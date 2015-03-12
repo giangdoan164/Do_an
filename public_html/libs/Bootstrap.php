@@ -3,7 +3,6 @@
 class Bootstrap {
 
     function __construct() {
-//         Session::init();
 // ko co thi goi mac dinh Con co thi xem no co dung hay ko
         $url = isset($_GET['url']) ? $_GET['url'] : null;
         $url = rtrim($url, '/');

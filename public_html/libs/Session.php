@@ -1,33 +1,43 @@
 <?php
 
 class Session {
-    public static function init(){
-        session_start();
+
+    const SESSION_INITED = '_session_inited';
+
+    public static function init() {
+        if (!isset($_SESSION[static::SESSION_INITED])) {
+            session_start();
+            $_SESSION[static::SESSION_INITED] = true;
+        }
     }
 
-    public static function get($key){
-        return isset($_SESSION[$key]) ? $_SESSION[$key]: null ;
+    public static function get($key) {
+        static::init();
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
 
-    public static function set($key, $val){
+    public static function set($key, $val) {
+        static::init();
         $_SESSION[$key] = $val;
     }
 
-    public static function destroy(){
-        session_destroy();
+    public static function destroy() {
+        if (isset($_SESSION[static::SESSION_INITED]) && $_SESSION[static::SESSION_INITED] == true) {
+            session_destroy();
+        }
     }
+
 //    
-     public static function check_login()
-    {
-        Session::init();
+    public static function check_login() {
+        static::init();
         $login = Session::get('loggedIn');
-       
-        if ($login == null)
-        {
+
+        if ($login == null) {
             Session::destroy();
-            header('location:'.SITE_URL.'user/login');
+            header('location:' . SITE_URL . 'user/login');
             return FALSE;
         }
         return TRUE;
     }
+
 }
