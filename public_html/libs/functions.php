@@ -1,5 +1,4 @@
 <?php
-
 /**
  * lay du lieu tu mang
  * @param array $array
@@ -11,7 +10,6 @@ function fetch_array($array, $key, $default = NULL) {
     $var = isset($array[$key]) ? $array[$key] : $default;
     return $var;
 }
-
 /**
  * 
  * @param string $string
@@ -20,36 +18,10 @@ function fetch_array($array, $key, $default = NULL) {
 function escape_string($string) {
     return mysql_real_escape_string($string);
 }
-
-//function get_post_var($key, $escape = true, $default = null) {
-//    $val = fetch_array($_POST, $key, $default);
-//    if ($escape) {
-//        if (is_array($val)) {
-//            array_walk_recursive($val, 'escape');
-//        } else {
-//            $val = escape_string($val);
-//        }
-//    }
-//    return $val;
-//}
-
-//function get_request_var($key, $escape = true, $default = null) {
-//    $val = fetch_array($_REQUEST, $key, $default);
-//    if ($escape) {
-//        if (is_array($val)) {
-//            array_walk_recursive($val, 'escape');
-//        } else {
-//            $val = escape_string($val);
-//        }
-//    }
-//    return $val;
-//}
-
 /** @return User */
 //function user() {
 //    return Session::get('user', new User);
 //}
-
 /** Neu chua dang nhap, redirect den log */
 //co ham check_login
 //function require_login() {
@@ -58,13 +30,11 @@ function escape_string($string) {
 //        exit();
 //    }
 //}
-
 /** Gui http status forbidden */
 function forbidden() {
     header('HTTP/1.0 403 Forbidden');
     die;
 }
-
 function site_url($uri = null, $params = array()) {
     $url = SITE_URL . '/' . trim($uri, "\\\/");
     $seperator = '?';
@@ -76,9 +46,7 @@ function site_url($uri = null, $params = array()) {
     }
     return $url;
 }
-
-function replace_bad_char($str)
-{
+function replace_bad_char($str) {
     $str = stripslashes($str);
     $str = str_replace("&", '&amp;', $str);
     $str = str_replace('<', '&lt;', $str);
@@ -87,31 +55,31 @@ function replace_bad_char($str)
     $str = str_replace("'", '&#39;', $str);
     return $str;
 }
-
-function get_post_var($html_object_name, $default_value = '', $is_replace_bad_char = TRUE)
-{
+function get_post_var($html_object_name, $default_value = '', $is_replace_bad_char = TRUE) {
     $var = isset($_POST[$html_object_name]) ? $_POST[$html_object_name] : $default_value;
-
-    if ($is_replace_bad_char && !is_array($var))
-    {
+    if ($is_replace_bad_char && !is_array($var)) {
         return replace_bad_char($var);
     }
-
     return $var;
 }
-
-function get_request_var($html_object_name, $default_value = '', $is_replace_bad_char = TRUE)
-{
+function get_request_var($html_object_name, $default_value = '', $is_replace_bad_char = TRUE) {
     $var = isset($_REQUEST[$html_object_name]) ? $_REQUEST[$html_object_name] : $default_value;
-    
-    if ($is_replace_bad_char && !is_array($var))
-    {
+    if ($is_replace_bad_char && !is_array($var)) {
         return replace_bad_char($var);
     }
     return $var;
 }
-
-function redirect($controller,$action){
-     header("location:".SITE_URL.$controller.DS.$action);
-     exit();
+function redirect($controller, $action) {
+    header("location:" . SITE_URL . $controller . DS . $action);
+    exit();
+}
+function require_login() {
+        Session::init();
+        $login = Session::get('loggedIn');
+        if ($login == null) {
+            Session::destroy();
+            header('location:' . SITE_URL . 'user/login');
+            return FALSE;
+        }
+        return TRUE;
 }
