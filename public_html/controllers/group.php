@@ -2,16 +2,16 @@
 
 class Group extends Controller {
     
-    public function __construct() {       
+    public function __construct() {
+//        Session::check_login();
         parent::__construct('group');
-        $this->view->title ='group';
-        require_login();
-        
+      
         
     }
     
     public function index(){
         $this->view->js = array('group/js/custom.js');
+         $this->view->title = 'group';
         $this->view->render('group/index');
     }
 

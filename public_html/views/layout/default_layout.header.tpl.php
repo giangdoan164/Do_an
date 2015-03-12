@@ -4,8 +4,7 @@
 <!--Cu dung session thi phai khoi tao--> 
 <html>
     <head>   
-        <?php $title = isset($this->title) ? $this->title : "Project Final"?>
-        <title><?php echo $title; ?></title>
+        <!--<title><?php // (isset($this->title)) ? $this->title :"MVC"; ?></title>-->
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.min.css"/>
@@ -52,9 +51,7 @@
                             <a href="<?php echo SITE_URL;?>group">Group</a>
                         </li>
                         <li>
-                            <?php @Session::init();
-                                Session::get('loggedIn');
-                            ?>
+                            <?php Session::init();?>
                             <?php if (Session::get('loggedIn') !=null): ?>
                                 <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
                             <?php else: ?>
