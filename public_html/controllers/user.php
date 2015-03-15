@@ -3,7 +3,7 @@
 class User extends Controller {
 
     public $model_login;
-
+   
     public function __construct() {
         parent::__construct('user'); //co view($this->view thoai mai)  
      

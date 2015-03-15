@@ -52,9 +52,10 @@
                             <a href="<?php echo SITE_URL;?>group">Group</a>
                         </li>
                         <li>
-                            <?php @Session::init();
-                                Session::get('loggedIn');
-                            ?>
+                            <a href="<?php echo SITE_URL;?>teacher">Teacher</a>
+                        </li>
+                        <li>
+                         
                             <?php if (Session::get('loggedIn') !=null): ?>
                                 <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
                             <?php else: ?>

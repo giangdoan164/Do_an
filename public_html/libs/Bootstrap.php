@@ -18,7 +18,7 @@ class Bootstrap {
             return false;
         }
         $file = CONTROLLER_PATH . $url[0] . '.php';
-        //ktra xem ton tai controller ko
+        //kiem tra neu ton tai thi no co dung hay ko
         if (file_exists($file)) {
             require $file;
         } else {

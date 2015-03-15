@@ -11,7 +11,7 @@ class Controller {
         $path = MODEL_PATH. $name . '_model.php';
         if (file_exists($path)) {
             require MODEL_PATH. $name . '_model.php';
-            //tu viet hoa khi new 
+            //tu viet hoa khi new doi tuong
             $modelName = $name . '_Model';
 //            $this->model = new $modelName(DB::get_connection());     
             return new $modelName(DB::get_connection());
