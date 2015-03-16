@@ -6,8 +6,10 @@
     <legend>Thêm mới Giáo viên</legend>
     <?php 
         $v_teacher_id   = get_post_var('hdn_teacher_id',0);
+
         echo $this->hidden('controller',$this->get_controller_url());  
         echo $this->hidden('hdn_teacher_id',$v_teacher_id);
+    
     ?>
     <div class="form-group">
       <label for="txt_teacher_name" class="col-lg-3 control-label" >Họ tên <span style="color:red;">(*)</span></label>

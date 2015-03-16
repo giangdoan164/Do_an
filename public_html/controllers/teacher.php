@@ -18,6 +18,7 @@ class Teacher extends Controller{
        $arr_data['arr_all_teacher'] = $this->teach_model->qry_all_teacher();
        $this->view->render('teacher/dsp_all_teacher',$arr_data);
    }
+   
    public function dsp_single_teacher(){
        $this->teach_model->update_teacher_record();
        $this->view->render('teacher/dsp_single_teacher');

@@ -11,6 +11,7 @@ class Teacher_Model extends Model {
        $result = $this->db->GetAll($sql);
         return $result;
   }
+  
   public function update_teacher_record(){
     $v_name = get_post_var('txt_teacher_name','');
     $v_phone = get_post_var('txt_teacher_phone','');
@@ -29,4 +30,5 @@ class Teacher_Model extends Model {
         
     }
   }
+  
 }

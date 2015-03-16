@@ -1,7 +1,5 @@
 <?php // $this->render('user/index'); ?>
-<?php 
-    echo $this->hidden('')
-?>
+
 <div class="container-fluid" >
     <div class="row-fluid">
         <h1 class="page-header">Quản lý giáo viên</h1>
@@ -10,6 +8,7 @@
                 <form name="frmMain" id="frmMain" action="" method="POST" >
                    <?php 
                         echo $this->hidden('controller',$this->get_controller_url());
+                          echo $this->hidden('hdn_teacher_id',0);
                      ?>
                     <input type="hidden" name="controller" id="controller" value="/taothu/license/license_type/"><input type="hidden" name="hdn_dsp_single_method" id="hdn_dsp_single_method" value="dsp_single_license_type"><input type="hidden" name="hdn_dsp_all_method" id="hdn_dsp_all_method" value="dsp_all_license_type"><input type="hidden" name="hdn_update_method" id="hdn_update_method" value="update_license_type"><input type="hidden" name="hdn_delete_method" id="hdn_delete_method" value="delete_license_type"><input type="hidden" name="hdn_item_id" id="hdn_item_id" value=""><input type="hidden" name="hdn_item_id_list" id="hdn_item_id_list" value=""><input type="hidden" name="XmlData" id="XmlData" value="">            <div class="row-fluid">
                         <div class="box box-bordered box-small">
@@ -49,8 +48,8 @@
                                         <td>
                                             <input type="checkbox" name="chk[]" />
                                         </td>
-                                        <td>
-                                            <?php echo $teacher['C_NAME']; ?>
+                                        <td><a href="javascript::(0)" onclick="row_click(<?php echo $teacher['PK_USER']?>);">  <?php echo $teacher['C_NAME']; ?></a>
+                                         
                                         </td>
                                         <td>
                                            <?php echo $teacher['C_PHONE'] ;?>
@@ -72,10 +71,7 @@
                                 <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <div id="paging" class="nowrap">
-                                    <div class="padding pull-right" id="pager">Tổng số 1 Trang. Chuyển tới <select class="input-small" name="sel_goto_page" onchange="this.form.submit();"><option value="1" selected="">Trang&nbsp;1</option></select>. Hiển thị <select class="input-mini" name="sel_rows_per_page" onchange="this.form.sel_goto_page.value = 1;
-                                            this.form.submit();"><option value="5">5</option><option value="10" selected="">10</option><option value="20">20</option><option value="30">30</option><option value="50">50</option><option value="100">100</option></select> Bản ghi/1 Trang</div>                        </div>
-                            </div>
+                              
                                <div class="modal fade modal-check" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -105,5 +101,11 @@
        var m = $('#frmMain #controller').val() +'dsp_single_teacher'; 
        $('#frmMain').attr('action',m);
        $('#frmMain').submit();
+    }
+    function row_click(id){
+        var m = $('#frmMain #controller').val() + 'dsp_single_teacher/'+id;
+        $('#hdn_teacher_id').val(id);
+        $('#frmMain').attr('action',m);
+        $('#frmMain').submit();
     }
 </script>

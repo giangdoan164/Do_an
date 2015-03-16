@@ -25,7 +25,9 @@ class View {
         $this->layout = $name;
         return $this;
     }
+   
     public function render($name ,$VIEW_DATA =array() ) {
+
         $v_view_file =  VIEW_PATH . $name . '.php';
         if (file_exists($v_view_file))
         {
