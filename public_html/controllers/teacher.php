@@ -11,7 +11,7 @@ class Teacher extends Controller{
 
    public function index(){
       $this->dsp_all_teacher();
-       
+      
    }
    
    public function dsp_all_teacher(){
@@ -19,8 +19,20 @@ class Teacher extends Controller{
        $this->view->render('teacher/dsp_all_teacher',$arr_data);
    }
    
-   public function dsp_single_teacher(){
-       $this->teach_model->update_teacher_record();
-       $this->view->render('teacher/dsp_single_teacher');
+   public function dsp_single_teacher($v_teacher_id = 0){
+       $arr_data = array();
+       
+       //xem chi tiet 
+       if($v_teacher_id >0)
+       {
+           $arr_data['arr_single_teacher'] = $this->teach_model->qry_single_teacher($v_teacher_id);
+       }
+       
+       //tao moi
+       $arr_data['arr_class'] = $this->teach_model->qry_all_class();
+       $arr_data['arr_grade'] = $this->teach_model->qry_all_grade();
+       $this->view->render('teacher/dsp_single_teacher',$arr_data);
    }
+   
+   
 }

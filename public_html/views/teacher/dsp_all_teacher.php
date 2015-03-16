@@ -1,5 +1,4 @@
 <?php // $this->render('user/index'); ?>
-
 <div class="container-fluid" >
     <div class="row-fluid">
         <h1 class="page-header">Quản lý giáo viên</h1>
@@ -64,7 +63,7 @@
                                             <?php echo $teacher['C_CLASS_NAME'];?>
                                         </td>
                                         <td>
-                                            <?php echo $teacher['C_GRADE'];?>
+                                            <?php echo $teacher['FK_GRADE'];?>
                                         </td>
                                         <td><a href="#">Sửa</a></td>
                                     </tr>

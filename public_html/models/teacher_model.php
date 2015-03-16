@@ -6,13 +6,20 @@ class Teacher_Model extends Model {
         parent::__construct($db);
     }
     
-  public function qry_all_teacher(){
-       $sql = "SELECT * , cg.C_CLASS_NAME , cg.C_GRADE FROM t_teacher  t INNER JOIN t_class_grade  cg ON t.FK_CLASS = cg.PK_CLASS  ";
-       $result = $this->db->GetAll($sql);
+  public function qry_all_teacher()
+    {
+        $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` 
+                  FROM
+                    t_teacher t 
+                    INNER JOIN t_class c
+                        ON t.FK_CLASS = c.PK_CLASS 
+                     INNER JOIN t_grade g 
+                        ON g.PK_GRADE =t.FK_GRADE ";
+        $result = $this->db->GetAll($sql);
         return $result;
-  }
-  
-  public function update_teacher_record(){
+    }
+
+    public function update_teacher_record(){
     $v_name = get_post_var('txt_teacher_name','');
     $v_phone = get_post_var('txt_teacher_phone','');
     $v_address = get_post_var('txt_teacher_address','');
@@ -27,8 +34,27 @@ class Teacher_Model extends Model {
         $sql = "INSERT INTO t_teacher (C_NAME,C_PHONE,C_ADDRESS,C_EMAIL,FK_CLASS,FK_GROUP) VALUES (?,?,?,?,?,?)";
         $params = array($v_name,$v_phone,$v_address,$v_email,$v_class,$v_grade);
         $this->db->Execute($sql,$params);
-        
     }
   }
+  
+  public function qry_single_teacher($v_id){
+      $sql = "SELECT * FROM t_teacher WHERE PK_USER = ?";
+      $result = $this->db->GetRow($sql,array($v_id));
+      return $result;
+
+  }
+  
+  public function qry_all_class(){
+      $sql = "SELECT * FROM t_class";
+      $result = $this->db->GetAll($sql);
+      return $result;
+  }
+   
+public function qry_all_grade(){
+    $sql = "SELECT * FROM t_grade ";
+    $result = $this->db->GetAll($sql);
+    return $result;
+    
+}
   
 }
