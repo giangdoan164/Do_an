@@ -83,3 +83,7 @@ function require_login() {
         }
         return TRUE;
 }
+
+function show_error($msg){
+    echo "<b>Đã xảy ra lỗi ".$msg."</b><a href='#'>Quay lại trang chủ</a>";
+}

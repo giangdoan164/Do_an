@@ -14,4 +14,9 @@ class Class_grade extends Controller {
         $DATA['arr_all_class'] = $this->class_grade_model->qry_all_class();
         echo json_encode($DATA['arr_all_class']);
         }
+    
+   public function load_grade(){
+       $DATA['arr_all_grade'] = $this->class_grade_model->qry_all_grade();
+       echo $DATA['arr_all_grade']['PK_GRADE'];
+   }
 }

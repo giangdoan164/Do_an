@@ -81,5 +81,48 @@ class Model {
             return false;
         }
     }
+    
+        //Quay ve man hinh truoc sau khi thuc hien thao tac voi CSDL
+    public static function exec_done($url, $filter_array = array()) {
+        $html = '<html><head></head><body>';
+        $html .= '<form name="frmMain" action="' . $url . '" method="POST">';
+
+        foreach ($filter_array as $key => $val) {
+            $html .= View::hidden($key, $val);
+        }
+
+        $html .= '</form>';
+        $html .= '<script type="text/javascript">document.frmMain.submit();</script>';
+        $html .= '</body></html>';
+
+        echo $html;
+        exit;
+    }
+        //Quay ve man hinh truoc sau khi thuc hien thao tac voi CSDL
+    public static function exec_fail($url, $message, $filter_array = array()) 
+    {
+        $html  = '<html><head></head><body>';
+        $html .= '<form name="frmMain" action="' . $url . '" method="POST">';
+
+        foreach ($filter_array as $key => $val) 
+        {
+            if(is_array($val))
+            {
+                $html .= View::hidden($key, json_encode($val));
+            }
+            else
+            {
+                $html .= View::hidden($key, $val);
+            }
+        }
+        $html .= '</form><script type="text/javascript">';
+        if(!is_null($message))
+        {
+            $html .= 'alert("' . $message . '");';
+        }
+        $html .= 'document.frmMain.submit();</script></body></html>';
+        echo $html;
+        exit;
+    }
 
 }

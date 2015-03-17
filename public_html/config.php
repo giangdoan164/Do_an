@@ -9,7 +9,7 @@ define('DB_PASS', 'root');
 
 //Che do Debug:0
 //          1   FALSE: Cay that
-define('DEBUG_MODE',0);
+
 //          o   TRUE:  Bat che do debug 
 
 define('LIMIT', 20);
@@ -24,7 +24,7 @@ define('DS', DIRECTORY_SEPARATOR);
 // Đường dẫn tương đối (URL):load các tâp tin CSS,Javascript ,image hiển thị trong trong web
 //define('SITE_URL', DS.'FinalProject'.DS.'public_html'.DS);//ảnh ọt css controller
 //define('ROOT_URL', DS.'FinalProject'.DS.'public_html'.DS);//ảnh ọt css controller
-define('SITE_URL', DS.'public_html'.DS);//ảnh ọt css controller
+define('SITE_URL','/public_html/');//ảnh ọt css controller
 define('ROOT_URL', DS.'public_html'.DS);//ảnh ọt css controller
 
 
@@ -51,3 +51,23 @@ define('VIEW_PATH',ROOT_PATH.'views'.DS);
 define('PUBLIC_PATH',ROOT_PATH.'public'.DS);
 
 
+//$debug= 0;
+//if(isset($_REQUEST['debug']))
+//{
+//    $debug= 99999;     
+//}
+//
+//define('DEBUG_MODE',$debug);
+////          o   TRUE:  Bat che do debug 
+//if (DEBUG_MODE > 0)
+//{
+//    error_reporting(E_ALL);
+//    ini_set('display_errors',1);
+//}
+//else
+//{
+//    error_reporting(E_ALL);
+//    ini_set('display_errors',0);
+//}
+
+define('DEBUG_MODE',0);

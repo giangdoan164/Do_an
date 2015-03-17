@@ -23,7 +23,7 @@
 ?>
 <div class="container-fluid " >
     <div class="col-md-6 col-md-offset-3">
-<form  data-toggle="validator"  role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().DS.'dsp_single_teacher';?>">
+<form  data-toggle="validator"  role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_teacher';?>">
   <fieldset>
     <legend>Cập nhật Giáo viên</legend>
     <?php 
@@ -32,12 +32,14 @@
         echo $this->hidden('controller',$this->get_controller_url());  
         echo $this->hidden('hdn_teacher_id',$v_teacher_id);
         echo $this->hidden('hdn_site_url',SITE_URL);
+        echo $this->hidden('hdn_dsp_all_method','dsp_all_teacher');
+        echo $this->hidden('hdn_dsp_single_teacher','dsp_single_teacher');
     
     ?>
     <div class="form-group">
       <label for="txt_teacher_name" class="col-lg-3 control-label" >Họ tên <span style="color:red;">(*)</span></label>
       <div class="col-lg-9">
-          <input type="text" class="form-control" value="<?php echo $v_teach_name; ?>" id="txt_teacher_name" name="txt_teacher_name" placeholder="Họ tên giáo viên" required="">
+          <input type="text" class="form-control" value="<?php echo $v_teach_name; ?>" id="txt_teacher_name" name="txt_teacher_name" placeholder="Họ tên giáo viên" required>
       </div>
     </div>
     <div class="form-group">
@@ -61,11 +63,11 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="sel_teacher" class="col-lg-3 control-label">Vai trò</label>
+      <label for="sel_role" class="col-lg-3 control-label">Vai trò</label>
       <div class="col-lg-9">
-        <select class="form-control" id="sel_teacher" name="sel_teacher_role">
-          <option value="3">Giáo viên lớp</option>
-          <option value="2">Giáo viên trường</option>
+        <select class="form-control" id="sel_role" name="sel_role" required>
+          <option value="3" >Giáo viên lớp</option>
+          <option value="2"  >Giáo viên trường</option>
         </select>
         <br>
       </div>
@@ -86,7 +88,7 @@
     <div class="form-group">
       <label for="sel_class" class="col-lg-3 control-label">Lớp</label>
       <div class="col-lg-9">
-        <select class="form-control" id="sel_class" name="sel_class">
+        <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
           <option value="0">--- Chọn lớp ---</option>
           <?php foreach($arr_class as $class):?>
           <?php $selected = ($v_class_id == $class['PK_CLASS'])? 'selected' : '';?>
@@ -109,21 +111,20 @@
     
 </div>
 <script type="text/javascript">
-    var script_data = {
-        controller : '<?php echo SITE_URL;?>class_grade/load_class'
-    }
+//    var script_data = {
+//        controller : '<?php // echo SITE_URL;?>class_grade/load_class'
+//    }
    
-    function load_class(class_id){
+    function load_class(grade_id){
         var site_url = $('#hdn_site_url').val();
         $.ajax({
                 url: site_url+'class_grade/load_class',
                 type: 'post',
                 async: true,
                 cache: false,
-                data : 'class_id='+class_id,
+                data : 'grade_id='+grade_id,
                 dataType: 'json',
                 success: function (result) {
-//                    console.log(result);
                     var xhtml = "<option value='0'>-- Mời chọn lớp --</option>";
                      for(i=0;i<result.length;i++){
                          var option = "<option value ='"+result[i].PK_CLASS +"'>"+result[i].C_CLASS_NAME+"</option>";
@@ -133,6 +134,24 @@
                 }
             });
     }
+    
+    function load_grade(class_id){
+     var site_url = $('#hdn_site_url').val();
+     $.ajax({
+         url : site_url+'class_grade/load_grade',
+         type : 'post',
+         async : true,
+         cache : false ,
+         data : 'class_id='+class_id ,
+         dataType : 'html',
+         success : function (result) {
+             $("#sel_grade option[value='"+result+"']").attr("selected","selected");
+         }
+     });
+    }
+//    $(document).ready(function(){
+//        $("#sel_role option[value='2']").attr("selected","selected");
+//    });
 </script>
 
 
