@@ -1,10 +1,5 @@
 <?php 
   $arr_single_teacher = isset($arr_single_teacher) ? $arr_single_teacher : array();
-  echo __FILE__;
- echo "<pre>";
- print_r($VIEW_DATA);
- echo "</pre>";
- echo __LINE__;
   if(sizeof($arr_single_teacher)>0){
       $v_teach_id = $arr_single_teacher['PK_USER'];
       $v_teach_name = $arr_single_teacher['C_NAME'];
@@ -36,6 +31,7 @@
         $v_teacher_id   = get_post_var('hdn_teacher_id',0);
         echo $this->hidden('controller',$this->get_controller_url());  
         echo $this->hidden('hdn_teacher_id',$v_teacher_id);
+        echo $this->hidden('hdn_site_url',SITE_URL);
     
     ?>
     <div class="form-group">
@@ -77,7 +73,7 @@
     <div class="form-group">
       <label for="sel_grade" class="col-lg-3 control-label">Khối học</label>
       <div class="col-lg-9">
-        <select class="form-control" id="sel_grade" name="sel_grade">
+          <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
           <option value="0">--- Chọn khối --- </option>
           <?php foreach($arr_grade as $grade):?>
           <?php $selected = ($v_grade_id ==$grade['PK_GRADE']) ? 'selected' : ''?>
@@ -110,11 +106,33 @@
   </fieldset>
 </form>
  </div> 
+    
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        
-    });
+    var script_data = {
+        controller : '<?php echo SITE_URL;?>class_grade/load_class'
+    }
+   
+    function load_class(class_id){
+        var site_url = $('#hdn_site_url').val();
+        $.ajax({
+                url: site_url+'class_grade/load_class',
+                type: 'post',
+                async: true,
+                cache: false,
+                data : 'class_id='+class_id,
+                dataType: 'json',
+                success: function (result) {
+//                    console.log(result);
+                    var xhtml = "<option value='0'>-- Mời chọn lớp --</option>";
+                     for(i=0;i<result.length;i++){
+                         var option = "<option value ='"+result[i].PK_CLASS +"'>"+result[i].C_CLASS_NAME+"</option>";
+                         xhtml += option;
+                     }
+                       $('#sel_class').html(xhtml);
+                }
+            });
+    }
 </script>
 
 
