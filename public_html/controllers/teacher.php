@@ -32,50 +32,59 @@ class Teacher extends Controller{
        $this->view->render('teacher/dsp_single_teacher',$arr_data);
    }
    
-   public function update_single_teacher(){
-    $arr_data = array();
-    $arr_data['controller'] = get_post_var('controller','');
-    $arr_data['hdn_dsp_all_teacher'] =  get_post_var('hdn_dsp_all_teacher','');
-    
-    $arr_data['hdn_dsp_single_teacher'] = get_post_var('hdn_dsp_single_teacher','');
-    $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_single_teacher'];
-    $is_exist_teacher = $this->teach_model->check_teach_has_class();
-  
-    if($is_exist_teacher == true){
-    
-        $DATA['error'] = "Lớp đã chọn có giáo viên chủ nhiệm";
-        $this->teach_model->exec_fail($this->goback_url,$DATA['error'],$arr_data);
-        exit();
+   public function update_single_teacher()
+    {
+        $arr_data                        = array();
+        $arr_data['controller']          = get_post_var('controller', '');
+        $arr_data['hdn_dsp_all_teacher'] = get_post_var('hdn_dsp_all_teacher', '');
+
+        $arr_data['hdn_dsp_single_teacher'] = get_post_var('hdn_dsp_single_teacher', '');
+        $this->goback_url                   = $arr_data['controller'] . $arr_data['hdn_dsp_single_teacher'];
+        $is_exist_teacher                   = $this->teach_model->check_teach_has_class();
+
+        if ($is_exist_teacher == true)
+        {
+
+            $DATA['error'] = "Lớp đã chọn có giáo viên chủ nhiệm";
+            $this->teach_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+            exit();
+        }
+
+
+        $result           = $this->teach_model->update_single_teacher();
+        $this->goback_url = $arr_data['controller'] . $arr_data['hdn_dsp_all_teacher'];
+        if ($result == false)
+        {
+            $DATA['error'] = " Xảy ra lỗi không cập nhật được";
+            $this->teach_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+            exit();
+        }
+        else
+        {
+            $this->teach_model->exec_done($this->goback_url, $arr_data);
+            exit();
+        }
     }
-    
-   
-    $result = $this->teach_model->update_single_teacher();
-    $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_all_teacher'];
-       if($result == false){
-        $DATA['error'] =" Xảy ra lỗi không cập nhật được";
-        $this->teach_model->exec_fail($this->goback_url, $DATA['error'],$arr_data);
-         exit();
-    }else{
-          $this->teach_model->exec_done($this->goback_url,$arr_data);
-          exit();
+
+    public function delete_teacher()
+    {
+       
+        $arr_data['controller']          = get_post_var('controller', '');
+        $arr_data['hdn_dsp_all_teacher'] = get_post_var('hdn_dsp_all_record', '');
+        $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_teacher'];
+
+        $result = $this->teach_model->delete_teacher();
+        if ($result == false)
+        {
+            $DATA['error'] = " Xảy ra lỗi không xóa được";
+            $this->teach_model->exec_fail($this->goback_url, $VIEW_DATA['error'], $arr_data);
+            exit();
+        }
+        else
+        {
+            $this->teach_model->exec_done($this->goback_url, $arr_data);
+            exit();
+        }
     }
-    
-   }
-   
-   
-   public function delete_teacher(){
-    $arr_data['controller'] = get_post_var('controller','');
-    $arr_data['hdn_dsp_all_teacher'] =  get_post_var('hdn_dsp_all_teacher','');
-     $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_all_teacher'];
-   
-     $result =  $this->teach_model->delete_teacher();
-    if($result == false){
-        $DATA['error'] =" Xảy ra lỗi không xóa được";
-        $this->teach_model->exec_fail($this->goback_url,$VIEW_DATA['error'],$arr_data);
-         exit();
-    }else{
-          $this->teach_model->exec_done($this->goback_url,$arr_data);
-          exit();
-    }
-   }
+
 }

@@ -4,7 +4,6 @@ class Controller {
 
     function __construct($controllerName) {
         $this->view = new View($controllerName);
-      
     }
 
     public function loadModel($name) {

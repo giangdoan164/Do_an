@@ -87,3 +87,16 @@ function require_login() {
 function show_error($msg){
     echo "<b>Đã xảy ra lỗi ".$msg."</b><a href='#'>Quay lại trang chủ</a>";
 }
+
+
+function page_calc(&$v_start, &$v_end)
+{
+    //Luu dieu kien loc
+    $v_page          = isset($_POST['sel_goto_page']) ? replace_bad_char($_POST['sel_goto_page']) : 1;
+    $v_rows_per_page = isset($_POST['sel_rows_per_page']) ? replace_bad_char($_POST['sel_rows_per_page']) : _CONST_DEFAULT_ROWS_PER_PAGE;
+    $v_page          = ($v_page >0)  ? $v_page : 1;
+    $v_rows_per_page = ($v_rows_per_page > 0)  ? $v_rows_per_page : _CONST_DEFAULT_ROWS_PER_PAGE;
+    
+    $v_start = $v_rows_per_page * ($v_page - 1) + 1;
+    $v_end   = $v_start + $v_rows_per_page - 1;
+}

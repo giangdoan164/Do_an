@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.min.css"/>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/custom.js"></script>
         <!--<script type='text/javascript' src=''-->
         <?php 
             if(!empty($this->js)){
@@ -56,7 +57,9 @@
                             <a href="<?php echo SITE_URL;?>teacher">Teacher</a>
                         </li>
                         <li>
-                         
+                            <a href="<?php echo SITE_URL;?>class_grade">Class</a>
+                        </li>
+                        <li>
                             <?php if (Session::get('loggedIn') !=null): ?>
                                 <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
                             <?php else: ?>

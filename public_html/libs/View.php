@@ -26,7 +26,7 @@ class View {
         return $this;
     }
    
-    public function render($name ,$VIEW_DATA =array() ) {
+    public function render($name ,$DATA =array() ) {
 
 //        $v_view_file =  VIEW_PATH . $name . '.php';
 //        if (file_exists($v_view_file))
@@ -55,8 +55,8 @@ class View {
 //        {
 //           die("Không tìm thấy <b>$v_view_file</b>");
 //        }
-         if (is_array($VIEW_DATA)) {
-            foreach ($VIEW_DATA as $key => $val) {
+         if (is_array($DATA)) {
+            foreach ($DATA as $key => $val) {
                 $$key = $val;
             }
         }
@@ -65,7 +65,6 @@ class View {
         } else {
             $v_view_file = VIEW_PATH . $name . '.php';
             if (file_exists($v_view_file)) {
-
                 $header = VIEW_PATH . "layout/{$this->layout}.header.tpl.php";
                 $footer = VIEW_PATH . "layout/{$this->layout}.footer.tpl.php";
                 if (!file_exists($header)) {
@@ -198,26 +197,7 @@ class View {
 
         return $html;
         
-        
-           $arr_page = array();
-        for ($i = 1; $i <= $v_total_page; $i++)
-        {
-            $arr_page[$i] = __('page') . '&nbsp;' . $i;
-        }
-
-        $html .= '<div class="pager" id="pager">';
-        $html .=  'Tổng số trang'. $v_total_page . ' ' . __('page');
-
-        $html .= '. ' .'chuyển tới'. '<select name="sel_goto_page" onchange="this.form.submit();">';
-        $html .= self::generate_select_option($arr_page, $page);
-        $html .= '</select>';
-
-        $html .= 'Hiển thị ' . '<select name="sel_rows_per_page" onchange="this.form.sel_goto_page.value=1;this.form.submit();">';
-        $html .= self::generate_select_option(null, $rows_per_page, 'xml_rows_per_page.xml');
-        $html .= '</select> ' .'Bản ghi'. '/1 ' .'Trang';
-
-        $html .= '</div>';
-
-        return $html;
     }
+    
+    
  }

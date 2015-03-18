@@ -10,14 +10,19 @@ class Teacher_Model extends Model {
  {
       $condition='';
       $filter = get_post_var('txt_filter','');
+       #Phan trang
+        page_calc($v_start, $v_end);
+        $v_start = $v_start - 1;
+        $v_limit = $v_end - $v_start;
+        #End phan trang
       if(trim($filter)==!''){ $condition = "WHERE C_NAME like '%".trim($filter)."%'";}
         $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` 
                   FROM
                     t_teacher t 
-                    INNER JOIN t_class c
+                    LEFT JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
                      INNER JOIN t_grade g 
-                        ON g.PK_GRADE =t.FK_GRADE ".$condition;
+                        ON g.PK_GRADE =t.FK_GRADE ".$condition."LIMIT $v_start,$v_limit";
         $result = $this->db->GetAll($sql);
         return $result;
     }
@@ -82,14 +87,11 @@ class Teacher_Model extends Model {
     }
     
     public function check_teach_has_class(){
-    
         $v_class = get_post_var('sel_class',0);
-   
         if($v_class==0){return false;}
         else{
-  
             $sql = "SELECT COUNT(*)
-                  FROM
+                    FROM
                     t_teacher t 
                     INNER JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
