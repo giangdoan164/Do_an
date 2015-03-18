@@ -7,21 +7,17 @@ class Teacher_Model extends Model {
     }
     
   public function qry_all_teacher()
-    {
-//        $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` 
-//                  FROM
-//                    t_teacher t 
-//                    INNER JOIN t_class c
-//                        ON t.FK_CLASS = c.PK_CLASS 
-//                     INNER JOIN t_grade g 
-//                        ON g.PK_GRADE =t.FK_GRADE ";
+ {
+      $condition='';
+      $filter = get_post_var('txt_filter','');
+      if(trim($filter)==!''){ $condition = "WHERE C_NAME like '%".trim($filter)."%'";}
         $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` 
                   FROM
                     t_teacher t 
                     INNER JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
                      INNER JOIN t_grade g 
-                        ON g.PK_GRADE =t.FK_GRADE ";
+                        ON g.PK_GRADE =t.FK_GRADE ".$condition;
         $result = $this->db->GetAll($sql);
         return $result;
     }

@@ -32,7 +32,7 @@
         echo $this->hidden('controller',$this->get_controller_url());  
         echo $this->hidden('hdn_teacher_id',$v_teacher_id);
         echo $this->hidden('hdn_site_url',SITE_URL);
-        echo $this->hidden('hdn_dsp_all_method','dsp_all_teacher');
+        echo $this->hidden('hdn_dsp_all_teacher','dsp_all_teacher');
         echo $this->hidden('hdn_dsp_single_teacher','dsp_single_teacher');
     
     ?>

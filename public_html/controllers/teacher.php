@@ -11,7 +11,6 @@ class Teacher extends Controller{
 
    public function index(){
       $this->dsp_all_teacher();
-      
    }
    
    public function dsp_all_teacher(){
@@ -36,7 +35,7 @@ class Teacher extends Controller{
    public function update_single_teacher(){
     $arr_data = array();
     $arr_data['controller'] = get_post_var('controller','');
-    $arr_data['hdn_dsp_all_method'] =  get_post_var('hdn_dsp_all_method','');
+    $arr_data['hdn_dsp_all_teacher'] =  get_post_var('hdn_dsp_all_teacher','');
     
     $arr_data['hdn_dsp_single_teacher'] = get_post_var('hdn_dsp_single_teacher','');
     $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_single_teacher'];
@@ -51,7 +50,7 @@ class Teacher extends Controller{
     
    
     $result = $this->teach_model->update_single_teacher();
-    $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_all_method'];
+    $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_all_teacher'];
        if($result == false){
         $DATA['error'] =" Xảy ra lỗi không cập nhật được";
         $this->teach_model->exec_fail($this->goback_url, $DATA['error'],$arr_data);
@@ -66,8 +65,8 @@ class Teacher extends Controller{
    
    public function delete_teacher(){
     $arr_data['controller'] = get_post_var('controller','');
-    $arr_data['hdn_dsp_all_method'] =  get_post_var('hdn_dsp_all_method','');
-     $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_all_method'];
+    $arr_data['hdn_dsp_all_teacher'] =  get_post_var('hdn_dsp_all_teacher','');
+     $this->goback_url = $arr_data['controller'].$arr_data['hdn_dsp_all_teacher'];
    
      $result =  $this->teach_model->delete_teacher();
     if($result == false){

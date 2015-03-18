@@ -9,8 +9,10 @@ class Error extends Controller {
 	function index() {
           
 		$this->view->msg = 'Error: controller :This page doesnt exist';
-		$this->view->render('error/index');
-                  
+                
+		$this->view->set_layout(null)
+                           ->render('error/index');
+                        
 	}
 
 }

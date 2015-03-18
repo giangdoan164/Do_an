@@ -8,11 +8,11 @@
                 <form name="frmMain" id="frmMain" action="" method="POST" >
                    <?php 
                    $url = $this->get_controller_url();
-                        echo $this->hidden('controller',$url);
-                        echo $this->hidden('hdn_teacher_id',0);
-                        echo $this->hidden('hdn_item_id_list', '');
-                        echo $this->hidden('hdn_delete_record_method', 'delete_teacher');
-                        echo $this->hidden('hdn_dsp_all_method','dsp_all_teacher');
+                    echo $this->hidden('controller',$url);
+                    echo $this->hidden('hdn_teacher_id',0);
+                    echo $this->hidden('hdn_item_id_list', '');
+                    echo $this->hidden('hdn_delete_record_method', 'delete_teacher');
+                    echo $this->hidden('hdn_dsp_all_teacher','dsp_all_teacher');
                      ?>
                     <!--<input type="hidden" name="controller" id="controller" value="/taothu/license/license_type/"><input type="hidden" name="hdn_dsp_single_method" id="hdn_dsp_single_method" value="dsp_single_license_type"><input type="hidden" name="hdn_dsp_all_method" id="hdn_dsp_all_method" value="dsp_all_license_type"><input type="hidden" name="hdn_update_method" id="hdn_update_method" value="update_license_type"><input type="hidden" name="hdn_delete_method" id="hdn_delete_method" value="delete_license_type"><input type="hidden" name="hdn_item_id" id="hdn_item_id" value=""><input type="hidden" name="hdn_item_id_list" id="hdn_item_id_list" value=""><input type="hidden" name="XmlData" id="XmlData" value="">            <div class="row-fluid">-->
                         <div class="box box-bordered box-small">
@@ -26,7 +26,7 @@
                             <div class="box-content nopadding">
                                 <div id="div_filter" class="padding" style="margin-bottom:20px";>
                                     Tìm kiếm &nbsp
-                                    <input type="text" name="txt_filter" value="" class="inputbox" size="30" autofocus="autofocus" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">
+                                    <input type="text" name="txt_filter" id="txt_filter" value="" class="inputbox" size="30" autofocus="autofocus" placeholder="Tên giáo viên" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">
                                     <button type="button" class="btn btn-file" onclick="btn_filter_onclick();" name="btn_filter">
                                         <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
                                     </button>
@@ -75,10 +75,16 @@
                                         <td><a href="#">Sửa</a></td>
                                     </tr>
                                 <?php endforeach; ?>
+                                      <?php echo $this->render_rows(count($arr_all_teacher),8);?>
                                     </tbody>
+                                       
                                 </table>
-                              
-                               <div class="modal fade modal-check" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                               <div id="paging" class="nowrap">
+                                   <?php echo $this->paging2($arr_all_teacher); ?>
+                               </div>
+                                
+                                
+                         <div class="modal fade modal-check" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -247,4 +253,11 @@
                         f.submit();
                     }
                 }
+          
+            function btn_filter_onclick() {
+                var f = document.frmMain;
+                m = $("#controller").val() + f.hdn_dsp_all_teacher.value;
+                $("#frmMain").attr("action", m);
+                f.submit();
+}
 </script>
