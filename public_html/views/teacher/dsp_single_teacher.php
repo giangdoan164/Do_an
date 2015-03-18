@@ -100,9 +100,8 @@
     </div>
     <div class="form-group">
       <div class="col-lg-9 col-lg-offset-3">
-        <button type="submit" class="btn btn-primary col-lg-3">Cập nhật</button>
-        <button type="reset" class="btn btn-default col-lg-3 col-lg-offset-1">Hủy</button>
-        <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-1 ">Quay lại</button>
+        <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2">Cập nhật</button>
+        <button type="submit" class="btn btn-default col-lg-3 col-lg-offset-2 ">Quay lại</button>
       </div>
     </div>
   </fieldset>
