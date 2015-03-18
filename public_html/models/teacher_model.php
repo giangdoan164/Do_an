@@ -16,7 +16,8 @@ class Teacher_Model extends Model {
         $v_limit = $v_end - $v_start;
         #End phan trang
       if(trim($filter)==!''){ $condition = "WHERE C_NAME like '%".trim($filter)."%'";}
-        $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` 
+      $total_record = $this->db->GetOne("SELECT COUNT(*) from t_teacher");
+        $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` ,$total_record as TOTAL_RECORD
                   FROM
                     t_teacher t 
                     LEFT JOIN t_class c

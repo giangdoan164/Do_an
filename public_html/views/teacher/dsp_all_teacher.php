@@ -33,46 +33,46 @@
                                 </div>
                                 <table class="table table-hover table-nomargin table-condensed ">
                                     <thead><tr class="info">
-                                            <th style="width: 5%">
+                                            <th style="width: 5%;text-align:center">
                                                 <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">
                                                
                                             </th>
-                                            <th style="width: 15%">Họ tên</th>
-                                            <th style="width: 12%">SĐT</th>
-                                            <th style="width: 20%">Địa chỉ</th>
-                                            <th style="width: 18%">Email</th>
-                                            <th style="width: 10%">Lớp</th>
-                                            <th style="width: 10%" >Khối</th>
-                                            <th style="width: 10%">Thao tác</th>
+                                            <th style="width: 15%;text-align:center">Họ tên</th>
+                                            <th style="width: 12%;text-align:center">SĐT</th>
+                                            <th style="width: 20%;text-align:center">Địa chỉ</th>
+                                            <th style="width: 18%;text-align:center">Email</th>
+                                            <th style="width: 10%;text-align:center">Lớp</th>
+                                            <th style="width: 10%;text-align:center" >Khối</th>
+                                            <th style="width: 10%;text-align:center">Thao tác</th>
                                         </tr>
 
                                     </thead>
                                     <tbody>
                                     <?php foreach ($arr_all_teacher as $teacher):?>
                                     <tr>
-                                        <td>
+                                        <td style="text-align:center">
                                             <!--<input type="checkbox" name="chk[]" />-->
                                             <input type="checkbox" name="chk" value="<?php echo $teacher['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                         </td>
-                                        <td><a href="javascript::(0)" onclick="row_click(<?php echo $teacher['PK_USER']; ?>);">  <?php echo $teacher['C_NAME']; ?></a>
+                                        <td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php echo $teacher['PK_USER']; ?>);">  <?php echo $teacher['C_NAME']; ?></a>
                                          
                                         </td>
-                                        <td>
+                                        <td style="text-align:center">
                                            <?php echo $teacher['C_PHONE'] ;?>
                                         </td>
-                                        <td>
+                                        <td style="text-align:center">
                                             <?php echo $teacher['C_ADDRESS'];?>
                                         </td>
                                         <td>
                                             <?php echo $teacher['C_EMAIL'];?>
                                         </td>
-                                        <td>
+                                        <td style="text-align:center">
                                             <?php echo $teacher['C_CLASS_NAME'];?>
                                         </td>
-                                        <td>
+                                        <td style="text-align:center">
                                             <?php echo $teacher['FK_GRADE'];?>
-                                        </td>
-                                        <td><a href="#">Sửa</a></td>
+                                        </td >
+                                        <td style="text-align:center"><a href="#">Sửa</a></td>
                                     </tr>
                                 <?php endforeach; ?>
                                       <?php echo $this->render_rows(count($arr_all_teacher),8);?>

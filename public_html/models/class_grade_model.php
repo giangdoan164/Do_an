@@ -31,10 +31,17 @@ class Class_grade_Model extends model {
     }
     
     public function qry_all_class_teacher(){
+       
         $condition = '';
-        $grade = get_post_var('sel_grade',0);
+        $grade = get_post_var('sel_grade_main',0);
+        #Phan trang
+        page_calc($v_start, $v_end);
+        $v_start = $v_start - 1;
+        $v_limit = $v_end - $v_start;
+        #End phan trang
+        $total_record = $this->db->GetOne("SELECT COUNT(*) from t_class");
         if($grade > 0){$condition = "WHERE c.FK_GRADE = $grade";}
-        $sql = "SELECT * FROM  t_class  c LEFT JOIN t_teacher t ON c.PK_CLASS =t.FK_CLASS $condition";
+        $sql = "SELECT * ,$total_record as TOTAL_RECORD FROM  t_class  c LEFT JOIN t_teacher t ON c.PK_CLASS =t.FK_CLASS $condition "."LIMIT $v_start,$v_limit";
         $result = $this->db->GetAll($sql);
          if($this->db->ErrorNo() == 0)
         {
@@ -52,4 +59,33 @@ class Class_grade_Model extends model {
         return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
     }
 
+    public function check_is_class_exist(){
+       $v_class_name = trim(get_post_var('txt_class_name',''));
+        if($v_class_name==''){
+             $arr_data['controller']          = get_post_var('controller', '');
+             $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
+             $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
+             $DATA['error'] = "Tên lớp không để rỗng !!! ";
+             $this->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+            exit();
+        }
+        
+            $sql = "SELECT COUNT(*)
+                    FROM
+                    t_class t 
+                    WHERE C_CLASS_NAME = ?";
+            $count = $this->db->GetOne($sql,array($v_class_name));
+            if(intval($count)>=1){return true;}
+        
+        return false;
+    }
+    
+    public function add_new_class(){
+        $v_class_name = trim(get_post_var('txt_class_name',''));
+        $v_grade = get_post_var('sel_grade',0);
+        $sql = "INSERT INTO t_class (C_CLASS_NAME,FK_GRADE) VALUES (?,?)";
+        $this->db->Execute($sql,array($v_class_name,$v_grade));
+        if($this->db->ErrorNo()==0){return true;}
+        return false;
+    }
 }
