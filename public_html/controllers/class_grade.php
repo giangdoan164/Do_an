@@ -76,17 +76,20 @@ class Class_grade extends Controller {
         $arr_data['controller']          = get_post_var('controller', '');
         $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
         $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
+        $v_class_name = trim(get_post_var('txt_class_name',''));
+        if($v_class_name==''){
+             $DATA['error'] = "Tên lớp không để rỗng ! ";
+        }
+        $v_grade = get_post_var('sel_grade',0);
+         if($v_grade==0){
+            $DATA['error'] .= "Mời chọn khối ! ";
+        }
         $is_exist_class                  = $this->class_grade_model->check_is_class_exist();
-        
         if ($is_exist_class == true)
         {              
             $DATA['error'] = "Tên lớp đã tồn tại !!! ";
         }
-        $v_grade = get_post_var('sel_grade',0);
-        
-        if($v_grade==0){
-            $DATA['error'] .= "Mời chọn khối !!! ";
-        }
+   
         if(isset($DATA['error'])){
             $this->class_grade_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
             exit();

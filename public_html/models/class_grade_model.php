@@ -60,16 +60,7 @@ class Class_grade_Model extends model {
     }
 
     public function check_is_class_exist(){
-       $v_class_name = trim(get_post_var('txt_class_name',''));
-        if($v_class_name==''){
-             $arr_data['controller']          = get_post_var('controller', '');
-             $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
-             $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
-             $DATA['error'] = "Tên lớp không để rỗng !!! ";
-             $this->exec_fail($this->goback_url, $DATA['error'], $arr_data);
-            exit();
-        }
-        
+         $v_class_name = trim(get_post_var('txt_class_name',''));
             $sql = "SELECT COUNT(*)
                     FROM
                     t_class t 
