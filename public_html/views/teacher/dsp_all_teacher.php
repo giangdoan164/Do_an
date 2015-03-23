@@ -9,6 +9,7 @@
                    <?php 
                    $url = $this->get_controller_url();
                     echo $this->hidden('controller',$url);
+                    echo $this->hidden('hdn_site_url',SITE_URL);
                     echo $this->hidden('hdn_teacher_id',0);
                     echo $this->hidden('hdn_item_id_list', '');
                     echo $this->hidden('hdn_delete_record_method', 'delete_teacher');

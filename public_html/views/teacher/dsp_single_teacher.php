@@ -110,10 +110,7 @@
     
 </div>
 <script type="text/javascript">
-//    var script_data = {
-//        controller : '<?php // echo SITE_URL;?>class_grade/load_class'
-//    }
-   
+
     function load_class(grade_id){
         var site_url = $('#hdn_site_url').val();
         $.ajax({
@@ -148,9 +145,7 @@
          }
      });
     }
-//    $(document).ready(function(){
-//        $("#sel_role option[value='2']").attr("selected","selected");
-//    });
+
 </script>
 
 

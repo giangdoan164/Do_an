@@ -16,10 +16,10 @@ class Teacher_Model extends Model {
         $v_limit = $v_end - $v_start;
         #End phan trang
       if(trim($filter)==!''){ $condition = "WHERE C_NAME like '%".trim($filter)."%'";}
-      $total_record = $this->db->GetOne("SELECT COUNT(*) from t_teacher");
+      $total_record = $this->db->GetOne("SELECT COUNT(*) from t_user");
         $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` ,$total_record as TOTAL_RECORD
                   FROM
-                    t_teacher t 
+                    t_user t 
                     LEFT JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
                      INNER JOIN t_grade g 
@@ -53,7 +53,7 @@ class Teacher_Model extends Model {
         $params = array($v_name,$v_phone,$v_address,$v_email,$v_role,$v_grade,$v_class,$v_teacher_id);
         $this->db->Execute($sql,$params);
     }else{
-        $sql = "INSERT INTO t_teacher (C_NAME,C_PHONE,C_ADDRESS,C_EMAIL,FK_CLASS,FK_GROUP,FK_GRADE) VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO t_user (C_NAME,C_PHONE,C_ADDRESS,C_EMAIL,FK_CLASS,FK_GROUP,FK_GRADE) VALUES (?,?,?,?,?,?,?)";
         $params = array($v_name,$v_phone,$v_address,$v_email,$v_class,$v_role,$v_grade);
         $this->db->Execute($sql,$params);
     }
@@ -61,7 +61,7 @@ class Teacher_Model extends Model {
   }
   
     public function qry_single_teacher($v_id){
-        $sql = "SELECT * FROM t_teacher WHERE PK_USER = ?";
+        $sql = "SELECT * FROM t_user WHERE PK_USER = ?";
         $result = $this->db->GetRow($sql,array($v_id));
         return $result;
 
@@ -82,7 +82,7 @@ class Teacher_Model extends Model {
 
     public function delete_teacher(){
         $v_delete_list = get_post_var('hdn_item_id_list',0);
-        $sql = "DELETE FROM `t_teacher` WHERE PK_USER IN ($v_delete_list)";
+        $sql = "DELETE FROM `t_user` WHERE PK_USER IN ($v_delete_list)";
         $this->db->Execute($sql);
         return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
     }
@@ -93,7 +93,7 @@ class Teacher_Model extends Model {
         else{
             $sql = "SELECT COUNT(*)
                     FROM
-                    t_teacher t 
+                    t_user t 
                     INNER JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
                    AND c.PK_CLASS = ?";

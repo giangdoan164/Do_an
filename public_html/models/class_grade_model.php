@@ -41,7 +41,7 @@ class Class_grade_Model extends model {
         #End phan trang
         $total_record = $this->db->GetOne("SELECT COUNT(*) from t_class");
         if($grade > 0){$condition = "WHERE c.FK_GRADE = $grade";}
-        $sql = "SELECT * ,$total_record as TOTAL_RECORD FROM  t_class  c LEFT JOIN t_teacher t ON c.PK_CLASS =t.FK_CLASS $condition "."LIMIT $v_start,$v_limit";
+        $sql = "SELECT * ,$total_record as TOTAL_RECORD FROM  t_class  c LEFT JOIN t_user t ON c.PK_CLASS =t.FK_CLASS $condition "."LIMIT $v_start,$v_limit";
         $result = $this->db->GetAll($sql);
          if($this->db->ErrorNo() == 0)
         {
@@ -54,7 +54,7 @@ class Class_grade_Model extends model {
         $v_delete_list = get_post_var('hdn_item_id_list',0);
         $sql = "DELETE FROM `t_class` WHERE PK_CLASS IN ($v_delete_list)";
         $this->db->Execute($sql);
-        $sql = "UPDATE `t_teacher` SET FK_CLASS = '' WHERE FK_CLASS IN ($v_delete_list)" ;
+        $sql = "UPDATE `t_user` SET FK_CLASS = '' WHERE FK_CLASS IN ($v_delete_list)" ;
         $this->db->Execute($sql);
         return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
     }
