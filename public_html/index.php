@@ -2,6 +2,7 @@
 require 'config.php';
 require 'const.php';
 require 'libs/adodb5/adodb.inc.php';
+require 'libs/PHPExcel/excel_reader.php';
 require 'libs/functions.php';
 require 'libs/DB.php';
 require 'libs/Session.php';

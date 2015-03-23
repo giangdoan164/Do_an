@@ -48,9 +48,6 @@
                 <div class="navbar-collapse collapse" id="navbar-main">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo SITE_URL; ?>help">Help</a>
-                        </li>
-                        <li>
                             <a href="<?php echo SITE_URL;?>group">Group</a>
                         </li>
                         <li>
@@ -59,6 +56,10 @@
                         <li>
                             <a href="<?php echo SITE_URL;?>class_grade">Class</a>
                         </li>
+                        <li>
+                            <a href="<?php echo SITE_URL;?>parent_student">Parent_Contact</a>
+                        </li>
+                      
                         <li>
                             <?php if (Session::get('loggedIn') !=null): ?>
                                 <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	

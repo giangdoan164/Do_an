@@ -72,7 +72,7 @@
                                         <td style="text-align:center">
                                             <?php echo $teacher['FK_GRADE'];?>
                                         </td >
-                                        <td style="text-align:center"><a href="#">Sửa</a></td>
+                                        <td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php echo $teacher['PK_USER']; ?>);"> Sửa </td>
                                     </tr>
                                 <?php endforeach; ?>
                                       <?php echo $this->render_rows(count($arr_all_teacher),8);?>
