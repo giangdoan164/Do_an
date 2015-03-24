@@ -59,6 +59,10 @@
                         <li>
                             <a href="<?php echo SITE_URL;?>parent_student">Parent_Contact</a>
                         </li>
+                        
+                        <li>
+                            <a href="<?php echo SITE_URL;?>announce">Anncounce</a>
+                        </li>
                       
                         <li>
                             <?php if (Session::get('loggedIn') !=null): ?>

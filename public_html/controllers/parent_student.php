@@ -10,45 +10,17 @@ class Parent_student extends Controller {
         $this->class_grade_model = $this->loadModel('class_grade');
     }
 
-//    public function index(){
-//    // creates an object instance of the class, and read the excel file data
-//    $excel = new PhpExcelReader();
-////    $excel->read(SERVER_ROOT.'contact_files/test_1.xls');
-//    $excel->read(EXCEL_PATH.'hehe.xls');
-//    echo __FILE__;
-//    echo "<pre>";
-//    print_r($excel);
-//    echo "</pre>";
-//    echo __LINE__;die();
-//
-//
-//}
-    
-   public function index(){
+
+   public function index(){ 
+       
       $this->dsp_all_parent_contact();
-            
-//       //include thu vien php excel
-//       require(SERVER_ROOT.'libs/excel/PHPExcel/IOFactory.php');
-//       //load file excel
-//       $inputFileType = 'Excel5';
-//       $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-//       $objReader->setReadDataOnly(true);
-//       $v_file = SERVER_ROOT.'contact_files/danhsach1.xls';
-//       $objPHPExcel = $objReader->load($v_file);
-//       
-//       //chuyen doi du lieu thanh array
-//       $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,TRUE,TRUE,TRUE);
-//       echo __FILE__;
-//       echo "<pre>";
-//       print_r($sheetData);
-//       echo "</pre>";
-//       echo __LINE__;
+      
    }
    
    public function dsp_all_parent_contact(){
-       $arr_data['arr_all_parent_contact'] = $this->parent_student_model->qry_all_parent_contact();
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
+       $arr_data['arr_all_parent_contact'] = $this->parent_student_model->qry_all_parent_contact();
        $this->view->render('parent_student/dsp_all_parent_contact',$arr_data);
    }
    
@@ -96,7 +68,7 @@ class Parent_student extends Controller {
     {
        
         $arr_data['controller']          = get_post_var('controller', '');
-        $arr_data['hdn_dsp_all_record'] = get_post_var('hdn_dsp_all_record', '');
+        $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
         $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
 
         $result = $this->parent_student_model->delete_parent_contact();

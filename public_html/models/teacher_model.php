@@ -11,12 +11,17 @@ class Teacher_Model extends Model {
       $condition='';
       $filter = get_post_var('txt_filter','');
        #Phan trang
-        page_calc($v_start, $v_end);
-        $v_start = $v_start - 1;
-        $v_limit = $v_end - $v_start;
+      page_calc($v_start, $v_end);
+      $v_start = $v_start - 1;
+      $v_limit = $v_end - $v_start;
         #End phan trang
-      if(trim($filter)==!''){ $condition = "WHERE C_NAME like '%".trim($filter)."%'";}
-      $total_record = $this->db->GetOne("SELECT COUNT(*) from t_user");
+      $total_record = $this->db->GetOne("SELECT COUNT(*) from t_user WHERE FK_GROUP ='3' AND C_DELETED ='0'");
+        #End phan trang
+        
+        //B2(xem dieu kien loc là gi)
+      $condition = "WHERE t.FK_GROUP='3' AND t.C_DELETED ='0'";
+      if(trim($filter)==!''){ $condition .= "AND C_NAME like '%".trim($filter)."%'";}
+     
         $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` ,$total_record as TOTAL_RECORD
                   FROM
                     t_user t 

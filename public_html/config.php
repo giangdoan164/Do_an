@@ -69,6 +69,7 @@ define('PUBLIC_PATH',ROOT_PATH.'public'.DS);
 //    ini_set('display_errors',0);
 //}
 
-
+define('_CONST_RECORD_FILE_ACCEPT', 'xls,xlsx');
+define('CONST_FILE_UPLOAD_PATH',SERVER_ROOT.'uploads'.DS);
 
 
