@@ -36,31 +36,21 @@
                                   </div>  
                                 </div>
                             </div>
-                            <div class="col-md-7">    
-                                    <label class='col-md-5  col-md-offset-1'>Tìm kiếm theo Nội dung thông báo</label>
-                               
-<!--                                 <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
-                                    <option value="0">--- Chọn khối --- </option>
-                                    <?php // foreach($arr_grade as $grade):?>
-                                    <?php // $selected = ($v_grade_id ==$grade['PK_GRADE']) ? 'selected' : ''?>
-                                      <option value="<?php // echo $grade['PK_GRADE'];?>" <?php // echo $selected;?>><?php // echo $grade['C_GRADE_NAME'];?></option>
-                                    <?php // endforeach;?>/
-                                </select>-->
-                               <div class="col-md-6" >
-<!--                                   <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
-                                    <option value="0">--- Chọn lớp ---</option>
-                                    <?php // foreach($arr_class as $class):?>
-                                    <?php // $selected = ($v_class_id == $class['PK_CLASS'])? 'selected' : '';?>
-                                    <option value="<?php // echo $class['PK_CLASS'];?>" <?php // echo $selected;?>><?php // echo $class['C_CLASS_NAME'];?></option>
-                                    <?php // endforeach;?>
-                              </select>-->
-                                   <input type='text' class='form-control' autofocus='autofocus' placeholder="Nhập từ khóa tìm kiếm : ví dụ : môn toán" name='txt_content_announce' id='txt_content_announce' />
-<!--                                      <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
-                                    <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
-                                 </button>-->
-                            </div>
+                        <div class="col-md-5"> 
+                            <div class="form-group">
+                                <label class='col-md-4 '>Từ khóa nội dung</label>
+                                <div class="col-md-8" >
+                                   <input type='text' class='form-control' autofocus='autofocus' placeholder="Nhập từ khóa ví dụ : môn toán" name='txt_content_announce' id='txt_content_announce' />
+                                    
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
+                                        <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
+                                    </button>
+                        </div>
+                    </div>
                     <div class="row" style="margin-top: 10px;">
                               <div class="col-md-5">
                                 <div class='form-group'>
@@ -75,19 +65,17 @@
                                   </div>  
                                 </div>
                             </div>  
-                              <div class="   col-md-4">
-                                <div class='form-group'>
-                                 <label for="sel_category"  class="col-md-5 control-label" >Tên học sinh &nbsp;</label>                                 
-                                  <div class="col-md-7">
-                                      <select class='form-control' id='sel_category' name='sel_category' >
-                                          <option value='0'>---- Tất cả ----</option>
-                                          <option value='1'>Thông báo chung</option>
-                                          <option value='2'>Thông báo học tập</option>
-                                          <option value='3'>Thông báo kỷ luật</option>
-                                      </select>            
-                                  </div>  
-                                </div>
-                            </div>  
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
+                                    <option value="0">--- Chọn khối --- </option>
+                                    <?php foreach ($arr_grade as $grade): ?>
+                                        <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
+                                        <option value="<?php echo $grade['PK_GRADE']; ?>" <?php // echo $selected; ?>><?php // echo $grade['C_GRADE_NAME']; ?></option>
+                                    <?php endforeach; ?>/
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row" style="margin-top: 10px;">
                               <div class="col-md-5">
@@ -105,15 +93,13 @@
                             </div>  
                               <div class="col-md-4">
                                 <div class='form-group'>
-                                 <label for="sel_category"  class="col-md-5 control-label" >Tên học sinh &nbsp;</label>                                 
-                                  <div class="col-md-7">
-                                      <select class='form-control' id='sel_category' name='sel_category' >
-                                          <option value='0'>---- Tất cả ----</option>
-                                          <option value='1'>Thông báo chung</option>
-                                          <option value='2'>Thông báo học tập</option>
-                                          <option value='3'>Thông báo kỷ luật</option>
-                                      </select>            
-                                  </div>  
+                              <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
+                                    <option value="0">--- Chọn lớp ---</option>
+                                    <?php foreach($arr_class as $class):?>
+                                    <?php $selected = ($v_class_id == $class['PK_CLASS'])? 'selected' : '';?>
+                                    <option value="<?php echo $class['PK_CLASS'];?>" <?php // echo $selected;?>><?php // echo $class['C_CLASS_NAME'];?></option>
+                                    <?php endforeach;?>
+                              </select>
                                 </div>
                             </div>  
                     </div>
@@ -139,7 +125,7 @@
                                     <?php foreach ($arr_all_parent_contact as $parent_contact):?>
                                     <tr>
                                         <td style="text-align:center">
-                                            <!--<input type="checkbox" name="chk[]" />-->
+                                            <!--<input type="checkbox" name="chk[]" />
                                             <input type="checkbox" name="chk" value="<?php echo $parent_contact['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                         </td>
                                         <td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_NAME']; ?></a>
