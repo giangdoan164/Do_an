@@ -1,18 +1,36 @@
 <?php
 
 class User_Model extends Model {
+    
     public function __construct($db) {
         parent::__construct($db);
        
     }
+    
     public function login() { 
+        $error = '';
         $user = get_post_var('txt_username','');
         $pass = get_post_var('txt_password','');
-          
-        $sql = "SELECT * FROM users where login ='$user' and password ='$pass'";
-        $result = $this->db->GetAssoc($sql);
-      
-        return $result;
+        if(trim($user=='')){$error  = " Mời nhập username !!!";}
+        if(trim($pass=='')){$error .= " Mời nhập password !!!";}
+        
+        if(!empty($error)){$this->exec_fail($this->goback_url,$error);}
+
+        $sql = "SELECT * FROM t_user where C_LOGIN_NAME ='$user' and C_PASSWORD ='$pass'";
+        $result = $this->db->GetRow($sql);
+        if(count($result)>0){
+            Session::set('loggedIn', true);
+            Session::set('level',$result['FK_GROUP']);
+            Session::set('grade',$result['FK_GRADE']);
+            Session::set('class',$result['FK_CLASS']);
+            Session::set('user_id',$result['PK_USER']);
+            //2 cach goi chuyen trang nhu nhau
+//            redirect('parent_student', 'dsp_all_parent_contact');
+            $this->exec_done(SITE_URL.'parent_student');
+        }else{
+            $this->exec_fail($this->goback_url,"Sai tên truy cập hoặc mật khẩu");
+        }
+        
     }
 
 }

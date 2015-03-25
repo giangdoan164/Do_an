@@ -19,7 +19,7 @@ class Teacher_Model extends Model {
         #End phan trang
         
         //B2(xem dieu kien loc là gi)
-      $condition = "WHERE t.FK_GROUP='3' AND t.C_DELETED ='0'";
+      $condition = "WHERE t.FK_GROUP='3' OR t.FK_GROUP ='2' AND t.C_DELETED ='0'";
       if(trim($filter)==!''){ $condition .= "AND C_NAME like '%".trim($filter)."%'";}
      
         $sql    = "SELECT *, c.C_CLASS_NAME, g.`PK_GRADE` ,$total_record as TOTAL_RECORD
@@ -27,25 +27,25 @@ class Teacher_Model extends Model {
                     t_user t 
                     LEFT JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
-                     INNER JOIN t_grade g 
+                    LEFT JOIN t_grade g 
                         ON g.PK_GRADE =t.FK_GRADE ".$condition."LIMIT $v_start,$v_limit";
         $result = $this->db->GetAll($sql);
         return $result;
     }
 
     public function update_single_teacher(){
-  
+   
     $v_name = get_post_var('txt_teacher_name','');
     $v_phone = get_post_var('txt_teacher_phone','');
     $v_address = get_post_var('txt_area_address','');
     $v_email = get_post_var('txt_teacher_email','');
-    $v_role = get_post_var('sel_teacher_role',3);
+    $v_role = get_post_var('sel_role',3);
     $v_grade = get_post_var('sel_grade','');
     $v_class = get_post_var('sel_class','');
     $v_teacher_id = get_post_var('hdn_teacher_id',0);
     if($v_teacher_id >0){
         $sql = "UPDATE 
-                `t_teacher` 
+                `t_user` 
               SET
                 C_NAME = ?,
                 C_PHONE = ?,
@@ -101,7 +101,7 @@ class Teacher_Model extends Model {
                     t_user t 
                     INNER JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
-                   AND c.PK_CLASS = ?";
+                   AND c.PK_CLASS = ? AND t.FK_GROUP = '3'";
             $count = $this->db->GetOne($sql,array($v_class));
             if(intval($count)>=1){return true;}
         }

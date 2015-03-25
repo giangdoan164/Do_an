@@ -16,11 +16,13 @@ class Session {
         $_SESSION[$key] = $val;
     }
     public static function destroy() {
+        static::init();           
         if (isset($_SESSION[static::SESSION_INITED]) && $_SESSION[static::SESSION_INITED] == true) {
+            $_SESSION = array();
             session_destroy();
         }
     }
-//    
+    
     public static function check_login() {
         static::init();
         $login = Session::get('loggedIn');

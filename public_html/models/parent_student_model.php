@@ -90,11 +90,12 @@ class Parent_student_Model extends Model
         $v_start   = $v_start - 1;
         $v_limit   = $v_end - $v_start;
         //nho ve sau con them dieu kien loc theo khoi hoac theo lop
-        $total_record = $this->db->GetOne("SELECT COUNT(*) from t_user WHERE FK_GROUP ='4' AND C_DELETED ='0'");
+        $class_id = Session::get('class');
+        $total_record = $this->db->GetOne("SELECT COUNT(*) from t_user WHERE FK_GROUP ='4' AND C_DELETED ='0' AND FK_CLASS = '$class_id'");
         #End phan trang
         
         //B2(xem dieu kien loc là gi)
-        $condition = "WHERE t.FK_GROUP='4' AND t.C_DELETED ='0'";
+        $condition = "WHERE t.FK_GROUP='4' AND t.C_DELETED ='0'  AND FK_CLASS = '$class_id'";
         $filter_name    = get_post_var('txt_filter','');
         $filter_class   = get_post_var('sel_class', 0);
         $filter_grade   = get_post_var('sel_grade', 0);
