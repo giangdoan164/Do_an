@@ -26,6 +26,13 @@ class Class_grade extends Controller {
        echo $DATA['arr_all_grade']['PK_GRADE'];
    }
    
+   public function load_student(){
+       header('Content-type:application/json');
+       $arr_data['arr_student'] = $this->class_grade_model->qry_all_student();
+       echo json_encode($arr_data['arr_student']);
+     
+   }
+   
    public function dsp_all_class(){
        $DATA['arr_all_class'] = $this->class_grade_model->qry_all_class_teacher();
        $this->view->render('class/dsp_all_class',$DATA);
@@ -49,25 +56,6 @@ class Class_grade extends Controller {
             exit();
         }
    }
-   
-//   public function dsp_single_class($v_class_id = 0){
-//        $arr_data = array();
-//        echo __FILE__;
-//        echo "<pre>";
-//        print_r($_POST);
-//        echo "</pre>";
-//        echo __LINE__;
-       //xem chi tiet 
-//       if($v_class_id >0)
-//       {
-//           $arr_data['arr_single_class'] = $this->teach_model->qry_single_teacher($v_teacher_id);
-//       }
-       
-       //tao moi
-//       $arr_data['arr_class'] = $this->teach_model->qry_all_class();
-//       $arr_data['arr_grade'] = $this->teach_model->qry_all_grade();
-//       $this->view->render('teacher/dsp_single_teacher',$arr_data);
-//   }
    
     public function add_new_class()
     {

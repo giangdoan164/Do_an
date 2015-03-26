@@ -9,14 +9,10 @@
                    <?php 
                         $url = $this->get_controller_url();
                          echo $this->hidden('controller',$url);
-                         echo $this->hidden('hdn_parent_contact_id',0);
-                         echo $this->hidden('hdn_item_id_list', '');
                          echo $this->hidden('hdn_site_url',SITE_URL);
-                         // phuc vu cho viec xoa
-                         echo $this->hidden('hdn_delete_record_method', 'delete_parent_contact');
-                         // phuc vu cho viec sua
-                         echo $this->hidden('hdn_dsp_all_record','dsp_all_parent_contact');
-                         echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
+                         echo $this->hidden('hdn_add_new_announce','add_new_announce');
+                    
+                         $role = Session::get('level');
                     ?>
                     <!--<input type="hidden" name="hdn_update_method" id="hdn_update_method" value="update_license_type">
                     <input type="hidden" name="hdn_delete_method" id="hdn_delete_method" value="delete_license_type">
@@ -24,25 +20,33 @@
                     <input type="hidden" name="hdn_item_id_list" id="hdn_item_id_list" value="">-->
                     <div class='row' style='margin-bottom: 15px;'>
                     <div class='row'>
-                        <div class="col-md-5">
-                            <div class='form-group'>
-                                <label for="sel_category"  class="col-md-5 control-label" >Loại thông báo &nbsp;</label>                                 
-                                <div class="col-md-7">
-                                    <select class='form-control' id='sel_category' name='sel_category' >
-                                        <option value='0'>---- Tất cả ----</option>
-                                        <option value='1'>Thông báo chung</option>
-                                        <option value='2'>Thông báo học tập</option>
-                                        <option value='3'>Thông báo kỷ luật</option>
-                                    </select>            
-                                </div>  
-                            </div>
-                        </div>
-                        <div class="col-md-5"> 
+                          <div class="col-md-5"> 
                             <div class="form-group">
-                                <label class='col-md-4 '>Từ khóa nội dung</label>
-                                <div class="col-md-8" >
+                                <label class='col-md-5 '>Từ khóa nội dung</label>
+                                <div class="col-md-7" >
                                     <input type='text' class='form-control' autofocus='autofocus' placeholder="Nhập từ khóa ví dụ : môn toán" name='txt_content_announce' id='txt_content_announce' />
 
+                                </div>
+                            </div>
+                        </div>
+                       
+                           <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="sel_grade" class="col-md-4 control-label" >Khối học</label>
+                                <div class="col-md-8">
+                                    <?php if($role==2):?>
+                                    <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
+                                        <option value="0">--- Chọn khối --- </option>
+                                        <?php foreach ($arr_grade as $grade): ?>
+                                            <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
+                                            <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
+                                        <?php endforeach; ?>/
+                                    </select>
+                                    <?php else :?>
+                                    <select disabled class="form-control" id="sel_grade" name="sel_grade" >
+                                    <option value="<?php echo Session::get('grade');?>"><?php echo "Khối ".Session::get('grade');?></option>
+                                    </select>
+                                    <?php endif?>
                                 </div>
                             </div>
                         </div>
@@ -57,11 +61,11 @@
 
 
                     <div class="row" style="margin-top: 10px;">
-                        <div class="col-md-5">
+                         <div class="col-md-5">
                             <div class='form-group'>
-                                <label for="sel_category"  class="col-md-5 control-label" >Tên học sinh &nbsp;</label>                                 
+                                <label for="sel_type"  class="col-md-5 control-label" >Loại thông báo &nbsp;</label>                                 
                                 <div class="col-md-7">
-                                    <select class='form-control' id='sel_category' name='sel_category' >
+                                    <select class='form-control' id='sel_type' name='sel_type' >
                                         <option value='0'>---- Tất cả ----</option>
                                         <option value='1'>Thông báo chung</option>
                                         <option value='2'>Thông báo học tập</option>
@@ -69,21 +73,29 @@
                                     </select>            
                                 </div>  
                             </div>
-                        </div>  
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="sel_grade" class="col-md-4 control-label" >Khối học</label>
-                                <div class="col-md-8">
-                                    <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
-                                        <option value="0">--- Chọn khối --- </option>
-                                        <?php foreach ($arr_grade as $grade): ?>
-                                            <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
-                                            <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
-                                        <?php endforeach; ?>/
-                                    </select>
-                                </div>
-                            </div>
                         </div>
+                             <div class="col-md-5">
+                            <div class='form-group'>
+                                <label for="sel_class" class="col-md-4">Lớp học</label>
+                                <div class="col-md-8">
+                                    <?php if($role==2):?>
+                                    <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade_student(this.value)">
+                                        <option value="0">--- Chọn lớp ---</option>
+                                        <?php foreach ($arr_class as $class): ?>
+                                            <?php $selected = ($v_class_id == $class['PK_CLASS']) ? 'selected' : ''; ?>
+                                            <option value="<?php echo $class['PK_CLASS']; ?>" <?php echo $selected; ?>><?php echo $class['C_CLASS_NAME']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select> 
+                                    <?php else :?>
+                                    <select disabled class="form-control" id="sel_class" name="sel_class" >
+                                        <option value="<?php echo $user_class['PK_CLASS'];?>"><?php echo $user_class['C_CLASS_NAME'];?></option>
+                                    </select>
+                                    <?php endif?>
+                                </div>
+
+                            </div>
+                        </div>  
+                    
                         <div class="col-md-2">
                             <div class='col-md-6 col-md-offset-1'>
                             <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
@@ -96,38 +108,32 @@
 
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-md-5">
-                            <div class='form-group'>
-                                <label for="sel_category"  class="col-md-5 control-label" >Học kỳ &nbsp;</label>                                 
-                                <div class="col-md-7">
-                                    <select class='form-control' id='sel_category' name='sel_category' >
-                                        <option value='0'>---- Tất cả ----</option>
-                                        <option value='1'>Học kỳ I</option>
-                                        <option value='2'>Học kỳ II</option>
 
-                                    </select>            
+                        </div>  
+                         <div class="col-md-5">
+                            <div class='form-group'>
+                                <label for="sel_student_name"  class="col-md-4 control-label" >Tên học sinh &nbsp;</label>                                 
+                                <div class="col-md-8">
+                                    <?php if($role==3 || $role ==2) :?>
+                                    <select class='form-control' id='sel_student_name' name='sel_student_name' >
+                                        <option value='0'>---- Chọn học sinh ----</option>
+                                        <?php foreach($arr_student as $student) :?>
+                                        <option value="<?php echo $student['PK_USER'];?>"><?php echo $student['C_NAME'];?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <?php else :?>
+                                    <select disabled class="form-control" id="sel_student_name" name="sel_student_name" >
+                                        <option value="<?php echo Session::get('user_id');?>"><?php echo Session::get('user_name');?></option>
+                                    </select>
+                                    <?php endif;?>
                                 </div>  
                             </div>
                         </div>  
-
-                        <div class="col-md-5">
-                            <div class='form-group'>
-                                <label for="sel_class" class="col-md-4">Lớp học</label>
-                                <div class="col-md-8">
-                                    <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
-                                        <option value="0">--- Chọn lớp ---</option>
-                                        <?php foreach ($arr_class as $class): ?>
-                                            <?php $selected = ($v_class_id == $class['PK_CLASS']) ? 'selected' : ''; ?>
-                                            <option value="<?php echo $class['PK_CLASS']; ?>" <?php echo $selected; ?>><?php echo $class['C_CLASS_NAME']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select> 
-                                </div>
-
-                            </div>
-                        </div>  
+                       
 
                         <div class="col-md-2">
                             <div class='col-md-6 col-md-offset-1'>
-                            <button type="button" class="btn btn-primary" onclick="btn_filter_onclick();" name="btn_filter">
+                            <button type="button" class="btn btn-primary" onclick="btn_add_new_onclick();" name="btn_add_new">
                                 Tạo mới 
                             </button>
                         </div>
@@ -192,23 +198,21 @@
             </div>
         </div>
 
-       
     </div>
 </div>
 
 <script type="text/javascript">
-        function btn_addnew_onclick(){
-               var m = $('#frmMain #controller').val() +$('#frmMain #hdn_dsp_single_record').val();
+        function btn_filter_onclick(){
+               $('#frmMain').submit();
+        }
+   
+        function btn_add_new_onclick(){
+                var m = $('#frmMain #controller').val() +$('#frmMain #hdn_add_new_announce').val();
                $('#frmMain').attr('action',m);
                $('#frmMain').submit();
-            }
-        function row_click(id){
-                var m = $('#frmMain #controller').val() + 'dsp_single_parent_contact/'+id;
-                $('#hdn_teacher_id').val(id);
-                $('#frmMain').attr('action',m);
-                $('#frmMain').submit();
-            } 
+        }
         function load_class(grade_id){
+          
             var site_url = $('#hdn_site_url').val();
             $.ajax({
                     url: site_url+'class_grade/load_class',
@@ -228,7 +232,7 @@
                 });
          }
     
-        function load_grade(class_id){
+        function load_grade_student(class_id){
          var site_url = $('#hdn_site_url').val();
          $.ajax({
              url : site_url+'class_grade/load_grade',
@@ -241,5 +245,23 @@
                  $("#sel_grade option[value='"+result+"']").attr("selected","selected");
              }
          });
+         $.ajax({
+             url : site_url+'class_grade/load_student',
+             type : 'post',
+             async : true,
+             cache : false ,
+             data : 'class_id='+class_id,
+             dataType : 'json',
+             success : function (result){
+                 console.log(result);
+                 var xhtml ="<option value ='0'>-- Mời chọn học sinh -- </option> ";
+                 for(i=0;i<result.length;i++){
+                     
+                     var option = "<option value ='"+result[i].PK_USER+"'>"+result[i].C_NAME+"</option>";
+                     xhtml +=option;
+                 }
+                $('#sel_student_name').html(xhtml); 
+             }
+         })
         }
 </script>

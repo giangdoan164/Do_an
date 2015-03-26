@@ -20,7 +20,14 @@ class Announce extends Controller {
        $arr_data = array();
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
+       $arr_data['arr_student'] = $this->class_grade_model->qry_all_student2();
+       $arr_data['user_class'] = $this->class_grade_model->qry_user_class();
+//       $arr_data['student_log_info'] =$this->class_grade_model->qry_student_log_info();
        $arr_data['arr_all_announce'] = $this->announce_model->qry_all_announce();
        $this->view->render('announce/dsp_all_announce',$arr_data);
+    }
+    
+    public function add_new_announce(){
+        $this->view->render('announce/create_new_announce');
     }
 }

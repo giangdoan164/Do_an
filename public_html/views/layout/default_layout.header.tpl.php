@@ -64,7 +64,10 @@
                             <a href="<?php echo SITE_URL;?>announce">Anncounce</a>
                         </li>
                       
-                        <li>
+                      
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                         <li>
                          
                             <?php if (Session::get('loggedIn') !=null): ?>
                                 <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
@@ -73,27 +76,11 @@
                             <?php endif; ?>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="http://bongda.com.vn/" target="_blank">Sport</a></li>
-                        <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-                    </ul>
 
                 </div>
             </div>
         </div>
         
         <div class="container" id="content">
-      <?php 
-//              echo __FILE__;
-//              echo "<pre>";
-//              print_r($_SESSION);
-//              echo "</pre>";
-//              echo __LINE__;
-//                    if(isset($_SESSION['grade'])){echo "co grade isset";}
-//                    else{echo "ko co grade isset";}
-//                    
-//                    var_dump($_SESSION['grade']);
-//                    if(empty($_SESSION['grade'])){echo "kooo co grade empty";}
-//                    else{ echo "co grade empty";}
-                    ?>
+    
                    

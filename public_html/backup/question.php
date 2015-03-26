@@ -1,4 +1,6 @@
 <?php
+http://harvesthq.github.io/chosen/
+    
 http://stackoverflow.com/questions/2954879/how-session-works
     http://stackoverflow.com/questions/1535697/how-do-php-sessions-work-not-how-are-they-used
     http://www.bennadel.com/blog/70-sql-query-order-of-operations.htm
@@ -30,3 +32,7 @@ FROM
   INNER JOIN `t_class` c
    ON (c.`PK_CLASS` = a.`FK_CLASS`)
   
+        
+        
+        http://www.mysqltutorial.org/mysql-subquery/
+    

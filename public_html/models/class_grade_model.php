@@ -29,7 +29,44 @@ class Class_grade_Model extends model {
         }
         return $result;
     }
+    //ajax
+    public function qry_all_student(){
+        $result = array();
+        $class_id = get_post_var('class_id',0);
+        if($class_id >0){
+            $sql = " SELECT * FROM t_user WHERE FK_CLASS = '$class_id' AND FK_GROUP <> 3";
+            $result = $this->db->GetAll($sql);
+        }
+        return $result;
+        
+    }
+    //qry student theo lop cua giao vien
+    public function qry_all_student2(){
+        $result = array();
+        $class_id = Session::get('class');
+        if($class_id != null){
+            $sql = " SELECT * FROM t_user WHERE FK_CLASS = '$class_id' AND FK_GROUP <> 3" ;
+            $result = $this->db->GetAll($sql);
+            
+        }
+        return $result;
+    }
     
+    //lay thong tin lop cua giao vien
+    public function qry_user_class(){
+        $result = array();
+        $class_id = Session::get('class');
+        if($class_id!=null){
+            $sql = "SELECT * FROM t_class WHERE PK_CLASS ='$class_id'";
+            $result = $this->db->GetRow($sql);
+        }
+        return $result;
+    }
+    
+    public function qry_student_log_info(){
+//        $result = array();
+//        $clas
+    }
     public function qry_all_class_teacher(){
        
         $condition = '';
