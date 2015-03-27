@@ -17,9 +17,10 @@ class Parent_student_Model extends Model
        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
        $objReader->setReadDataOnly(true);
        $objPHPExcel = $objReader->load($excel_path);
-       
+      
        //chuyen doi du lieu thanh array
        $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,TRUE,TRUE,TRUE);
+    
        $arr_legth = count($sheetData);
        for($i = 2;$i <=$arr_legth;$i++){
            $v_student_name = $sheetData[$i]['A'];

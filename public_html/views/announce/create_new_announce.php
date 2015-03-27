@@ -62,17 +62,17 @@
                         </div>
                     </div>
                      
-                    <div class="row" style="margin-top: 10px;">
+                    <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
                         <div class="col-md-8">
                             <textarea class="form-control" rows="3" placeholder="Nhập thông báo chung" autofocus="autofocus"></textarea>
                         </div>
                         <div class="col-md-4">
                             <div class="row">
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Thông báo chung
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" class="disabled"> Thông báo chung
                                   </label>
                                   <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Thông báo riêng
+                                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked> Thông báo riêng
                                   </label>
                                 </div>
                             <div class="row" style="margin-top: 15px;">
@@ -86,18 +86,16 @@
                            <div class="box-content nopadding" >
                                
                                 <table class="table table-hover table-nomargin table-condensed ">
-                                    <thead><tr class="info">
+                                    <thead>
+                                              <tr class="info">
                                             <th style="width: 5%;text-align:center">
                                                 <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                               
                                             </th>
-                                            <th style="width: 18%;text-align:center">Họ tên học sinh</th>
-                                            <th style="width: 10%;text-align:center">Ngày sinh </th>
-                                            <th style="width: 17%;text-align:center">Họ tên bố</th>
-                                            <th style="width: 17%;text-align:center">Họ tên mẹ</th>
-                                            <th style="width: 10%;text-align:center">Email</th>
-                                            <th style="width: 11%;text-align:center" >SĐT</th>
-                                            <th style="width: 5%;text-align:center">Lớp</th>
-                                            <th style="width: 7%;text-align:center">Thao tác</th>
+                                            <th style="width: 20%;text-align:center">Họ tên học sinh</th>
+                                            <th style="width: 15%;text-align: center">Ngày sinh</th>
+                                            <th style="width: 5%;text-align:center">Lớp </th>
+                                            <th style="width: 55%;text-align:center">Nội dung thông báo</th>
+                                                 
                                         </tr>
 
                                     </thead>
@@ -106,47 +104,47 @@
                                     <tr>
                                         <td style="text-align:center">
                                             <!--<input type="checkbox" name="chk[]" />-->
-                                            <input type="checkbox" name="chk" value="<?php echo $parent_contact['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
+                                           
                                         </td>
-                                        <td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_NAME']; ?></a>
+                                        <!--<td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php // echo $parent_contact['PK_USER']; ?>);">  <?php // echo $parent_contact['C_NAME']; ?></a>-->
                                          
                                         </td>
                                         <td style="text-align:center">
-                                          <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_STUDENT_BIRTH']; ?></a>
+                                         
 
                                         </td>
                                         <td style="text-align:center">
-                                          <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_FATHER_NAME']; ?></a>
+                                         
 
                                         </td>
                                         <td style="text-align:center">
-                                            <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_MOTHER_NAME']; ?></a>
+                                         
 
                                         </td>
                                         <td style="text-align:center">
-                                            <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_EMAIL']; ?></a>
+                                         
 
                                         </td>
                                         <td style="text-align:center">
-                                           <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_PHONE']; ?></a>
+                                           
 
                                         </td >
                                         <td style="text-align:center">
-                                           <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  <?php echo $parent_contact['C_CLASS_NAME']; ?></a>
+                                           
 
                                         </td>
                                          <td style="text-align:center">
-                                           <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  Sửa</a>
+                                           
 
                                         </td>
                                     </tr>
                                 <?php // endforeach; ?>
-                                      <?php echo $this->render_rows(count($arr_all_parent_contact),9);?>
+                                      <?php // echo $this->render_rows(count($arr_all_parent_contact),9);?>
                                     </tbody>
                                        
                                 </table>
                                <div id="paging" class="nowrap">
-                                   <?php echo $this->paging2($arr_all_parent_contact); ?>
+                                   <?php // echo $this->paging2($arr_all_parent_contact); ?>
                                </div>
                                     
                         </div>

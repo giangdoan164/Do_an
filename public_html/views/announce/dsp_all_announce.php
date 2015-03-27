@@ -10,7 +10,7 @@
                         $url = $this->get_controller_url();
                          echo $this->hidden('controller',$url);
                          echo $this->hidden('hdn_site_url',SITE_URL);
-                         echo $this->hidden('hdn_add_new_announce','add_new_announce');
+                         echo $this->hidden('hdn_add_new_announce','dsp_add_new_announce');
                     
                          $role = Session::get('level');
                     ?>
@@ -139,21 +139,22 @@
                         </div>
                     </div>
                     </div>
-</div>
+                </div>
                     
                     <div class="box box-bordered box-small">
                            <div class="box-content nopadding" >
                                 <table class="table table-hover table-nomargin table-condensed table-bordered ">
-                                    <thead><tr class="info">
+                                    <thead>
+                                        <tr class="info">
                                             <th style="width: 5%;text-align:center">
                                                 <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                               
                                             </th>
                                             <th style="width: 18%;text-align:center">Họ tên học sinh</th>
-                                            <th style="width: 4%;text-align:center">Lớp </th>
-                                            <th style="width: 45%;text-align:center">Nội dung thông báo</th>
-                                            <th style="width: 10%;text-align:center">Ngày nhập</th>
-                                            <th style="width: 18%;text-align:center">Người gửi</th>
-                                          
+                                            <th style="width: 5%;text-align: center">Lớp</th>
+                                            <th style="width: 45%;text-align:center">Nội dung</th>
+                                            <th style="width: 10%;text-align:center">Ngày gửi</th>
+                                            <th style="width: 27%;text-align:center">Người gửi</th>
+                                                 
                                         </tr>
 
                                     </thead>
@@ -161,8 +162,8 @@
                                     <?php foreach ($arr_all_announce as $announce):?>
                                     <tr>
                                         <td style="text-align:center">
-                                            <!--<!--<input type="checkbox" name="chk[]" />-->
-                                            <input type="checkbox" name="chk" value="<?php echo $parent_contact['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
+                                        
+                                            <input type="checkbox" name="chk" value="<?php  ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                         </td>
                                         <td style="text-align:center"> 
                                             <?php echo $announce['C_NAME']; ?>

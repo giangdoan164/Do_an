@@ -27,7 +27,11 @@ class Announce extends Controller {
        $this->view->render('announce/dsp_all_announce',$arr_data);
     }
     
-    public function add_new_announce(){
+    public function dsp_add_new_announce(){
         $this->view->render('announce/create_new_announce');
+    }
+    
+    public function add_new_announce(){
+        
     }
 }
