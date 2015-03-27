@@ -5,7 +5,7 @@ define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'mvc');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'root');
 
 define('DEBUG_MODE',0);
 
@@ -20,12 +20,12 @@ define('DS', DIRECTORY_SEPARATOR);
 
 // Đường dẫn tương đối (URL):load các tâp tin CSS,Javascript ,image hiển thị trong trong web
 
-define('SITE_URL', '/FinalProject/public_html/');//ảnh ọt css controller
-define('ROOT_URL', DS.'FinalProject'.DS.'public_html'.DS);//ảnh ọt css controller
+//define('SITE_URL', '/FinalProject/public_html/');//ảnh ọt css controller
+//define('ROOT_URL', DS.'FinalProject'.DS.'public_html'.DS);//ảnh ọt css controller
 
 
-//define('SITE_URL','/public_html/');//ảnh ọt css controller
-//define('ROOT_URL', DS.'public_html'.DS);//ảnh ọt css controller
+define('SITE_URL','/public_html/');//ảnh ọt css controller
+define('ROOT_URL', DS.'public_html'.DS);//ảnh ọt css controller
 
 
 define('PUBLIC_URL', ROOT_URL.'public'.DS);//ảnh ọt css controller

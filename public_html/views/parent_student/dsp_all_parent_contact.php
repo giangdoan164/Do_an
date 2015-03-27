@@ -19,19 +19,12 @@
                          echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
                     ?>
                     <!--<input type="hidden" name="controller" id="controller" value="/taothu/license/license_type/"><input type="hidden" name="hdn_dsp_single_method" id="hdn_dsp_single_method" value="dsp_single_license_type"><input type="hidden" name="hdn_dsp_all_method" id="hdn_dsp_all_method" value="dsp_all_license_type"><input type="hidden" name="hdn_update_method" id="hdn_update_method" value="update_license_type"><input type="hidden" name="hdn_delete_method" id="hdn_delete_method" value="delete_license_type"><input type="hidden" name="hdn_item_id" id="hdn_item_id" value=""><input type="hidden" name="hdn_item_id_list" id="hdn_item_id_list" value=""><input type="hidden" name="XmlData" id="XmlData" value="">            <div class="row-fluid">-->
-                        
-                
-                   
-                      
-                            <div class="col-md-4">
-                              
+                          <div class="col-md-4">
                                  <label for="txt_filter"  class="col-md-4" >Tìm kiếm &nbsp;</label>                                 
                                   <div class="col-md-8">
                                        <input type="text" name="txt_filter" id="txt_filter" value="" class="form-control col-md-5" autofocus="autofocus" placeholder="Tên học sinh" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">                                 
-                                  </div>     
-                                 
+                                  </div>  
                             </div>
-                            
                             <div class="col-md-3">                 
                                  <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
                                     <option value="0">--- Chọn khối --- </option>

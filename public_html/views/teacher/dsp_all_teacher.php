@@ -54,6 +54,7 @@
                                         <td style="text-align:center">
                                             <!--<input type="checkbox" name="chk[]" />-->
                                             <input type="checkbox" name="chk" value="<?php echo $teacher['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
+                                        
                                         </td>
                                         <td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php echo $teacher['PK_USER']; ?>);">  <?php echo $teacher['C_NAME']; ?></a>
                                          

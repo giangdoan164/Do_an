@@ -5,7 +5,7 @@
         <h1 class="page-header">Nhập thông báo học sinh</h1>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <div class="container-fluid block">
-                <form name="frmMain" id="frmMain" action="" method="POST" enctype="multipart/form-data">
+                <form name="frmMain" id="frmMain" action="" method="POST">
                    <?php 
                         $url = $this->get_controller_url();
                          echo $this->hidden('controller',$url);
@@ -13,7 +13,8 @@
                          echo $this->hidden('hdn_item_id_list', '');
                          echo $this->hidden('hdn_site_url',SITE_URL);
                          // phuc vu cho viec xoa
-                         echo $this->hidden('hdn_delete_record_method', 'delete_parent_contact');
+                     
+                         echo $this->hidden('hdn_add_new_add','add_new_announce');
                          // phuc vu cho viec sua
                          echo $this->hidden('hdn_dsp_all_record','dsp_all_parent_contact');
                          echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
@@ -64,90 +65,76 @@
                      
                     <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="3" placeholder="Nhập thông báo chung" autofocus="autofocus"></textarea>
+                            <textarea class="form-control"  id="txta_ann" rows="3" placeholder="Nhập thông báo dùng gửi chung cho phụ huynh" autofocus="autofocus"></textarea>
                         </div>
                         <div class="col-md-4">
-                            <div class="row">
-                                <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" class="disabled"> Thông báo chung
-                                  </label>
-                                  <label class="radio-inline">
-                                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked> Thông báo riêng
-                                  </label>
-                                </div>
+                            <div class="row " >
+                                          <label class="radio-inline"><input onclick="abc(1)" type="radio" name="radio_ann_scope" value="1">Thông báo chung</label>
+                                          <label class="radio-inline"><input onclick="abc(2)" type="radio" name="radio_ann_scope" value="2">Thông báo riêng</label>
+                             </div>
+                          
                             <div class="row" style="margin-top: 15px;">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button type="submit" class="btn btn-primary">Gửi thông báo</button>
+                                       <button type="button" class="btn btn-primary " onclick="btn_send_announce();" id="btn_send_ann">
+                                             <span class="glyphicon glyphicon-arrow-right"></span>  &nbsp Gửi thông báo
+                                        </button>
                                 </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="box box-bordered box-small">
-                           <div class="box-content nopadding" >
-                               
+                           <div class="box-content nopadding">
                                 <table class="table table-hover table-nomargin table-condensed ">
                                     <thead>
                                               <tr class="info">
                                             <th style="width: 5%;text-align:center">
                                                 <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                               
                                             </th>
-                                            <th style="width: 20%;text-align:center">Họ tên học sinh</th>
-                                            <th style="width: 15%;text-align: center">Ngày sinh</th>
+                                            <th style="width: 15%;text-align:center">Họ tên học sinh</th>
+                                            <th style="width: 10%;text-align: center">Ngày sinh</th>
                                             <th style="width: 5%;text-align:center">Lớp </th>
-                                            <th style="width: 55%;text-align:center">Nội dung thông báo</th>
+                                            <th style="width: 65%;text-align:center">Nội dung thông báo</th>
                                                  
                                         </tr>
 
                                     </thead>
                                     <tbody>
-                                    <?php // foreach ($arr_all_parent_contact as $parent_contact):?>
+                                     
+                                    <?php foreach ($arr_student as $student):?>
                                     <tr>
-                                        <td style="text-align:center">
-                                            <!--<input type="checkbox" name="chk[]" />-->
-                                           
-                                        </td>
-                                        <!--<td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php // echo $parent_contact['PK_USER']; ?>);">  <?php // echo $parent_contact['C_NAME']; ?></a>-->
-                                         
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                           
-
-                                        </td >
-                                        <td style="text-align:center">
-                                           
-
-                                        </td>
                                          <td style="text-align:center">
-                                           
+                                                <input type="checkbox" name="chk" value="<?php echo $student['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">                 
+                                        </td>
+                                      
+                                        <td style="text-align:center">
+                                                        
+                                               <?php echo $student['C_NAME'];?> 
+                                        </td>
+                                        <td style="text-align:center">
+                                            <?php echo $student['C_STUDENT_BIRTH'] ;     ?>
 
                                         </td>
+                                        <td style="text-align:center">
+                                            <?php echo $student['C_CLASS_NAME'] ;?>
+
+                                        </td>
+                                        <td style="text-align:center">
+                                            <input type="text" class="form-control" name="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" >
+
+                                        </td>
+                                     
+                                         
                                     </tr>
-                                <?php // endforeach; ?>
-                                      <?php // echo $this->render_rows(count($arr_all_parent_contact),9);?>
+                                <?php endforeach; ?>
+                                      <?php echo $this->render_rows(count($arr_student),5);?>
                                     </tbody>
                                        
                                 </table>
                                <div id="paging" class="nowrap">
-                                   <?php // echo $this->paging2($arr_all_parent_contact); ?>
+                                   <?php echo $this->paging2($arr_student); ?>
                                </div>
                                     
-                        </div>
+                        </div>  
                     </div>
                 </form>
                  </div>
@@ -159,6 +146,11 @@
 </div>
 
 <script type="text/javascript">
+        function btn_send_announce(){
+            var m = $('#frmMain #controller').val() +$('#frmMain #hdn_add_new_add').val();
+               $('#frmMain').attr('action',m);
+               $('#frmMain').submit();
+        }
         function btn_addnew_onclick(){
                var m = $('#frmMain #controller').val() +$('#frmMain #hdn_dsp_single_record').val();
                $('#frmMain').attr('action',m);
@@ -203,5 +195,16 @@
                  $("#sel_grade option[value='"+result+"']").attr("selected","selected");
              }
          });
+        }
+        
+        function abc(type)
+        {
+            if (type == 1){
+                
+            }
+             else{
+                 
+             }
+                
         }
 </script>
