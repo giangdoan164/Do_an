@@ -1,0 +1,1 @@
+crtg_content = ''; (function(){document.cookie = 'crtg_vng_rta=' + escape(crtg_content) + '; path=/; expires=Tue, 28 Apr 2015 06:36:17 GMT; domain=baomoi.com';})();

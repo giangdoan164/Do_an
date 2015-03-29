@@ -1,0 +1,120 @@
+/* ######### Matt Black Strip Main Menu Bar CSS ######### */
+
+.mattblackmenu ul{
+margin: 0;
+padding: 0;
+font: bold 14px Times New Roman, Verdana;
+list-style-type: none;
+overflow: hidden;
+width: 100%;
+}
+
+.mattblackmenu li{
+display: inline;
+margin: 0;
+}
+
+.mattblackmenu li a
+{
+    float: left;
+    display: block;
+    text-decoration: none;
+    margin: 0;
+    padding: 9px 15px; /*padding inside each tab*/
+    color: #fff;
+    text-transform: uppercase;
+    font: normal 14px Times New Roman, Verdana;
+    background: url('index_07.jpg') no-repeat top right;
+}
+
+.mattblackmenu li a:visited{
+color: #fff;
+}
+
+.mattblackmenu li a:hover{
+/*background: black; background of tabs for hover state */
+/*background: #d5f1fa; background of tab with "selected" class assigned to its LI */
+color:#f7e908;
+}
+
+.mattblackmenu a.selected{
+/*background: #d5f1fa; background of tab with "selected" class assigned to its LI */
+color:#f7e908;
+}
+
+
+.mattblackmenu ul li.End a {
+float: left;
+display: block;
+text-decoration: none;
+margin: 0;
+padding: 9px 15px; /*padding inside each tab*/
+/*border-right: 1px solid white; right divider between tabs*/
+color: #fff;
+font: normal 14px Times New Roman, Verdana;
+text-transform:uppercase;
+background:none; /*right divider between tabs*/
+
+}
+
+.mattblackmenu  ul li.End a:hover{
+/*background: black; background of tabs for hover state */
+/*background: #d5f1fa; background of tab with "selected" class assigned to its LI */
+color:#f7e908;
+}
+
+/* ######### Matt Black Strip Main Menu Bar CSS ######### */
+
+.mattblackmenu2 ul{
+margin: 0;
+padding: 0;
+font: bold 12px Times New Roman, Verdana;
+list-style-type: none;
+overflow: hidden;
+width: 100%;
+}
+
+.mattblackmenu2 li{
+display: inline;
+margin: 0;
+}
+
+.mattblackmenu2 li a
+{
+    float: left;
+    display: block;
+    text-decoration: none;
+    margin: 0;
+    padding: 11px 15px; /*padding inside each tab*/
+    color: #3e3d3d;
+    text-transform: uppercase;
+    font: bold 12px Times New Roman, Verdana;
+    background: url('index_07.jpg') no-repeat 0 -2px;
+}
+
+.mattblackmenu2 li a:hover{
+/*background: black; background of tabs for hover state */
+/*background: #d5f1fa; background of tab with "selected" class assigned to its LI */
+color:#ff0000;
+}
+
+.mattblackmenu2 ul li.End a {
+float: left;
+display: block;
+text-decoration: none;
+margin: 0;
+    padding: 11px 15px 11px 20px; /*padding inside each tab*/
+/*border-right: 1px solid white; right divider between tabs*/
+color: #3e3d3d;
+text-transform:uppercase;
+background:none; /*right divider between tabs*/
+font: bold 12px Times New Roman, Verdana;
+background: none;
+
+}
+
+.mattblackmenu2  ul li.End a:hover{
+/*background: black; background of tabs for hover state */
+/*background: #d5f1fa; background of tab with "selected" class assigned to its LI */
+color:#ff0000;
+}

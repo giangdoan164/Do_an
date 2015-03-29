@@ -2,7 +2,7 @@
   $arr_single_parent_contact = isset($arr_single_parent_contact) ? $arr_single_parent_contact : array();
   if(sizeof($arr_single_parent_contact)>0){
       $v_single_parent_contact_id = $arr_single_parent_contact['PK_USER'];
-      $v_student_name = $arr_single_parent_contact['C_STUDENT_NAME'];
+      $v_student_name = $arr_single_parent_contact['C_NAME'];
       $v_father_name = $arr_single_parent_contact['C_FATHER_NAME'];
       $v_mother_name = $arr_single_parent_contact['C_MOTHER_NAME'];
       $v_student_birth = $arr_single_parent_contact['C_STUDENT_BIRTH'];
@@ -27,7 +27,7 @@
 ?>
 <div class="container-fluid " >
     <div class="col-md-6 col-md-offset-3">
-<form  data-toggle="validator"  role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_parent_contact';?>">
+<form  id='frmMain' role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_parent_contact';?>">
   <fieldset>
     <legend>Cập nhật Thông tin liên lạc gia đình</legend>
     <?php 
@@ -36,6 +36,7 @@
         echo $this->hidden('controller',$this->get_controller_url());  
         echo $this->hidden('hdn_parent_contact_id',$v_single_parent_contact_id);
         echo $this->hidden('hdn_site_url',SITE_URL);
+
         echo $this->hidden('hdn_delete_record_method', 'delete_parent_contact');
         echo $this->hidden('hdn_dsp_all_record','dsp_all_parent_contact');
         echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
@@ -118,7 +119,7 @@
     <div class="form-group">
       <div class="col-lg-9 col-lg-offset-3">
         <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2">Cập nhật</button>
-        <button type="submit" class="btn btn-default col-lg-3 col-lg-offset-2 ">Quay lại</button>
+        <button type="button" class="btn btn-default col-lg-3 col-lg-offset-2 " onclick="btn_go_back_onclick();">Quay lại</button>
       </div>
     </div>
   </fieldset>
@@ -130,6 +131,15 @@
 //    var script_data = {
 //        controller : '<?php // echo SITE_URL;?>class_grade/load_class'
 //    }
+
+
+function btn_go_back_onclick(){
+         
+                var m = $('#frmMain #controller').val() +$('#frmMain #hdn_dsp_all_record').val();
+               $('#frmMain').attr('action',m);
+               $('#frmMain').submit();
+     
+}
        function load_class(grade_id){
             var site_url = $('#hdn_site_url').val();
             $.ajax({

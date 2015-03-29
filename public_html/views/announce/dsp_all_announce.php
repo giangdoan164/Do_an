@@ -11,13 +11,9 @@
                          echo $this->hidden('controller',$url);
                          echo $this->hidden('hdn_site_url',SITE_URL);
                          echo $this->hidden('hdn_add_new_announce','dsp_add_new_announce');
-                    
                          $role = Session::get('level');
                     ?>
-                    <!--<input type="hidden" name="hdn_update_method" id="hdn_update_method" value="update_license_type">
-                    <input type="hidden" name="hdn_delete_method" id="hdn_delete_method" value="delete_license_type">
-                    <input type="hidden" name="hdn_item_id" id="hdn_item_id" value="">
-                    <input type="hidden" name="hdn_item_id_list" id="hdn_item_id_list" value="">-->
+        
                     <div class='row' style='margin-bottom: 15px;'>
                     <div class='row'>
                           <div class="col-md-5"> 
@@ -98,9 +94,7 @@
                     
                         <div class="col-md-2">
                             <div class='col-md-6 col-md-offset-1'>
-                            <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
-                                 &nbsp  &nbsp&nbsp&nbsp  In &nbsp  &nbsp&nbsp
-                            </button>
+                         
                         </div>
                         </div>
                     </div>

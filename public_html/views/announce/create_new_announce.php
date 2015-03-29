@@ -1,22 +1,25 @@
 <?php // $this->render('user/index'); ?>
-<?php // echo $this->get_controller_url();?>
 <div class="container-fluid" >
     <div class="row-fluid">
         <h1 class="page-header">Nhập thông báo học sinh</h1>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <div class="container-fluid block">
-                <form name="frmMain" id="frmMain" action="" method="POST" enctype="multipart/form-data">
+                <form name="frmMain" id="frmMain" action="" method="POST">
                    <?php 
+                       $role = Session::get('level');
+                       echo $this->hidden('hdn_role',$role);
                         $url = $this->get_controller_url();
                          echo $this->hidden('controller',$url);
                          echo $this->hidden('hdn_parent_contact_id',0);
                          echo $this->hidden('hdn_item_id_list', '');
+                       
+                         echo $this->hidden('hdn_add_new_ann','add_new_announce');
+//                                       echo $this->hidden('hdn_site_url',SITE_URL);
                          echo $this->hidden('hdn_site_url',SITE_URL);
-                         // phuc vu cho viec xoa
-                         echo $this->hidden('hdn_delete_record_method', 'delete_parent_contact');
+                         echo $this->hidden('hdn_dsp_add_new_announce','dsp_add_new_announce');
                          // phuc vu cho viec sua
-                         echo $this->hidden('hdn_dsp_all_record','dsp_all_parent_contact');
-                         echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
+                         echo $this->hidden('hdn_dsp_all_record','dsp_all_announce');
+                      
                     ?>
                     <div class="row">
                         <div class="col-md-4">
@@ -36,13 +39,19 @@
                             <div class="form-group">
                                 <label for="" class="control-label col-md-2  col-md-offset-3 ">Khối</label>
                                 <div class="col-md-7">
+                                       <?php if($role==2):?>
                                     <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
-                                       <option value="0">--- Chọn khối --- </option>
-                                       <?php foreach($arr_grade as $grade):?>
-                                       <?php $selected = ($v_grade_id ==$grade['PK_GRADE']) ? 'selected' : ''?>
-                                         <option value="<?php echo $grade['PK_GRADE'];?>" <?php echo $selected;?>><?php echo $grade['C_GRADE_NAME'];?></option>
-                                       <?php endforeach;?>
-                                   </select>
+                                        <option value="0">--- Toàn trường --- </option>
+                                        <?php foreach ($arr_grade as $grade): ?>
+                                            <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
+                                            <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
+                                        <?php endforeach; ?>/
+                                    </select>
+                                    <?php else :?>
+                                    <select readonly ="readonly" class="form-control" id="sel_grade" name="sel_grade" >
+                                    <option value="<?php echo Session::get('grade');?>"><?php echo "Khối ".Session::get('grade');?></option>
+                                    </select>
+                                    <?php endif?>
                                  </div>
                             </div> 
                         </div>
@@ -50,13 +59,19 @@
                             <div class="form-group">
                                 <label for="" class="control-label col-md-2  col-md-offset-3">Lớp</label>
                                 <div class="col-md-7">
-                                  <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
+                                    <?php if($role==2):?>
+                                    <select  disabled="true" class="form-control" id="sel_class" name="sel_class" onchange="load_grade_student(this.value)">
                                         <option value="0">--- Chọn lớp ---</option>
-                                        <?php foreach($arr_class as $class):?>
-                                        <?php $selected = ($v_class_id == $class['PK_CLASS'])? 'selected' : '';?>
-                                        <option value="<?php echo $class['PK_CLASS'];?>" <?php echo $selected;?>><?php echo $class['C_CLASS_NAME'];?></option>
-                                        <?php endforeach;?>
-                                  </select>
+                                        <?php foreach ($arr_class as $class): ?>
+                                            <?php $selected = ($v_class_id == $class['PK_CLASS']) ? 'selected' : ''; ?>
+                                        <option value="<?php echo $class['PK_CLASS']; ?>" <?php echo $selected; ?>><?php echo $class['C_CLASS_NAME']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select> 
+                                    <?php else :?>
+                                    <select readonly="readonly" class="form-control" id="sel_class" name="sel_class" >
+                                        <option value="<?php echo $user_class['PK_CLASS'];?>"><?php echo $user_class['C_CLASS_NAME'];?></option>
+                                    </select>
+                                    <?php endif?>
                                     </div>
                             </div>
                         </div>
@@ -64,90 +79,80 @@
                      
                     <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="3" placeholder="Nhập thông báo chung" autofocus="autofocus"></textarea>
+                            <textarea class="form-control"  id="txta_ann"  name ="txta_ann" rows="3" placeholder="Nhập thông báo dùng gửi chung cho phụ huynh" autofocus="autofocus"></textarea>
                         </div>
                         <div class="col-md-4">
-                            <div class="row">
-                                <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" class="disabled"> Thông báo chung
-                                  </label>
-                                  <label class="radio-inline">
-                                      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked> Thông báo riêng
-                                  </label>
-                                </div>
+                            <div class="row " >
+                                <label class="radio-inline"><input onclick="radio_type_ann_onclick(1)" id="radio_public_ann" type="radio" name="radio_ann_scope" value="1" >Thông báo chung</label>
+                              
+                                <label class="radio-inline"><?php if($role==3):?>
+                                     <input onclick="radio_type_ann_onclick(2)" id='radio_private_ann' type='radio' name='radio_ann_scope' value='2'>Thông báo riêng
+                                    <?php endif;?>
+                                </label>
+                             </div>
+                          
                             <div class="row" style="margin-top: 15px;">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button type="submit" class="btn btn-primary">Gửi thông báo</button>
+                                       <button type="button" class="btn btn-primary " onclick="btn_send_announce();" id="btn_send_ann">
+                                             <span class="glyphicon glyphicon-arrow-right"></span>  &nbsp Gửi thông báo
+                                        </button>
                                 </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="box box-bordered box-small">
-                           <div class="box-content nopadding" >
-                               
+                           <div class="box-content nopadding">
                                 <table class="table table-hover table-nomargin table-condensed ">
                                     <thead>
                                               <tr class="info">
                                             <th style="width: 5%;text-align:center">
                                                 <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                               
                                             </th>
-                                            <th style="width: 20%;text-align:center">Họ tên học sinh</th>
-                                            <th style="width: 15%;text-align: center">Ngày sinh</th>
+                                            <th style="width: 15%;text-align:center">Họ tên học sinh</th>
+                                            <th style="width: 10%;text-align: center">Ngày sinh</th>
                                             <th style="width: 5%;text-align:center">Lớp </th>
-                                            <th style="width: 55%;text-align:center">Nội dung thông báo</th>
+                                            <th style="width: 65%;text-align:center">Nội dung thông báo</th>
                                                  
                                         </tr>
 
                                     </thead>
                                     <tbody>
-                                    <?php // foreach ($arr_all_parent_contact as $parent_contact):?>
+                                     
+                                    <?php foreach ($arr_student as $student):?>
                                     <tr>
-                                        <td style="text-align:center">
-                                            <!--<input type="checkbox" name="chk[]" />-->
-                                           
-                                        </td>
-                                        <!--<td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php // echo $parent_contact['PK_USER']; ?>);">  <?php // echo $parent_contact['C_NAME']; ?></a>-->
-                                         
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                         
-
-                                        </td>
-                                        <td style="text-align:center">
-                                           
-
-                                        </td >
-                                        <td style="text-align:center">
-                                           
-
-                                        </td>
                                          <td style="text-align:center">
-                                           
+                                                <input type="checkbox" name="chk" value="<?php echo $student['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">                 
+                                        </td>
+                                      
+                                        <td style="text-align:center">
+                                                        
+                                               <?php echo $student['C_NAME'];?> 
+                                        </td>
+                                        <td style="text-align:center">
+                                            <?php echo $student['C_STUDENT_BIRTH'] ;     ?>
 
                                         </td>
+                                        <td style="text-align:center">
+                                            <?php echo $student['C_CLASS_NAME'] ;?>
+
+                                        </td>
+                                        <td style="text-align:center">
+                                            <input type="text" class="form-control txt_ann"  id="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" name="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" >
+
+                                        </td>
+                                     
+                                         
                                     </tr>
-                                <?php // endforeach; ?>
-                                      <?php // echo $this->render_rows(count($arr_all_parent_contact),9);?>
+                                <?php endforeach; ?>
+                                      <?php echo $this->render_rows(count($arr_student),5);?>
                                     </tbody>
                                        
                                 </table>
                                <div id="paging" class="nowrap">
-                                   <?php // echo $this->paging2($arr_all_parent_contact); ?>
+                                   <?php echo $this->paging2($arr_student); ?>
                                </div>
                                     
-                        </div>
+                        </div>  
                     </div>
                 </form>
                  </div>
@@ -159,17 +164,66 @@
 </div>
 
 <script type="text/javascript">
-        function btn_addnew_onclick(){
-               var m = $('#frmMain #controller').val() +$('#frmMain #hdn_dsp_single_record').val();
-               $('#frmMain').attr('action',m);
-               $('#frmMain').submit();
-            }
-        function row_click(id){
-                var m = $('#frmMain #controller').val() + 'dsp_single_parent_contact/'+id;
-                $('#hdn_teacher_id').val(id);
-                $('#frmMain').attr('action',m);
-                $('#frmMain').submit();
-            } 
+    $(document).ready(function(){
+       $('#frmMain #radio_public_ann').attr('checked',true); 
+       $('#frmMain .txt_ann').attr('disabled',true);
+       $('#frmMain #txt_ann').attr('disabled',false);
+
+    });
+
+      function btn_send_announce(){
+            
+                var f = document.frmMain;
+                var role  = f.hdn_role.value;
+                //neu la giao vien thi kiem tra the nay
+                        //kiem tra loai thong bao da duoc chon
+                var ann_type = f.sel_type.value;
+                if(ann_type ==0){
+                    alert("Chưa chọn loại thông báo");
+                    return false;
+                }
+                    //neu la thong bao chung thi kiem tra noi dung txta rong ko?
+                if(f.radio_ann_scope.value==1){
+                  var ann_type = f.txta_ann.value;
+                    if(ann_type.trim()==''){
+                        alert("Chưa nhập nội dung thông báo");
+                        return false;
+                    }
+                }
+                m = $("#controller").val() + f.hdn_add_new_ann.value;
+                $("#frmMain").attr("action", m);
+                if(role ==3){
+                        var is_item_checked = set_value_chk(hdn_item_id_list);
+                        if(!is_item_checked)
+                        {
+                            return false;
+                        }
+               
+                        //thang nao la loai thong bao rieng ma chua nhap nôi dung thi phai nhap vao
+                        if(f.radio_ann_scope.value==2){
+                               var list = f.hdn_item_id_list.value;
+                               var list_arr = list.split(",");
+
+                              var err_arr = new Array();
+
+                              for(x in list_arr){
+                                  var name_string = "txt_sle_std_ann_" + list_arr[x];
+                                   var checked_string  = $('#frmMain #txt_sle_std_ann_'+list_arr[x]).val();
+                                  if(checked_string.trim()==''){err_arr.push(x);}
+                              }
+                              if(err_arr.length >0){
+                                  alert("Mời nhập nội dung thông báo đến học sinh đã lựa chọn !");
+                                  return false;
+                              }
+                       }
+                          if(confirm('Bạn chắc chắn gửi thông báo đên các đối tượng đã chọn?')) { f.submit(); }
+                }else{
+                    if(confirm('Bạn có chắc chắn gửi thông báo ?')){f.submit();}
+                }
+       
+             
+        }
+        
         function load_class(grade_id){
             var site_url = $('#hdn_site_url').val();
             $.ajax({
@@ -190,7 +244,7 @@
                 });
          }
     
-        function load_grade(class_id){
+        function load_grade_student(class_id){
          var site_url = $('#hdn_site_url').val();
          $.ajax({
              url : site_url+'class_grade/load_grade',
@@ -204,4 +258,19 @@
              }
          });
         }
+        
+        function radio_type_ann_onclick(type)
+        {
+            if (type == 1){
+              $('#frmMain .txt_ann').attr('disabled',true);
+              $('#frmMain #txta_ann').attr('disabled',false);
+            }
+             else{
+              $('#frmMain #txta_ann').attr('disabled',true);
+              $('#frmMain .txt_ann').attr('disabled',false);
+             }
+                
+        }
+        
+       
 </script>

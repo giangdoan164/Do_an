@@ -1,11 +1,8 @@
 <?php
-
 class Class_grade_Model extends model {
-
     function __construct($db) {
         parent::__construct($db);
         }
-
     function qry_all_class(){
        $grade_id = get_post_var('grade_id',0);
        if($grade_id>0){
@@ -42,10 +39,20 @@ class Class_grade_Model extends model {
     }
     //qry student theo lop cua giao vien
     public function qry_all_student2(){
-        $result = array();
-        $class_id = Session::get('class');
+        
+      $result = array();
+      $class_id = Session::get('class');
+        
+      page_calc($v_start, $v_end);
+      $v_start = $v_start - 1;
+      $v_limit = $v_end - $v_start;
+      
+        #End phan trang
+      $total_record = $this->db->GetOne("SELECT * FROM t_user u INNER JOIN t_class  c ON u.FK_CLASS = c.PK_CLASS   WHERE u.FK_CLASS = '$class_id' AND u.FK_GROUP <> 3 ");
+        #End phan trang
+        
         if($class_id != null){
-            $sql = " SELECT * FROM t_user WHERE FK_CLASS = '$class_id' AND FK_GROUP <> 3" ;
+            $sql = " SELECT * FROM t_user u INNER JOIN t_class  c ON u.FK_CLASS = c.PK_CLASS   WHERE u.FK_CLASS = '$class_id' AND u.FK_GROUP <> 3 " ;
             $result = $this->db->GetAll($sql);
             
         }
@@ -95,7 +102,6 @@ class Class_grade_Model extends model {
         $this->db->Execute($sql);
         return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
     }
-
     public function check_is_class_exist(){
          $v_class_name = trim(get_post_var('txt_class_name',''));
             $sql = "SELECT COUNT(*)

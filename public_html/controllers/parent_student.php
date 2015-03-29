@@ -20,6 +20,7 @@ class Parent_student extends Controller {
    public function dsp_all_parent_contact(){
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
+        $arr_data['user_class'] = $this->class_grade_model->qry_user_class();
        $arr_data['arr_all_parent_contact'] = $this->parent_student_model->qry_all_parent_contact();
        $this->view->render('parent_student/dsp_all_parent_contact',$arr_data);
    }
@@ -43,8 +44,6 @@ class Parent_student extends Controller {
         $arr_data                        = array();
         $arr_data['controller']          = get_post_var('controller', '');
         $arr_data['hdn_dsp_all_record'] = get_post_var('hdn_dsp_all_record', '');
-
-    
         $result           = $this->parent_student_model->update_single_parent_contact();
      
         if ($result == false)
@@ -75,7 +74,7 @@ class Parent_student extends Controller {
         if ($result == false)
         {
             $DATA['error'] = " Xảy ra lỗi không xóa được";
-            $this->parent_student_model->exec_fail($this->goback_url, $VIEW_DATA['error'], $arr_data);
+            $this->parent_student_model->exec_fail($this->goback_url,$DATA['error'], $arr_data);
             exit();
         }
         else
@@ -83,6 +82,25 @@ class Parent_student extends Controller {
             $this->parent_student_model->exec_done($this->goback_url, $arr_data);
             exit();
         }
+    }
+    
+    public function add_new_contact_list(){
+        $arr_data['controller']          = get_post_var('controller', '');
+        $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
+        $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
+         if(isset($_FILES['uploader'])){
+             
+             $result = $this->parent_student_model->update_list_excel();
+             if($result == FALSE){
+                  $DATA['error'] = " Mời chọn danh sách cần nhập !";
+                  $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+             }else{
+                  $DATA['error'] = " Cập nhật danh sách mới thành công !";
+                  $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+             }
+            
+         }
+        
     }
     
 }
