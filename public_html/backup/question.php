@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 Theo Jack Ma, con người thua cuộc và thất bại là bởi bốn lý do sau đây:
 
 1. Không nhìn thấy cơ hội
@@ -10,6 +11,10 @@ Theo Jack Ma, con người thua cuộc và thất bại là bởi bốn lý do s
 4. Hành động chậm
 
 //Có tham vọng là sống một cuộc đời với lý tưởng to lớn và hoàn thành mục tiêu vĩ đại. Trên đời này chỉ có những việc không dám nghĩ, không dám làm chứ không có chuyện gì là không thể làm được. Khát vọng của bạn lớn thế nào thì tương lai của bạn rộng mở thế đó!
+
+css http://learnlayout.com/margin-auto.html
+    
+
 http://harvesthq.github.io/chosen/
     
 http://stackoverflow.com/questions/2954879/how-session-works
@@ -22,28 +27,6 @@ http://stackoverflow.com/questions/2954879/how-session-works
     http://vnexpress.net/tin-tuc/goc-nhin/kinh-doanh-kieu-viet-nam-3156586.html
     http://kinhdoanh.vnexpress.net/tin-tuc/tien-cua-toi/nhan-vien-phuc-vu-sai-gon-kiem-hon-chuc-trieu-moi-thang-3161968.html
     
-    SELECT 
-  * , (SELECT C_NAME FROM t_user WHERE t_user.`PK_USER` = a.`FK_TEACHER_USER` ) AS C_TEACHER_NAME 
-FROM
-  `t_announce` a 
-  INNER JOIN `t_user` u 
-    ON (a.`FK_PARENT_USER` = u.`PK_USER`)
-  INNER JOIN `t_class` c
-   ON (c.`PK_CLASS` = a.`FK_CLASS`)
-  
-  
- SELECT 
-  * 
-FROM
-  `t_announce` a 
-  INNER JOIN `t_user` u 
-    ON (a.`FK_PARENT_USER` = u.`PK_USER`)
-  INNER JOIN  `t_user` u1
-    ON (a.`FK_TEACHER_USER` =u1.`PK_USER`)
-  INNER JOIN `t_class` c
-   ON (c.`PK_CLASS` = a.`FK_CLASS`)
-  
-        
         
         http://www.mysqltutorial.org/mysql-subquery/
     
