@@ -63,7 +63,9 @@
                         <li>
                             <a href="<?php echo SITE_URL;?>announce">Anncounce</a>
                         </li>
-                      
+                        <li>
+                            <a href="<?php echo SITE_URL;?>class_forum">Forum</a>
+                        </li>
                       
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -81,6 +83,6 @@
             </div>
         </div>
         
-        <div class="container" id="content">
+        <div id="content">
    
                    

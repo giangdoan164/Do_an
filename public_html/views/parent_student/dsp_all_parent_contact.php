@@ -99,10 +99,7 @@
                              
                     </div>
                     <div class="box box-bordered box-small">
-                         
-                         
                            <div class="box-content nopadding" >
-                               
                                 <table class="table table-hover table-nomargin table-condensed ">
                                     <thead><tr class="info">
                                             <th style="width: 5%;text-align:center">
@@ -117,7 +114,6 @@
                                             <th style="width: 5%;text-align:center">Lớp</th>
                                             <th style="width: 7%;text-align:center">Thao tác</th>
                                         </tr>
-
                                     </thead>
                                     <tbody>
                                     <?php foreach ($arr_all_parent_contact as $parent_contact):?>

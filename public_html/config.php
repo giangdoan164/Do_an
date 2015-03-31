@@ -34,8 +34,10 @@ define('VIEW_URL',ROOT_URL.'views'.DS);
 
   //  Đường dẫn tuyệt đối (PATH): nhúng các tập tin .php vào một tập tin .php nào đó,đường dẫn path thường đc dùng vs hàm include , require
 //C:\xampp\htdocs\FinalProject\public_html\ nhu nhau
+//
+//
 // ĐỊnh nghĩa đường dẫn đến thư mục gốc   --> require file cu the
-define('BASE_DIR', __DIR__.DS);
+//define('BASE_DIR', __DIR__.DS);
 define('ROOT_PATH',dirname(__FILE__).DS);
 define('SERVER_ROOT',dirname(__FILE__).DS);
 
