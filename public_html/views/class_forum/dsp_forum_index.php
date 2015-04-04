@@ -1,5 +1,12 @@
-<div style="background-color: #f1eff0" >
+<?php 
+echo __FILE__;
+echo "<pre>";
+print_r($arr_all_category);
+echo "</pre>";
+echo __LINE__;
 
+?>
+<div style="background-color: #f1eff0" >
 <div class="container" style="background-color: #fff">
              <h1>Diễn đàn trao đổi</h1>
             <div class="row">
@@ -12,22 +19,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i=0;$i<=2;$i++):?>
+                    <?php for($i=0;$i<sizeof($arr_all_category);$i++):?>
                         <tr>
                             <td class="category">
                                 <?php 
-                                   if($arr_result[$i]['FK_CATEGORY'] == 1){echo " + Thông báo chung";}
-                                   elseif ($arr_result[$i]['FK_CATEGORY'] == 2) {echo " + Góc học tập";}
-                                   else{
-                                       echo " +Góc kỷ luật";
-                                   }
+//                                   if($arr_new_topic[$i]['PK_CATEGORY'] == 1){echo " + Thông báo chung";}
+//                                   elseif ($arr_new_topic[$i]['PK_CATEGORY'] == 2) {echo " + Góc học tập";}
+//                                   else{
+//                                       echo " +Góc kỷ luật";
+                                          echo $arr_all_category[$i]['C_NAME'];
+                                   
                                 ?>
                             </td>
                             <td style="text-align:center"> 
                                 <div id="public_title_new" class="title">
-                                    <?php echo "<a href='#'>".$arr_result[$i]['C_TITLE']."</a>";?>
+                                    <?php echo "<a href='#'>".$arr_new_topic[$i]['C_TITLE']."</a>";?>
                                 </div>
-                                <div id="public_user_name" class="user_name"><?php echo "By ".$arr_result[$i]['C_NAME'] ;?></div>
+                                <div id="public_user_name" class="user_name"><?php echo "By ".$arr_new_topic[$i]['C_NAME'] ;?></div>
                             </td>
                             <td style="text-align:center;vertical-align:middle;">
                                 <?php echo $arr_count_topic[$i]['POST_NUMBER'];?>           

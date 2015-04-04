@@ -5,8 +5,8 @@ class Class_forum_Model extends Model {
         parent::__construct($db);
     }
     
-    
-    function qry_all_category(){
+   
+    function qry_new_topic(){
         $class_id  = Session::get('class');
         $result = array();
         if($class_id == null){return $result;}
