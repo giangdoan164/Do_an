@@ -34,6 +34,8 @@ class Class_grade extends Controller {
    }
    
    public function dsp_all_class(){
+        $level = Session::get('level');
+       if($level==3 || $level == 4 || $level ==null){echo "Bạn ko có quyền truy cập chức năng này";}
        $DATA['arr_all_class'] = $this->class_grade_model->qry_all_class_teacher();
        $this->view->render('class/dsp_all_class',$DATA);
    }

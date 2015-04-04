@@ -131,8 +131,6 @@ class Parent_student_Model extends Model
     
     public function qry_all_parent_contact()
     {
-        
-       
         //B1
         #Phan trang
         page_calc($v_start, $v_end);

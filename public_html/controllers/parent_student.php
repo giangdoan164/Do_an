@@ -18,6 +18,8 @@ class Parent_student extends Controller {
    }
    
    public function dsp_all_parent_contact(){
+       $level =  Session::get('level');
+       if($level == 4){echo "Bạn  ko có quyền truy cập chức năng này";exit();}
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
         $arr_data['user_class'] = $this->class_grade_model->qry_user_class();

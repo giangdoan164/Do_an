@@ -14,6 +14,8 @@ class Teacher extends Controller{
    }
    
    public function dsp_all_teacher(){
+       $level = Session::get('level');
+       if($level==3 || $level == 4 || $level ==null){echo "Bạn ko có quyền truy cập chức năng này";}
        $arr_data['arr_all_teacher'] = $this->teach_model->qry_all_teacher();
        $this->view->render('teacher/dsp_all_teacher',$arr_data);
    }
