@@ -1,6 +1,4 @@
-<?php 
-                    
-?>
+<?php ?>
 <div style="background-color: #f1eff0" >
 <div class="container" style="background-color: #fff">
              <h1>Diễn đàn trao đổi</h1>

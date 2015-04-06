@@ -6,21 +6,22 @@
         <h1 class="page-header">Diễn đàn - Trao đổi</h1>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
-                    <?php
-                        if(isset($cate_id)){
-                            echo $this->hidden('category_id',$cate_id);
-                        }
-                        echo $this->hidden('controller', $this->get_controller_url());
-                        echo $this->hidden('hdn_dsp_forum_index','dsp_forum_index');
-                        echo $this->hidden('hdn_dsp_all_topic','dsp_all_topic');
-                        echo $this->hidden('hdn_dsp_single_topic','dsp_single_topic');
-                    ?>
+                <?php
+                    if(isset($cate_id)){
+                        echo $this->hidden('category_id',$cate_id);
+                    }
+                    echo $this->hidden('controller', $this->get_controller_url());
+                    echo $this->hidden('hdn_dsp_forum_index','dsp_forum_index');
+                    echo $this->hidden('hdn_dsp_all_topic','dsp_all_topic');
+                    echo $this->hidden('hdn_dsp_single_topic','dsp_single_topic');
+                    echo $this->hidden('hdn_dsp_create_new_topic','dsp_create_new_topic');
+                ?>
                 <div class='row' style='margin-bottom:19px;'>                        
                     <div class="col-md-5 col-md-offset-1">
                         <a href="#">Trang chủ>></a>                            
                     </div>     
                     <div class="col-md-1 col-md-offset-3">
-                        <button class="btn btn-primary"> <span class="icon-plus">Chủ đề mới</span></button>
+                        <button class="btn btn-primary" onclick="dsp_create_new_topic();"> <span class="icon-plus">Chủ đề mới</span></button>
                     </div>
                 </div>  
                 <table class="table table-hover table-nomargin table-condensed ">
@@ -35,7 +36,7 @@
                     <tbody>  
                         <?php if (sizeof($arr_all_topic) >0 ):?>
                         <?php foreach ($arr_all_topic as $topic) :?>
-                        <tr  >
+                        <tr>
                             <td style="text-align:center"><a href="#" onclick="row_click(<?php echo $topic['PK_TOPIC'];?>)"> <?php echo $topic['C_TITLE'];?> </a></td>
                             <td style="text-align:center"> 
                               <div id="public_title_new" class="title">
@@ -56,10 +57,19 @@
                         <?php endif;?>
                     </tbody>
                 </table>
+               
             </form>
         </div>
     </div>
 <script type="text/javascript">
+    function dsp_create_new_topic(){
+        var f = document.frmMain;
+        m = $("#controller").val() + f.hdn_dsp_create_new_topic.value;
+        $("#frmMain").attr("action", m);
+        f.submit();
+        
+      
+    }
   function row_click(id){
                     var topic = $('#frmMain #hdn_dsp_single_topic').val();
                     var m = $('#frmMain #controller').val() + topic + '/'+id;

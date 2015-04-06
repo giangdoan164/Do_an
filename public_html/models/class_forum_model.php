@@ -92,7 +92,7 @@ class Class_forum_Model extends Model {
         if($class_id == null){
             return $result;
         }else{
-//            SELECT * FROM t_public_post pt INNER JOIN t_user  u ON pt.C_POSTED_USER = u.PK_USER  WHERE pt.FK_CLASS = 3 AND pt.FK_TOPIC = 1
+
 
             $sql = "select * from t_public_post where PK_POST = '$topic_id'";
             $result = $this->db->GetRow($sql);
@@ -105,6 +105,12 @@ class Class_forum_Model extends Model {
         }
     }
     
-    
+   public function do_create_new_topic($category_id = 0){
+       $class_id = Session::get('class');
+       $result = array();
+       if($category_id ==0){return $result;}
+       if($class_id ==null){return $result;}
+       
+   }
 }
     

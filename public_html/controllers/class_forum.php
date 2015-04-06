@@ -60,6 +60,17 @@ class Class_forum extends Controller {
         
     }
     
+    public function dsp_create_new_topic(){
+        $DATA['cate_id'] = get_post_var('category_id');
+       
+        $this->view->render('class_forum/dsp_create_new_topic',$DATA);
+    }
+    
+    public function do_create_new_topic(){
+        $cate_id  = get_post_var('category_id');
+        $this->class_forum_model->do_create_new_topic($cate_id);
+    }
+    
     
 
 }
