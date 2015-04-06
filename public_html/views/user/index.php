@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
 <h1>Login page</h1><hr />
-<form class="form-group" action="<?php echo $this->get_controller_url().'/login'?>" method="post">
+<form class="form-group" action="<?php echo $this->get_controller_url().'login'?>" method="post">
   <div class="form-group">
     <label  for="txt_username" class="col-md-2">Username</label>
     <input type="text" class="form-control" id="txt_username" placeholder="Enter username" name="txt_username" >

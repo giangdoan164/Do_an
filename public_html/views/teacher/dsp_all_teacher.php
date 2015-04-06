@@ -84,23 +84,7 @@
                                <div id="paging" class="nowrap">
                                    <?php echo $this->paging2($arr_all_teacher); ?>
                                </div>
-                                
-                                
-                         <div class="modal fade modal-check" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            <h4>Xóa loại hồ sơ</h4>
-                                        </div>
-                                        <p style="text-align: center">Bạn có chắc chắn xóa loại hồ sơ này?</p>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" onclick="onlick_delete_license();">Đồng ý</button>
-                                            <button type="button" class="btn " data-dismiss="modal">Hủy bỏ</button>
-                                        </div>
-                                    </div><!-- /.modal-content -->
-                                </div><!-- /.modal-dialog -->
-                            </div>
+                        
                         </div>
                     </div>
                 </form>

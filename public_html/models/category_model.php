@@ -6,7 +6,7 @@ class Category_Model extends Model{
     
     function qry_all_category(){
         $sql = 'SELECT * FROM t_category';
-        $result = $this->db->GetAll($sql);
+        $result = $this->db->GetAssoc($sql);
         return $result;
     }
     

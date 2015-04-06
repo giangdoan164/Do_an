@@ -1,14 +1,18 @@
 <?php 
-echo __FILE__;
-echo "<pre>";
-print_r($arr_all_category);
-echo "</pre>";
-echo __LINE__;
-
+                    
 ?>
 <div style="background-color: #f1eff0" >
 <div class="container" style="background-color: #fff">
              <h1>Diễn đàn trao đổi</h1>
+             <form id="frmMain" name="frmMain" action="" method="post">
+                 <?php 
+                        
+                        echo $this->hidden('controller',$this->get_controller_url());
+                        echo $this->hidden('hdn_site_url',SITE_URL);
+                        echo $this->hidden('hdn_dsp_forum_index','dsp_forum_index');
+                        echo $this->hidden('hdn_dsp_all_topic','dsp_all_topic');
+                        echo $this->hidden('hdn_dsp_single_topic','dsp_single_topic');
+                 ?>
             <div class="row">
             <table class="table table-hover table-nomargin table-condensed table-bordered ">
                 <thead>
@@ -19,36 +23,50 @@ echo __LINE__;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i=0;$i<sizeof($arr_all_category);$i++):?>
+                    <?php foreach ($arr_all_category as $cate_key => $category):?>
                         <tr>
                             <td class="category">
-                                <?php 
-//                                   if($arr_new_topic[$i]['PK_CATEGORY'] == 1){echo " + Thông báo chung";}
-//                                   elseif ($arr_new_topic[$i]['PK_CATEGORY'] == 2) {echo " + Góc học tập";}
-//                                   else{
-//                                       echo " +Góc kỷ luật";
-                                          echo $arr_all_category[$i]['C_NAME'];
-                                   
-                                ?>
+                                <a href="#" onclick="row_click(<?php echo $cate_key; ?>);"><?php   echo "+ ".$category['C_NAME'];  ?></a>
                             </td>
                             <td style="text-align:center"> 
                                 <div id="public_title_new" class="title">
-                                    <?php echo "<a href='#'>".$arr_new_topic[$i]['C_TITLE']."</a>";?>
+                                    <?php if(isset($arr_new_topic[$cate_key])):?>
+                                    <?php echo $arr_new_topic[$cate_key]['C_TITLE'];?>
+                                    <?php else:?>
+                                    <?php echo "Không có chủ đề nào trong chuyên mục"?>
+                                    <?php endif; ?>
                                 </div>
-                                <div id="public_user_name" class="user_name"><?php echo "By ".$arr_new_topic[$i]['C_NAME'] ;?></div>
+                                <div id="public_user_name" class="user_name">
+                                    <?php if(isset($arr_new_topic[$cate_key])): ?>
+                                    <?php echo $arr_new_topic[$cate_key]['C_TITLE'];?>
+                                    <?php endif; ?>
+                                </div>
                             </td>
                             <td style="text-align:center;vertical-align:middle;">
-                                <?php echo $arr_count_topic[$i]['POST_NUMBER'];?>           
+                                <?php  if(isset($arr_count_topic[$cate_key])):?>
+                                <?php echo $arr_count_topic[$cate_key]['POST_NUMBER'];?> 
+                                <?php else:?>
+                                <?php echo 0;?>
+                                <?php endif;?>
                             </td>
                     </tr> 
                          
-                    <?php endfor;?>
+                    <?php endforeach;?>
 
                     </tr>
                 </tbody>
             </table>
 
         </div>
+     </form>
     </div>
 
 </div>  
+<script type="text/javascript">
+    function row_click(id){
+                    var topic = $('#frmMain #hdn_dsp_all_topic').val();
+                    var m = $('#frmMain #controller').val() + topic + '/'+id;
+                    $('#frmMain').attr('action',m);
+                    $('#frmMain').submit();
+                } 
+</script>

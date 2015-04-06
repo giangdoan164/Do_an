@@ -55,9 +55,11 @@ class View {
 //        {
 //           die("Không tìm thấy <b>$v_view_file</b>");
 //        }
+      
          if (is_array($DATA)) {
             foreach ($DATA as $key => $val) {
                 $$key = $val;
+                
             }
         }
         if ($this->layout == null) {
