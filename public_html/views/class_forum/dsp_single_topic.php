@@ -1,9 +1,9 @@
 <?php
-//echo __FILE__;
-//echo "<pre>";
-//print_r($arr_all_post);
-//echo "</pre>";
-//echo __LINE__;
+echo __FILE__;
+echo "<pre>";
+print_r($arr_all_post);
+echo "</pre>";
+echo __LINE__;
 
 ?>
     

@@ -52,6 +52,7 @@ class Class_forum extends Controller {
         $controller = get_post_var('controller','');
         $dsp_all_topic = get_post_var('hdn_dsp_all_topic','');
         if($topic_id >0){
+            
             $DATA['arr_all_post'] = $this->class_forum_model->dsp_single_topic($topic_id);
             $this->view->render('class_forum/dsp_single_topic',$DATA);
         }else{
@@ -62,13 +63,23 @@ class Class_forum extends Controller {
     
     public function dsp_create_new_topic(){
         $DATA['cate_id'] = get_post_var('category_id');
-       
+        $DATA['arr_all_category']  = $this->category_model->qry_all_category();
         $this->view->render('class_forum/dsp_create_new_topic',$DATA);
     }
     
     public function do_create_new_topic(){
         $cate_id  = get_post_var('category_id');
-        $this->class_forum_model->do_create_new_topic($cate_id);
+        $result = $this->class_forum_model->do_create_new_topic($cate_id);
+        $single_topic_url = get_post_var('hdn_dsp_single_topic');
+        $controller = get_post_var('controller');
+        $this->view->goback_url = $controller.$single_topic_url;
+        if($result){
+            $this->class_forum_model->exec_done(  $this->view->goback_url.'/'.$result,array());
+        }  else {
+            die("Thêm chủ đề lỗi");
+        }
+        
+        
     }
     
     

@@ -16,8 +16,10 @@ class Class_forum_Model extends Model {
         $class_id = Session::get('class');
         $result = array();
         //neu ko co lop ==> chua dang nhap theo lop(giao vien or admin)
-        if ($class_id == null) { return $result; } else {
-         
+        if ($class_id == null) {
+            return $result;
+        } else {
+
             foreach ($arr_category as $key => $value) {
                 $sql_new_topic[] = "SELECT
                                         FK_CATEGORY,
@@ -63,7 +65,7 @@ class Class_forum_Model extends Model {
             return false;
         }
     }
-    
+
     public function qry_all_topic($cate_id) {
         $class_id = Session::get('class');
         $result = array();
@@ -85,32 +87,66 @@ class Class_forum_Model extends Model {
             return array(); //nhu nhau do arrat() tuong duong false;
         }
     }
-    
-    public function dsp_single_topic($topic_id){
-        $class_id =Session::get('class');
+
+    public function dsp_single_topic($topic_id) {
+        $class_id = Session::get('class');
         $result = array();
-        if($class_id == null){
+        if ($class_id == null) {
             return $result;
-        }else{
-
-
-            $sql = "select * from t_public_post where PK_POST = '$topic_id'";
-            $result = $this->db->GetRow($sql);
+        } else {
+            $sql = "SELECT pp.*,u.C_LOGIN_NAME  FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
+                        WHERE pp.FK_TOPIC = '$topic_id' ";
+            $result = $this->db->GetAll($sql);
         }
-        if($this->db->ErrorNo() == 0){
+        if ($this->db->ErrorNo() == 0) {
             return $result;
-        }else{
+        } else {
             return false;
             return array();
         }
     }
-    
-   public function do_create_new_topic($category_id = 0){
-       $class_id = Session::get('class');
-       $result = array();
-       if($category_id ==0){return $result;}
-       if($class_id ==null){return $result;}
-       
-   }
+
+    public function do_create_new_topic($category_id = 0) {
+        $class_id = Session::get('class');
+        $title = get_post_var('txt_title', '');
+        $latest_date = $created_date = date('Y-m-d H:i:s');
+        $create_user_id = $last_user_id = Session::get('user_id');
+        $post_number = $view_number = 1;
+        $content = get_post_var('txta_content');
+
+        $result = array();
+        if ($category_id == 0) {
+            return $result;
+        }
+        if ($class_id == null) {
+            return $result;
+        }
+        // tao 1 topic roi lay id topic cho vao post
+        $sql = "INSERT INTO t_public_topic
+            (FK_CLASS,
+             FK_CATEGORY,
+             C_TITLE,
+             C_CREATED_DATE,
+             C_LATEST_DATE,
+             C_CREATER_USER,
+             C_LAST_USER,
+             C_POST_NUMBER,
+             C_VIEW_NUMBER)
+             VALUES (?,?,?,?,?,?,?,?,?)";
+        $params = array($class_id, $category_id, $title, $created_date, $latest_date, $create_user_id, $last_user_id, $post_number, $view_number);
+        $this->db->Execute($sql, $params);
+
+        //tra lai insert ID cua thang topic
+        $v_topic_id = $this->db->Insert_ID();
+        // tao 1 post 
+        $sql = "INSERT INTO t_public_post  (FK_TOPIC,C_CONTENT,C_POSTED_DATE,C_POSTED_USER) VALUES (?,?,?,?)";
+        $params = array($v_topic_id, $content, $created_date, $create_user_id);
+        $this->db->Execute($sql, $params);
+        if ($this->db->ErrorNo() == 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
 }
-    

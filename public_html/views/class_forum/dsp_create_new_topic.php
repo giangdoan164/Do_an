@@ -1,6 +1,7 @@
 <div class ="container">
     <div class="row">
         <h3 class="page-header" style="text-align:center">Tạo mới chủ đề</h3>
+        
         <form action="" method="post" name="frmMain" id="frmMain">
             <?php 
                     if(isset($cate_id)){echo $this->hidden('category_id',$cate_id);}
@@ -10,24 +11,12 @@
                         echo $this->hidden('hdn_dsp_single_topic','dsp_single_topic');
                         echo $this->hidden('hdn_create_new_topic','do_create_new_topic');
             ?>
-            <div class="row">
-            <div class="form-group">
-                <label class="control-label col-md-2 col-md-offset-1" for="sel_grade" >Loại chủ đề</label>
-                <div class="col-md-5 col-md-offset-2">
-                <select class="form-control" id="sel_grade">
-                    <option value="0" >--- Chọn chủ đề ---</option>
-                    <option value="1" > Trao đổi chung</option>
-                    <option value="2" > Góc học tập  </option>
-                    <option value="3" > Góc kỷ luật</option>
-                </select>
-               </div>
-           </div>
-            </div>
+            <div class="row"><a href="#">Diễn đàn >>Góc giải trí</a></div>
             <div class="row" style="margin-top:10px;margin-bottom:10px;">
                 <div class="form-group">
                     <label class="control-label col-md-2  col-md-offset-1" for="sel_grade" >Tiêu đề </label>
                     <div class="col-md-5 col-md-offset-2">
-                        <input class="form-control" type="text" placeholder="Nhập tiêu đề" >
+                        <input class="form-control" type="text" placeholder="Nhập tiêu đề" id="txt_title" name="txt_title" >
                     </div>
                 </div>
             </div>
@@ -41,7 +30,7 @@
             </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-5">
-                <button class="btn btn-primary" onclick="do_create_new_topic();">Cập nhật</button>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary" onclick="do_create_new_topic();">Tạo chủ đề</button>&nbsp;&nbsp;&nbsp;
                 <button class="btn btn-primary" >Quay lại</button>
             </div>
         </div>
