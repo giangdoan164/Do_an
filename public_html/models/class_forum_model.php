@@ -94,7 +94,8 @@ class Class_forum_Model extends Model {
         if ($class_id == null) {
             return $result;
         } else {
-            $sql = "SELECT pp.*,u.C_LOGIN_NAME  FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
+            $sql = "SELECT pp.*,u.C_LOGIN_NAME ,pt.C_TITLE FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
+                                INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
                         WHERE pp.FK_TOPIC = '$topic_id' ";
             $result = $this->db->GetAll($sql);
         }
@@ -149,4 +150,51 @@ class Class_forum_Model extends Model {
         }
     }
 
+    public function update_view_number($topic_id){
+        $sql = "SELECT C_VIEW_NUMBER FROM t_public_topic WHERE PK_TOPIC ='$topic_id'";
+        $current_view = $this->db->GetOne($sql);
+        $current_view = intval($current_view) +1;
+        $sql = "UPDATE t_public_topic SET C_VIEW_NUMBER ='$current_view' WHERE PK_TOPIC = '$topic_id'";
+        $this->db->Execute($sql);
+        if($this->db->ErrorNo()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public function qry_topic_title($topic_id){
+        $sql = "SELECT C_TITLE from t_public_topic WHERE PK_TOPIC = '$topic_id'";
+        $result = $this->db->GetOne($sql);
+         if($this->db->ErrorNo()==0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    
+    public function reply_topic($data){
+      $topic_id = $data['topic_id'];
+      $user_id = $data['user_id'];
+      $content_reply = $data['content'];
+      $posted_date = date('Y-m-d H:i:s');
+      //1 insert vao bang post
+      $params = array($topic_id,$content_reply,$posted_date,$user_id);
+      $sql = "INSERT INTO t_public_post (FK_TOPIC,C_CONTENT,C_POSTED_DATE,C_POSTED_USER) VALUES(?,?,?,?)";
+      $this->db->Execute($sql,$params);
+      
+      $sql = "SELECT C_POST_NUMBER FROM t_public_topic WHERE PK_TOPIC = '$topic_id'";
+      $curr_post = $this->db->GetOne($sql);
+      $curr_post = intval($curr_post) + 1;
+      
+      //2 update trong bao topic
+      $sql = "UPDATE t_public_topic SET C_LATEST_DATE = ?,C_LAST_USER =?,C_POST_NUMBER =? WHERE  PK_TOPIC = ?";
+      $params = array($posted_date,$user_id,$curr_post,$topic_id);
+      $this->db->Execute($sql,$params);
+         if($this->db->ErrorNo()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

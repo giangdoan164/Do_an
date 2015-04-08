@@ -6,7 +6,7 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'mvc');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DEBUG_MODE',1);
+define('DEBUG_MODE',0);
 define('LIMIT', 20);
 
 //=========================== ĐƯỜNG DẪN =========================
@@ -28,7 +28,7 @@ define('ROOT_URL', DS.'FinalProject'.DS.'public_html'.DS);//ảnh ọt css contr
 
 define('PUBLIC_URL', ROOT_URL.'public'.DS);//ảnh ọt css controller
 define('VIEW_URL',ROOT_URL.'views'.DS);
-
+define('LIBS_URL',ROOT_URL.'libs'.DS);
 
   //  Đường dẫn tuyệt đối (PATH): nhúng các tập tin .php vào một tập tin .php nào đó,đường dẫn path thường đc dùng vs hàm include , require
 //C:\xampp\htdocs\FinalProject\public_html\ nhu nhau

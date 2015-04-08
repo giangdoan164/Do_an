@@ -4,11 +4,12 @@
 <div class="container-fluid" >
     <div class="row-fluid">
         <h1 class="page-header">Diễn đàn - Trao đổi</h1>
+        
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
                 <?php
-                    if(isset($cate_id)){
-                        echo $this->hidden('category_id',$cate_id);
+                    if(isset($category_id)){
+                        echo $this->hidden('category_id',$category_id);
                     }
                     echo $this->hidden('controller', $this->get_controller_url());
                     echo $this->hidden('hdn_dsp_forum_index','dsp_forum_index');
@@ -17,8 +18,9 @@
                     echo $this->hidden('hdn_dsp_create_new_topic','dsp_create_new_topic');
                 ?>
                 <div class='row' style='margin-bottom:19px;'>                        
-                    <div class="col-md-5 col-md-offset-1">
-                        <a href="#">Trang chủ>></a>                            
+                    <div class="col-md-4 col-md-offset-1">
+                        <a href="<?php echo $this->get_controller_url().'dsp_forum_index';?>"><span class="glyphicon glyphicon-home"></span> &nbsp;Trang chủ</a>&nbsp;&gt;
+                     <a href="<?php echo $this->get_controller_url().'dsp_all_topic/'.$category_id;?>"><?php echo $category_name ;?></a>           
                     </div>     
                     <div class="col-md-1 col-md-offset-3">
                         <button class="btn btn-primary" onclick="dsp_create_new_topic();"> <span class="icon-plus">Chủ đề mới</span></button>

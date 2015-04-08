@@ -10,4 +10,14 @@ class Category_Model extends Model{
         return $result;
     }
     
+    public function qry_category_name($cate_id){
+        $sql = "SELECT C_NAME FROM t_category WHERE PK_CATEGORY ='$cate_id' ";
+        $result = $this->db->GetOne($sql);
+        if($this->db->ErrorNo() ==0){
+            return $result;
+        }else{
+            return FALSE;
+        }
+    }
+    
 }

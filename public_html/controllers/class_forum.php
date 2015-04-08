@@ -12,6 +12,7 @@ class Class_forum extends Controller {
         $this->category_model = $this->loadModel('category');
         //them file js rieng cua forum
         $this->view->js = array('class_forum/js/forum.js');
+        $this->view->ckeditor_js = 'ckeditor/ckeditor.js';
         $this->view->css = array('class_forum/css/forum1.css');
     }
 
@@ -37,7 +38,8 @@ class Class_forum extends Controller {
        
         $this->view->goback_url = $controller . $dsp_forum_index;
         if ($category_id > 0) {
-            $DATA['cate_id'] = $category_id;
+            $DATA['category_id'] = $category_id;
+            $DATA['category_name'] = $this->category_model->qry_category_name($category_id);
             $DATA['arr_all_topic'] = $this->class_forum_model->qry_all_topic($category_id);
  
             $this->view->render('class_forum/dsp_all_topic', $DATA);
@@ -48,11 +50,17 @@ class Class_forum extends Controller {
     }
     
     public function dsp_single_topic($topic_id =0){
+    
+
         $topic_id = intval($topic_id);
         $controller = get_post_var('controller','');
         $dsp_all_topic = get_post_var('hdn_dsp_all_topic','');
         if($topic_id >0){
-            
+            $DATA['category_id'] = get_post_var('category_id');
+            $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
+            $DATA['topic_id'] = $topic_id;
+            $DATA['topic_name'] = $this->class_forum_model->qry_topic_title($topic_id);
+            $this->class_forum_model->update_view_number($topic_id);
             $DATA['arr_all_post'] = $this->class_forum_model->dsp_single_topic($topic_id);
             $this->view->render('class_forum/dsp_single_topic',$DATA);
         }else{
@@ -70,16 +78,36 @@ class Class_forum extends Controller {
     public function do_create_new_topic(){
         $cate_id  = get_post_var('category_id');
         $result = $this->class_forum_model->do_create_new_topic($cate_id);
-        $single_topic_url = get_post_var('hdn_dsp_single_topic');
+//        $single_topic_url = get_post_var('hdn_dsp_single_topic');
+        $all_topic_url = get_post_var('hdn_dsp_all_topic');
         $controller = get_post_var('controller');
-        $this->view->goback_url = $controller.$single_topic_url;
+        $this->view->goback_url = $controller.$all_topic_url;
         if($result){
-            $this->class_forum_model->exec_done(  $this->view->goback_url.'/'.$result,array());
+            $this->class_forum_model->exec_done($this->view->goback_url.'/'.$result,array());
         }  else {
             die("Thêm chủ đề lỗi");
         }
         
         
+    }
+    
+    public function reply_topic($user_id){
+        
+
+        $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
+            $arr['user_id']  = $user_id;
+            $arr['content']   = get_post_var('txta_reply_content');
+            $DATA['category_id'] = get_post_var('category_id');
+      $result =  $this->class_forum_model->reply_topic($arr);
+    if($result){
+            
+            $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
+            $DATA['topic_id'] = $topic_id;
+            $DATA['topic_name'] = $this->class_forum_model->qry_topic_title($topic_id);
+            $this->class_forum_model->update_view_number($topic_id);
+            $DATA['arr_all_post'] = $this->class_forum_model->dsp_single_topic($topic_id);
+            $this->view->render('class_forum/dsp_single_topic',$DATA);
+    }
     }
     
     
