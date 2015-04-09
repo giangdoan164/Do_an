@@ -1,3 +1,13 @@
+https://www.youtube.com/watch?v=RoQIjbAwoGs
+http://www.codeproject.com/Articles/359654/important-database-designing-rules-which-I-fo
+http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-designate
+
+
+http://www.amazon.com/dp/1558608206/?tag=stackoverfl08-20
+
+http://www.amazon.com/dp/0321210255/?tag=stackoverfl08-20
+
+
 <?php
 <<<<<<< HEAD
 Theo Jack Ma, con người thua cuộc và thất bại là bởi bốn lý do sau đây:

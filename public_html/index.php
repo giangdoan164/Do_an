@@ -1,9 +1,13 @@
 <?php
+//
+//if (!ini_get('date.timezone'))
+//{
+////    date_default_timezone_set('GMT');
+//    date_default_timezone_set('Asia/Ho_Chi_Minh');  
+//    set tring php.ini   ;date.timezone=Asia/Ho_Chi_Minh
+//date.timezone=GMT
+//}
 
-if (!ini_get('date.timezone'))
-{
-    date_default_timezone_set('GMT');
-}
 require 'libs/adodb5/adodb.inc.php';
 require 'config.php';
 require 'const.php';

@@ -1,5 +1,5 @@
 <?php
-
+//http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-design
 class Class_forum extends Controller {
 
     public $class_forum_model;
@@ -35,13 +35,11 @@ class Class_forum extends Controller {
         $category_id = intval($category_id);
         $controller = get_post_var('controller');
         $dsp_forum_index = get_post_var('hdn_dsp_forum_index');
-       
         $this->view->goback_url = $controller . $dsp_forum_index;
         if ($category_id > 0) {
             $DATA['category_id'] = $category_id;
             $DATA['category_name'] = $this->category_model->qry_category_name($category_id);
             $DATA['arr_all_topic'] = $this->class_forum_model->qry_all_topic($category_id);
- 
             $this->view->render('class_forum/dsp_all_topic', $DATA);
         } else {
             $this->class_forum_model->exec_fail($this->view->goback_url, "Mời chọn chủ đề !");
@@ -56,6 +54,7 @@ class Class_forum extends Controller {
         $controller = get_post_var('controller','');
         $dsp_all_topic = get_post_var('hdn_dsp_all_topic','');
         if($topic_id >0){
+            $DATA['arr_user_post'] = $this->class_forum_model->qry_post_list_user($topic_id);
             $DATA['category_id'] = get_post_var('category_id');
             $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
             $DATA['topic_id'] = $topic_id;
@@ -92,14 +91,12 @@ class Class_forum extends Controller {
     }
     
     public function reply_topic($user_id){
-        
-
-        $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
+            $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
             $arr['user_id']  = $user_id;
             $arr['content']   = get_post_var('txta_reply_content');
             $DATA['category_id'] = get_post_var('category_id');
-      $result =  $this->class_forum_model->reply_topic($arr);
-    if($result){
+            $result =  $this->class_forum_model->reply_topic($arr);
+         if($result){
             
             $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
             $DATA['topic_id'] = $topic_id;

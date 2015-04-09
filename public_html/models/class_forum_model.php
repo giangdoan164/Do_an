@@ -74,7 +74,7 @@ class Class_forum_Model extends Model {
             return $result;
         } else {
 
-            $sql = "SELECT * FROM t_public_topic pt "
+            $sql = "SELECT pt.*,u.C_NAME FROM t_public_topic pt "
                     . "  INNER JOIN t_user u
                                           ON pt.C_LAST_USER = u.PK_USER "
                     . "WHERE pt.FK_CLASS = '$class_id' AND pt.FK_CATEGORY = '$cate_id'  ORDER BY C_LATEST_DATE DESC ";
@@ -90,11 +90,17 @@ class Class_forum_Model extends Model {
 
     public function dsp_single_topic($topic_id) {
         $class_id = Session::get('class');
+        //B1
+        #Phan trang
+        page_calc($v_start, $v_end);
+        $v_start   = $v_start - 1;
+        $v_limit   = $v_end - $v_start;
+        
         $result = array();
         if ($class_id == null) {
             return $result;
         } else {
-            $sql = "SELECT pp.*,u.C_LOGIN_NAME ,pt.C_TITLE FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
+            $sql = "SELECT pp.*,u.C_LOGIN_NAME ,u.C_POST_NUMBER,pt.C_TITLE FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
                                 INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
                         WHERE pp.FK_TOPIC = '$topic_id' ";
             $result = $this->db->GetAll($sql);
@@ -191,10 +197,43 @@ class Class_forum_Model extends Model {
       $sql = "UPDATE t_public_topic SET C_LATEST_DATE = ?,C_LAST_USER =?,C_POST_NUMBER =? WHERE  PK_TOPIC = ?";
       $params = array($posted_date,$user_id,$curr_post,$topic_id);
       $this->db->Execute($sql,$params);
+      
+      
+      //update lai so luong post cá»§a user
+      
+      $sql = "SELECT C_POST_NUMBER FROM t_user WHERE PK_USER = '$user_id'";
+      $curr_post = $this->db->GetOne($sql);
+      $curr_post = intval($curr_post) + 1;
+      
+      // update nguoc lai POST_NUMBER 
+      $sql = "UPDATE t_user SET C_POST_NUMBER = '$curr_post' WHERE PK_USER = '$user_id' ";
+      $this->db->Execute($sql);
          if($this->db->ErrorNo()==0){
             return true;
         }else{
             return false;
         }
     }
+    
+    public function qry_post_list_user($topic_id){
+        $sql = "SELECT DISTINCT C_POSTED_USER FROM t_public_post  WHERE FK_TOPIC = '$topic_id'";
+        $arr_user_topic = $this->db->GetCol($sql);
+     
+        if(sizeof($arr_user_topic)>1){
+            foreach ($arr_user_topic as $user_id) {
+            $sql_user_post[] = "SELECT PK_USER , C_POST_NUMBER  FROM t_user WHERE PK_USER ='$user_id' ";
+             $sql = implode(' UNION ', $sql_user_post);
+             }
+        }else{// ko co thang nao posst chu de
+            return false;
+        }
+        $result = $this->db->GetAssoc($sql);
+//         $this->db->Execute($sql,$curr_post);
+         if($this->db->ErrorNo()==0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    
 }
