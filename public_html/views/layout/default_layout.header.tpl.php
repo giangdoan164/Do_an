@@ -66,7 +66,9 @@
                         <li>
                             <a href="<?php echo SITE_URL;?>class_forum">Forum</a>
                         </li>
-                      
+                       <li>
+                            <a href="<?php echo SITE_URL;?>private_message">Message</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                          <li>
