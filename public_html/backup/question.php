@@ -1,7 +1,7 @@
 https://www.youtube.com/watch?v=RoQIjbAwoGs
 http://www.codeproject.com/Articles/359654/important-database-designing-rules-which-I-fo
 http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-designate
-
+http://www.toptal.com/php/a-utf-8-primer-for-php-and-mysql
 http://www.w3resource.com/sql/subqueries/nested-subqueries.php
 
 http://www.amazon.com/dp/1558608206/?tag=stackoverfl08-20
@@ -41,12 +41,18 @@ http://stackoverflow.com/questions/2954879/how-session-works
     
     http://vnexpress.net/tin-tuc/goc-nhin/kinh-doanh-kieu-viet-nam-3156586.html
     http://kinhdoanh.vnexpress.net/tin-tuc/tien-cua-toi/nhan-vien-phuc-vu-sai-gon-kiem-hon-chuc-trieu-moi-thang-3161968.html
-    
-        
+   sql
+https://www.youtube.com/user/luutruonghailan/videos
+http://blogs.msdn.com/b/craigfr/archive/2006/07/26/nested-loops-join.aspx
         http://www.mysqltutorial.org/mysql-subquery/
+    http://www.sqlviet.com/blog/index-giup-tang-hieu-nang-thuc-hien-nhu-the-nao
     
     
-    
+
+
+jquery
+http://jstherightway.org/#js-code-style
+
     he simplist way to convert one date format into another is to use strtotime() with date(). strtotime() will convert the date into a Unix Timestamp. That Unix Timestamp can then be passed to date() to convert it to the new format.
 
 $timestamp = strtotime('2008-07-01T22:35:17.02');
@@ -82,3 +88,13 @@ In PHP 5.4 we gained the ability to do class member access on instantiation has 
 $new_date_format = (new DateTime('2008-07-01T22:35:17.02'))->format('Y-m-d H:i:s');
 Unfortunately this does not work with DateTime::createFromFormat() yet.
     
+        
+        
+ http://www.codingdojo.com/programs
+        http://sharecode.vn/source-code/chuong-trinh-quan-ly-sinh-vien-full-code-c-139.htm
+        
+        
+        
+ http://langmaster.edu.vn/7-video-ted-talks-thay-doi-tu-duy-goc-re-cua-ban-ve-hoc-ngon-ngu-a15i653.html
+        http://www.woodstitch.com/resources/php-interview-questions.php
+        

@@ -184,6 +184,12 @@
                                 </table>
                                <div id="paging" class="nowrap">
                                    <?php echo $this->paging2($arr_all_announce); ?>
+                                
+                               </div>
+                               
+                               
+                               <div class="div_padding" >
+                                       <?php // echo $this->paging3(count($arr_all_announce),1,5); ?>
                                </div>
                                     
                         </div>

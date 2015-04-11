@@ -62,13 +62,17 @@ function get_post_var($html_object_name, $default_value = '', $is_replace_bad_ch
     }
     return $var;
 }
-function get_request_var($html_object_name, $default_value = '', $is_replace_bad_char = TRUE) {
+    function get_request_var($html_object_name, $default_value = '', $is_replace_bad_char = TRUE)
+{
     $var = isset($_REQUEST[$html_object_name]) ? $_REQUEST[$html_object_name] : $default_value;
-    if ($is_replace_bad_char && !is_array($var)) {
+    
+    if ($is_replace_bad_char && !is_array($var))
+    {
         return replace_bad_char($var);
     }
     return $var;
 }
+
 function redirect($controller, $action) {
     header("location:" . SITE_URL . $controller . DS . $action);
     exit();
@@ -215,4 +219,7 @@ function chuyenChuoi($str) {
      $str = preg_replace("/(Đ)/", 'D', $str);
      return $str; // Trả về chuỗi đã chuyển
      }
+     
+     
+ 
  

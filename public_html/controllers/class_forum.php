@@ -91,6 +91,7 @@ class Class_forum extends Controller {
     }
     
     public function reply_topic($user_id){
+        
             $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
             $arr['user_id']  = $user_id;
             $arr['content']   = get_post_var('txta_reply_content');
@@ -104,6 +105,7 @@ class Class_forum extends Controller {
             $this->class_forum_model->update_view_number($topic_id);
             $DATA['arr_all_post'] = $this->class_forum_model->dsp_single_topic($topic_id);
             $this->view->render('class_forum/dsp_single_topic',$DATA);
+            
     }
     }
     

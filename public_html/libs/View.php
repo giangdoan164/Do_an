@@ -201,5 +201,65 @@ class View {
         
     }
     
+     public static function paging3($total_record,$page =1, $rows_per_page=_CONST_DEFAULT_ROWS_PER_PAGE){
+        $html='';
+        if ($total_record % $rows_per_page == 0)
+        {
+            $v_total_page = $total_record / $rows_per_page;
+        } else
+        {
+            $v_total_page = intval($total_record / $rows_per_page) + 1;
+        }
+        if($v_total_page > 1){
+            $html.="<ul class='ul_pagination'>";
+            $html.="<li><a href='#' num_page=1 class='page_item' title='Trang đầu'>&laquo;</a></li>";
+            for ($i = 1; $i <= $v_total_page; $i++)
+            {
+                if($page == $i){
+                    $html.="<li class='active'><a href='#' num_page='$i' class='page_item' title='Trang $i'>$i</a></li>";
+                }
+                else{
+                     $html.="<li><a href='#' num_page='$i' class='page_item' title='Trang $i'>$i</a></li>";
+                }
+            }
+            $html.="<li><a href='#' num_page=$v_total_page class='page_item' title='Trang cuối'>&raquo;</a></li>";
+            $html.="</ul>";
+        }
+        return $html;
+    }
+    
+     public static function paging_forum($total_record,$page =1, $rows_per_page=_CONST_DEFAULT_ROWS_PER_PAGE){
+        $html='';
+        if ($total_record % $rows_per_page == 0)
+        {
+            $v_total_page = $total_record / $rows_per_page;
+        } else
+        {
+            $v_total_page = intval($total_record / $rows_per_page) + 1;
+        }
+        if($v_total_page > 1){
+            $html.="<ul class='ul_pagination'>";
+            $html.="<li><a href='#' num_page=1 class='page_item' title='Trang đầu'>Trang đầu</a></li>";
+            $begin = intval($page) -2 ;
+            if($begin < 1){$begin = 1;}
+            $end = $page +2;
+            if($end > $v_total_page ){$end = $v_total_page;}
+            
+            for ($i = $begin; $i <= $end; $i++)
+            {
+                if($page == $i){
+                    $html.="<li class='active'><a href='#' num_page='$i' class='page_item' title='Trang $i'>$i</a></li>";
+                }
+                else{
+                     $html.="<li><a href='#' num_page='$i' class='page_item' title='Trang $i'>$i</a></li>";
+                }
+            }
+            $html.="<li><a href='#' num_page=$v_total_page class='page_item' title='Trang cuối'>Trang cuối</a></li>";
+            $html.="</ul>";
+        }
+        return $html;
+    }
+
+    
     
  }

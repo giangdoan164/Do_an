@@ -35,6 +35,33 @@
             body{
                 padding-top: 70px;
             }
+            
+             #list_license .div_padding{
+        text-align: center;
+        margin: 0 auto;
+    }
+    .div_padding .ul_pagination{
+        padding: 5px;
+        overflow: hidden;
+    }
+   .div_padding .ul_pagination li{
+        list-style: none;
+        padding: 6px;
+        margin: 2px;
+        background: #EEEEEE;
+        float: left;
+    }
+ .div_padding .ul_pagination li a{
+        text-decoration: none;
+        color: black;
+    }
+    .div_padding .ul_pagination li.active{
+        background: #368EE0;
+    }
+  .div_padding .ul_pagination li.active a{
+        text-decoration: none;
+        color: white;
+    }
         </style>
        
     </head>
@@ -43,37 +70,37 @@
          
             <div class="container" >
                 <div class="navbar-header">
-                    <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index" >Home Page</a>
+                    <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index" >Trang chủ</a>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-main">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo SITE_URL;?>group">Group</a>
+                            <a href="<?php echo SITE_URL;?>group"></a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>teacher">Teacher</a>
+                            <a href="<?php echo SITE_URL;?>teacher">Quản lý giáo viên</a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>class_grade">Class</a>
+                            <a href="<?php echo SITE_URL;?>class_grade">Quản lý lớp học</a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>parent_student">Parent_Contact</a>
+                            <a href="<?php echo SITE_URL;?>parent_student">Danh sách liên lạc</a>
                         </li>
                         
                         <li>
-                            <a href="<?php echo SITE_URL;?>announce">Anncounce</a>
+                            <a href="<?php echo SITE_URL;?>announce">Thông báo</a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>class_forum">Forum</a>
+                            <a href="<?php echo SITE_URL;?>class_forum">Diễn đàn</a>
                         </li>
                        <li>
-                            <a href="<?php echo SITE_URL;?>private_message">Message</a>
+                            <a href="<?php echo SITE_URL;?>private_thread">Trao đổi riêng</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                          <li>
                          
-                            <?php if (Session::get('loggedIn') !=null): ?>
+                            <?php if (@Session::get('loggedIn') !=null): ?>
                                 <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
                             <?php else: ?>
                                 <a href="<?php echo SITE_URL; ?>user/index" class="login">Login</a>
