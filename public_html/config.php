@@ -18,6 +18,8 @@ define('DS', DIRECTORY_SEPARATOR);
 
 // Đường dẫn tương đối (URL):load các tâp tin CSS,Javascript ,image hiển thị trong trong web
 
+//define('SITE_URL', '/FinalProject/public_html/');//ảnh ọt css controller
+//define('ROOT_URL', DS.'FinalProject'.DS.'public_html'.DS);//ảnh ọt css controller
 define('SITE_URL', '/FinalProject/public_html/');//ảnh ọt css controller
 define('ROOT_URL', DS.'FinalProject'.DS.'public_html'.DS);//ảnh ọt css controller
 

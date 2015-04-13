@@ -6,11 +6,11 @@ http://www.codeproject.com/Articles/359654/important-database-designing-rules-wh
 http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-designate
 http://www.toptal.com/php/a-utf-8-primer-for-php-and-mysql
 http://www.w3resource.com/sql/subqueries/nested-subqueries.php
-
+https://dev.mysql.com/doc/refman/5.0/en/any-in-some-subqueries.html
 http://www.amazon.com/dp/1558608206/?tag=stackoverfl08-20
 số 9 ngõ 167 Đội Cấn
 http://www.amazon.com/dp/0321210255/?tag=stackoverfl08-20
-
+http://www.w3schools.com/php/php_ref_array.asp
 http://www.html5-tutorials.org/tables/colspan-rowspan/
 
 http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-design

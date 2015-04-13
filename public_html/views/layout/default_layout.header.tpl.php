@@ -4,7 +4,7 @@
 <!--Cu dung session thi phai khoi tao--> 
 <html>
     <head>   
-        <?php $title = isset($this->title) ? $this->title : "Project Final"?>
+        <?php $title = isset($this->title) ? $this->title : "Project Final" ?>
         <title><?php echo $title; ?></title>
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.css"/>
@@ -15,61 +15,71 @@
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery.validate.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
         <!--<script type='text/javascript' src=''-->
-        <?php 
-            if(!empty($this->js)){
-                $js_files = '';
-                foreach ($this->js as $js){
-                    $js_files .="<script type='text/javascript' src='".VIEW_URL.$js."'></script>";
-                }
+        <?php
+        if (!empty($this->js))
+        {
+            $js_files = '';
+            foreach ($this->js as $js)
+            {
+                $js_files .="<script type='text/javascript' src='" . VIEW_URL . $js . "'></script>";
             }
-           
-            if(!empty($this->css)){
-                $css_files = '';
-                foreach ($this->css as $css){
-                    $css_files .="<link rel='stylesheet'  href='".VIEW_URL.$css."'/>";
-                }
+        }
+
+        if (!empty($this->css))
+        {
+            $css_files = '';
+            foreach ($this->css as $css)
+            {
+                $css_files .="<link rel='stylesheet'  href='" . VIEW_URL . $css . "'/>";
             }
-           if(!empty($js_files)){echo $js_files;}
-           if(!empty($css_files)){echo $css_files;}
+        }
+        if (!empty($js_files))
+        {
+            echo $js_files;
+        }
+        if (!empty($css_files))
+        {
+            echo $css_files;
+        }
         ?>
-        
+
         <style type="text/css">
             body{
                 padding-top: 70px;
             }
-            
-             #list_license .div_padding{
-        text-align: center;
-        margin: 0 auto;
-    }
-    .div_padding .ul_pagination{
-        padding: 5px;
-        overflow: hidden;
-    }
-   .div_padding .ul_pagination li{
-        list-style: none;
-        padding: 6px;
-        margin: 2px;
-        background: #EEEEEE;
-        float: left;
-    }
- .div_padding .ul_pagination li a{
-        text-decoration: none;
-        color: black;
-    }
-    .div_padding .ul_pagination li.active{
-        background: #368EE0;
-    }
-  .div_padding .ul_pagination li.active a{
-        text-decoration: none;
-        color: white;
-    }
+
+            #list_license .div_padding{
+                text-align: center;
+                margin: 0 auto;
+            }
+            .div_padding .ul_pagination{
+                padding: 5px;
+                overflow: hidden;
+            }
+            .div_padding .ul_pagination li{
+                list-style: none;
+                padding: 6px;
+                margin: 2px;
+                background: #EEEEEE;
+                float: left;
+            }
+            .div_padding .ul_pagination li a{
+                text-decoration: none;
+                color: black;
+            }
+            .div_padding .ul_pagination li.active{
+                background: #368EE0;
+            }
+            .div_padding .ul_pagination li.active a{
+                text-decoration: none;
+                color: white;
+            }
         </style>
-       
+
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top">
-         
+
             <div class="container" >
                 <div class="navbar-header">
                     <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index" >Trang chủ</a>
@@ -77,47 +87,63 @@
                 <div class="navbar-collapse collapse" id="navbar-main">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo SITE_URL;?>group"></a>
+                            <a href="<?php echo SITE_URL; ?>group"></a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>teacher">Quản lý giáo viên</a>
+                            <a href="<?php echo SITE_URL; ?>teacher">Quản lý giáo viên</a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>class_grade">Quản lý lớp học</a>
+                            <a href="<?php echo SITE_URL; ?>class_grade">Quản lý lớp học</a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>parent_student">Danh sách liên lạc</a>
+                            <a href="<?php echo SITE_URL; ?>parent_student">Danh sách liên lạc</a>
                         </li>
-                        
+
                         <li>
-                            <a href="<?php echo SITE_URL;?>announce">Thông báo</a>
+                            <a href="<?php echo SITE_URL; ?>announce">Thông báo</a>
                         </li>
                         <li>
-                            <a href="<?php echo SITE_URL;?>class_forum">Diễn đàn</a>
+                            <a href="<?php echo SITE_URL; ?>class_forum">Diễn đàn</a>
                         </li>
-                       <li>
-                            <a href="<?php echo SITE_URL;?>private_thread">Trao đổi riêng</a>
+                        <li>
+                            <a href="<?php echo SITE_URL; ?>private_thread">Trao đổi riêng</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                         <li>
-                         
-                            <?php if (@Session::get('loggedIn') !=null): ?>
-                                <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
-                            <?php else: ?>
-                                <a href="<?php echo SITE_URL; ?>user/index" class="login">Login</a>
-                            <?php endif; ?>
-                        </li>
+                            <?php // if (@Session::get('loggedIn') != null): ?>
+                                <!--<li>-->
+                                    <!--<a href="<?php // echo SITE_URL?>private_thread/dsp_all_thread_has_unread_message">Hội thoại chưa đọc</a>-->
+                                <!--</li>-->
+                            <?php // endif; ?>
+                                       <?php if (@Session::get('loggedIn') != null): ?>
+                                            <li>
+                                                <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
+                                             <?php else: ?>
+                                                <a href="<?php echo SITE_URL; ?>user/index" class="login">Login</a>
+                                            </li>
+                                         <?php endif; ?>
+                       
                     </ul>
 
                 </div>
             </div>
         </div>
-        
+        <script type="text/javascript">
+              var script_data = {
+                   controller: '<?php echo SITE_ROOT; ?>private_thread/dsp_all_thread_has_unread_message'
+             };
+        </script>
+        <script type="text/javascript">
+//               $.ajax({
+//                url: script_data.controller,
+//                type: 'post',
+//                dataType: 'json',
+//                success: function (result) {
+//                    $('#detail').html(result.over_due_files);
+//                                 
+                }
+            });
+        </script>
         <div id="content">
-   <?php 
-  
-     
 
-   ?>
                    

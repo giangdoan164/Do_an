@@ -20,7 +20,7 @@ $level = Session::get('level');
                 <div class="form-group">
                        <label class="control-label col-md-2">Chọn học sinh</label>
                       <div class="col-md-5">
-                      <select data-placeholder="Choose a Country..." class=" form-control"  id= "sel_class_student" style="width: 350px;" name="sel_class_student">
+                      <select  class=" form-control"  id= "sel_class_student" style="width: 350px;" name="sel_class_student">
                             <option value="0">--Chọn PHHS ---</option>
                             <?php if(sizeof($arr_all_contact)>0): ?>
                                 <?php foreach($arr_all_contact as $contact) :?>
@@ -30,10 +30,23 @@ $level = Session::get('level');
                       </select>
                       </div>
                  </div>
-                <?php endif;?>
+                <?php else:?>
+                    <div class="form-group">
+                       <label class="control-label col-md-2">Giáo viên chủ nhiệm</label>
+                      <div class="col-md-5">
+                      <select  class=" form-control"  id= "sel_class_student" style="width: 350px;" name="sel_class_student" readonly>
+                            <?php if(sizeof($arr_all_contact)>0): ?>
+                                <?php foreach($arr_all_contact as $contact) :?>
+                          <option  value="<?php echo $contact['PK_USER'];?>"><?php echo $contact["C_NAME"]; ?> </option>
+                                <?php endforeach;?>         
+                           <?php endif; ?>
+                      </select>
+                      </div>
+                 </div>
+                <?php  endif;?>
            
            </div>
-            <!--<div class="row"><a href="<?php // echo $this->get_controller_url();?>">Trở về</a></div>-->
+
             <div class="row" style="margin-top:10px;margin-bottom:10px;">
               
                 <div class="form-group">
@@ -63,47 +76,8 @@ $level = Session::get('level');
       </form>  
     </div>
 </div>
-<script type="text/javascript">
-//      // When the browser is ready...
-//  $(function() {
-//  
-//    // Setup form validation on the #register-form element
-//    $("#frmMain").validate({
-//    
-//        // Specify the validation rules
-//        rules: {
-//            txta_reply_content: {
-//                required: true,
-//                minlength: 10
-//            },
-//            txt_title: {
-//                required: true,
-//                minlength: 10
-//            },
-////            agree: "required"
-//        },
-//        
-//        // Specify the validation error messages
-//        messages: {
-//           
-//            txta_reply_content: {
-//                required: "Yêu cầu nhập nội dung trả lời",
-//                minlength: "Nội dung cần dài ít nhất 10 ký tự"
-//            },
-//            txta_reply_content: {
-//                required: "Yêu cầu nhập  nội dung tiêu đề",
-//                minlength: "Nội dung cần dài ít nhất 10 ký tự"
-//            },
-//        },
-//        
-//        submitHandler: function(form) {
-//            form.submit();
-//        }
-//    });
 
-//  });
-  
-  
+<script type="text/javascript">
     function do_create_new_thread(){
         var student = $('#frmMain #sel_class_student').val();
         var title  = $('#frmMain #txt_title').val();
@@ -118,12 +92,14 @@ $level = Session::get('level');
        
        
     }
+    
     function btn_back_onclick(){
         var f = document.frmMain;
         m = $("#controller").val() + f.hdn_dsp_all_topic.value;
         $("#frmMain").attr("action", m);
         f.submit();
     }
+    
     $(document).ready(function(){
         CKEDITOR.replace('txta_reply_content');
     

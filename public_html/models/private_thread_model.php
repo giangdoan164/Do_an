@@ -5,19 +5,55 @@ class Private_thread_Model extends model {
     function __construct($db) {
         parent::__construct($db);
     }
-
+    
+    public function qry_new_unread_message_thread(){
+        $user_id = Session::get('user_id');
+        $result = array();
+        $sql = "SELECT 
+                pm.FK_THREAD,
+                COUNT(*) AS UNREAD_MESSAGE_NUMBER 
+              FROM
+                t_private_message_read_state pmrs 
+                INNER JOIN t_private_message pm 
+                  ON pmrs.FK_MESSAGE = pm.PK_MESSAGE 
+              WHERE FK_USER = '$user_id' 
+                AND C_READ_STATE = 0 
+              GROUP BY FK_THREAD ";
+       $result =  $this->db->GetAssoc($sql);
+       return $result;
+    }
+        
     public function qry_all_thread() {
         $user_id = Session::get('user_id');
         $result = array();
         // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
-        $sql = "SELECT pt.* ,u.C_LOGIN_NAME FROM t_private_thread pt
+        $sql = "SELECT pt.PK_THREAD ,pt.C_TITLE,pt.C_CREATED_DATE ,u.C_LOGIN_NAME FROM t_private_thread pt
                 INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
             WHERE PK_THREAD 
-                IN (SELECT FK_THREAD  FROM t_private_thread_participant WHERE FK_USER = '$user_id')";
-        $result = $this->db->GetAll($sql);
+                IN (SELECT FK_THREAD  FROM t_private_thread_participant WHERE FK_USER = '$user_id') ORDER BY pt.C_CREATED_DATE DESC";
+        $result = $this->db->GetAssoc($sql);
         return $result;
     }
 
+    public function qry_all_thread_has_unread_message(){
+        $arr_unread = $this->qry_new_unread_message_thread();
+        if(sizeof($arr_unread)==0){return array();}
+        else{
+              $arr_unread_mess_key = array_keys($arr_unread);
+              $list_unread_mess = implode(",", $arr_unread_mess_key);
+              $user_id = Session::get('user_id');
+              $result = array();
+            // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
+            $sql = "SELECT pt.PK_THREAD ,pt.C_TITLE,pt.C_CREATED_DATE ,u.C_LOGIN_NAME FROM t_private_thread pt
+                    INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
+                    WHERE PK_THREAD 
+                    IN ($list_unread_mess) ORDER BY pt.C_CREATED_DATE DESC";
+            $result = $this->db->GetAssoc($sql);
+            return $result; 
+        }
+       
+    }
+    
     public function qry_single_thread($thread_id) {
         #Phan trang
         $page = get_request_var('page', 1);
@@ -81,6 +117,7 @@ class Private_thread_Model extends model {
     }
 
     public function do_create_new_thread() {
+   
         $started_user_id = Session::get('user_id');
         $title = get_post_var('txt_title');
         $created_date = date('Y-m-d H:i:s');
@@ -92,7 +129,7 @@ class Private_thread_Model extends model {
         $params = array($title, $created_date, $started_user_id);
         $this->db->Execute($sql, $params);
         $new_thread_id = $this->db->Insert_ID();
-
+        
         //2
         $sql = "INSERT INTO t_private_thread_participant(FK_THREAD,FK_USER) VALUES (?,?)";
         $params = array($new_thread_id, $started_user_id);
