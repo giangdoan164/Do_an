@@ -5,11 +5,6 @@ if (!empty($this->ckeditor_js)) {
 }
 
 $user_id = Session::get('user_id');
-//echo __FILE__;
-//echo "<pre>";
-//print_r($arr_user_post);
-//echo "</pre>";
-//echo __LINE__;
 
 ?>
 <div style="min-height: 600px;">
@@ -62,7 +57,7 @@ $user_id = Session::get('user_id');
                     </div>
                 </div>
                 <div id="reply_div" style="display: none">
-                <div class="row">
+              <div class="row">
                     <div class="col-md-8 col-md-offset-1">
                         <div class="form-group">
                             <label for="txta_reply_content" class="control-label">Nội dung</label>
@@ -73,8 +68,7 @@ $user_id = Session::get('user_id');
                         CKEDITOR.replace('txta_reply_content');
                     </script>
                 </div>
-                 
-                </div>
+            </div>
                 <div class="row">
                        <div class="col-md-1 col-md-offset-8">
                          <button class='btn btn-primary' onclick="do_reply(<?php echo $user_id?>)">Trả lời</button>

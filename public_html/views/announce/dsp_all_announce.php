@@ -37,6 +37,7 @@
                                             <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
                                             <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
                                         <?php endforeach; ?>/
+                                      
                                     </select>
                                     <?php else :?>
                                     <select disabled class="form-control" id="sel_grade" name="sel_grade" >

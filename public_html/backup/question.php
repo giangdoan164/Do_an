@@ -1,3 +1,6 @@
+<!--http://www.goonersworld.co.uk/forum/viewtopic.php?f=5&t=25572&sid=4de9d0d3321cb22de153f18675e727c0-->
+http://vinacode.net/2014/07/07/tro-thanh-lap-trinh-vien-gioi/
+http://www.woodstitch.com/resources/php-interview-questions.php
 https://www.youtube.com/watch?v=RoQIjbAwoGs
 http://www.codeproject.com/Articles/359654/important-database-designing-rules-which-I-fo
 http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-designate
@@ -5,14 +8,18 @@ http://www.toptal.com/php/a-utf-8-primer-for-php-and-mysql
 http://www.w3resource.com/sql/subqueries/nested-subqueries.php
 
 http://www.amazon.com/dp/1558608206/?tag=stackoverfl08-20
-
+số 9 ngõ 167 Đội Cấn
 http://www.amazon.com/dp/0321210255/?tag=stackoverfl08-20
 
 http://www.html5-tutorials.org/tables/colspan-rowspan/
 
 http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-design
 http://www.w3schools.com/xsl/xsl_choose.asp
+http://minhnhut.info/ham-chuyen-tieng-viet-co-dau-sang-khong-dau-php/?hc_location=ufi
 
+http://zlatanblog.com/category/htmlcss/
+//// booot strapppp
+https://www.youtube.com/watch?v=3cNqKYHilAs&index=18&list=PLu6qmuYFqldTFU_nfH4FYRt-YPQCLZnn0
 <?php
 <<<<<<< HEAD
 Theo Jack Ma, con người thua cuộc và thất bại là bởi bốn lý do sau đây:

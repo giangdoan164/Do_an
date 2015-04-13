@@ -1,11 +1,12 @@
 <?php
+
 class Private_thread_Model extends model {
+
     function __construct($db) {
         parent::__construct($db);
-        }
-    
-        
-    public function qry_all_thread(){
+    }
+
+    public function qry_all_thread() {
         $user_id = Session::get('user_id');
         $result = array();
         // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
@@ -16,13 +17,21 @@ class Private_thread_Model extends model {
         $result = $this->db->GetAll($sql);
         return $result;
     }
-    
-    public function qry_single_thread($thread_id){
-         #Phan trang
-        $page = get_request_var('page',1);
-        $page = ((int)$page > 1) ? (int)$page : 1;
+
+    public function qry_single_thread($thread_id) {
+        #Phan trang
+        $page = get_request_var('page', 1);
+        $page = ((int) $page > 1) ? (int) $page : 1;
         $v_start = ($page - 1) * 5;
         #End phan trang
+        //cap nhat lai trang thai doc tin;
+        $user_id = Session::get('user_id');
+        $sql = "SELECT PK_MESSAGE FROM t_private_message WHERE FK_THREAD = '$thread_id' AND FK_SENDING_USER <> '$user_id'";
+        $list_message =$this->db->GetCol($sql);
+        $list_message =  implode(',', $list_message);
+        $sql ="UPDATE t_private_message_read_state SET C_READ_STATE = 1 WHERE FK_USER = '$user_id' AND FK_MESSAGE IN ($list_message)";
+        $this->db->Execute($sql);
+        
         
         $sql_count = "SELECT COUNT(*)  FROM t_private_message pm WHERE FK_THREAD = '$thread_id' ";
         $result = array();
@@ -39,12 +48,12 @@ class Private_thread_Model extends model {
         $result = $this->db->GetAll($sql);
         return $result;
     }
-    
-    public function create_reply_to_thread($arr){
+
+    public function create_reply_to_thread($arr) {
         // 1: them vao bang message noi dung user tra loi 
         $sent_date = date('Y-m-d H:i:s');
         $sql = "INSERT INTO t_private_message(FK_THREAD,C_CONTENT,FK_SENDING_USER,C_SENT_DATE) VALUES (?,?,?,?)";
-        $params = array($arr['thread_id'],$arr['content'],$arr['user_id'],$sent_date );
+        $params = array($arr['thread_id'], $arr['content'], $arr['user_id'], $sent_date);
         $this->db->Execute($sql, $params);
 
         //tra lai insert ID cua thang message vua insert
@@ -52,23 +61,74 @@ class Private_thread_Model extends model {
         // 2 : them vao bang trang thai tin nhan 2 ban ghi 
         //cua thang gui tin nhan
         $sql = "INSERT INTO t_private_message_read_state(FK_MESSAGE,FK_USER,C_READ_STATE) VALUES (?,?,?)";
-        $params = array($v_message_id,$arr['user_id'],1);
-        $this->db->Execute($sql,$params);
-        
+        $params = array($v_message_id, $arr['user_id'], 1);
+        $this->db->Execute($sql, $params);
+
         //cua thang nhan tin nhan 
         $sql = "SELECT FK_USER FROM t_private_thread_participant WHERE FK_THREAD = ? AND FK_USER <> ?";
-        $params = array($arr['thread_id'],$arr['user_id']);
-        $receive_user_id = $this->db->GetOne($sql,$params);
-        
+        $params = array($arr['thread_id'], $arr['user_id']);
+        $receive_user_id = $this->db->GetOne($sql, $params);
+
         //insert trang thai doc tin cua thang nhan 
         $sql = "INSERT INTO t_private_message_read_state(FK_MESSAGE,FK_USER,C_READ_STATE) VALUES (?,?,?)";
-        $params = array($v_message_id,$receive_user_id,0);
-        $this->db->Execute($sql,$params);
-        if($this->db->ErrorNo()==0){
+        $params = array($v_message_id, $receive_user_id, 0);
+        $this->db->Execute($sql, $params);
+        if ($this->db->ErrorNo() == 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
+
+    public function do_create_new_thread() {
+        $started_user_id = Session::get('user_id');
+        $title = get_post_var('txt_title');
+        $created_date = date('Y-m-d H:i:s');
+        $second_user_id = get_post_var('sel_class_student');
+        $reply_content = get_post_var('txta_reply_content');
+
+        //1
+        $sql = "INSERT INTO t_private_thread(C_TITLE,C_CREATED_DATE,C_CREATED_USER) VALUES(?,?,?)";
+        $params = array($title, $created_date, $started_user_id);
+        $this->db->Execute($sql, $params);
+        $new_thread_id = $this->db->Insert_ID();
+
+        //2
+        $sql = "INSERT INTO t_private_thread_participant(FK_THREAD,FK_USER) VALUES (?,?)";
+        $params = array($new_thread_id, $started_user_id);
+        $this->db->Execute($sql, $params);
+        $sql = "INSERT INTO t_private_thread_participant(FK_THREAD,FK_USER) VALUES (?,?)";
+        $params = array($new_thread_id, $second_user_id);
+        $this->db->Execute($sql, $params);
+
+        //3
+        $sql = "INSERT INTO t_private_message(FK_THREAD,C_CONTENT,FK_SENDING_USER,C_SENT_DATE) VALUES (?,?,?,?)";
+        $params = array($new_thread_id, $reply_content, $started_user_id, $created_date);
+        $this->db->Execute($sql, $params);
+        $pk_message_id = $this->db->Insert_ID();
+
+        //4
+        $sql = "INSERT INTO t_private_message_read_state(FK_MESSAGE,FK_USER,C_READ_STATE) VALUES (?,?,?)";
+        $params = array($pk_message_id, $started_user_id, 1);
+        $this->db->Execute($sql, $params);
+
+        $sql = "INSERT INTO t_private_message_read_state(FK_MESSAGE,FK_USER,C_READ_STATE) VALUES (?,?,?)";
+        $params = array($pk_message_id, $second_user_id, 0);
+        $this->db->Execute($sql, $params);
+
+        if ($this->db->ErrorNo() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function qry_all_contact() {
+        $class_id = Session::get('class');
+        $level = Session::get('level');
+        $sql = "SELECT * FROM  t_user WHERE FK_CLASS = '$class_id' AND FK_GROUP <>'$level'";
+        $result = $this->db->GetAll($sql);
+        return $result;
+    }
+
 }

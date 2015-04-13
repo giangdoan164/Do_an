@@ -12,6 +12,8 @@
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/custom.js"></script>
+        <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery.validate.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
         <!--<script type='text/javascript' src=''-->
         <?php 
             if(!empty($this->js)){

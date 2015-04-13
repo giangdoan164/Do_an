@@ -23,12 +23,7 @@ class Private_thread extends Controller {
         $this->view->render('private_thread/dsp_all_thread',$DATA);
     }
     public function dsp_single_thread($thread_id){
-        echo __FILE__;
-        echo "<pre>";
-        print_r($thread_id);
-        echo "</pre>";
-        echo __LINE__;
-    
+      
         $DATA['thread_id'] = $thread_id;
         $DATA['arr_all_message'] = $this->private_thread_model->qry_single_thread($thread_id);
         $this->view->render('private_thread/dsp_single_thread',$DATA);
@@ -48,6 +43,18 @@ class Private_thread extends Controller {
     }
     
     public function dsp_create_new_thread(){
-        echo "hohohaha";
+      
+        $DATA = array();
+         $DATA['arr_all_contact'] = $this->private_thread_model->qry_all_contact();
+         $this->view->render('private_thread/dsp_create_new_thread',$DATA);
     }
+    
+    public function do_create_new_thread(){
+      
+          
+           $result =  $this->private_thread_model->do_create_new_thread();
+           if($result){
+               $this->private_thread_model->exec_done($this->view->get_controller_url().'/'.'dsp_all_thread');
+           }
+        }
 }
