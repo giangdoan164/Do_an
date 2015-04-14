@@ -1,3 +1,4 @@
+ <link rel="stylesheet" href='<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.min.css'/>
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
 <h1>Login page</h1><hr />
@@ -14,3 +15,6 @@
 </form>
 </div>
 </div>
+        <script type="text/javascript" src='<?php echo PUBLIC_URL; ?>js/jquery-1.10.2.min.js'></script>
+<script type="text/javascript" src="<?php echo PUBLIC_URL . 'bootstrap/js/bootstrap.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo PUBLIC_URL . 'bootstrap/js/bootswatch.js' ?>"></script>

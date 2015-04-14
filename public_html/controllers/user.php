@@ -14,7 +14,7 @@ class User extends Controller {
 
     public function index() {
    
-        $this->view->render('user/index');
+        $this->view->render('user/index',array(),false);
     }
 
     public function login() {

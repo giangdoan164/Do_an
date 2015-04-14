@@ -27,8 +27,9 @@ class Session {
         static::init();
         $login = Session::get('loggedIn');
         if ($login == null) {
+            
             Session::destroy();
-            header('location:' . SITE_URL . 'user/login');
+            header('location:' . SITE_URL . 'user');
             return FALSE;
         }
         return TRUE;

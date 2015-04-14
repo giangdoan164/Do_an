@@ -6,16 +6,14 @@
     <head>   
         <?php $title = isset($this->title) ? $this->title : "Project Final" ?>
         <title><?php echo $title; ?></title>
-       
-        <!--<link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.css"/>-->
+
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.min.css"/>
-        <!--<script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-1.10.2.min.js"></script>-->
+    
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/custom.js"></script>
-        <!--<script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery.validate.min.js"></script>-->
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
          <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
-        <!--<script type='text/javascript' src=''-->
+      
         <?php
         if (!empty($this->js)) {
             $js_files = '';
@@ -97,13 +95,16 @@
                         <li>
                             <a href="<?php echo SITE_URL; ?>private_thread">Trao đổi riêng</a>
                         </li>
+                        <li>
+                            <a href="<?php echo SITE_URL; ?>school_report">Quản lý học bạ</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-<?php if (@Session::get('loggedIn') != null): ?>
+                        <?php if (@Session::get('loggedIn') != null): ?>
                             <li>
                                 <a style="color: #ffff99;font-weight: bold;" href="<?php echo SITE_URL ?>private_thread/dsp_all_thread_has_unread_message"><span id='li_unread_thread_message'></span></a>
                             </li>
-<?php endif; ?>
+                        <?php endif; ?>
                         <li>
                         <?php if (@Session::get('loggedIn') != null): ?>
  

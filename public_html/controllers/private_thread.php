@@ -3,10 +3,10 @@
 class Private_thread extends Controller {
     public $private_thread_model;
     function __construct() {
+//           Session::check_login();
         //khoi tao 2 doi tuong view model de su dung
         parent::__construct('private_thread');
         $this->private_thread_model = $this->loadModel('private_thread');
-     
         //them file js rieng cua forum
 //        $this->view->js = array('class_forum/js/forum.js');
         $this->view->ckeditor_js = 'ckeditor/ckeditor.js';

@@ -22,6 +22,7 @@ http://zlatanblog.com/category/htmlcss/
 //// booot strapppp
 https://www.youtube.com/watch?v=3cNqKYHilAs&index=18&list=PLu6qmuYFqldTFU_nfH4FYRt-YPQCLZnn0
 <?php
+http request response
 <<<<<<< HEAD
 Theo Jack Ma, con người thua cuộc và thất bại là bởi bốn lý do sau đây:
 
@@ -106,3 +107,9 @@ Unfortunately this does not work with DateTime::createFromFormat() yet.
  http://langmaster.edu.vn/7-video-ted-talks-thay-doi-tu-duy-goc-re-cua-ban-ve-hoc-ngon-ngu-a15i653.html
         http://www.woodstitch.com/resources/php-interview-questions.php
         
+        
+        
+        
+ ve visio :
+        
+        https://www.youtube.com/watch?v=Z3uTWpuv54U
