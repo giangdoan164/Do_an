@@ -6,39 +6,34 @@
     <head>   
         <?php $title = isset($this->title) ? $this->title : "Project Final" ?>
         <title><?php echo $title; ?></title>
-        <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
-        <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.css"/>
+       
+        <!--<link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.css"/>-->
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.min.css"/>
-        <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-1.10.2.min.js"></script>
+        <!--<script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-1.10.2.min.js"></script>-->
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/custom.js"></script>
-        <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery.validate.min.js"></script>
+        <!--<script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery.validate.min.js"></script>-->
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
         <!--<script type='text/javascript' src=''-->
         <?php
-        if (!empty($this->js))
-        {
+        if (!empty($this->js)) {
             $js_files = '';
-            foreach ($this->js as $js)
-            {
+            foreach ($this->js as $js) {
                 $js_files .="<script type='text/javascript' src='" . VIEW_URL . $js . "'></script>";
             }
         }
 
-        if (!empty($this->css))
-        {
+        if (!empty($this->css)) {
             $css_files = '';
-            foreach ($this->css as $css)
-            {
+            foreach ($this->css as $css) {
                 $css_files .="<link rel='stylesheet'  href='" . VIEW_URL . $css . "'/>";
             }
         }
-        if (!empty($js_files))
-        {
+        if (!empty($js_files)) {
             echo $js_files;
         }
-        if (!empty($css_files))
-        {
+        if (!empty($css_files)) {
             echo $css_files;
         }
         ?>
@@ -67,20 +62,14 @@
                 text-decoration: none;
                 color: black;
             }
-            .div_padding .ul_pagination li.active{
-                background: #368EE0;
-            }
-            .div_padding .ul_pagination li.active a{
-                text-decoration: none;
-                color: white;
-            }
+
         </style>
 
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top">
 
-            <div class="container" >
+            <div class="container" id="div_navigation">
                 <div class="navbar-header">
                     <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index" >Trang chủ</a>
                 </div>
@@ -110,40 +99,40 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                            <?php // if (@Session::get('loggedIn') != null): ?>
-                                <!--<li>-->
-                                    <!--<a href="<?php // echo SITE_URL?>private_thread/dsp_all_thread_has_unread_message">Hội thoại chưa đọc</a>-->
-                                <!--</li>-->
-                            <?php // endif; ?>
-                                       <?php if (@Session::get('loggedIn') != null): ?>
-                                            <li>
-                                                <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
-                                             <?php else: ?>
-                                                <a href="<?php echo SITE_URL; ?>user/index" class="login">Login</a>
-                                            </li>
-                                         <?php endif; ?>
-                       
+<?php if (@Session::get('loggedIn') != null): ?>
+                            <li>
+                                <a style="color: #ffff99;font-weight: bold;" href="<?php echo SITE_URL ?>private_thread/dsp_all_thread_has_unread_message"><span id='li_unread_thread_message'></span></a>
+                            </li>
+<?php endif; ?>
+                        <li>
+                        <?php if (@Session::get('loggedIn') != null): ?>
+ 
+                                <a href="<?php echo SITE_URL; ?>user/logout">Logout</a>	
+                        <?php else: ?>
+                                <a href="<?php echo SITE_URL; ?>user/index" class="login">Login</a>
+
+                            <?php endif; ?>
+                        </li>
+
                     </ul>
 
                 </div>
             </div>
         </div>
         <script type="text/javascript">
-              var script_data = {
-                   controller: '<?php echo SITE_ROOT; ?>private_thread/dsp_all_thread_has_unread_message'
-             };
-        </script>
-        <script type="text/javascript">
-//               $.ajax({
-//                url: script_data.controller,
-//                type: 'post',
-//                dataType: 'json',
-//                success: function (result) {
-//                    $('#detail').html(result.over_due_files);
-//                                 
+            var site_root = '<?php echo SITE_URL ;?>';
+            $.ajax({
+                url: site_root+'private_thread/count_unread_message',
+                type: 'post',
+                success: function(result) {
+                    if(result == 0){ $('#li_unread_thread_message').parent().html('');}
+                    else{
+                        $('#li_unread_thread_message').text(result +' Tin nhắn mới')
+                    }
+                    ;
                 }
             });
         </script>
+
         <div id="content">
 
-                   

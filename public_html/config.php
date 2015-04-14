@@ -6,9 +6,10 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'mvc');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DEBUG_MODE',1);
+//define('DEBUG_MODE',0);
 define('LIMIT', 20);
 
+$debug= 0;
 //=========================== ĐƯỜNG DẪN =========================
 //
 //Khai bao các đường dẫn giúp ứng dụng linh hoạt và dễ nâng cấp hơn
@@ -54,24 +55,24 @@ define('VIEW_PATH',ROOT_PATH.'views'.DS);
 define('PUBLIC_PATH',ROOT_PATH.'public'.DS);
 
 
-//$debug= 0;
-//if(isset($_REQUEST['debug']))
-//{
-//    $debug= 99999;     
-//}
-//
-//define('DEBUG_MODE',$debug);
-////          o   TRUE:  Bat che do debug 
-//if (DEBUG_MODE > 0)
-//{
-//    error_reporting(E_ALL);
-//    ini_set('display_errors',1);
-//}
-//else
-//{
-//    error_reporting(E_ALL);
-//    ini_set('display_errors',0);
-//}
+
+if(isset($_REQUEST['debug']))
+{
+    $debug= 99999;     
+}
+
+define('DEBUG_MODE',$debug);
+//          o   TRUE:  Bat che do debug 
+if (DEBUG_MODE > 0)
+{
+    error_reporting(E_ALL);
+    ini_set('display_errors',1);
+}
+else
+{
+    error_reporting(E_ALL);
+    ini_set('display_errors',0);
+}
 
 define('_CONST_RECORD_FILE_ACCEPT', 'xls,xlsx');
 define('CONST_FILE_UPLOAD_PATH',SERVER_ROOT.'uploads'.DS);

@@ -7,11 +7,6 @@
                 <form name="frmMain" id="frmMain" action="" method="POST" class="form-inline" >
                    <?php 
                    // vi du chung minh bien toan cuc thi goi dau cug  duoc
-//                 echo __FILE__;
-//                 echo "<pre>";
-//                 print_r(get_post_var('sel_grade',0));
-//                 echo "</pre>";
-//                 echo __LINE__;
                     echo $this->hidden('controller',$this->get_controller_url());
                     echo $this->hidden('hdn_teacher_id',0);
                     echo $this->hidden('hdn_item_id_list', '');
@@ -32,9 +27,9 @@
                        </div>
                         <div class="form-group pull-right">
                             <div>
-                                <!--<a data-toggle="modal"  data-target ="#add_new_class" href="javascript:void(0)" onclick="btn_addnew_onclick()"><i class="icon-plus"></i>Thêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp-->
+                             
                                 <a data-toggle="modal"   href="#add_new_class" ><i class="icon-plus"></i>Thêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-                                    <a  href="javascript:void(0);" onclick="update_delete_onclick();"><i class="icon-trash"></i>Xóa</a>
+                                    <a  class="btn btn-primary btn-block" href="javascript:void(0);" onclick="update_delete_onclick();"><i class="icon-trash"></i>Xóa</a>
                             </div>
                         </div>
                         </div>

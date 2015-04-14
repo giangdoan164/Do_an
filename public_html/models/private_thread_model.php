@@ -167,5 +167,14 @@ class Private_thread_Model extends model {
         $result = $this->db->GetAll($sql);
         return $result;
     }
+    
+    public function del_thread(){
+        $user_id = Session::get('user_id');
+        $v_delete_list = get_post_var('hdn_item_id_list',0);
+        $sql = "DELETE  FROM t_private_thread_participant WHERE FK_USER = '$user_id' AND FK_THREAD IN ($v_delete_list)";
+        $this->db->Execute($sql);
+        return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
+    }
 
+  
 }

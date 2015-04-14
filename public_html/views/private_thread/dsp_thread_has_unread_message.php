@@ -1,7 +1,7 @@
 <?php $arr_key_unread_mess = array_keys($arr_all_unread_mess);?>
 <div class="container-fluid" >
     <div class="row-fluid">
-        <h1 class="page-header">Tin nhắn mới hiển thị</h1>
+        <h1 class="page-header">Chủ đề có tin nhắn mới</h1>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
                 <?php
@@ -9,10 +9,16 @@
                 echo $this->hidden('hdn_dsp_all_thread', 'dsp_all_thread');
                 echo $this->hidden('hdn_dsp_single_thread', 'dsp_single_thread');
                 echo $this->hidden('hdn_dsp_create_new_thread', 'dsp_create_new_thread');
+                //2 cai nay de cho viec xoa
+                echo $this->hidden('hdn_item_id_list', '');
+                echo $this->hidden('hdn_delete_record_method', 'delete_thread');
                 ?>
                 <div class='row' style='margin-bottom:19px;'>  
-                    <div class="col-md-1 col-md-offset-3">
+                    <div class="col-md-1 col-md-offset-8">
                         <button class="btn btn-primary" onclick="dsp_create_new_thread();"> <span class="icon-plus">Trao đổi mới</span></button>
+                    </div>
+                    <div class="col-md-1 col-md-offset-2">
+                        <button class="btn btn-primary" onclick="update_delete_onclick();"> <span class="icon-plus">Xóa</span></button>
                     </div>
                 </div>  
                 <table class="table table-hover table-nomargin table-condensed " >

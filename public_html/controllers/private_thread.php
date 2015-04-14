@@ -51,7 +51,7 @@ class Private_thread extends Controller {
     public function do_create_new_thread(){
            $result =  $this->private_thread_model->do_create_new_thread();
            if($result){
-               $this->private_thread_model->exec_done($this->view->get_controller_url().'/'.'dsp_all_thread');
+               $this->private_thread_model->exec_done($this->view->get_controller_url().'dsp_all_thread');
            }
     }
     
@@ -61,6 +61,27 @@ class Private_thread extends Controller {
         $DATA['arr_all_message'] = $this->private_thread_model->qry_all_thread_has_unread_message();
         $this->view->render('private_thread/dsp_thread_has_unread_message',$DATA);
     }
+    
+    public function count_unread_message(){
+       $arr= $this->private_thread_model->qry_new_unread_message_thread();
+       $arr_unread_thread = array_values($arr);
+       $total  = array_sum($arr_unread_thread);
+       echo $total;
+    }
+    
+    public function delete_thread(){
+        
+        $result = $this->private_thread_model->del_thread();
+        if($result){
+            $this->private_thread_model->exec_done($this->view->get_controller_url().'dsp_all_thread');
+             exit();
+        }else{
+            $DATA['error'] = " Xảy ra lỗi không xóa được";
+            $this->private_thread_model->exec_fail($this->goback_url, $VIEW_DATA['error']);
+            exit();
+        }
+    }
      
+    
     
 }

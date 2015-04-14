@@ -17,3 +17,6 @@ body {
 	padding: 20px;
 }
 
+.btn {
+    border-radius: 0;
+}

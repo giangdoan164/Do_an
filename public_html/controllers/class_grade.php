@@ -35,13 +35,13 @@ class Class_grade extends Controller {
    
    public function dsp_all_class(){
         $level = Session::get('level');
-       if($level==3 || $level == 4 || $level ==null){echo "Bạn ko có quyền truy cập chức năng này";}
+       if($level==3 || $level == 4 || $level ==null){die("Bạn ko có quyền truy cập chức năng này");}
        $DATA['arr_all_class'] = $this->class_grade_model->qry_all_class_teacher();
        $this->view->render('class/dsp_all_class',$DATA);
    }
    
    public function delete_class(){
-   
+      
         $arr_data['controller']          = get_post_var('controller', '');
         $arr_data['hdn_dsp_all_class'] = get_post_var('hdn_dsp_all_record', '');
         $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_class'];

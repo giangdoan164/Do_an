@@ -10,10 +10,20 @@
                     echo $this->hidden('hdn_dsp_all_thread','dsp_all_thread');
                     echo $this->hidden('hdn_dsp_single_thread','dsp_single_thread');
                     echo $this->hidden('hdn_dsp_create_new_thread','dsp_create_new_thread');
+                    
+                    
+                    //phuc vu cho viec xoa
+                          //2 cai nay de cho viec xoa
+                echo $this->hidden('hdn_item_id_list', '');
+                echo $this->hidden('hdn_delete_record_method', 'delete_thread');
                 ?>
                 <div class='row' style='margin-bottom:19px;'>  
-                    <div class="col-md-1 col-md-offset-3">
-                        <button class="btn btn-primary" onclick="dsp_create_new_thread();"> <span class="icon-plus">Trao đổi mới</span></button>
+                        <div class="col-md-2 col-md-offset-7">
+                        <button class="btn btn-primary btn-block" onclick="dsp_create_new_thread();">Trao đổi mới</button>
+                    </div>
+                    <div class="col-md-1 col-md-offset-1">
+                        <button class="btn btn-primary btn-block" onclick="update_delete_onclick();">Xóa</button>
+                       
                     </div>
                 </div>  
                 <table class="table table-hover table-nomargin table-condensed " >
@@ -39,7 +49,7 @@
                                         <td style="text-align:center">
                                             <a  style="color:black;" href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"> <?php echo $message['C_LOGIN_NAME'];?> </a>                           
                                         </td>
-                                        <td style="text-align:center">   <a style="color:black;"  href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"><?php echo $message['C_TITLE']."(".$arr_all_unread_mess[$key_all_mess]['UNREAD_MESSAGE_NUMBER'].")"; ?></a></td>
+                                        <td style="text-align:center">   <a style="color:black;"  href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"><?php echo $message['C_TITLE']."(".$arr_all_unread_mess[$key_all_mess].")"; ?></a></td>
                                         <td style="text-align:center"><?php echo $message['C_CREATED_DATE'];?></td>
                                         </tr>
                                     <?php else: ?>
@@ -98,4 +108,6 @@
       $('#frmMain').attr('action',m);
       f.submit();
   }
+  
+  
 </script>
