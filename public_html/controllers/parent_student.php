@@ -4,10 +4,12 @@ class Parent_student extends Controller {
     public $parent_student_model;
     public $class_grade_model;
     function __construct() {
+        Session::check_login();
         parent::__construct('parent_student');
         $this->parent_student_model = $this->loadModel('parent_student');
         $this->view->title = 'Quản lý danh sách liên lạc';
         $this->class_grade_model = $this->loadModel('class_grade');
+        
     }
 
 

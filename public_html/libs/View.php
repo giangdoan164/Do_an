@@ -65,6 +65,7 @@ class View {
         if ($this->layout == null) {
             require VIEW_PATH . $name . '.tpl.php';
         } else {
+            $header = $footer = '';
             $v_view_file = VIEW_PATH . $name . '.php';
             if (file_exists($v_view_file)) {
                 
