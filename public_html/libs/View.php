@@ -28,69 +28,69 @@ class View {
    
     public function render($name ,$DATA =array() ,$include = true) {
 
-//        $v_view_file =  VIEW_PATH . $name . '.php';
-//        if (file_exists($v_view_file))
-//        {
-//            if (is_array($VIEW_DATA)) {
-//                foreach ($VIEW_DATA as $key => $val) {  
-//                    $$key = $val;
-//                  }
-//                  }
-//                if ($this->layout == null) {
-//                    require VIEW_PATH . $name . '.tpl.php';
-//                } else {
-//                    $header = VIEW_PATH . "layout/{$this->layout}.header.tpl.php";
-//                    $footer = VIEW_PATH . "layout/{$this->layout}.footer.tpl.php";
-//                    if (!file_exists($header)) {
-//                        throw new Exception("Not found header :$header ");
-//                    }
-//                    if (!file_exists($footer)) {
-//                        throw new Exception("Not found header :$footer ");
-//                    }
-//                    require $header;
-//                    require $v_view_file;
-//                    require $footer;
-//                }
-//        }else 
-//        {
-//           die("Không tìm thấy <b>$v_view_file</b>");
-//        }
-      
-         if (is_array($DATA)) {
-            foreach ($DATA as $key => $val) {
-                $$key = $val;
-                
-            }
-        }
-        if ($this->layout == null) {
-            require VIEW_PATH . $name . '.tpl.php';
-        } else {
-            $header = $footer = '';
-            $v_view_file = VIEW_PATH . $name . '.php';
-            if (file_exists($v_view_file)) {
-                
-                if($include == true){
-                     $header = VIEW_PATH . "layout/{$this->layout}.header.tpl.php";
-                     $footer = VIEW_PATH . "layout/{$this->layout}.footer.tpl.php"; 
-                     if (!file_exists($header)) {
-                     throw new Exception("Not found header :$header ");
+        $v_view_file =  VIEW_PATH . $name . '.php';
+        if (file_exists($v_view_file))
+        {
+            if (is_array($DATA)) {
+                foreach ($DATA as $key => $val) {  
+                    $$key = $val;
+                  }
+                  }
+                if ($this->layout == null) {
+                    require VIEW_PATH . $name . '.tpl.php';
+                } else {
+                    $header = VIEW_PATH . "layout/{$this->layout}.header.tpl.php";
+                    $footer = VIEW_PATH . "layout/{$this->layout}.footer.tpl.php";
+                    if (!file_exists($header)) {
+                        throw new Exception("Not found header :$header ");
+                    }
                     if (!file_exists($footer)) {
-                    throw new Exception("Not found header :$footer ");
-                     }
-                }
-              
-                }
-              
-                if(!empty($header)&&!empty($footer)){
+                        throw new Exception("Not found header :$footer ");
+                    }
                     require $header;
                     require $v_view_file;
                     require $footer;
-                }else{require $v_view_file;}
-             
-            } else {
-                die("Không tìm thấy <b>$v_view_file</b>");
-            }
+                }
+        }else 
+        {
+           die("Không tìm thấy <b>$v_view_file</b>");
         }
+      
+//         if (is_array($DATA)) {
+//            foreach ($DATA as $key => $val) {
+//                $$key = $val;
+//                
+//            }
+//        }
+//        if ($this->layout == null) {
+//            require VIEW_PATH . $name . '.tpl.php';
+//        } else {
+//            $header = $footer = '';
+//            $v_view_file = VIEW_PATH . $name . '.php';
+//            if (file_exists($v_view_file)) {
+//                
+//                if($include == true){
+//                     $header = VIEW_PATH . "layout/{$this->layout}.header.tpl.php";
+//                     $footer = VIEW_PATH . "layout/{$this->layout}.footer.tpl.php"; 
+//                     if (!file_exists($header)) {
+//                     throw new Exception("Not found header :$header ");
+//                    if (!file_exists($footer)) {
+//                    throw new Exception("Not found header :$footer ");
+//                     }
+//                }
+//              
+//                }
+//              
+//                if(!empty($header)&&!empty($footer)){
+//                    require $header;
+//                    require $v_view_file;
+//                    require $footer;
+//                }else{require $v_view_file;}
+//             
+//            } else {
+//                die("Không tìm thấy <b>$v_view_file</b>");
+//            }
+//        }
     }
 
     public function get_controller_url() {

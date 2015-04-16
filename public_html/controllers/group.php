@@ -3,10 +3,7 @@ class Group extends Controller {
     
     public function __construct() {       
         parent::__construct('group');
-        $this->view->title ='group';
-        require_login();
-        
-        
+        $this->view->title ='group'; 
     }
     
     public function index(){

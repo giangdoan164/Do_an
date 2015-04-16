@@ -54,11 +54,8 @@ class Parent_student_Model extends Model
      
 //       doc tung sheet mot
         for ($j = 0; $j < $sheetCount; $j++) {
-           
-
             $sheetData = $objPHPExcel->setActiveSheetIndex($j)->toArray(null, TRUE, TRUE, TRUE);
-             $arr_legth = count($sheetData);         
-       
+             $arr_legth = count($sheetData); 
             for ($i = 2; $i <= $arr_legth; $i++) {
                 $v_student_name = $sheetData[$i]['A'];
                 $temp = strtotime(PHPExcel_Style_NumberFormat::toFormattedString($sheetData[$i]['B'], 'YYYY-MM-DD'));
@@ -86,11 +83,7 @@ class Parent_student_Model extends Model
             }
 
     public function update_list_excel(){
-        /**
-         * kiem tra da co thu muc mac dinh trong t_r3_media chua
-         * 1 Quản lý file theo thu muc [năm]/[tháng]/[ngày]
-         */
-        
+     
             if ($_FILES['uploader']['error'] == 0)
             {
                 $v_file_name = $_FILES['uploader']['name'];

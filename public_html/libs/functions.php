@@ -77,16 +77,16 @@ function redirect($controller, $action) {
     header("location:" . SITE_URL . $controller . DS . $action);
     exit();
 }
-function require_login() {
-        Session::init();
-        $login = Session::get('loggedIn');
-        if ($login == null) {
-            Session::destroy();
-            header('location:' . SITE_URL . 'user/login');
-            return FALSE;
-        }
-        return TRUE;
-}
+//function require_login() {
+//        Session::init();
+//        $login = Session::get('loggedIn');
+//        if ($login == null) {
+//            Session::destroy();
+//            header('location:' . SITE_URL . 'user/login');
+//            return FALSE;
+//        }
+//        return TRUE;
+//}
 
 function show_error($msg){
     echo "<b>Đã xảy ra lỗi ".$msg."</b><a href='#'>Quay lại trang chủ</a>";

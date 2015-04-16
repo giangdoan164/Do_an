@@ -20,9 +20,6 @@
                          echo $this->hidden('hdn_dsp_all_record','dsp_all_parent_contact');
                          echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
                     ?>
-                    <!--<input type="hidden" name="controller" id="controller" value="/taothu/license/license_type/"><input type="hidden" name="hdn_dsp_single_method" id="hdn_dsp_single_method" value="dsp_single_license_type"><input type="hidden" name="hdn_dsp_all_method" id="hdn_dsp_all_method" value="dsp_all_license_type"><input type="hidden" name="hdn_update_method" id="hdn_update_method" value="update_license_type"><input type="hidden" name="hdn_delete_method" id="hdn_delete_method" value="delete_license_type"><input type="hidden" name="hdn_item_id" id="hdn_item_id" value=""><input type="hidden" name="hdn_item_id_list" id="hdn_item_id_list" value=""><input type="hidden" name="XmlData" id="XmlData" value="">            <div class="row-fluid">-->
-                        
-                
                     <div class='row' style='margin-bottom:19px;'>
                       
                             <div class="col-md-4">
@@ -176,7 +173,7 @@
 
 <script type="text/javascript">
         function btn_add_contact_list_onclick(){
-                   var m = $('#frmMain #controller').val() +$('#frmMain #hdn_add_new_contact_list').val();
+               var m = $('#frmMain #controller').val() +$('#frmMain #hdn_add_new_contact_list').val();
                $('#frmMain').attr('action',m);
                $('#frmMain').submit();
         }
