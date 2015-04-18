@@ -1,5 +1,7 @@
 body {
-	background: silver;
+    /*background: #eadfdf;*/
+/*    background: #999999;*/
+background: #666600;
 }
 
 #header {
@@ -8,7 +10,10 @@ body {
 }
 
 #content {
-	background: #fff;
+       width: 90%;
+       margin-left: 5%;
+       margin-right: 5%;
+       background: #ffffff;
 	
 }
 
