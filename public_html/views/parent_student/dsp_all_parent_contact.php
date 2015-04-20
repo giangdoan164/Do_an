@@ -21,17 +21,24 @@
                          echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
                     ?>
                     <div class='row' style='margin-bottom:19px;'>
-                      
+                         <details open>
+                                     <summary>Show/Hide me</summary>
+                           
+  <!--<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>-->
+
                             <div class="col-md-4">
-                              
+                           
                                  <label for="txt_filter"  class="col-md-4" >Tìm kiếm &nbsp;</label>                                 
                                   <div class="col-md-8">
                                        <input type="text" name="txt_filter" id="txt_filter" value="" class="form-control col-md-5" autofocus="autofocus" placeholder="Tên học sinh" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">                                 
-                                  </div>     
-                                 
+                                  
                             </div>
-                            
-                            <div class="col-md-3">                 
+                            </div>
+                         </details>
+                        <details open>
+                              <summary>Show/Hide me</summary>
+                            <div class="col-md-3">  
+                                
                               <?php if($role==2):?>
                                     <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
                                         <option value="0">--- Chọn khối --- </option>
@@ -45,7 +52,11 @@
                                     <option value="<?php echo Session::get('grade');?>"><?php echo "Khối ".Session::get('grade');?></option>
                                     </select>
                                     <?php endif?>
+                         
+                                  
+                                   
                             </div>
+                             </details>
                             <div class="col-md-3">
                                       <?php if($role==2):?>
                                     <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade_student(this.value)">

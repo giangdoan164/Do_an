@@ -1,5 +1,4 @@
 <?php
-
 $json_data = '';
 $count_arr = sizeof($arr_data);
 if ($count_arr > 0) {

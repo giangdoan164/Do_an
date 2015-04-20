@@ -1,7 +1,4 @@
-<!--ko can quan tam den gia tri  ma quan tam den su ton tai dung isset-->
-<!--quan tam den rong hay ko : vd nhu nap file ben duoi dung empty-->
-<!--Tao moi doi tuong su dung dc toan bo thuoc tinh va pt cua lop do-> class controller->Model-->
-<!--Cu dung session thi phai khoi tao--> 
+<!DOCTYPE html>
 <html>
     <head>   
         <?php $title = isset($this->title) ? $this->title : "Project Final" ?>

@@ -1,7 +1,8 @@
 body {
     /*background: #eadfdf;*/
 /*    background: #999999;*/
-background: #666600;
+/*background: #666600;*/
+background: #F1EFF0;
 }
 
 #header {
@@ -24,4 +25,26 @@ background: #666600;
 
 .btn {
     border-radius: 0;
+}
+
+footer#page_footer{
+margin-top: 40px;
+margin-bottom: 0;
+padding: 0;
+clear: both;
+width: 100%;
+display: block;
+text-align: center;
+
+}
+
+footer#page_footer p{
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    font-size: 15px;
+    text-align: center;
+    background-color: #DD4814;
+    color: #FDFDFD;
+    line-height: 50px;
 }

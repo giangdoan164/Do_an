@@ -1,12 +1,15 @@
 group byefile:///E:/Thuc%20Tap/sql%20order%20statement/sql%20-%20Using%20group%20by%20on%20multiple%20columns%20-%20Stack%20Overflow.html
-
+<!--ko can quan tam den gia tri  ma quan tam den su ton tai dung isset-->
+<!--quan tam den rong hay ko : vd nhu nap file ben duoi dung empty-->
+<!--Tao moi doi tuong su dung dc toan bo thuoc tinh va pt cua lop do-> class controller->Model-->
+<!--Cu dung session thi phai khoi tao--> 
 phan tich thiet ke database
 http://www.vnschool.net/modules.php?name=SVR&file=article&sid=1655
 <!--https://www.youtube.com/watch?v=44gnHh75oNY-->
 https://www.youtube.com/watch?v=5n7-w9QmxjY
 http://video.zendvn.com/demo/lap-trinh-joomla-v25-demo-tao-database-cho-component.html
 http://thuvienphapluat.vn/archive/Thong-tu-29-TT-danh-gia-xep-loai-hoc-sinh-cap-II-pho-thong-co-so-trung-hoc-vb162578.aspx
-<!--http://www.goonersworld.co.uk/forum/viewtopic.php?f=5&t=25572&sid=4de9d0d3321cb22de153f18675e727c0-->
+    http://www.goonersworld.co.uk/forum/viewtopic.php?f=5&t=25572&sid=4de9d0d3321cb22de153f18675e727c0
 http://vinacode.net/2014/07/07/tro-thanh-lap-trinh-vien-gioi/
 http://www.woodstitch.com/resources/php-interview-questions.php
 https://www.youtube.com/watch?v=RoQIjbAwoGs
