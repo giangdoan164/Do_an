@@ -151,14 +151,15 @@ class Parent_student_Model extends Model
                 $result       = $this->db->GetAll($sql);
                return $result;
          }else{
-             $total_record = $this->db->GetOne("SELECT COUNT(*) FROM t_user WHERE FK_GROUP ='4' AND C_DELETED ='0'");
-             $condition = "WHERE t.FK_GROUP='4' AND t.C_DELETED ='0'";
+            
+                $condition = "WHERE t.FK_GROUP='4' AND t.C_DELETED ='0'";
                 $filter_class   = get_post_var('sel_class', 0);
                 $filter_grade   = get_post_var('sel_grade', 0);
                  $filter_name    = get_post_var('txt_filter','');
                 if($filter_grade!=0){$condition.="AND t.FK_GRADE ='$filter_grade'";}
                 if($filter_class!=0){$condition.="AND t.FK_CLASS='$filter_class'";}
                 if(trim($filter_name) == !'') {$condition .= "AND t.C_NAME like '%" . trim($filter_name) . "%'"; }
+                $total_record = $this->db->GetOne("SELECT COUNT(*) FROM t_user WHERE $condition ");
                 $sql = "SELECT t.*, c.C_CLASS_NAME, g.`PK_GRADE` ,$total_record as TOTAL_RECORD
                                  FROM
                                     t_user t 

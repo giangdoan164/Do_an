@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://localhost/mot-cua-ha-tinh/main/main/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <link rel="shortcut icon" href="http://localhost/mot-cua-ha-tinh/favicon.ico">
+        <title>Bảng điều khiển trung tâm - Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- theme resource -->
+        <link href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/css/font-awesome.css">
+        <!--[if IE 7]>
+            <link rel="stylesheet" href="/mot-cua-ha-tinh/public/themes/bootstrap/css/font-awesome-ie7.min.css">
+        <![endif]-->
+        <link href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/css/styles.css" rel="stylesheet">
+        <link id="themes" href="http://localhost/mot-cua-ha-tinh/main/main/#" rel="stylesheet">
+        <!--[if IE 7]>
+            <link rel="stylesheet" type="text/css" href="/mot-cua-ha-tinh/public/themes/bootstrap/css/ie/ie7.css" />
+        <![endif]-->
+        <!--[if IE 8]>
+            <link rel="stylesheet" type="text/css" href="/mot-cua-ha-tinh/public/themes/bootstrap/css/ie/ie8.css" />
+        <![endif]-->
+        <!--[if IE 9]>
+            <link rel="stylesheet" type="text/css" href="/mot-cua-ha-tinh/public/themes/bootstrap/css/ie/ie9.css" />
+        <![endif]-->
+        <link href="./Bảng điều khiển trung tâm - Dashboard_files/dosis.css" rel="stylesheet" type="text/css">
+        <!--fav and touch icons -->
+        <link rel="shortcut icon" href="http://localhost/mot-cua-ha-tinh/main/main/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="http://localhost/mot-cua-ha-tinh/public/themes/bootstrap/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="stylesheet" href="./Bảng điều khiển trung tâm - Dashboard_files/style.css" type="text/css" media="screen">
+    </head>
+    <body>
+        <div class="layout">
+            <div id="overDiv" style="Z-INDEX: 10000; VISIBILITY: hidden; POSITION: absolute"></div>
+            <div style="width: 100%;">
+                <div style="background: #da3610;width: 220px;float:left;height: 50px;">
+                    <div style="float: left;padding-left: 10px;padding-top: 2px;">
+                        <img src="./Bảng điều khiển trung tâm - Dashboard_files/logoQuocHuy.png" style="width: 45px;height: 45px;">
+                    </div>
+                    <center style="color: white;font-weight: bold;padding-top: 5px;font-size: 13px;font-family: Tohama">
+                        UỶ BAN NHÂN DÂN HUYỆN CẨM XUYÊN                    </center>
+                </div>
+                <div class="main-wrapper" style="padding: 0;">
+                    <div class="navbar navbar-inverse top-nav">
+                        <div class="navbar-inner">
+                            <div class="container">
+                                <div class="btn-toolbar pull-right notification-nav">
+                                                                            <div class="btn-group">
+                                            <div class="dropdown">
+                                                <a data-toggle="dropdown" class="btn dropdown-toggle" href="javascript:void(0);">
+                                                    <i class="icon-user"></i>
+                                                        Quản trị hệ thống 
+                                                    <i class="icon-th" style="font-size: 14px; margin-left: 5px;"></i>
+                                                </a>
+                                                <div class="dropdown-menu">
+                                                    <ul>
+                                                                                                                                                                                <li>
+                                                                <a href="javascript:void(0)" onclick="showPopWin(&#39;/mot-cua-ha-tinh/cores/user/dsp_change_password&#39;, 500, 400, null);">
+                                                                    <i class="icon-lock"></i> Đổi mật khẩu
+                                                                </a>
+                                                            </li>
+                                                                                                                <li><a href="http://localhost/mot-cua-ha-tinh/logout.php"><i class="icon-signout"></i> Đăng thoát</a></li>
+                                                        <li>
+                                                            <a href="http://localhost/mot-cua-ha-tinh/r3/mapping">
+                                                                <i class="icon-list-alt"></i> Bảng ánh xạ thủ tục
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <a class="btn btn-notification" href="http://localhost/mot-cua-ha-tinh/logout.php" title="Đăng thoát">
+                                                    <i class="icon-signout"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>           
+
+
+
+<div class="container-fluid" style="padding: 20px">
+    <style>
+        .switch-item li,
+        .switch-item li a
+        {
+            width: 150px !important;
+            height: 150px !important;
+        }
+        .app:hover{
+
+        }
+        .app:hover .green{
+            background-color: rgba(0, 163, 0, 0.5);
+        }
+        .app:hover .board-widgets-head{
+            background-color: rgba(245, 245, 245, 0.5);
+        }
+    </style>
+    <div class="row-fluid" style="text-align: center">
+                                <div class="span3 app">
+                <div class="board-widgets green">
+                    <div class="board-widgets-head clearfix">
+                        <h4 class="pull-left"><i class="icon-desktop"></i> Quản trị hệ thống</h4>
+                        <a href="http://localhost/mot-cua-ha-tinh/cores/application/" class="widget-settings"><i class="icon-cog"></i></a>
+                    </div>
+                    <div class="board-widgets-content">
+                        <a href="http://localhost/mot-cua-ha-tinh/cores/application/">
+                            <span class="n-sources">Quản trị hệ thống</span>
+                        </a>
+                    </div>
+                    <div class="board-widgets-botttom">
+                        <a href="http://localhost/mot-cua-ha-tinh/cores/application/">
+                            Truy câp Quản trị hệ thống<i class="icon-double-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                                                <div class="span3 app" style="">
+                <div class="board-widgets green">
+                    <div class="board-widgets-head clearfix">
+                        <h4 class="pull-left"><i class="icon-desktop"></i> R3</h4>
+                    </div>
+                    <div class="board-widgets-content">
+                        <a href="http://localhost/mot-cua-ha-tinh/r3/record">
+                            <span class="n-sources">Phần mềm hỗ trợ giải quyết thủ tục hành chính theo cơ chế "Một-cửa"</span>
+                        </a>
+                    </div>
+                    <div class="board-widgets-botttom">
+                        <a href="http://localhost/mot-cua-ha-tinh/r3/record">
+                            Truy cập phần mềm R3<i class="icon-double-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        </div>
+</div>
+                <div class="footer">
+                    Hệ thống phần mềm Chính phủ điện tử Go-Office
+                </div>
+            </div><!-- .main-wrapper -->
+        <!-- .layout -->
+    
+
+</body></html>

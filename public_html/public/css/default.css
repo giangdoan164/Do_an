@@ -4,17 +4,21 @@ body {
 /*background: #666600;*/
 background: #E1E1E1;
 }
-
+.navbar-fixed-top{
+     background-color: #AC0713;
+      
+}
 #header {
 	padding: 20px;
-	background: gold;
+	/*background: gold;*/
 }
 
 #content {
        width: 90%;
        margin-left: 5%;
        margin-right: 5%;
-       background: #FFFFFF;
+       /*background: #FFFFFF;*/
+       background: #eee;
 	
 }
 
@@ -39,11 +43,13 @@ text-align: center;
 }
 
 footer#page_footer p{
-   
+    margin:0;
+    padding:0;
     height: 50px;
     font-size: 15px;
     text-align: center;
-    background-color: #DD4814;
+    /*background-color: #DD4814;*/
+    background-color: #AC0713;
     color: #FDFDFD;
     line-height: 50px;
     position: fixed;

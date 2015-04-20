@@ -2,9 +2,9 @@
 <?php // echo $this->get_controller_url(); ?>
 <div class="container-fluid" >
     <div class="row-fluid">
-        <h1 class="page-header">Quản lý danh sách liên lạc</h1>
-        <div class="main-wrapper" style="margin-left: 0px;">   
-            <div class="container-fluid block" style="border:1px solid #ff9900 !important; border-top: #ff9900 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">
+        <h1 class="page-header">Chuyển lớp</h1>
+        <div class="main-wrapper" style="margin-left: 0px;">                    
+            <div class="container-fluid block" style="border:1px solid blue; margin-bottom: 25px;">
                 <form name="frmMain" id="frmMain" action="" method="POST" enctype="multipart/form-data">
                     <?php
                     $url  = $this->get_controller_url();
@@ -20,12 +20,9 @@
                     echo $this->hidden('hdn_dsp_all_record', 'dsp_all_parent_contact');
                     echo $this->hidden('hdn_dsp_single_record', 'dsp_single_parent_contact');
                     ?>
-                    <details open>
-                        <summary><strong>Tìm kiếm</strong></summary>
-                        <div class='row' style='margin-bottom:19px;'>
-                            <div class="col-md-3 col-md-offset-1">
-                                    <input type="text" name="txt_filter" id="txt_filter" value="" class="form-control col-md-5" autofocus="autofocus" placeholder="Tên học sinh" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">                                   
-                            </div>
+                    
+                  <div class='row' style='margin-bottom:19px;'>
+                  
                     <div class="col-md-3">  
                         <?php if ($role == 1): ?>
                             <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
@@ -35,16 +32,9 @@
                                     <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
                                 <?php endforeach; ?>/
                             </select>
-                        <?php // else : ?>
-                            <!--<select disabled class="form-control" id="sel_grade" name="sel_grade" >-->
-                                <!--<option value="<?php // echo Session::get('grade'); ?>"><?php // echo "Khối " . Session::get('grade'); ?></option>-->
-                            <!--</select>-->
+                    
                         <?php endif ?>
-
-
-
                     </div>
-
                     <div class="col-md-3">
                         <?php if ($role == 1): ?>
                             <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
@@ -62,56 +52,13 @@
                     </div>
 
                     <div class="col-md-2" >
-                        <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
+                        <button type="button" class="btn btn-primary " onclick="btn_filter_onclick1();" name="btn_filter">
                             <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
                         </button>
                     </div>
 
             </div>
-            </details>
-                    <?php if ($role == 1): ?>
-                    <details>
-                            <summary>Thêm mới</summary>
-                            <div class="row">
-                                <div class='col-md-6' style='padding:35px 0px 25px 15px;'>
-                                    <div class='col-md-8'>
-                                        <input type="file"  class="form-control" name="uploader" id="uploader" >
-                                    </div>
-                                    <div class='col-md-1'>
-                                        <button  class='btn btn-primary ' onclick="btn_add_contact_list_onclick();" ><span  class="glyphicon glyphicon-plus"></span>&nbsp&nbspNhập danh sách</button>
-                                    </div>  
-                                </div>
-                                <div class='col-md-6 ' style='padding-top:35px;'>
-                                    <div class='row'>
-                                        <div class='col-md-3 col-md-offset-6'>
-                                            <a href="javascript:void(0)" class="btn btn-primary" onclick="btn_addnew_onclick()"><span  class="glyphicon glyphicon-plus"></span>&nbsp&nbspThêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-
-                                        </div>
-                                     
-                                    </div>
-                                </div>  
-                        </details>            
-                    <details>
-                            <summary>Xóa</summary>
-                            <div class="row">
-                                  <div class='col-md-3 col-md-offset-9'>
-                                            <a href="javascript:void(0);" class="btn btn-primary" onclick="update_delete_onclick();"><span  class="glyphicon glyphicon-remove"></span>&nbsp&nbsp&nbspXóa&nbsp&nbsp&nbsp</a>
-                                  </div>
-                                </div>  
-                        </details>            
-             <?php endif; ?>
-              <?php if($role == 1): ?>
-                  <details>
-                        <summary>Chuyển lớp</summary>
-                    <div class="row">
-                        <div class="col-md-1 col-md-offset-9">
-                               <a  href="<?php echo SITE_URL.'parent_student/dsp_transfer_class'?>" class="btn btn-primary"  ><span class="glyphicon glyphicon-random"></span>&nbsp&nbsp&nbsp Chuyển Lớp</a>
-                        </div>
-                    </div>
-                 </details>
-             <?php endif;?>
-                
-
+           
             </div>
             <div class="box box-bordered box-small">
                 <div class="box-content nopadding" >
@@ -190,6 +137,12 @@
 </div>
 
 <script type="text/javascript">
+    function btn_filter_onclick1(){
+        var f = document.frmMain;
+        var m = $('#frmMain #controller').val() +'dsp_transfer_class';
+        $('#frmMain').attr('action',m);
+        $('#frmMain').submit();
+    }
     function btn_add_contact_list_onclick() {
         var m = $('#frmMain #controller').val() + $('#frmMain #hdn_add_new_contact_list').val();
         $('#frmMain').attr('action', m);
@@ -240,7 +193,4 @@
             }
         });
     }
-     function btn_filter_onclick(){
-               $('#frmMain').submit();
-        }
 </script>

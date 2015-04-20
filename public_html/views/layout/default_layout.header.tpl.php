@@ -66,10 +66,13 @@
 
             <div class="container" id="div_navigation">
                 <div class="navbar-header">
-                    <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index" >Trang chủ</a>
+                    <!--<a href="<?php // echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" ></a>-->
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-main">
                     <ul class="nav navbar-nav">
+                        <li>
+                             <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" >Trang chủ</a>
+                        </li>
                         <li>
                             <a href="<?php echo SITE_URL; ?>group"></a>
                         </li>
