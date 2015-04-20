@@ -2,7 +2,7 @@ body {
     /*background: #eadfdf;*/
 /*    background: #999999;*/
 /*background: #666600;*/
-background: #F1EFF0;
+background: #E1E1E1;
 }
 
 #header {
@@ -14,7 +14,7 @@ background: #F1EFF0;
        width: 90%;
        margin-left: 5%;
        margin-right: 5%;
-       background: #ffffff;
+       background: #FFFFFF;
 	
 }
 
@@ -39,12 +39,14 @@ text-align: center;
 }
 
 footer#page_footer p{
-    margin: 0;
-    padding: 0;
+   
     height: 50px;
     font-size: 15px;
     text-align: center;
     background-color: #DD4814;
     color: #FDFDFD;
     line-height: 50px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

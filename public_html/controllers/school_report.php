@@ -5,7 +5,7 @@ class School_report extends Controller {
   public $arr_list ;
     function __construct()
     {
-//        Session::check_login();
+        Session::check_login();
         parent::__construct('school_report');
         $this->view->title = "Quản lý học bạ";
         $this->school_report_model = $this->loadModel('school_report');

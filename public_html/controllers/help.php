@@ -3,6 +3,7 @@
 class Help extends Controller {
 
 	function __construct() {
+                Session::check_login();
 		parent::__construct('help');
 	}
 	

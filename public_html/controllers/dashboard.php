@@ -6,6 +6,7 @@ class Dashboard extends Controller {
     public $user_model;
 
     function __construct() {
+        Session::check_login();
         parent::__construct('dashboard');
 //        $this->product_model = $this->loadModel('product');
         $this->user_model = $this->loadModel('help');

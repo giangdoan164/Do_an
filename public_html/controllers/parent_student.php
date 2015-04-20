@@ -4,7 +4,7 @@ class Parent_student extends Controller {
     public $parent_student_model;
     public $class_grade_model;
     function __construct() {
-//        Session::check_login();
+        Session::check_login();
         parent::__construct('parent_student');
         $this->parent_student_model = $this->loadModel('parent_student');
         $this->view->title = 'Quản lý danh sách liên lạc';
@@ -20,8 +20,6 @@ class Parent_student extends Controller {
    }
    
    public function dsp_all_parent_contact(){
-       $level =  Session::get('level');
-//       if($level == 4){echo "Bạn  ko có quyền truy cập chức năng này";exit();}
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
         $arr_data['user_class'] = $this->class_grade_model->qry_user_class();
@@ -68,8 +66,7 @@ class Parent_student extends Controller {
     }
 
     public function delete_parent_contact()
-    {
-       
+    {  
         $arr_data['controller']          = get_post_var('controller', '');
         $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
         $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];

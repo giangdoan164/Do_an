@@ -3,7 +3,8 @@
 class Error extends Controller {
 
 	function __construct() {
-		parent::__construct('error');
+            Session::check_login();
+	    parent::__construct('error');
 	}
 	
 	function index() {

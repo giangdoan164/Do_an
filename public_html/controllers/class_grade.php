@@ -5,6 +5,7 @@ class Class_grade extends Controller {
     public $class_grade_model;
 
     function __construct() {
+        Session::check_login();
         parent::__construct('class_grade');
         $this->class_grade_model = $this->loadModel('class_grade');
     }

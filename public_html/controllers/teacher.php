@@ -4,6 +4,7 @@ class Teacher extends Controller{
     public $teach_model ;
     
     function __construct() {
+        Session::check_login();
         parent::__construct('teacher');//tao view cung ten
         $this->teach_model =  $this->loadModel('teacher');
         $this->view->title  = 'Teacher Management';

@@ -6,6 +6,7 @@ class Class_forum extends Controller {
     public $category_model;
 
     function __construct() {
+        Session::check_login();
         //khoi tao 2 doi tuong view model de su dung
         parent::__construct('class_forum');
         $this->class_forum_model = $this->loadModel('class_forum');

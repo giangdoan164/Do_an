@@ -4,6 +4,7 @@ class Announce extends Controller {
   public $class_grade_model;
     function __construct()
     {
+        Session::check_login();
         parent::__construct('announce');
         $this->view->title = "Quản lý thông báo";
         $this->announce_model =  $this->loadModel('announce');
