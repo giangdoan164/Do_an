@@ -1,7 +1,6 @@
 <div class ="container">
     <div class="row">
         <h3 class="page-header" style="text-align:center">Tạo mới chủ đề</h3>
-        
         <form action="" method="post" name="frmMain" id="frmMain">
             <?php 
                     if(isset($cate_id)){echo $this->hidden('category_id',$cate_id);}
@@ -11,7 +10,9 @@
                         echo $this->hidden('hdn_dsp_single_topic','dsp_single_topic');
                         echo $this->hidden('hdn_create_new_topic','do_create_new_topic');
             ?>
-            <div class="row"><a href="#">Diễn đàn >>Góc giải trí</a></div>
+            <div class="row">
+                <a href="<?php echo $this->get_controller_url().dsp_all_topic ?>"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Diễn đàn</a>
+            </div>
             <div class="row" style="margin-top:10px;margin-bottom:10px;">
                 <div class="form-group">
                     <label class="control-label col-md-2  col-md-offset-1" for="sel_grade" >Tiêu đề </label>

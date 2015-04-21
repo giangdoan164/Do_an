@@ -1,4 +1,6 @@
-<?php ?>
+<?php 
+
+?>
 <div style="background-color: #f1eff0" >
 <div class="container" style="background-color: #fff">
              <h1>Diễn đàn trao đổi</h1>
@@ -36,7 +38,7 @@
                                 </div>
                                 <div id="public_user_name" class="user_name">
                                     <?php if(isset($arr_new_topic[$cate_key])): ?>
-                                    <?php echo $arr_new_topic[$cate_key]['C_TITLE'];?>
+                                    <?php echo $arr_new_topic[$cate_key]['C_NAME'];?>
                                     <?php endif; ?>
                                 </div>
                             </td>

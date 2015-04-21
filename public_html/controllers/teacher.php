@@ -43,19 +43,11 @@ class Teacher extends Controller{
 
         $arr_data['hdn_dsp_single_teacher'] = get_post_var('hdn_dsp_single_teacher', '');
         $this->goback_url                   = $arr_data['controller'] . $arr_data['hdn_dsp_single_teacher'];
-        $is_exist_teacher                   = $this->teach_model->check_teach_has_class();
-
-        if ($is_exist_teacher == true)
-        {
-
-            $DATA['error'] = "Lớp đã chọn có giáo viên chủ nhiệm";
-            $this->teach_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
-            exit();
-        }
 
 
+         $this->teach_model->goback_url = $arr_data['controller'] . $arr_data['hdn_dsp_all_teacher'];
         $result           = $this->teach_model->update_single_teacher();
-        $this->goback_url = $arr_data['controller'] . $arr_data['hdn_dsp_all_teacher'];
+       
         if ($result == false)
         {
             $DATA['error'] = " Xảy ra lỗi không cập nhật được";
@@ -64,7 +56,7 @@ class Teacher extends Controller{
         }
         else
         {
-            $this->teach_model->exec_done($this->goback_url, $arr_data);
+            $this->teach_model->exec_done( $this->teach_model->goback_url, $arr_data);
             exit();
         }
     }

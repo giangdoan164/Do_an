@@ -12,17 +12,18 @@ class School_report extends Controller {
     }
     
     public function index(){
-        $this->dsp_add_school_report();
+        $this->dsp_add_main_school_report();
     }
+    
     public function dsp_single_school_report($arr = array()){
         $DATA['arr_data'] = $arr;
         $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
         $this->view->render('school_report/dsp_single_school_report',$DATA);
     }
     
-    public function dsp_add_school_report(){
+    public function dsp_add_main_school_report(){
 //        $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
-        $this->view->render('school_report/dsp_add_school_report');
+        $this->view->render('school_report/dsp_add_main_school_report');
     }
     
   
@@ -89,7 +90,8 @@ class School_report extends Controller {
 //        }
 //    }
     public function dsp_ds_toan_van_chuan_bi_nhap(){
-         $this->goback_url  = $this->view->get_controller_url().'dsp_add_school_report';
+       
+        $this->goback_url  = $this->view->get_controller_url().'dsp_add_school_report';
          if(!empty($_FILES['uploader']['name'])){
             $result= array();
             $this->school_report_model->goback_url =  $this->goback_url;

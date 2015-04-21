@@ -31,6 +31,8 @@
         if (!empty($css_files)) {
             echo $css_files;
         }
+        
+        $role = Session::get('level');
         ?>
 
         <style type="text/css">
@@ -71,24 +73,30 @@
                 <div class="navbar-collapse collapse" id="navbar-main">
                     <ul class="nav navbar-nav">
                         <li>
-                             <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" >Trang chủ</a>
+                             <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" ></a>
                         </li>
                         <li>
                             <a href="<?php echo SITE_URL; ?>group"></a>
                         </li>
+                        <?php if($role == 1):?>
                         <li>
                             <a href="<?php echo SITE_URL; ?>teacher">Quản lý giáo viên</a>
                         </li>
                         <li>
                             <a href="<?php echo SITE_URL; ?>class_grade">Quản lý lớp học</a>
                         </li>
+                        <?php endif;?>
+                        <?php if($role == 3 || $role == 1):?>
                         <li>
                             <a href="<?php echo SITE_URL; ?>parent_student">Danh sách liên lạc</a>
                         </li>
-
+                        <?php endif;?>
+                        <?php if($role ==3 || $role == 2||$role ==4):?>
                         <li>
                             <a href="<?php echo SITE_URL; ?>announce">Thông báo</a>
                         </li>
+                        <?php endif;?>
+                        <?php if($role ==3 || $role==4):?>
                         <li>
                             <a href="<?php echo SITE_URL; ?>class_forum">Diễn đàn</a>
                         </li>
@@ -98,6 +106,7 @@
                         <li>
                             <a href="<?php echo SITE_URL; ?>school_report">Quản lý học bạ</a>
                         </li>
+                        <?php endif;?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (@Session::get('loggedIn') != null): ?>

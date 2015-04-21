@@ -20,6 +20,8 @@ class Parent_student extends Controller {
    }
    
    public function dsp_all_parent_contact(){
+         $arr_data['class'] = get_post_var('sel_class','');
+       $arr_data['grade'] = get_post_var('sel_grade','');
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
        $arr_data['user_class'] = $this->class_grade_model->qry_user_class();
@@ -86,11 +88,11 @@ class Parent_student extends Controller {
     }
     
     public function add_new_contact_list(){
+        
         $arr_data['controller']          = get_post_var('controller', '');
         $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
         $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
-         if(isset($_FILES['uploader'])){
-             
+         if(!empty($_FILES['uploader']['name'])){
              $result = $this->parent_student_model->update_list_excel();
              if($result == FALSE){
                   $DATA['error'] = " Mời chọn danh sách cần nhập !";
@@ -100,6 +102,9 @@ class Parent_student extends Controller {
                   $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
              }
             
+         }else{
+                $DATA['error'] = " Mời chọn danh sách cần nhập !";
+                  $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
          }
         
     }
@@ -108,11 +113,27 @@ class Parent_student extends Controller {
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
        $arr_data['user_class'] = $this->class_grade_model->qry_user_class();
+       $arr_data['class'] = get_post_var('sel_class','');
+       $arr_data['grade'] = get_post_var('sel_grade','');
        $arr_data['arr_all_parent_contact'] = $this->parent_student_model->qry_all_parent_contact();
-        $this->view->render('parent_student/dsp_transfer_class',$arr_data);
+       $this->view->render('parent_student/dsp_transfer_class',$arr_data);
     }
     
     public function do_transfer_class(){
-        echo "hoho";die();
+       
+      $result =  $this->parent_student_model->do_transfer_class();
+      
+        if($result){
+            $this->goback_url = $this->view->get_controller_url().'dsp_all_parent_contact';
+            $this->class_grade_model->exec_fail($this->goback_url,"Cập nhật lớp thành công !");
+        }else{
+             $this->goback_url = $this->view->get_controller_url().'dsp_transfer_class';
+            $this->class_grade_model->exec_fail($this->goback_url,"Cập nhật thất bại");
+        }
+    
     }
+     public function qry_student_number_from_class(){
+         $result  = $this->parent_student_model->qry_student_number_from_class();
+         echo $result;
+     }
 }

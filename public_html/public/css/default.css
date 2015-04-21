@@ -18,7 +18,7 @@ background: #E1E1E1;
        margin-left: 5%;
        margin-right: 5%;
        /*background: #FFFFFF;*/
-       background: #eee;
+       background: #fffff2;
 	
 }
 
@@ -45,13 +45,13 @@ text-align: center;
 footer#page_footer p{
     margin:0;
     padding:0;
-    height: 50px;
-    font-size: 15px;
+    height: 30px;
+   
     text-align: center;
     /*background-color: #DD4814;*/
     background-color: #AC0713;
     color: #FDFDFD;
-    line-height: 50px;
+    line-height: 30px;
     position: fixed;
     bottom: 0;
     width: 100%;

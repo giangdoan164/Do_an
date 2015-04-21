@@ -1,13 +1,18 @@
-<?php // $this->render('user/index');  ?>
-<?php // echo $this->get_controller_url(); ?>
+<?php // $this->render('user/index');   ?>
+<?php // echo $this->get_controller_url();  ?>
+<?php
+$v_grade_id = $grade;
+$v_class_id = $class;
+?>
 <div class="container-fluid" >
     <div class="row-fluid">
         <h1 class="page-header">Quản lý danh sách liên lạc</h1>
         <div class="main-wrapper" style="margin-left: 0px;">   
-            <div class="container-fluid block" style="border:1px solid #ff9900 !important; border-top: #ff9900 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">
+            <!--<div class="container-fluid block" style="border:1px solid #ff9900 !important; border-top: #ff9900 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">-->
+            <div class="container-fluid block" style="border:1px solid #AC0713 !important; border-top: #AC0713 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">
                 <form name="frmMain" id="frmMain" action="" method="POST" enctype="multipart/form-data">
                     <?php
-                    $url  = $this->get_controller_url();
+                    $url = $this->get_controller_url();
                     echo $this->hidden('controller', $url);
                     echo $this->hidden('hdn_parent_contact_id', 0);
                     echo $this->hidden('hdn_item_id_list', '');
@@ -24,53 +29,45 @@
                         <summary><strong>Tìm kiếm</strong></summary>
                         <div class='row' style='margin-bottom:19px;'>
                             <div class="col-md-3 col-md-offset-1">
-                                    <input type="text" name="txt_filter" id="txt_filter" value="" class="form-control col-md-5" autofocus="autofocus" placeholder="Tên học sinh" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">                                   
+                                <input type="text" name="txt_filter" id="txt_filter" value="" class="form-control col-md-5" autofocus="autofocus" placeholder="Tên học sinh" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">                                   
                             </div>
-                    <div class="col-md-3">  
-                        <?php if ($role == 1): ?>
-                            <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
-                                <option value="0">--- Chọn khối --- </option>
-                                <?php foreach ($arr_grade as $grade): ?>
-                                    <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
-                                    <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
-                                <?php endforeach; ?>/
-                            </select>
-                        <?php // else : ?>
-                            <!--<select disabled class="form-control" id="sel_grade" name="sel_grade" >-->
-                                <!--<option value="<?php // echo Session::get('grade'); ?>"><?php // echo "Khối " . Session::get('grade'); ?></option>-->
-                            <!--</select>-->
-                        <?php endif ?>
+                            <div class="col-md-3">  
+                                <?php if ($role == 1): ?>
+                                    <select class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
+                                        <option value="0">--- Chọn khối --- </option>
+                                        <?php foreach ($arr_grade as $grade): ?>
+                                            <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
+                                            <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
+                                        <?php endforeach; ?>/
+                                    </select>
+                                <?php endif ?>
+                            </div>
+                            <div class="col-md-3">
+                                <?php if ($role == 1): ?>
+                                    <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
+                                        <option value="0">--- Chọn lớp ---</option>
+                                        <?php foreach ($arr_class as $class): ?>
+                                            <?php $selected = ($v_class_id == $class['PK_CLASS']) ? 'selected' : ''; ?>
+                                            <option value="<?php echo $class['PK_CLASS']; ?>" <?php echo $selected; ?>><?php echo $class['C_CLASS_NAME']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select> 
+                                    <?php // else : ?>
+        <!--                            <select disabled class="form-control" id="sel_class" name="sel_class" >
+                                        <option value="<?php // echo $user_class['PK_CLASS'];  ?>"><?php // echo $user_class['C_CLASS_NAME'];  ?></option>
+                                    </select>-->
+                                <?php endif ?>
+                            </div>
 
+                            <div class="col-md-2" >
+                                <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
+                                    <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
+                                </button>
+                            </div>
 
-
-                    </div>
-
-                    <div class="col-md-3">
-                        <?php if ($role == 1): ?>
-                            <select class="form-control" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
-                                <option value="0">--- Chọn lớp ---</option>
-                                <?php foreach ($arr_class as $class): ?>
-                                    <?php $selected = ($v_class_id == $class['PK_CLASS']) ? 'selected' : ''; ?>
-                                    <option value="<?php echo $class['PK_CLASS']; ?>" <?php echo $selected; ?>><?php echo $class['C_CLASS_NAME']; ?></option>
-                                <?php endforeach; ?>
-                            </select> 
-                        <?php // else : ?>
-<!--                            <select disabled class="form-control" id="sel_class" name="sel_class" >
-                                <option value="<?php // echo $user_class['PK_CLASS']; ?>"><?php // echo $user_class['C_CLASS_NAME']; ?></option>
-                            </select>-->
-                        <?php endif ?>
-                    </div>
-
-                    <div class="col-md-2" >
-                        <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
-                            <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
-                        </button>
-                    </div>
-
-            </div>
-            </details>
+                        </div>
+                    </details>
                     <?php if ($role == 1): ?>
-                    <details>
+                        <details>
                             <summary>Thêm mới</summary>
                             <div class="row">
                                 <div class='col-md-6' style='padding:35px 0px 25px 15px;'>
@@ -83,34 +80,35 @@
                                 </div>
                                 <div class='col-md-6 ' style='padding-top:35px;'>
                                     <div class='row'>
-                                        <div class='col-md-3 col-md-offset-6'>
+                                        <div class='col-md-3'>
                                             <a href="javascript:void(0)" class="btn btn-primary" onclick="btn_addnew_onclick()"><span  class="glyphicon glyphicon-plus"></span>&nbsp&nbspThêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
 
                                         </div>
-                                     
+
                                     </div>
                                 </div>  
-                        </details>            
-                    <details>
+                        </details>     
+                        <?php if ($role == 1): ?>
+                            <details>
+                                <summary>Chuyển lớp</summary>
+                                <div class="row">
+                                    <div class="col-md-1 col-md-offset-6">
+                                        <a  href="<?php echo SITE_URL . 'parent_student/dsp_transfer_class' ?>" class="btn btn-primary"  ><span class="glyphicon glyphicon-random"></span>&nbsp&nbsp&nbsp Chuyển Lớp</a>
+                                    </div>
+                                </div>
+                            </details>
+                        <?php endif; ?>
+                        <details>
                             <summary>Xóa</summary>
                             <div class="row">
-                                  <div class='col-md-3 col-md-offset-9'>
-                                            <a href="javascript:void(0);" class="btn btn-primary" onclick="update_delete_onclick();"><span  class="glyphicon glyphicon-remove"></span>&nbsp&nbsp&nbspXóa&nbsp&nbsp&nbsp</a>
-                                  </div>
-                                </div>  
+                                <div class='col-md-3 col-md-offset-6'>
+                                    <a href="javascript:void(0);" class="btn btn-primary" onclick="update_delete_onclick();"><span  class="glyphicon glyphicon-remove"></span>&nbsp&nbsp&nbspXóa&nbsp&nbsp&nbsp</a>
+                                </div>
+                            </div>  
                         </details>            
-             <?php endif; ?>
-              <?php if($role == 1): ?>
-                  <details>
-                        <summary>Chuyển lớp</summary>
-                    <div class="row">
-                        <div class="col-md-1 col-md-offset-9">
-                               <a  href="<?php echo SITE_URL.'parent_student/dsp_transfer_class'?>" class="btn btn-primary"  ><span class="glyphicon glyphicon-random"></span>&nbsp&nbsp&nbsp Chuyển Lớp</a>
-                        </div>
-                    </div>
-                 </details>
-             <?php endif;?>
-                
+                    <?php endif; ?>
+
+
 
             </div>
             <div class="box box-bordered box-small">
@@ -142,27 +140,27 @@
 
                                     </td>
                                     <td style="text-align:center">
-                                            <?php echo $parent_contact['C_STUDENT_BIRTH']; ?>
+                                        <?php echo $parent_contact['C_STUDENT_BIRTH']; ?>
 
                                     </td>
                                     <td style="text-align:center">
-                                            <?php echo $parent_contact['C_FATHER_NAME']; ?>
+                                        <?php echo $parent_contact['C_FATHER_NAME']; ?>
 
                                     </td>
                                     <td style="text-align:center">
-                                            <?php echo $parent_contact['C_MOTHER_NAME']; ?>
+                                        <?php echo $parent_contact['C_MOTHER_NAME']; ?>
 
                                     </td>
                                     <td style="text-align:center">
-                                             <?php echo $parent_contact['C_EMAIL']; ?>
+                                        <?php echo $parent_contact['C_EMAIL']; ?>
 
                                     </td>
                                     <td style="text-align:center">
-                                              <?php echo $parent_contact['C_PHONE']; ?>
+                                        <?php echo $parent_contact['C_PHONE']; ?>
 
                                     </td >
                                     <td style="text-align:center">
-                                              <?php echo $parent_contact['C_CLASS_NAME']; ?>
+                                        <?php echo $parent_contact['C_CLASS_NAME']; ?>
 
                                     </td>
                                     <td style="text-align:center">
@@ -171,12 +169,12 @@
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                                        <?php echo $this->render_rows(count($arr_all_parent_contact), 9); ?>
+                            <?php echo $this->render_rows(count($arr_all_parent_contact), 9); ?>
                         </tbody>
 
                     </table>
                     <div id="paging" class="nowrap">
-                                        <?php echo $this->paging2($arr_all_parent_contact); ?>
+                        <?php echo $this->paging2($arr_all_parent_contact); ?>
                     </div>
                 </div>
             </div>
@@ -215,7 +213,7 @@
             cache: false,
             data: 'grade_id=' + grade_id,
             dataType: 'json',
-            success: function (result) {
+            success: function(result) {
                 var xhtml = "<option value='0'>-- Mời chọn lớp --</option>";
                 for (i = 0; i < result.length; i++) {
                     var option = "<option value ='" + result[i].PK_CLASS + "'>" + result[i].C_CLASS_NAME + "</option>";
@@ -235,12 +233,12 @@
             cache: false,
             data: 'class_id=' + class_id,
             dataType: 'html',
-            success: function (result) {
+            success: function(result) {
                 $("#sel_grade option[value='" + result + "']").attr("selected", "selected");
             }
         });
     }
-     function btn_filter_onclick(){
-               $('#frmMain').submit();
-        }
+    function btn_filter_onclick() {
+        $('#frmMain').submit();
+    }
 </script>

@@ -125,7 +125,7 @@
                             </div>
                         </div>  
                        
-
+                    <?php if($role !=4): ?>
                         <div class="col-md-2">
                             <div class='col-md-6 col-md-offset-1'>
                             <button type="button" class="btn btn-primary" onclick="btn_add_new_onclick();" name="btn_add_new">
@@ -133,6 +133,7 @@
                             </button>
                         </div>
                     </div>
+                        <?php endif;?>
                     </div>
                 </div>
                     

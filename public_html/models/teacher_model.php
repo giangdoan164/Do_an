@@ -43,6 +43,7 @@ class Teacher_Model extends Model {
     $v_grade = get_post_var('sel_grade','');
     $v_class = get_post_var('sel_class','');
     $v_teacher_id = get_post_var('hdn_teacher_id',0);
+    $v_teacher_code = get_post_var('txt_teacher_code','');
     if($v_teacher_id >0){
         $sql = "UPDATE 
                 `t_user` 
@@ -57,9 +58,18 @@ class Teacher_Model extends Model {
               WHERE PK_USER = ?";
         $params = array($v_name,$v_phone,$v_address,$v_email,$v_role,$v_grade,$v_class,$v_teacher_id);
         $this->db->Execute($sql,$params);
+       
     }else{
-        $sql = "INSERT INTO t_user (C_NAME,C_PHONE,C_ADDRESS,C_EMAIL,FK_CLASS,FK_GROUP,FK_GRADE) VALUES (?,?,?,?,?,?,?)";
-        $params = array($v_name,$v_phone,$v_address,$v_email,$v_class,$v_role,$v_grade);
+        $is_exist_teacher = $this->check_teach_has_class();
+        if ($is_exist_teacher == true)
+        {
+
+            $DATA['error'] = "Lớp đã chọn có giáo viên chủ nhiệm";
+            $this->teach_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+            exit();
+        }
+        $sql = "INSERT INTO t_user (C_NAME,C_PHONE,C_ADDRESS,C_EMAIL,FK_CLASS,FK_GROUP,FK_GRADE,C_CODE) VALUES (?,?,?,?,?,?,?,?)";
+        $params = array($v_name,$v_phone,$v_address,$v_email,$v_class,$v_role,$v_grade,$v_teacher_code);
         $this->db->Execute($sql,$params);
     }
      return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;

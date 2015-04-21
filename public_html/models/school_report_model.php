@@ -102,7 +102,7 @@ class School_report_Model extends Model {
                     $objPHPExcel = $objReader->load($v_dir_file . $v_cur_file_name);
                     //        neu file excel co 1 sheet
                     $sheetData = $objPHPExcel->getActiveSheet()->toArray(null, TRUE, TRUE, TRUE);
-//                            $sheetCount = $objPHPExcel->getSheetCount();
+//                  
                     $count = sizeof($sheetData);
                     for ($i = 5; $i <= $count; $i++) {
                         $sheetData[$i]['B'] = PHPExcel_Style_NumberFormat::toFormattedString($sheetData[$i]['B'], 'YYYY-MM-DD');
@@ -128,12 +128,7 @@ class School_report_Model extends Model {
     }
 
     public function do_add_list_school_record($data_arr) {
-        echo __FILE__;
-        echo "<pre>";
-        print_r($data_arr);
-        echo "</pre>";
-        echo __LINE__;
-
+    
         $teacher_id = Session::get('user_id');
         $class = Session::get('class');
         $grade = Session::get('grade');

@@ -1,12 +1,6 @@
 <?php
 $json_data = '';
 $count_arr = sizeof($arr_data);
-//echo __FILE__;
-//echo "<pre>";
-//print_r($arr_data);
-//echo "</pre>";
-//echo __LINE__;
-
 if ($count_arr > 0) {
    $string_arr = '';
     foreach($arr_data as $data){
@@ -24,7 +18,11 @@ $string_arr = substr($string_arr,2);
 
 ?>
 <div class="container">
+    
     <div class="row">
+        <div class="row">
+            <h3 style="text-align: center;">Danh sách điểm thi toán văn chuẩn bị nhập</h3>
+        </div>
           <form action="" method="post" name="frmMain" id="frmMain"  enctype="multipart/form-data">
         <?php
         echo $this->hidden('controller', $this->get_controller_url());
@@ -41,7 +39,7 @@ $string_arr = substr($string_arr,2);
                         <th style="width: 20%;text-align:center"><?php echo $arr_data[4]['C']  ?></th>
                         <th style="width: 20%;text-align:center"><?php echo $arr_data[4]['D']  ?></th>
                         <th style="width: 14%;text-align:center"><?php echo $arr_data[4]['E']  ?></th>
-                        <th style="width: 14%;text-align:center"><?php echo $arr_data[4]['F']  ?></th>
+                        <!--<th style="width: 14%;text-align:center"><?php echo $arr_data[4]['F']  ?></th>-->
                       
                     </tr>
                 </thead>
@@ -54,7 +52,7 @@ $string_arr = substr($string_arr,2);
                                 <td style="width: 20%;text-align:center"><?php echo $arr_data[$i]['C'] ?></td>
                                 <td style="width: 20%;text-align:center"><?php echo $arr_data[$i]['D'] ?></td>
                                 <td style="width: 14%;text-align:center"><?php echo $arr_data[$i]['E'] ?></td>
-                                <td style="width: 14%;text-align:center"><?php echo $arr_data[$i]['F'] ?></td>
+                                <!--<td style="width: 14%;text-align:center"><?php echo $arr_data[$i]['F'] ?></td>-->
                             </tr>
                          <?php endfor; ?>
                     <?php else: ?>
@@ -68,8 +66,8 @@ $string_arr = substr($string_arr,2);
                     <div class="row" style="margin-top:10px;margin-bottom:10px;">
                     <button type="button"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cập nhật vào hệ thống </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button type="button"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Quay lại </button>
+                    <a  href="<?php echo $this->get_controller_url().'dsp_add_main_school_report'?>"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Quay lại </a>
                 </div>
         </div>
            </form> 

@@ -9,6 +9,7 @@
       $v_class_id = isset($arr_single_teacher['FK_CLASS']) ? $arr_single_teacher['FK_CLASS'] : 0;
       $v_grade_id = isset($arr_single_teacher['FK_GRADE']) ? $arr_single_teacher['FK_GRADE'] : 0;
       $v_role =isset($arr_single_teacher['FK_GROUP']) ? $arr_single_teacher['FK_GROUP'] : 3;
+      $v_teacher_code =  $arr_single_teacher['C_CODE'];
    }else{
        //thay cho mac dinh
       $v_teach_id = get_post_var('hdn_teacher_id',0);
@@ -19,6 +20,7 @@
       $v_role = get_post_var('sel_teacher',3);
       $v_grade = get_post_var('sel_grade',0);
       $v_class = get_post_var('sel_class',0);
+      $v_teacher_code ='';
    }
 ?>
 <div class="container-fluid " >
@@ -40,6 +42,18 @@
       <label for="txt_teacher_name" class="col-lg-3 control-label" >Họ tên <span style="color:red;">(*)</span></label>
       <div class="col-lg-9">
           <input type="text" class="form-control" value="<?php echo $v_teach_name; ?>" id="txt_teacher_name" name="txt_teacher_name" placeholder="Họ tên giáo viên" required>
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="txt_teacher_code" class="col-lg-3 control-label">Mã giáo viên</label>
+      <div class="col-lg-9">
+          <?php if (sizeof($arr_single_teacher)>0):?>
+          <input type="text" class="form-control" value="<?php echo $v_teacher_code;?>" id="txt_teacher_code" readonly="true"  name="txt_teacher_code" placeholder="Mã giáo viên">
+        
+          <?php else:?>
+          <input type="text" class="form-control" value="<?php echo $v_teacher_code;?>" id="txt_teacher_code"   name="txt_teacher_code" placeholder="Mã giáo viên">
+        
+          <?php endif;?>
       </div>
     </div>
     <div class="form-group">

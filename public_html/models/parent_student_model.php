@@ -68,14 +68,16 @@ class Parent_student_Model extends Model
                 $v_phone = $sheetData[$i]['G'];
                 $v_class = $sheetData[$i]['H'];
                 $v_grade = $sheetData[$i]['I'];
+                $v_student_code = $sheetData[$i]['J'];
                 //kiem tra trung ten dang nhap truoc khi insert
                 // MaPH se co dang : nguyenvannam |11022009 |01
                 $v_user_name = $this->do_create_user_name($v_student_name,$v_student_birth);
                 $v_pass_word = md5("123456");
-                $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class,$v_user_name,$v_pass_word, 4);
-                $sql = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,C_LOGIN_NAME,C_PASSWORD,FK_GROUP) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class,$v_user_name,$v_pass_word, 4,$v_student_code);
+                $sql = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,C_LOGIN_NAME,C_PASSWORD,FK_GROUP,C_CODE) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
                 $this->db->Execute($sql, $params);
+                
             }
         }
     
@@ -110,7 +112,7 @@ class Parent_student_Model extends Model
                     }
                 
                 }else{
-                    $DATA['error'] = "Yêu cầu chọn file excel";
+                    $DATA['error'] = "Lỗi trong quá trình cập nhật";
                     $arr_data['controller']          = get_post_var('controller', '');
                     $arr_data['hdn_dsp_all_record'] = get_post_var('hdn_dsp_all_record', '');
                     $this->goback_url = $arr_data['controller']. $arr_data['hdn_dsp_all_record'];
@@ -151,15 +153,15 @@ class Parent_student_Model extends Model
                 $result       = $this->db->GetAll($sql);
                return $result;
          }else{
-            
-                $condition = "WHERE t.FK_GROUP='4' AND t.C_DELETED ='0'";
+         
+             $condition = "WHERE t.FK_GROUP='4' AND t.C_DELETED ='0'";
                 $filter_class   = get_post_var('sel_class', 0);
                 $filter_grade   = get_post_var('sel_grade', 0);
                  $filter_name    = get_post_var('txt_filter','');
                 if($filter_grade!=0){$condition.="AND t.FK_GRADE ='$filter_grade'";}
                 if($filter_class!=0){$condition.="AND t.FK_CLASS='$filter_class'";}
                 if(trim($filter_name) == !'') {$condition .= "AND t.C_NAME like '%" . trim($filter_name) . "%'"; }
-                $total_record = $this->db->GetOne("SELECT COUNT(*) FROM t_user WHERE $condition ");
+                $total_record = $this->db->GetOne("SELECT COUNT(*) FROM t_user t $condition ");
                 $sql = "SELECT t.*, c.C_CLASS_NAME, g.`PK_GRADE` ,$total_record as TOTAL_RECORD
                                  FROM
                                     t_user t 
@@ -225,8 +227,32 @@ class Parent_student_Model extends Model
     public function delete_parent_contact(){
         $v_delete_list = get_post_var('hdn_item_id_list',0);
         $sql = "DELETE FROM `t_user` WHERE PK_USER IN ($v_delete_list)";
-        //        $sql = "DELETE FROM `t_user` WHERE PK_USER IN ($v_delete_list)";
         $this->db->Execute($sql);
         return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
+    }
+    
+    public function qry_student_number_from_class(){
+        $class_id = get_post_var('sel_class1',0);
+        if($class_id > 0){
+            $sql = "SELECT COUNT(*) FROM t_user WHERE FK_CLASS = '$class_id' AND FK_GROUP = 4 AND C_DELETED = 0";
+            $result = $this->db->GetOne($sql);
+           return $result;
+        }
+        return 0;
+    }
+    
+    public function do_transfer_class(){
+        $list_update  = get_post_var('hdn_item_id_list','');
+        $class_to = get_post_var('sel_class1','');
+        if($class_to!='' && $class_to !=''){
+            $sql = " UPDATE t_user SET FK_CLASS = '$class_to' WHERE PK_USER IN ($list_update)";
+            $this->db->Execute($sql);
+            if($this->db->ErrorNo()== 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
 }

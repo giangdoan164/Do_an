@@ -129,6 +129,28 @@
                         f.submit();
                     }
                 }
+            function update_class_onclick(record_id)
+                {
+                    var f = document.frmMain;
+                    if(typeof record_id != 'undefined' && parseInt(record_id) >0)
+                    {
+                        $('#hdn_item_id_list').val(record_id);
+                    }
+                    else
+                    {
+                        var is_item_checked = set_value_chk(hdn_item_id_list);
+                        if(!is_item_checked)
+                        {
+                            return false;
+                        }
+                    }
+                    m = $("#controller").val() + f.hdn_update_class.value;
+                    $("#frmMain").attr("action", m);
+                    if(confirm('Bạn chắc chắn  chuyển lớp các đối tượng đã chọn?'))
+                    {
+                        f.submit();
+                    }
+                }
           
             function btn_filter_onclick() {
                 var f = document.frmMain;
