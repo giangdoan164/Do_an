@@ -73,7 +73,7 @@ class School_report_Model extends Model {
         return $sheetData;
     }
 
-    public function dsp_list_school_record() {
+    public function dsp_list_school_record_toan_van() {
         $class = Session::get('class');
         if ($_FILES['uploader']['error'] == 0) {
 
@@ -127,7 +127,7 @@ class School_report_Model extends Model {
         }
     }
 
-    public function do_add_list_school_record($data_arr) {
+    public function do_add_list_school_record_excel($data_arr) {
     
         $teacher_id = Session::get('user_id');
         $class = Session::get('class');
@@ -136,7 +136,7 @@ class School_report_Model extends Model {
         $year  = $data_arr[0][3];
         for ($i = 4; $i < sizeof($data_arr); $i++) {
             $student_name = trim($data_arr[$i][0]);
-//            $student_birth = date("Y-m-d", strtotime(trim($data_arr[$i]['1'])));
+
             $father_name = trim($data_arr[$i][2]);
             $mother_name = trim($data_arr[$i][3]);
             $sql = "SELECT PK_USER FROM t_user WHERE C_NAME = ? AND C_FATHER_NAME = ? AND C_MOTHER_NAME =? AND FK_CLASS = ?";

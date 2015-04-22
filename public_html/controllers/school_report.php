@@ -95,7 +95,7 @@ class School_report extends Controller {
          if(!empty($_FILES['uploader']['name'])){
             $result= array();
             $this->school_report_model->goback_url =  $this->goback_url;
-            $result = $this->school_report_model->dsp_list_school_record();
+            $result = $this->school_report_model->dsp_list_school_record_toan_van();
            
             if($result == FALSE){
                  $DATA['error'] = "Không nhập được file!";
@@ -112,7 +112,17 @@ class School_report extends Controller {
         }
     }
     
-    public function do_add_list_school_record(){
+    public function do_add_list_school_record_toan_van(){
+        
+//INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TITLE,C_TEACHER_CODE) VALUES (1,2,3,4,5) 
+//
+//INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(1,2,6) 
+//
+//INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(1,4,8)
+//
+//
+//INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(1,3,9)
+        
         $string_arr = get_post_var('arr_data');
         $data = explode('_', $string_arr);
         $final_arr = array();
@@ -120,7 +130,7 @@ class School_report extends Controller {
            $value = explode(',', $value);
            $final_arr[] = $value;
         }
-        $result = $this->school_report_model->do_add_list_school_record($final_arr);
+        $result = $this->school_report_model->do_add_list_school_record_excel($final_arr);
         $this->goback_url = $this->view->get_controller_url().'dsp_new_added_school_record';
         if($result){
 //            $this->school_report_model->exec_fail($this->goback_url,"Thêm mới điểm học bạ thành công");

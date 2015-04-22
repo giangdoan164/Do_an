@@ -28,6 +28,7 @@ class User_Model extends Model {
             Session::set('class',$result['FK_CLASS']);
             Session::set('user_id',$result['PK_USER']);
             Session::set('user_name',$result['C_NAME']);
+            Session::set('user_code',$result['C_CODE']);
             //2 cach goi chuyen trang nhu nhau
 //            redirect('parent_student', 'dsp_all_parent_contact');
              

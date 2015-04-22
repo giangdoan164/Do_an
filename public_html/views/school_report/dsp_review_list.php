@@ -26,7 +26,7 @@ $string_arr = substr($string_arr,2);
           <form action="" method="post" name="frmMain" id="frmMain"  enctype="multipart/form-data">
         <?php
         echo $this->hidden('controller', $this->get_controller_url());
-        echo $this->hidden('hdn_do_add_list_school_record', 'do_add_list_school_record');
+        echo $this->hidden('hdn_do_add_list_school_record', 'do_add_list_school_record_toan_van');
         echo $this->hidden('arr_data',$string_arr );
 
         ?>
