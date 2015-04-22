@@ -7,26 +7,40 @@ class School_report extends Controller {
     {
         Session::check_login();
         parent::__construct('school_report');
-        $this->view->title = "Quản lý học bạ";
+        $this->view->title = "Quản lý học bạ";;
         $this->school_report_model = $this->loadModel('school_report');
+     
     }
     
     public function index(){
-        $this->dsp_add_main_school_report();
+        $this->dsp_main_school_record();
     }
     
     public function dsp_single_school_report($arr = array()){
         $DATA['arr_data'] = $arr;
-        $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
+//        $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
         $this->view->render('school_report/dsp_single_school_report',$DATA);
     }
     
-    public function dsp_add_main_school_report(){
-//        $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
-        $this->view->render('school_report/dsp_add_main_school_report');
+    public function dsp_main_school_record(){
+       
+        $this->view->render('school_report/dsp_main_school_record');
     }
     
+    public function dsp_add_school_report_toan_van(){
+//        $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
+        $this->view->render('school_report/dsp_add_school_report_toan_van');
+    }
+    
+    public function dsp_add_school_report_mon_phu(){
+        $DATA = array();
+        $DATA['arr_subject'] = $this->school_report_model->qry_all_subject_grade(); 
+        $DATA['arr_student'] = $this->school_report_model->qry_all_student_class();
   
+        $this->view-> render('school_report/dsp_add_school_report_mon_phu',$DATA);
+    }
+    
+   
      public function do_add_list_sent_school_record(){
          $DATA['da'] = array(1,2,3,4);
          $this->goback_url  = $this->view->get_controller_url().'dsp_single_school_report';
@@ -112,17 +126,7 @@ class School_report extends Controller {
         }
     }
     
-    public function do_add_list_school_record_toan_van(){
-        
-//INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TITLE,C_TEACHER_CODE) VALUES (1,2,3,4,5) 
-//
-//INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(1,2,6) 
-//
-//INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(1,4,8)
-//
-//
-//INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(1,3,9)
-        
+    public function do_add_list_school_record_toan_van(){    
         $string_arr = get_post_var('arr_data');
         $data = explode('_', $string_arr);
         $final_arr = array();
@@ -131,11 +135,11 @@ class School_report extends Controller {
            $final_arr[] = $value;
         }
         $result = $this->school_report_model->do_add_list_school_record_excel($final_arr);
-        $this->goback_url = $this->view->get_controller_url().'dsp_new_added_school_record';
+        $this->goback_url = $this->view->get_controller_url().'dsp_add_school_report_toan_van';
         if($result){
-//            $this->school_report_model->exec_fail($this->goback_url,"Thêm mới điểm học bạ thành công");
+            $this->school_report_model->exec_fail($this->goback_url,"Thêm mới điểm học bạ thành công");
         }else{
-//            $this->school_report_model->exec_fail($this->view_get_controller_url().'dsp_single_school_report',"Nhập điểm lỗi | Mời chọn file excel đúng");
+            $this->school_report_model->exec_fail($this->goback_url,"Không nhập được file excel");
         }
     }
     

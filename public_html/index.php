@@ -3,7 +3,7 @@
 //if (!ini_get('date.timezone'))
 //{
 ////    date_default_timezone_set('GMT');
-//    date_default_timezone_set('Asia/Ho_Chi_Minh');  
+    date_default_timezone_set('Asia/Ho_Chi_Minh');  
 //    set tring php.ini   ;date.timezone=Asia/Ho_Chi_Minh
 //date.timezone=GMT
 //}

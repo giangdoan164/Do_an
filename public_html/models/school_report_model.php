@@ -10,35 +10,24 @@ class School_report_Model extends Model {
         parent::__construct($db);
     }
 
-    public function qry_all_student_class() {
-        $result = array();
-        $class_id = Session::get('class');
-        $sql = "SELECT u.PK_USER ,u.C_NAME FROM t_user u INNER JOIN t_class c WHERE  u.FK_CLASS = c.PK_CLASS AND u.FK_CLASS = $class_id AND  u.FK_GROUP =4 ";
-
-//        $sql="INSERT INTO `t_shcool_report` (FK_TEACHER_USER,FK_PARENT_USER,FK_GRADE,FK_CLASS,C_SEMESTER,C_YEAR,C_MATH_GRADE,C_LITERATURE_GRADE,C_FINAL_GRADE,C_TEACHER_REMARK)
-//VALUES(1,1,1,1,1,1,1,1,1,1)";
-        $result = $this->db->GetAll($sql);
-        return $result;
-    }
-
-    public function do_dsp_list_school_record($excel_path) {
-//          @session_start();
-        //include thu vien php excel
-        require(SERVER_ROOT . 'libs/excel/PHPExcel/IOFactory.php');
-        //load file excel
-        $inputFileType = 'Excel5';
-        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-        $objReader->setReadDataOnly(true);
-        $objPHPExcel = $objReader->load($excel_path);
-//        neu file excel co 1 sheet
-        $sheetData = $objPHPExcel->getActiveSheet()->toArray(null, TRUE, TRUE, TRUE);
-        $sheetCount = $objPHPExcel->getSheetCount();
-        PHPExcel_Style_NumberFormat::toFormattedString($sheetData[$i]['B'], 'YYYY-MM-DD');
-        for ($i = 5; $i < $sheetCount; $i++) {
-            $sheetData[$i]['B'] = PHPExcel_Style_NumberFormat::toFormattedString($sheetData[$i]['B'], 'YYYY-MM-DD');
-            echo $sheetData[$i]['B'];
-        }
-        die();
+//    public function do_dsp_list_school_record($excel_path) {
+////          @session_start();
+//        //include thu vien php excel
+//        require(SERVER_ROOT . 'libs/excel/PHPExcel/IOFactory.php');
+//        //load file excel
+//        $inputFileType = 'Excel5';
+//        $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+//        $objReader->setReadDataOnly(true);
+//        $objPHPExcel = $objReader->load($excel_path);
+////        neu file excel co 1 sheet
+//        $sheetData = $objPHPExcel->getActiveSheet()->toArray(null, TRUE, TRUE, TRUE);
+//        $sheetCount = $objPHPExcel->getSheetCount();
+//        PHPExcel_Style_NumberFormat::toFormattedString($sheetData[$i]['B'], 'YYYY-MM-DD');
+//        for ($i = 5; $i < $sheetCount; $i++) {
+//            $sheetData[$i]['B'] = PHPExcel_Style_NumberFormat::toFormattedString($sheetData[$i]['B'], 'YYYY-MM-DD');
+//            echo $sheetData[$i]['B'];
+//        }
+       
 //       doc tung sheet mot
 //        for ($j = 0; $j < $sheetCount; $j++) {
 //            $sheetData = $objPHPExcel->setActiveSheetIndex($j)->toArray(null, TRUE, TRUE, TRUE);
@@ -65,13 +54,7 @@ class School_report_Model extends Model {
 //                $this->db->Execute($sql, $params);
 //            }
 //        }
-//        echo __FILE__;
-//        echo "<pre>";
-//        print_r($sheetData);
-//        echo "</pre>";
-//        echo __LINE__;
-        return $sheetData;
-    }
+//    }
 
     public function dsp_list_school_record_toan_van() {
         $class = Session::get('class');
@@ -127,32 +110,61 @@ class School_report_Model extends Model {
         }
     }
 
+    function check_is_added_list_record($code,$semester,$year){
+          $sql = "SELECT COUNT(*) FROM t_school_record WHERE C_SEMESTER = '$semester' AND C_YEAR ='$year' AND C_TEACHER_CODE='$code'";
+          $count = $this->db->GetOne($sql);
+          if(intval($count)==0){return true;}
+          else{return false;}
+          
+    }
     public function do_add_list_school_record_excel($data_arr) {
-    
-        $teacher_id = Session::get('user_id');
-        $class = Session::get('class');
-        $grade = Session::get('grade');
+        $teacher_code = Session::get('user_code');
         $semester = $data_arr[0][1];
         $year  = $data_arr[0][3];
-        for ($i = 4; $i < sizeof($data_arr); $i++) {
-            $student_name = trim($data_arr[$i][0]);
-
-            $father_name = trim($data_arr[$i][2]);
-            $mother_name = trim($data_arr[$i][3]);
-            $sql = "SELECT PK_USER FROM t_user WHERE C_NAME = ? AND C_FATHER_NAME = ? AND C_MOTHER_NAME =? AND FK_CLASS = ?";
-            $params = array($student_name, $father_name, $mother_name,$class);
-            $student_id = $this->db->GetOne($sql, $params);
-            if (intval($student_id) > 0) {
-                $sql = "INSERT INTO t_school_report (FK_TEACHER_USER,FK_STUDENT_USER,FK_GRADE,FK_CLASS,C_SEMESTER,C_YEAR,C_MATH_GRADE,C_LITERATURE_GRADE)
-                     VALUES(?,?,?,?,?,?,?,?)";
-                $params = array($teacher_id,$student_id,$grade,$class,$semester,$year,$data_arr[$i][4],$data_arr[$i][5]);
+        $check = $this->check_is_added_list_record($teacher_code, $semester, $year);
+        if($check==FALSE){  return false;}
+        else{
+             $count_data = sizeof($data_arr);
+        for ($i = 4; $i <$count_data; $i++) {
+                $student_code = $data_arr[$i][2];
+                $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE) VALUES (?,?,?,?) ";
+                $params = array($student_code,$semester,$year,$teacher_code);
                 $this->db->Execute($sql,$params);
-            }
+                $school_record = $this->db->Insert_ID();
+                    //Them mon toan
+                   $sql = "INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(?,?,?)"; 
+                   $params = array($school_record,1,$data_arr[$i][3]);
+                   $this->db->Execute($sql,$params);
+                    //Them mon tieng viet
+                   $sql = "INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES(?,?,?)"; 
+                   $params = array($school_record,2,$data_arr[$i][4]);
+                   $this->db->Execute($sql,$params);
+                }
         }
-        if($this->db->ErrorNo()){return true;}
+      
+        if($this->db->ErrorNo()==0){return true;}
         else{
             return false;
         }
+        
     }
+    
+    public function qry_all_subject_grade(){
+        $result = array();
+        $grade = Session::get('grade');
+        $sql ="SELECT s.* FROM `t_grade_subject`  gs INNER JOIN `t_subject` s ON gs.FK_SUBJECT = s.PK_SUBJECT AND gs.FK_GRADE = '$grade'";
+        $result = $this->db->GetAll($sql);
+        return $result;
+        
+    }
+    
+   public function qry_all_student_class(){
+       $result = array();
+       $class_id = Session::get('class');
+       $sql = "SELECT PK_USER,C_CODE,C_NAME,C_STUDENT_BIRTH FROM t_user WHERE  FK_CLASS ='$class_id' AND FK_GROUP = 4 AND C_DELETED = 0";
+       $result = $this->db->GetAll($sql);
+       return $result;
+   }
+   
 
 }

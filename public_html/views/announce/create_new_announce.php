@@ -6,20 +6,11 @@
             <div class="container-fluid block">
                 <form name="frmMain" id="frmMain" action="" method="POST">
                    <?php 
-                       $role = Session::get('level');
-                       echo $this->hidden('hdn_role',$role);
-                        $url = $this->get_controller_url();
+                         $role = Session::get('level');
+                         echo $this->hidden('hdn_role',$role);
+                         $url = $this->get_controller_url();
                          echo $this->hidden('controller',$url);
-                         echo $this->hidden('hdn_parent_contact_id',0);
                          echo $this->hidden('hdn_item_id_list', '');
-                       
-                         echo $this->hidden('hdn_add_new_ann','add_new_announce');
-//                                       echo $this->hidden('hdn_site_url',SITE_URL);
-                         echo $this->hidden('hdn_site_url',SITE_URL);
-                         echo $this->hidden('hdn_dsp_add_new_announce','dsp_add_new_announce');
-                         // phuc vu cho viec sua
-                         echo $this->hidden('hdn_dsp_all_record','dsp_all_announce');
-                      
                     ?>
                     <div class="row">
                         <div class="col-md-4">
@@ -104,24 +95,23 @@
                            <div class="box-content nopadding">
                                 <table class="table table-hover table-nomargin table-condensed ">
                                     <thead>
-                                              <tr class="info">
+                                        <tr class="info">
                                             <th style="width: 5%;text-align:center">
-                                                <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                               
+                                                <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk"  onclick="toggle_check_all(this, this.form.chk);">                                               
+                                           
                                             </th>
                                             <th style="width: 15%;text-align:center">Họ tên học sinh</th>
                                             <th style="width: 10%;text-align: center">Ngày sinh</th>
                                             <th style="width: 5%;text-align:center">Lớp </th>
                                             <th style="width: 65%;text-align:center">Nội dung thông báo</th>
-                                                 
                                         </tr>
-
                                     </thead>
                                     <tbody>
                                      
                                     <?php foreach ($arr_student as $student):?>
                                     <tr>
                                          <td style="text-align:center">
-                                                <input type="checkbox" name="chk" value="<?php echo $student['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">                 
+                                                <input type="checkbox" name="chk" value="<?php echo $student['PK_USER']; ?>" onchange="update_announce_content(<?php echo $student['PK_USER'] ; ?>)" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">                 
                                         </td>
                                       
                                         <td style="text-align:center">
@@ -137,11 +127,8 @@
 
                                         </td>
                                         <td style="text-align:center">
-                                            <input type="text" class="form-control txt_ann"  id="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" name="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" >
-
+                                            <input type="text" class="form-control txt_ann" onchange="update_check_box(<?php echo $student['PK_USER'] ; ?>);" id="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" name="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" >
                                         </td>
-                                     
-                                         
                                     </tr>
                                 <?php endforeach; ?>
                                       <?php echo $this->render_rows(count($arr_student),5);?>
@@ -170,9 +157,24 @@
        $('#frmMain #txt_ann').attr('disabled',false);
 
     });
+    function update_check_box(id){
+        var content = $('#frmMain #txt_sle_std_ann_'+id).val();
+        content = $.trim(content);
+//        co the dung content.length == 0 de kiem tra
+//        console.log(content == '');
+        if(content == ''){
+            $("input[value ='"+id+"']").attr('checked',false);
+        }else{
+            $("input[value ='"+id+"']").attr('checked',true);
+        }
 
+    }
+    function update_announce_content(id){
+       if( $("input[value ='"+id+"']").is(':checked')==false){
+             $('#frmMain #txt_sle_std_ann_'+id).val('');
+       } 
+    }
       function btn_send_announce(){
-            
                 var f = document.frmMain;
                 var role  = f.hdn_role.value;
                 //neu la giao vien thi kiem tra the nay
@@ -203,7 +205,7 @@
                         if(f.radio_ann_scope.value==2){
                                var list = f.hdn_item_id_list.value;
                                var list_arr = list.split(",");
-
+                         
                               var err_arr = new Array();
 
                               for(x in list_arr){

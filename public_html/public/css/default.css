@@ -5,7 +5,8 @@ body {
 background: #E1E1E1;
 }
 .navbar-fixed-top{
-     background-color: #AC0713;
+     background-color: #CE4B27;
+/*     background-color: #AC0713;*/
       
 }
 #header {
@@ -14,16 +15,16 @@ background: #E1E1E1;
 }
 
 #content {
-       width: 90%;
-       margin-left: 5%;
-       margin-right: 5%;
+       width: 95%;
+       margin: 20px auto;
+      
        /*background: #FFFFFF;*/
        background: #fffff2;
 	
 }
 
 #footer {
-	background: green;
+background-color: #CE4B27;
 	padding: 20px;
 }
 
@@ -32,6 +33,7 @@ background: #E1E1E1;
 }
 
 footer#page_footer{
+      background-color: #CE4B27;
 margin-top: 40px;
 margin-bottom: 0;
 padding: 0;
@@ -49,7 +51,7 @@ footer#page_footer p{
    
     text-align: center;
     /*background-color: #DD4814;*/
-    background-color: #AC0713;
+    background-color: #CE4B27;
     color: #FDFDFD;
     line-height: 30px;
     position: fixed;

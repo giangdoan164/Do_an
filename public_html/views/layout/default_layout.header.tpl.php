@@ -3,7 +3,7 @@
     <head>   
         <?php $title = isset($this->title) ? $this->title : "Project Final" ?>
         <title><?php echo $title; ?></title>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.min.css"/>
     
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-2.1.3.min.js"></script>
@@ -75,9 +75,7 @@
                         <li>
                              <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" ></a>
                         </li>
-                        <li>
-                            <a href="<?php echo SITE_URL; ?>group"></a>
-                        </li>
+                     
                         <?php if($role == 1):?>
                         <li>
                             <a href="<?php echo SITE_URL; ?>teacher">Quản lý giáo viên</a>

@@ -54,8 +54,6 @@ class Announce_Model extends Model
                           $condition  ORDER BY a.C_DATE  DESC  LIMIT $v_start,$v_limit ";
         $result = $this->db->GetAll($sql);
         return $result;
-        
-       
     }
     
     public function add_new_announce(){
