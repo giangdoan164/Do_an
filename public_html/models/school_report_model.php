@@ -191,24 +191,86 @@ class School_report_Model extends Model {
            return $school_record;
        }
    }
-   public function do_add_school_record_mon_phu(){
-      $arr_code = get_post_var('hdn_item_id_list');
-      $arr_student_code = explode(',', $arr_code);
+   public function do_update_school_record_mon_phu($type){
+   
+      $arr_student = $this->qry_all_student_class();
       $semester_info = $this->get_semester_info();
       $semester = $semester_info[0]['C_SEMESTER'];
       $year = $semester_info[0]['C_SCHOOL_YEAR'];
       $teacher_code = Session::get('user_code');
       $subject_id = get_post_var('sel_subject');
      
-      foreach ($arr_student_code as $student_code) {
-           $subject_grade = get_post_var("txt_sle_std_ann_".$student_code);
-           $school_record = $this->get_school_record($student_code);
-           $sql = "INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES ('$school_record','$subject_id','$subject_grade')";
-           $this->db->Execute($sql);
+      foreach ($arr_student as $student) {
+           $subject_grade = get_post_var("txt_sle_std_ann_".$student['C_CODE']);
+           $school_record = $this->get_school_record($student['C_CODE']);
+           if($type==0){
+                $sql = "INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES ('$school_record','$subject_id','$subject_grade')";
+                $this->db->Execute($sql);
+            }else{
+                $sql = "UPDATE t_detail_school_record SET FK_GRADE = '$subject_grade' WHERE FK_SCHOOL_RECORD = '$school_record' AND FK_SUBJECT = '$subject_id'";
+                $this->db->Execute($sql);
+            }
       }
       if($this->db->ErrorNo()==0){return true;}
       else{return false;}
        
 }
+
+    public function qry_all_subject_grade_student(){
+        $result = array();
+        $arr_student = $this->qry_all_student_class();
+      $semester_info = $this->get_semester_info();
+      $semester = $semester_info[0]['C_SEMESTER'];
+      $year = $semester_info[0]['C_SCHOOL_YEAR'];
+      $teacher_code = Session::get('user_code');
+      $subject_id = get_post_var('subject_id');
+
+      foreach ($arr_student as $student) {
+           $subject_grade = get_post_var("txt_sle_std_ann_".$student['C_CODE']);
+           $school_record = $this->get_school_record($student['C_CODE']);
+//           $sql[] ="SELECT FK_GRADE FROM t_detail_school_record WHERE FK_SCHOOL_RECORD='$school_record' AND FK_SUBJECT ='$subject_id'";  
+           $sql[] = "SELECT 
+                        sr.C_STUDENT_CODE,
+                        dsr.FK_GRADE 
+                          FROM
+                        t_school_record sr 
+                        INNER JOIN `t_detail_school_record` dsr ON  sr.PK_SCHOOL_RECORD = dsr.FK_SCHOOL_RECORD AND sr.PK_SCHOOL_RECORD = '$school_record' 
+                        AND dsr.FK_SUBJECT  = '$subject_id'";
+      }
+      $sql = implode(' UNION ALL ',$sql);
+      $result = $this->db->GetAll($sql);
+      return $result;
+    }
+  
+    //tra lai bang chua toan bo diem cua hoc sinh hien tai 
+    public function qry_all_subject_grade_remark(){
+      $grade = Session::get('grade');
+      $result = array();
+      $semester_info = $this->get_semester_info();
+      $semester = $semester_info[0]['C_SEMESTER'];
+      $year = $semester_info[0]['C_SCHOOL_YEAR'];
+      $teacher_code = Session::get('user_code');
+      $subject_id = get_post_var('subject_id');
+      $student_code = get_post_var('student_code');
+      $school_record = $this->get_school_record($student_code);
+      $grade_subject = $this->qry_all_subject_grade();
+      foreach ($grade_subject as $subject_id => $value)
+      {
+          $sql[] = "SELECT FK_GRADE from t_detail_school_record where FK_SUBJECT = '$subject_id' ";
+      }
+        $sql ="SELECT
+                    s.PK_SUBJECT,
+                    s.C_SUBJECT_NAME,
+                    dsr.FK_GRADE 
+                  FROM
+                    t_detail_school_record dsr 
+                    RIGHT JOIN  s 
+                      ON dsr.FK_SUBJECT = s.PK_SUBJECT 
+                  WHERE FK_SCHOOL_RECORD = '$school_record' ";
+      $result = $this->db->GetAll($sql);
+      return $result;
+      
+      
+    }
 
 }

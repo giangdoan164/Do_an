@@ -6,12 +6,17 @@
             <?php
             echo $this->hidden('controller', $this->get_controller_url());
             echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
+            echo $this->hidden('hdn_update_type',0);
             ?>
             <div class="row">
-                <div class="col-md-4 col-md-offset-8">
+                <div class="col-md-9 col-md-offset-2">
                     <a href="<?php echo $this->get_controller_url().'dsp_add_school_report_toan_van';?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="<?php echo $this->get_controller_url().'dsp_add_school_report_mon_phu';?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
+                    <a href="<?php echo $this->get_controller_url().'dsp_update_school_report_mon_phu/0';?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="<?php echo $this->get_controller_url().'dsp_update_school_report_mon_phu/1';?>"><span class="glyphicon glyphicon-plus"></span> Sửa điểm</a>
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="<?php echo $this->get_controller_url().'dsp_list_student_to_remark';?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét cuối kỳ</a>
                 </div>
             </div>
         </form> 

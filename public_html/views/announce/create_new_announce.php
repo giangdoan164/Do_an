@@ -36,7 +36,7 @@
                                         <?php foreach ($arr_grade as $grade): ?>
                                             <?php $selected = ($v_grade_id == $grade['PK_GRADE']) ? 'selected' : '' ?>
                                             <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
-                                        <?php endforeach; ?>/
+                                        <?php endforeach; ?>
                                     </select>
                                     <?php else :?>
                                     <select readonly ="readonly" class="form-control" id="sel_grade" name="sel_grade" >
@@ -114,8 +114,7 @@
                                                 <input type="checkbox" name="chk" value="<?php echo $student['PK_USER']; ?>" onchange="update_announce_content(<?php echo $student['PK_USER'] ; ?>)" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">                 
                                         </td>
                                       
-                                        <td style="text-align:center">
-                                                        
+                                        <td style="text-align:center">         
                                                <?php echo $student['C_NAME'];?> 
                                         </td>
                                         <td style="text-align:center">
@@ -164,9 +163,9 @@
 //        co the dung content.length == 0 de kiem tra
 //        console.log(content == '');
         if(content == ''){
-            $("input[value ='"+id+"']").attr('checked',false);
+            $("input[value ='"+id+"']").prop('checked',false);
         }else{
-            $("input[value ='"+id+"']").attr('checked',true);
+            $("input[value ='"+id+"']").prop('checked',true);
         }
 
     }

@@ -63,7 +63,6 @@ class Teacher_Model extends Model {
         $is_exist_teacher = $this->check_teach_has_class();
         if ($is_exist_teacher == true)
         {
-
             $DATA['error'] = "Lớp đã chọn có giáo viên chủ nhiệm";
             $this->teach_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
             exit();

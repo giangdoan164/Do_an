@@ -32,14 +32,25 @@ class School_report extends Controller {
         $this->view->render('school_report/dsp_add_school_report_toan_van');
     }
     
-    public function dsp_add_school_report_mon_phu(){
+    public function dsp_update_school_report_mon_phu($update_type){
+    
         $DATA = array();
+        $DATA['update_type'] = $update_type;
+        $DATA['arr_subject_grade'] = array();
+//        if($update_type==1){
+//             $DATA['arr_subject_grade'] = $this->school_report_model->qry_all_subject_grade_student();
+//        }
         $DATA['arr_subject'] = $this->school_report_model->qry_all_subject_grade(); 
         $DATA['arr_student'] = $this->school_report_model->qry_all_student_class();
   
         $this->view-> render('school_report/dsp_add_school_report_mon_phu',$DATA);
     }
     
+    public function qry_all_subject_grade_student(){
+         header('Content-type:application/json');
+        $result = $this->school_report_model->qry_all_subject_grade_student();
+        echo json_encode($result);
+    }
    
 //     public function do_add_list_sent_school_record(){
 //         $DATA['da'] = array(1,2,3,4);
@@ -103,13 +114,25 @@ class School_report extends Controller {
         }
     }
     
-    public function do_add_school_record_mon_phu(){ 
-       $result = $this->school_report_model->do_add_school_record_mon_phu();
+    public function do_update_school_record_mon_phu(){ 
+        $update_type = get_post_var('update_type',0);
+       $result = $this->school_report_model->do_update_school_record_mon_phu($update_type);
          if($result){
             $this->school_report_model->exec_fail($this->view->get_controller_url().'dsp_main_school_record',"Thêm mới điểm học bạ thành công");
         }else{
             $this->school_report_model->exec_fail($this->view->get_controller_url().'dsp_add_school_report_mon_phu',"Thêm thất bại");
         }
     }
+    
+    public function dsp_list_student_to_remark(){
+        $DATA = array();
+        $DATA['arr_all_student']  = $this->school_report_model->qry_all_student_class();
+        $this->view->render('school_report/dsp_list_student_to_remark',$DATA);
+    }
    
+    public function dsp_single_student_to_remark(){
+        $DATA['student_code'] = get_post_var('student_code');
+        $DATA['arr_subject_grade'] = $this->school_report_model->qry_all_subject_grade_remark();
+        $this->view->render('school_report/dsp_single_student_to_remark',$DATA);
+    }
 }
