@@ -128,6 +128,7 @@
                                         </td>
                                         <td style="text-align:center">
                                             <input type="text" class="form-control txt_ann" onchange="update_check_box(<?php echo $student['PK_USER'] ; ?>);" id="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" name="txt_sle_std_ann_<?php echo $student['PK_USER'] ; ?>" >
+                                       
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -153,7 +153,7 @@ class School_report_Model extends Model {
         $result = array();
         $grade = Session::get('grade');
         $sql ="SELECT s.* FROM `t_grade_subject`  gs INNER JOIN `t_subject` s ON gs.FK_SUBJECT = s.PK_SUBJECT AND gs.FK_GRADE = '$grade'";
-        $result = $this->db->GetAll($sql);
+        $result = $this->db->GetAssoc($sql);
         return $result;
         
     }
@@ -166,5 +166,49 @@ class School_report_Model extends Model {
        return $result;
    }
    
+   public function get_semester_info(){
+       $result = array();
+       $sql = "SELECT * FROM t_current_time";
+       $result = $this->db->GetAll($sql);
+       return $result;
+   }
+   
+   public function get_school_record($student_code){
+       $semester_info = $this->get_semester_info();
+       $semester = $semester_info[0]['C_SEMESTER'];
+       $year = $semester_info[0]['C_SCHOOL_YEAR'];
+       $teacher_code = Session::get('user_code');
+       $sql = "SELECT PK_SCHOOL_RECORD FROM t_school_record WHERE C_STUDENT_CODE=?  AND C_SEMESTER=? AND C_YEAR =? AND C_TEACHER_CODE=?";
+       $params = array($student_code,$semester,$year,$teacher_code);
+       $school_record = $this->db->GetOne($sql,$params);
+       if($school_record == 0){// neu chua co hoc ba thi tao moi
+           $sql ="INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE) VALUES(?,?,?,?)";
+           $params = array($student_code,$semester,$year,$teacher_code);
+           $this->db->Execute($sql, $params);
+           $school_record = $this->db->Insert_ID();
+           return $school_record;
+       }else{
+           return $school_record;
+       }
+   }
+   public function do_add_school_record_mon_phu(){
+      $arr_code = get_post_var('hdn_item_id_list');
+      $arr_student_code = explode(',', $arr_code);
+      $semester_info = $this->get_semester_info();
+      $semester = $semester_info[0]['C_SEMESTER'];
+      $year = $semester_info[0]['C_SCHOOL_YEAR'];
+      $teacher_code = Session::get('user_code');
+      $subject_id = get_post_var('sel_subject');
+     
+      foreach ($arr_student_code as $student_code) {
+           $subject_grade = get_post_var("txt_sle_std_ann_".$student_code);
+           $school_record = $this->get_school_record($student_code);
+           $sql = "INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES ('$school_record','$subject_id','$subject_grade')";
+           $this->db->Execute($sql);
+      }
+      if($this->db->ErrorNo()==0){return true;}
+      else{return false;}
+       
+}
 
 }

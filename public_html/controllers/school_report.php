@@ -41,50 +41,10 @@ class School_report extends Controller {
     }
     
    
-     public function do_add_list_sent_school_record(){
-         $DATA['da'] = array(1,2,3,4);
-         $this->goback_url  = $this->view->get_controller_url().'dsp_single_school_report';
-        if(!empty($_FILES['uploader']['name'])){
-            $result= array();
-            $this->school_report_model->goback_url =  $this->goback_url;
-            $result = $this->school_report_model->dsp_list_school_record();
-           
-            if($result == FALSE){
-                 $DATA['error'] = "Không nhập được file!";
-                 $this->school_report_model->exec_fail($this->goback_url, $DATA['error']);
-            }else{
-                   $DATA['arr_data'] = $result;
-                   echo __FILE__;
-                   echo "<pre>";
-                   print_r( $DATA['arr_data']);
-                   echo "</pre>";
-                   echo __LINE__;
-                   $this->view->render('school_report/dsp_review_list',$DATA);
-//                $DATA['arr_data'] = $result;
-//                echo __FILE__;
-//                echo "<pre>";
-//                print_r($DATA['arr_data']);
-//                echo "</pre>";
-//                echo __LINE__;
-//                 
-//                echo "hohohaha";
-//                   $this->school_report_model->exec_fail($this->goback_url, $DATA['error']);
-             
-            }   
-        }
-        
-//        else{
-//             $DATA['error'] = "Mời chọn file excel chứa điểm học kỳ!";
-//             $this->school_report_model->exec_fail($this->goback_url, $DATA['error']);
-//        }
-   
-     
-    }
-    
-//    public function dsp_add_list_school_record1(){
-//       
+//     public function do_add_list_sent_school_record(){
+//         $DATA['da'] = array(1,2,3,4);
 //         $this->goback_url  = $this->view->get_controller_url().'dsp_single_school_report';
-//         if(!empty($_FILES['uploader']['name'])){
+//        if(!empty($_FILES['uploader']['name'])){
 //            $result= array();
 //            $this->school_report_model->goback_url =  $this->goback_url;
 //            $result = $this->school_report_model->dsp_list_school_record();
@@ -93,16 +53,16 @@ class School_report extends Controller {
 //                 $DATA['error'] = "Không nhập được file!";
 //                 $this->school_report_model->exec_fail($this->goback_url, $DATA['error']);
 //            }else{
-//                   $this->arr_list = $result;
 //                   $DATA['arr_data'] = $result;
+//                   echo __FILE__;
+//                   echo "<pre>";
+//                   print_r( $DATA['arr_data']);
+//                   echo "</pre>";
+//                   echo __LINE__;
 //                   $this->view->render('school_report/dsp_review_list',$DATA);
-//             
-//            }   
-//        } else{
-//             $DATA['error'] = "Mời chọn file excel chứa điểm học kỳ!";
-//             $this->school_report_model->exec_fail($this->goback_url, $DATA['error']);
-//        }
 //    }
+    
+
     public function dsp_ds_toan_van_chuan_bi_nhap(){
        
         $this->goback_url  = $this->view->get_controller_url().'dsp_add_school_report';
@@ -143,6 +103,13 @@ class School_report extends Controller {
         }
     }
     
-    
+    public function do_add_school_record_mon_phu(){ 
+       $result = $this->school_report_model->do_add_school_record_mon_phu();
+         if($result){
+            $this->school_report_model->exec_fail($this->view->get_controller_url().'dsp_main_school_record',"Thêm mới điểm học bạ thành công");
+        }else{
+            $this->school_report_model->exec_fail($this->view->get_controller_url().'dsp_add_school_report_mon_phu',"Thêm thất bại");
+        }
+    }
    
 }

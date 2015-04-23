@@ -9,7 +9,7 @@ define('DB_PASS', '');
 //define('DEBUG_MODE',0);
 define('LIMIT', 20);
 
-$debug= 0;
+$debug= 1;
 //=========================== ĐƯỜNG DẪN =========================
 //
 //Khai bao các đường dẫn giúp ứng dụng linh hoạt và dễ nâng cấp hơn
