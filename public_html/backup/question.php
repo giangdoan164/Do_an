@@ -1,4 +1,5 @@
 class Date time
+http://blog.itviec.com/2014/03/full-stack-developer/
 https://www.google.com/search?q=mutipage+form&oq=mutipage+form&aqs=chrome..69i57.5143j0j7&sourceid=chrome&es_sm=93&ie=UTF-8
 http://www.w3schools.com/jquery/sel_attribute_beginning_value.asp
 http://www.mkyong.com/jquery/how-to-check-unchecked-a-checkbox-with-jquery/
