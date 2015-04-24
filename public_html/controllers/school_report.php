@@ -33,11 +33,11 @@ class School_report extends Controller {
         $this->view->render('school_report/dsp_add_school_report_toan_van');
     }
 
-    public function dsp_update_school_report_mon_phu($update_type) {
+    public function dsp_update_school_report_mon_phu($type) {
 
         $DATA = array();
-        $DATA['update_type'] = $update_type;
-        $DATA['arr_subject_grade'] = array();
+        $DATA['update_type'] = 1;
+//        $DATA['arr_subject_grade'] = array();
 //        if($update_type==1){
 //             $DATA['arr_subject_grade'] = $this->school_report_model->qry_all_subject_grade_student();
 //        }
@@ -119,12 +119,12 @@ class School_report extends Controller {
     }
 
     public function do_update_school_record_mon_phu() {
-        $update_type = get_post_var('update_type', 0);
+        $update_type = get_post_var('update_type', 1);
         $result = $this->school_report_model->do_update_school_record_mon_phu($update_type);
         if ($result) {
-            $this->school_report_model->exec_fail($this->view->get_controller_url() . 'dsp_main_school_record', "Thêm mới điểm học bạ thành công");
+            $this->school_report_model->exec_fail($this->view->get_controller_url() . 'dsp_update_school_report_mon_phu/1', "Thêm mới điểm học bạ thành công");
         } else {
-            $this->school_report_model->exec_fail($this->view->get_controller_url() . 'dsp_add_school_report_mon_phu', "Thêm thất bại");
+            $this->school_report_model->exec_fail($this->view->get_controller_url() . 'dsp_update_school_report_mon_phu/1', "Thêm thất bại");
         }
     }
 

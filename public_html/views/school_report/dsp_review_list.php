@@ -34,12 +34,12 @@ $string_arr = substr($string_arr,2);
             <table class="table table-hover table-nomargin  ">
                   <thead>
                     <tr class="info">
-                        <th style="width: 20%;text-align:center"><?php echo $arr_data[4]['A']  ?></th>
-                        <th style="width: 16%;text-align:center"><?php echo $arr_data[4]['B']  ?></th>
-                        <th style="width: 20%;text-align:center"><?php echo $arr_data[4]['C']  ?></th>
-                        <th style="width: 20%;text-align:center"><?php echo $arr_data[4]['D']  ?></th>
-                        <th style="width: 14%;text-align:center"><?php echo $arr_data[4]['E']  ?></th>
-                        <!--<th style="width: 14%;text-align:center"><?php echo $arr_data[4]['F']  ?></th>-->
+                        <th style="width: 15%;text-align:center"><?php echo $arr_data[4]['A']  ?></th>
+                        <th style="width: 15%;text-align:center"><?php echo $arr_data[4]['B']  ?></th>
+                        <th style="width: 10%;text-align:center"><?php echo $arr_data[4]['C']  ?></th>
+                        <th style="width: 10%;text-align:center"><?php echo $arr_data[4]['D']  ?></th>
+                        <th style="width: 25%;text-align:center"><?php echo $arr_data[4]['E']  ?></th>
+                        <th style="width: 25%;text-align:center"><?php echo $arr_data[4]['F']  ?></th>
                       
                     </tr>
                 </thead>
@@ -47,12 +47,12 @@ $string_arr = substr($string_arr,2);
                         <?php if ($count_arr > 0): ?>
                         <?php for ($i = 5; $i < $count_arr; $i++) : ?>
                             <tr>
-                                <td style="width: 20%;text-align:center"><?php echo $arr_data[$i]['A'] ?></td>
-                                <td style="width: 16%;text-align:center"><?php echo date("d-m-Y", strtotime($arr_data[$i]['B'])); ?></td>
-                                <td style="width: 20%;text-align:center"><?php echo $arr_data[$i]['C'] ?></td>
-                                <td style="width: 20%;text-align:center"><?php echo $arr_data[$i]['D'] ?></td>
-                                <td style="width: 14%;text-align:center"><?php echo $arr_data[$i]['E'] ?></td>
-                                <!--<td style="width: 14%;text-align:center"><?php echo $arr_data[$i]['F'] ?></td>-->
+                                <td style="width: 15%;text-align:center"><?php echo $arr_data[$i]['A'] ?></td>
+                                <td style="width: 15%;text-align:center"><?php echo date("d-m-Y", strtotime($arr_data[$i]['B'])); ?></td>
+                                <td style="width: 10%;text-align:center"><?php echo $arr_data[$i]['C'] ?></td>
+                                <td style="width: 10%;text-align:center"><?php echo $arr_data[$i]['D'] ?></td>
+                                <td style="width: 25%;text-align:center"><?php echo $arr_data[$i]['E'] ?></td>
+                                <td style="width: 25%;text-align:center"><?php echo $arr_data[$i]['F'] ?></td>
                             </tr>
                          <?php endfor; ?>
                     <?php else: ?>

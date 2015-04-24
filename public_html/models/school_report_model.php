@@ -86,6 +86,9 @@ class School_report_Model extends Model {
         $class = Session::get('class');
         if ($_FILES['uploader']['error'] == 0) {
 
+            $semester_info = $this->get_semester_info();
+            $semester = $semester_info[0]['C_SEMESTER'];
+            $year = $semester_info[0]['C_SCHOOL_YEAR'];
             $v_file_name = $_FILES['uploader']['name'];
             $v_tmp_name = $_FILES['uploader']['tmp_name'];
             $arr_file_name = explode('.', $v_file_name);
@@ -94,7 +97,7 @@ class School_report_Model extends Model {
 
             if (in_array($v_file_ext, explode(',', _CONST_RECORD_FILE_ACCEPT))) {
                 //upload file len server
-                $v_dir_file = CONST_FILE_UPLOAD_PATH . $class . DS;
+                $v_dir_file = CONST_FILE_UPLOAD_PATH .$year.DS;
 
                 if (file_exists($v_dir_file) == FALSE) {
 
@@ -162,19 +165,24 @@ class School_report_Model extends Model {
         $year = $semester_info[0]['C_SCHOOL_YEAR'];
         $teacher_code = Session::get('user_code');
         $arr_subject = $this->qry_all_subject_grade();
+        //array_diff
         //truoc do con check kiem tra mang lay va mang user_class  trong bang user xem neu giong nhau moi nhap . ko thi thoi-->dam bao giong het nhau trong csdl
         //neu hs chuyen truong thi cho C_DELETED = 1 -> chi select nhung thang C_DELETED = 0 thoi
         $check = $this->check_is_added_list_record($teacher_code, $semester, $year);
         if ($check == FALSE) {
             return 'added';
         } else {
-       
+
             $count_data = sizeof($data_arr);
             for ($i = 4; $i < $count_data; $i++) {
                 $student_code = $data_arr[$i][2];
-                $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE) VALUES (?,?,?,?) ";
-                $params = array($student_code, $semester, $year, $teacher_code);
+                $student_title = $data_arr[$i][5];
+                $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE,C_TITLE) VALUES (?,?,?,?,?) ";
+                $params = array($student_code, $semester, $year, $teacher_code,$student_title);
                 $this->db->Execute($sql, $params);
+                $math_grade =$data_arr[$i][3];
+                $liture_grade = $data_arr[$i][4];
+                
                //them vao bang detail record moi hoc sinh se co cac mon hoc giong nhau cua tung khoi
                 $school_record = $this->db->Insert_ID();
                 foreach ($arr_subject as $subject_id => $subject_name) {
@@ -182,13 +190,17 @@ class School_report_Model extends Model {
                     $this->db->Execute($sql);
                     //neu la mon toan
                     if($subject_id =='1'){//neu mon them moi la mon Toan thi update luon diem
+                        
                        $sql = "UPDATE t_detail_school_record SET FK_GRADE = ? WHERE FK_SCHOOL_RECORD = ? AND FK_SUBJECT = ?";
-                       $params = array($data_arr[$i][3],$school_record,$subject_id);
+                       $params = array($math_grade,$school_record,$subject_id);
+                        $this->db->Execute($sql,$params);
                     }
                     if($subject_id=='2'){ 
+                    
                         //neu mon them moi la mon Tieng Viet thi update luon diem
                          $sql = "UPDATE t_detail_school_record SET FK_GRADE = ? WHERE FK_SCHOOL_RECORD = ? AND FK_SUBJECT = ?";
-                         $params = array($data_arr[$i][4],$school_record,$subject_id);
+                         $params = array($liture_grade,$school_record,$subject_id);
+                          $this->db->Execute($sql,$params);
                     }   
                 }
             }
@@ -219,24 +231,20 @@ class School_report_Model extends Model {
         }
     }
 
-    public function do_update_school_record_mon_phu($type) {
+    public function do_update_school_record_mon_phu() {
         $arr_student = $this->qry_all_student_class();
         $semester_info = $this->get_semester_info();
         $semester = $semester_info[0]['C_SEMESTER'];
         $year = $semester_info[0]['C_SCHOOL_YEAR'];
         $teacher_code = Session::get('user_code');
         $subject_id = get_post_var('sel_subject');
-
+        //luon luon  = 1
         foreach ($arr_student as $student) {
             $subject_grade = get_post_var("txt_sle_std_ann_" . $student['C_CODE']);
             $school_record = $this->get_school_record($student['C_CODE']);
-            if ($type == 0) {
-                $sql = "INSERT INTO t_detail_school_record(FK_SCHOOL_RECORD,FK_SUBJECT,FK_GRADE) VALUES ('$school_record','$subject_id','$subject_grade')";
-                $this->db->Execute($sql);
-            } else {
-                $sql = "UPDATE t_detail_school_record SET FK_GRADE = '$subject_grade' WHERE FK_SCHOOL_RECORD = '$school_record' AND FK_SUBJECT = '$subject_id'";
-                $this->db->Execute($sql);
-            }
+            $sql = "UPDATE t_detail_school_record SET FK_GRADE = '$subject_grade' WHERE FK_SCHOOL_RECORD = '$school_record' AND FK_SUBJECT = '$subject_id'";
+            $this->db->Execute($sql);
+            
         }
         if ($this->db->ErrorNo() == 0) {
             return true;
@@ -333,7 +341,9 @@ class School_report_Model extends Model {
                   ON sr.C_STUDENT_CODE = u.C_CODE COLLATE utf8_unicode_ci
                     AND sr.C_SEMESTER ='$semester'
                     AND sr.C_YEAR = '$year'
-                    AND sr.C_TEACHER_CODE = '$teacher_code'";
+                    AND sr.C_TEACHER_CODE = '$teacher_code'"
+                . "AND u.C_DELETED='0'";
+                    
         $result = $this->db->GetAll($sql);
         return $result;
     }
@@ -344,12 +354,12 @@ class School_report_Model extends Model {
         $year = $semester_info[0]['C_SCHOOL_YEAR'];
         $teacher_code = Session::get('user_code');
         $arr_student_code = get_post_var('student_code');
+       
         foreach ($arr_student_code as $student_code) {
-            $remark = get_post_var('txt_sle_std_ann_remark_' . $student_code);
-            $title = get_post_var('title_student_' . $student_code);
+            $remark = get_post_var('txt_sle_std_ann_remark_'.$student_code);
+           
             $sql = " UPDATE t_school_record
-                  SET   C_REMARK_FINAL = '$remark',
-                        C_TITLE = '$title'
+                  SET   C_REMARK_FINAL = '$remark'
                   WHERE C_STUDENT_CODE = '$student_code'
                       AND C_SEMESTER = '$semester'
                       AND C_YEAR = '$year'

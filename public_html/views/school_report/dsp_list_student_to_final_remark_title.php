@@ -23,8 +23,9 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                             <th style="width: 5%;text-align:center">STT</th>
                             <th style="width: 20%;text-align:center">Học sinh</th>
                             <th style="width: 10%;text-align: center">Năm sinh</th>
-                            <th style="width: 40%;text-align:center">Nhận xét cuối kỳ </th>
-                            <th style="width: 30%;text-align:center">Danh hiệu </th>
+                             <th style="width: 20%;text-align:center">Danh hiệu </th>
+                            <th style="width: 50%;text-align:center">Nhận xét cuối kỳ </th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -41,28 +42,30 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                                 <td >
                                     <?php echo date('d-m-Y', strtotime($student['C_STUDENT_BIRTH'])); ?>
                                 </td>
+                                <td> 
+                                    <?php echo $student['C_TITLE'];?>
+                                </td>
                                 <td>
                                     <input type="text" class="form-control txt_ann" id="txt_sle_std_ann_remark<?php echo $student['C_STUDENT_CODE']; ?>" name="txt_sle_std_ann_remark_<?php echo $student['C_STUDENT_CODE']; ?>"  value="<?php echo $student['C_REMARK_FINAL']; ?>" >
                                 </td>
 
-                                <td>  
-                                   <?php  for($i = 1;$i<=3 ;$i++):?>
+<!--                                <td>  
+                                   <?php //  for($i = 1;$i<=3 ;$i++):?>
                                                
                                     <?php 
-                                        if(intval($student['C_TITLE'])==$i){
-                                            $checked = " checked ='true'";
-                                        }else{
-                                            $checked = '';
-                                        }
+//                                        if(intval($student['C_TITLE'])==$i){
+//                                            $checked = " checked ='true'";
+//                                        }else{
+//                                            $checked = '';
+//                                        }
                                     
                                     ?>
-                                    <label class="radio-inline"><input type="radio" name="title_student_<?php echo $student['C_STUDENT_CODE'];?>" value="<?php echo $i;?>" <?php echo $checked;?> ><?php if($i==1){echo "Giỏi";}elseif($i==2){echo "Khá";}else{echo "Trung Bình";}?></label>
-<!--                                                    <label class="radio-inline"><input type="radio" name="title_student_<?php // echo $student['C_STUDENT_CODE'];?>"  value="2" id="hs_kha">Khá</label>
-                                                    <label class="radio-inline"><input type="radio"  name="title_student_<?php // echo $student['C_STUDENT_CODE'];?>"  value="3" id="hs_trung_binh">Trung Bình</label>-->
-                                
-                                        <?php endfor;?>
-                                </td>
-
+                                    <label class="radio-inline"><input type="radio" name="title_student_<?php // echo $student['C_STUDENT_CODE'];?>" value="<?php // echo $i;?>" <?php // echo $checked;?> ><?php // if($i==1){echo "Giỏi";}elseif($i==2){echo "Khá";}else{echo "Trung Bình";}?></label>
+                                               
+                                        <?php // endfor;?>
+          
+                                </td>-->
+                              
                    
                         <!--<input type="text" class="form-control txt_ann" id="txt_sle_std_ann_title<?php // echo $student['C_STUDENT_CODE']; ?>" name="txt_sle_std_ann_title<?php // echo $student['C_CODE']; ?>"  value="<?php // echo $student['C_REMARK_FINAL']; ?>" >-->
                                 
@@ -83,8 +86,8 @@ echo $this->hidden('hdn_site_url', SITE_URL);
 </div>
 
 <script type="text/javascript">
-    function do_update_onclick_final(student_code) {
-        $('#frmMain #student_code').val(student_code);
+    function do_update_onclick_final() {
+//        $('#frmMain #student_code').val(student_code);
         var f = document.frmMain;
         m = $('#controller').val() + 'do_update_single_student_final_remark_title';
         $('#frmMain').attr('action', m);

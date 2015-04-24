@@ -1,3 +1,8 @@
+class Date time
+https://www.google.com/search?q=mutipage+form&oq=mutipage+form&aqs=chrome..69i57.5143j0j7&sourceid=chrome&es_sm=93&ie=UTF-8
+http://www.w3schools.com/jquery/sel_attribute_beginning_value.asp
+http://www.mkyong.com/jquery/how-to-check-unchecked-a-checkbox-with-jquery/
+http://www.electrictoolbox.com/check-uncheck-checkbox-jquery/
 https://bootstrapbay.com/blog/bootstrap-editors/?hc_location=ufi
 group byefile:///E:/Thuc%20Tap/sql%20order%20statement/sql%20-%20Using%20group%20by%20on%20multiple%20columns%20-%20Stack%20Overflow.html
 <!--ko can quan tam den gia tri  ma quan tam den su ton tai dung isset-->
