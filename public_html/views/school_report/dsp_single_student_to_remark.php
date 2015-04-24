@@ -1,68 +1,80 @@
 <?php
-echo __FILE__;
- echo "<pre>";
- print_r($arr_subject_grade);
- echo "</pre>";
- echo __LINE__;
+
 ?>
 
 <div class="container">
     <div class="row-fluid">
-      
+
         <form  name="frmMain" id="frmMain" action="" method="POST">
             <?php
-                $url  = $this->get_controller_url();
-                echo $this->hidden('controller', $url);
-                echo $this->hidden('hdn_site_url', SITE_URL);
-                echo $this->hidden('student_code',$student_code)
+            $url = $this->get_controller_url();
+            echo $this->hidden('controller', $url);
+            echo $this->hidden('hdn_site_url', SITE_URL);
+            echo $this->hidden('student_code', $student_code);
             ?>
             <div class="row" style="margin: 15px 10px;">
                 <h3>Danh sách học sinh nhận xét</h3>
             </div>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                <table class="table table-hover  table-condensed ">
-                    <thead>
-                        <tr class="info">    
-                            <th style="width: 25%;text-align:center">Môn học</th>
-                            <th style="width: 25%;text-align: center">Điểm cuối kỳ</th>
-                            <th style="width: 50%;text-align:center">Nhận xét</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($arr_subject_grade as $student): ?>
-                            <tr style="text-align:center"> 
-                                <td >
-                                    <?php echo $student['C_SUBJECT_NAME']; ?> 
-                                </td>
-                                <td >
-                                    <?php echo $student['FK_GRADE']; ?>
-                                </td>
-                                <td >            
-    <input type="text" class="form-control txt_ann" id="txt_sle_std_ann_<?php echo $student_code ; ?>" name="txt_sle_std_ann_<?php echo $student_code ; ?>" >
-                            
-                                </td>
+                    <table class="table table-hover  table-condensed ">
+                        <thead>
+                            <tr class="info">    
+                                <th style="width: 25%;text-align:center">Môn học</th>
+                                <th style="width: 25%;text-align: center">Điểm cuối kỳ</th>
+                                <th style="width: 50%;text-align:center">Nhận xét</th>
                             </tr>
-                        <?php endforeach; ?>
-                  
-                    </tbody>
-                </table>
-             </div>
-            </div>
-            <div class="row" style="margin: 10px;">
-                <div class="col-md-1 col-md-offset-9">
-                    <a  class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập nhận xét</a>
+                        </thead>
+                        <tbody>
+                            <?php if (sizeof($arr_subject_grade) > 0) : ?>
+                                <?php foreach ($arr_subject_grade as $student): ?>
+                                    <tr style="text-align:center"> 
+                                        <td >
+                                            <?php echo $student['C_SUBJECT_NAME']; ?> 
+                                            <input type="hidden" name="subject[]" value="<?php echo $student['PK_SUBJECT']; ?>"/>
+                                        </td>
+                                        <td >
+                                            <?php echo $student['FK_GRADE']; ?>
+                                        </td>
+                                        <td >            
+                                            <input type="text" class="form-control txt_ann" id="txt_sle_std_ann_<?php echo $student['PK_SUBJECT']; ?>" name="txt_sle_std_ann_<?php echo $student['PK_SUBJECT']; ?>"  value="<?php echo $student['C_TEACHER_REMARK']; ?>" >
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <tr>
+                                    <td colspan="2" style="text-align: center;color:red;font-size: 20px;">
+                                        Mời nhập điểm cuối kỳ các môn học để nhận xét<br/>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo $this->get_controller_url() . 'dsp_add_school_report_toan_van'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="<?php echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/0'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
+                                    </td>
+                                </tr>
+                                
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+               <?php if (sizeof($arr_subject_grade) > 0) : ?>
+            <div class="row" style="margin: 10px;">
+                <div class="col-md-1 col-md-offset-9">
+                    <a  class=" btn btn-primary" onclick="do_update_onclick1();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập nhận xét</a>
+                </div>
+            </div>
+            <?php endif;?>
         </form>
     </div>
 </div>
 
 <script type="text/javascript">
-    function dsp_single_student_remak(){
+    function do_update_onclick1() {
         var f = document.frmMain;
-        m = $('#controller').val()+'dsp_single_student_to_remark';
+        m = $('#controller').val() + 'do_insert_all_remark_single_student';
         $('#frmMain').attr('action', m);
         f.submit();
     }
+//  
 </script>
