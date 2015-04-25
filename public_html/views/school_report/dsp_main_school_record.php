@@ -38,28 +38,36 @@ echo $this->hidden('hdn_update_type', 1);
 echo $this->hidden('hdn_site_url', SITE_URL);
 ?>
              <h3 class="page-header" style="text-align:center">Quản lý học bạ</h3>
-            <details>
-                <summary>Quản lý điểm cuối kỳ</summary>
-                <div class="row">
-                    <div class="col-md-9 col-md-offset-2">
-                        <a href="<?php echo $this->get_controller_url() . 'dsp_add_school_report_toan_van'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="<?php echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/1'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
-                </div>
-            </details>
-            <details>
-                <summary>Quản lý nhận xét</summary>
-                <div class="row">
-                    <div class="col-md-9 col-md-offset-2">
-                        <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_remark'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét cuối kỳ</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_final_remark_title'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét cả năm, Danh hiệu</a>
+              <details style="width:50%">
+                <summary>Nhập học bạ</summary>
+                     <div class="row">
+                         <div class="col-md-11 col-md-offset-1">
+                             <details>
+                                 <summary>Quản lý điểm cuối kỳ</summary>
+                                 <div class="row">
+                                     <div class="col-md-9 col-md-offset-2">
+                                         <a href="<?php echo $this->get_controller_url() . 'dsp_add_school_report_toan_van'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                         <a href="<?php echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/1'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     </div>
+                                 </div>
+                             </details>
+                             <details>
+                                 <summary>Quản lý nhận xét</summary>
+                                 <div class="row">
+                                     <div class="col-md-9 col-md-offset-2">
+                                         <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_remark'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét cuối kỳ</a>
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                         <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_final_remark_title'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét cả năm, Danh hiệu</a>
 
-                    </div>
-                </div>
-            </details>
+                                     </div>
+                                 </div>
+                             </details>
+                         </div>
+                     </div>
+                 </details>
+            
             <details <?php echo $open;?>>
                 <summary>Tra cứu học bạ học sinh</summary>
                 <div class="row" style="margin: 20px;">
@@ -101,11 +109,17 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                             </div>  
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-1 col-md-offset-8">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-4 col-md-offset-8">
                             <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
                                 Tìm kiếm
                             </button>
+                            <?php if($size_arr >0 && $size_arr_final >0) : ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-primary" onclick="btn_print_onclick();">
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </button>
+                           <?php endif;?>
                         </div>
                     </div>
                 </div>
@@ -275,6 +289,13 @@ echo $this->hidden('hdn_site_url', SITE_URL);
 
 
 <script type="text/javascript">
+    function btn_print_onclick(){
+          var f = document.frmMain;
+                m = $('#controller').val() +'dsp_print_student_record';
+                $('#frmMain').attr('action', m);
+                f.submit();
+        
+    }
     function load_year_student(object) {
         student_code = $(object).val();
         var site_url = $('#hdn_site_url').val();

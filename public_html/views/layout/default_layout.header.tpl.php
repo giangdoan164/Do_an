@@ -104,6 +104,9 @@
                         <li>
                             <a href="<?php echo SITE_URL; ?>school_report">Quản lý học bạ</a>
                         </li>
+                        <li>
+                            <a href="<?php echo SITE_URL; ?>school_year_config">Cấu hình thời gian</a>
+                        </li>
                         <?php endif;?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

@@ -1,6 +1,5 @@
 <?php
 
-
 ?>
 
 <div class="container">
@@ -25,7 +24,6 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                             <th style="width: 10%;text-align: center">Năm sinh</th>
                              <th style="width: 20%;text-align:center">Danh hiệu </th>
                             <th style="width: 50%;text-align:center">Nhận xét cuối kỳ </th>
-                           
                         </tr>
                     </thead>
                     <tbody>

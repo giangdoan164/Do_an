@@ -58,8 +58,7 @@ class View {
       
          if (is_array($DATA)) {
             foreach ($DATA as $key => $val) {
-                $$key = $val;
-                
+                $$key = $val;    
             }
         }
         if ($this->layout == null) {

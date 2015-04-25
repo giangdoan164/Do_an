@@ -417,5 +417,24 @@ class School_report_Model extends Model {
      
   }
   
+  public function check_is_acived(){
+      $result = array();
+       $sql = "SELECT C_ACTIVE FROM t_current_time";
+       $result = $this->db->GetOne($sql);
+       if(intval($result) == 1){return true;}
+       else{  return false;  }
+       
+       
+  }
+  
+  public function qry_current_year_semester(){
+      $result =array();
+      $sql = "SELECT * FROM t_current_time";
+      $result = $this->db->GetRow($sql);
+      return $result;
+  }
+  
+   
+    
    
 }

@@ -15,6 +15,7 @@ require 'libs/functions.php';
 require 'libs/DB.php';
 require 'libs/Session.php';
 require 'libs/Exeptions.php';
+require 'libs/tcpdf/zreport.php';
 // co bao nhieu thu vien thi phai require bay nhieu --> autoload Chuong 6 02 autoload :giúp tu dong nap cac file ma ko can require
 //function __autoload($className){
 //    $path = 'libs/';

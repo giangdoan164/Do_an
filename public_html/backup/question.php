@@ -1,3 +1,9 @@
+
+alert box boostrap
+http://bootboxjs.com/documentation.html
+http://bootboxjs.com/
+
+http://www.twitterbootstrap.net/forum/forum.php?s=b83d4df800284858bff42aeee1ed587b
 class Date time
 http://blog.itviec.com/2014/03/full-stack-developer/
 https://www.google.com/search?q=mutipage+form&oq=mutipage+form&aqs=chrome..69i57.5143j0j7&sourceid=chrome&es_sm=93&ie=UTF-8

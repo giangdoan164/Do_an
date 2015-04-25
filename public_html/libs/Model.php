@@ -119,6 +119,9 @@ class Model {
         if(!is_null($message))
         {
             $html .= 'alert("' . $message . '");';
+//            $html .='bootbox.alert("'.$message.'",function(){});';
+//            bootbox.alert("Hello world!", function(){}) ;
+//            $html .= 'alert("' . $message . '");';
         }
         $html .= 'document.frmMain.submit();</script></body></html>';
         echo $html;

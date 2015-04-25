@@ -27,8 +27,7 @@ class School_report extends Controller {
         //neu la giao vien : lay duoc code hoc sinh bat ky
         //neu la phu huynnh
 //            $student_code = Session::get('user_code');
-        if ($role == 3) {
-            
+        if ($role == 3) {    
             $student_code = get_post_var('sel_student_code', '');
             $semester = get_post_var('sel_semester', '');
             $year = get_post_var('sel_year', '');
@@ -38,8 +37,7 @@ class School_report extends Controller {
                 $DATA['student_code'] = $student_code;
                 $DATA['semester'] = $semester;
                 $DATA['year'] = $year;
-                $DATA['arr_final_remark_title'] = $this->school_report_model->qry_final_remark_title($student_code, $semester, $year);
-               
+                $DATA['arr_final_remark_title'] = $this->school_report_model->qry_final_remark_title($student_code, $semester, $year);              
             }
             //hien thi lan dau
              $DATA['arr_all_student_class'] = $this->school_report_model->qry_all_student_class();
@@ -54,7 +52,7 @@ class School_report extends Controller {
                 $DATA['semester'] = $semester;
                 $DATA['year'] = $year;
                 $DATA['arr_final_remark_title'] = $this->school_report_model->qry_final_remark_title($student_code, $semester, $year);
-               
+                
             }
             $DATA['arr_all_year_student'] = $this->school_report_model->qry_all_year_student();
         }
@@ -64,16 +62,28 @@ class School_report extends Controller {
     }
 
     public function dsp_add_school_report_toan_van() {
+        $check = $this->school_report_model->check_is_acived();
+        if($check){
         $this->view->render('school_report/dsp_add_school_report_toan_van');
+        }else{
+            $this->goback_url = $this->view->get_controller_url() . 'dsp_main_school_record';
+            $this->school_report_model->exec_fail($this->goback_url, "Chưa đến thời gian nhập học bạ");
+        }
     }
 
     public function dsp_update_school_report_mon_phu($type) {
-
+         $check = $this->school_report_model->check_is_acived();
+        if($check){
         $DATA = array();
         $DATA['update_type'] = 1;
         $DATA['arr_subject'] = $this->school_report_model->qry_all_subject_grade();
         $DATA['arr_student'] = $this->school_report_model->qry_all_student_class();
         $this->view->render('school_report/dsp_add_school_report_mon_phu', $DATA);
+        }else{
+            $this->goback_url = $this->view->get_controller_url() . 'dsp_main_school_record';
+            $this->school_report_model->exec_fail($this->goback_url, "Chưa đến thời gian nhập học bạ");
+        }
+      
     }
 
     public function qry_all_subject_grade_student() {
@@ -137,9 +147,16 @@ class School_report extends Controller {
     }
 
     public function dsp_list_student_to_remark() {
-        $DATA = array();
-        $DATA['arr_all_student'] = $this->school_report_model->qry_all_student_class();
-        $this->view->render('school_report/dsp_list_student_to_remark', $DATA);
+        $check = $this->school_report_model->check_is_acived();
+        if($check){
+             $DATA = array();
+             $DATA['arr_all_student'] = $this->school_report_model->qry_all_student_class();
+             $this->view->render('school_report/dsp_list_student_to_remark', $DATA);
+        }else{
+            $this->goback_url = $this->view->get_controller_url() . 'dsp_main_school_record';
+            $this->school_report_model->exec_fail($this->goback_url, "Chưa đến thời gian nhập học bạ");
+        }
+       
     }
 
     public function dsp_single_student_to_remark() {
@@ -158,9 +175,16 @@ class School_report extends Controller {
     }
 
     public function dsp_list_student_to_final_remark_title() {
-        $DATA = array();
-        $DATA['arr_all_student'] = $this->school_report_model->qry_all_student_final_remark_title();
-        $this->view->render('school_report/dsp_list_student_to_final_remark_title', $DATA);
+            $check = $this->school_report_model->check_is_acived();
+        if($check){
+            $DATA = array();
+            $DATA['arr_all_student'] = $this->school_report_model->qry_all_student_final_remark_title();
+            $this->view->render('school_report/dsp_list_student_to_final_remark_title', $DATA);
+        }else{
+            $this->goback_url = $this->view->get_controller_url() . 'dsp_main_school_record';
+            $this->school_report_model->exec_fail($this->goback_url, "Chưa đến thời gian nhập học bạ");
+        }
+      
     }
 
     public function do_update_single_student_final_remark_title() {
@@ -189,5 +213,9 @@ class School_report extends Controller {
          
         public function qry_all_final_remark_title(){
 //            $result = $this->school_report_model->qry_all_final_remark_title();
+        }
+        
+        public function dsp_print_student_record(){
+            $this->view->render('school_report/dsp_print_student_record',array(),false);
         }
 }
