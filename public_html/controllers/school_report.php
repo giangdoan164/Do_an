@@ -9,7 +9,6 @@ class School_report extends Controller {
         Session::check_login();
         parent::__construct('school_report');
         $this->view->title = "Quản lý học bạ";
-        ;
         $this->school_report_model = $this->loadModel('school_report');
     }
 
@@ -19,17 +18,52 @@ class School_report extends Controller {
 
     public function dsp_single_school_report($arr = array()) {
         $DATA['arr_data'] = $arr;
-//        $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
         $this->view->render('school_report/dsp_single_school_report', $DATA);
     }
 
     public function dsp_main_school_record() {
+        //se co 2 giao dien khac nhau ung voi tung nguoi dung
+        $role = Session::get('level');
+        //neu la giao vien : lay duoc code hoc sinh bat ky
+        //neu la phu huynnh
+//            $student_code = Session::get('user_code');
+        if ($role == 3) {
+            
+            $student_code = get_post_var('sel_student_code', '');
+            $semester = get_post_var('sel_semester', '');
+            $year = get_post_var('sel_year', '');
+            //neu la post nguoc lai
+            if ($student_code != '' && $semester != '' && $year != '') {
+                $DATA['arr_student_record_info'] = $this->school_report_model->qry_student_school_record($student_code, $semester, $year);
+                $DATA['student_code'] = $student_code;
+                $DATA['semester'] = $semester;
+                $DATA['year'] = $year;
+                $DATA['arr_final_remark_title'] = $this->school_report_model->qry_final_remark_title($student_code, $semester, $year);
+               
+            }
+            //hien thi lan dau
+             $DATA['arr_all_student_class'] = $this->school_report_model->qry_all_student_class();
+        } else {
+            $student_code = Session::get('user_code');
+            $semester = get_post_var('sel_semester', '');
+            $year = get_post_var('sel_year', '');
+            //neu la post nguoc lai
+            if ($student_code != '' && $semester != '' && $year != '') {
+                $DATA['arr_student_record_info'] = $this->school_report_model->qry_student_school_record($student_code, $semester, $year);
+                $DATA['student_code'] = $student_code;
+                $DATA['semester'] = $semester;
+                $DATA['year'] = $year;
+                $DATA['arr_final_remark_title'] = $this->school_report_model->qry_final_remark_title($student_code, $semester, $year);
+               
+            }
+            $DATA['arr_all_year_student'] = $this->school_report_model->qry_all_year_student();
+        }
 
-        $this->view->render('school_report/dsp_main_school_record');
+
+        $this->view->render('school_report/dsp_main_school_record', $DATA);
     }
 
     public function dsp_add_school_report_toan_van() {
-//        $DATA["arr_all_student"] = $this->school_report_model->qry_all_student_class();
         $this->view->render('school_report/dsp_add_school_report_toan_van');
     }
 
@@ -37,13 +71,8 @@ class School_report extends Controller {
 
         $DATA = array();
         $DATA['update_type'] = 1;
-//        $DATA['arr_subject_grade'] = array();
-//        if($update_type==1){
-//             $DATA['arr_subject_grade'] = $this->school_report_model->qry_all_subject_grade_student();
-//        }
         $DATA['arr_subject'] = $this->school_report_model->qry_all_subject_grade();
         $DATA['arr_student'] = $this->school_report_model->qry_all_student_class();
-
         $this->view->render('school_report/dsp_add_school_report_mon_phu', $DATA);
     }
 
@@ -52,27 +81,6 @@ class School_report extends Controller {
         $result = $this->school_report_model->qry_all_subject_grade_student();
         echo json_encode($result);
     }
-
-//     public function do_add_list_sent_school_record(){
-//         $DATA['da'] = array(1,2,3,4);
-//         $this->goback_url  = $this->view->get_controller_url().'dsp_single_school_report';
-//        if(!empty($_FILES['uploader']['name'])){
-//            $result= array();
-//            $this->school_report_model->goback_url =  $this->goback_url;
-//            $result = $this->school_report_model->dsp_list_school_record();
-//           
-//            if($result == FALSE){
-//                 $DATA['error'] = "Không nhập được file!";
-//                 $this->school_report_model->exec_fail($this->goback_url, $DATA['error']);
-//            }else{
-//                   $DATA['arr_data'] = $result;
-//                   echo __FILE__;
-//                   echo "<pre>";
-//                   print_r( $DATA['arr_data']);
-//                   echo "</pre>";
-//                   echo __LINE__;
-//                   $this->view->render('school_report/dsp_review_list',$DATA);
-//    }
 
 
     public function dsp_ds_toan_van_chuan_bi_nhap() {
@@ -164,4 +172,22 @@ class School_report extends Controller {
         }
     }
 
+        public function qry_all_year_student(){
+        header('Content-type:app/lication/json');
+        $result = $this->school_report_model->qry_all_year_student();
+        echo json_encode($result); 
+        }
+        
+        public function qry_student_school_record(){
+            $DATA['arr_student_record_info'] = $this->school_report_model->qry_student_school_record();
+            $DATA['student_code'] = get_post_var('sel_student_code','');
+            $DATA['semester']     = get_post_var('sel_semester','');
+            $DATA['year']         = get_post_var('sel_year','');
+            $DATA['arr_final_remark_title'] = $this->school_report_model->qry_all_final_remark_title();
+            $this->view->render('school_report/dsp_main_school_record',$DATA);
+         }
+         
+        public function qry_all_final_remark_title(){
+//            $result = $this->school_report_model->qry_all_final_remark_title();
+        }
 }

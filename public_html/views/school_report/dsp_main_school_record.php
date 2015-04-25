@@ -1,21 +1,49 @@
-<?php ?>
+<?php
+$role = Session::get('level');
+//giao vien
+if (!isset($arr_final_remark_title)) {
+    $size_arr_final = 0;
+} else {
+    $size_arr_final = sizeof($arr_final_remark_title);
+}
+if (isset($arr_student_record_info)) {
+    $size_arr = sizeof($arr_student_record_info);
+    $open = 'open';
+} else {
+    $size_arr = 0;
+}
+if (!isset($year)) {
+    $year = 0;
+}
+if (!isset($semester)) {
+    $semester = 0;
+}
+  
+if (!isset($arr_all_year_student)) {
+   
+    $size_arr_all_year_student = 0;
+}else{
+    $size_arr_all_year_student = sizeof($arr_all_year_student);
+}
+?>
+
+<?php if($role == 3) :?>
 <div class ="container">
     <div class="row" style="min-height: 400px;">
-        <form action="" method="post" name="frmMain" id="frmMain"  >
-            <h3 class="page-header" style="text-align:center">Quản lý học bạ</h3>
-            <?php
-            echo $this->hidden('controller', $this->get_controller_url());
-            echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
-            echo $this->hidden('hdn_update_type', 0);
-            ?>
+        <form action="" method="post" name="frmMain" id="frmMain"  >      
+<?php
+echo $this->hidden('controller', $this->get_controller_url());
+echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
+echo $this->hidden('hdn_update_type', 1);
+echo $this->hidden('hdn_site_url', SITE_URL);
+?>
+             <h3 class="page-header" style="text-align:center">Quản lý học bạ</h3>
             <details>
                 <summary>Quản lý điểm cuối kỳ</summary>
                 <div class="row">
                     <div class="col-md-9 col-md-offset-2">
                         <a href="<?php echo $this->get_controller_url() . 'dsp_add_school_report_toan_van'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                        <a href="<?php // echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/0'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
                         <a href="<?php echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/1'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
@@ -32,21 +60,30 @@
                     </div>
                 </div>
             </details>
-            <details>
-                <summary>Tìm kiếm học bạ học sinh</summary>
+            <details <?php echo $open;?>>
+                <summary>Tra cứu học bạ học sinh</summary>
                 <div class="row" style="margin: 20px;">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="sel_student_name" class="col-md-4 control-label">Tên học sinh &nbsp;</label>                                 
                             <div class="col-md-8">
-                                <select class="form-control" id="sel_student_name" name="sel_student_name">
+                                <select class="form-control" id="sel_student_code" name="sel_student_code" onchange="load_year_student(this);">
                                     <option value="0">---Chọn học sinh---</option>
-                                    <option value="224">Nguyễn Thúy Quỳnh</option>
-                                    <option value="225">Phạm Văn Mách</option>
-                                    <option value="226">Nguyễn Quỳnh Trang</option>
-                                    <option value="227">Đậu Văn Hưởng</option>
-                                    <option value="228">Trần Đình Quang</option>
-                                    <option value="229">Nguyễn Tự Nguyện</option>
+                                        <?php if (sizeof($arr_all_student_class) > 0): ?>
+                                            <?php foreach ($arr_all_student_class as $student): ?>
+                                            <option value="<?php echo $student['C_CODE']; ?>"><?php echo $student['C_NAME']; ?></option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="sel_student_name" class="col-md-5 control-label">Năm học &nbsp;</label>                                 
+                            <div class="col-md-7">
+                                <select class="form-control" id="sel_year" name="sel_year">
+                                    <option value="0">-- Năm học --</option>
                                 </select>
                             </div>  
                         </div>
@@ -55,73 +92,234 @@
                         <div class="form-group">
                             <label for="sel_student_name" class="col-md-4 control-label">Học kỳ &nbsp;</label>                                 
                             <div class="col-md-8">
-                                <select class="form-control" id="sel_student_name" name="sel_student_name">
+                                <select class="form-control" id="sel_semester" name="sel_semester">
                                     <option value="0">--Chọn học kỳ--</option>
-                                    <option value="224">Học kỳ I</option>
-                                    <option value="225">Học kỳ II</option>
+                                    <option value="1">Học kỳ I</option>
+                                    <option value="2">Học kỳ II</option>
 
-                                </select>
-                            </div>  
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="sel_student_name" class="col-md-4 control-label">Năm học &nbsp;</label>                                 
-                            <div class="col-md-8">
-                                <select class="form-control" id="sel_student_name" name="sel_student_name">
-                                    <option value="0">--Chọn năm học --</option>
-                                    <option value="224">2014-2015</option>
-                                    <option value="225">2015-2016</option>
-                                    <option value="225">2016-2017</option>
                                 </select>
                             </div>  
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-1 col-md-offset-8">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
                                 Tìm kiếm
                             </button>
                         </div>
                     </div>
                 </div>
-            </details>
-
-
-
-
-
+            </details>   
+            <?php if($size_arr>0):?>
+            <div class="row">
+                   <table class="table table-hover  table-condensed ">
+                    <thead>
+                        <tr class="info">
+                            <th style="width: 10%;text-align:center">Môn học</th>
+                            <th style="width: 10%;text-align: center">Điểm cuối kỳ</th>
+                            <th style="width: 80%;text-align:center">Nhận xét môn học</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($arr_student_record_info as $student_record): ?>
+                            <tr>
+                                <td style="text-align:center">
+                                    <?php echo $student_record['C_SUBJECT_NAME']; ?> 
+                                </td>
+                                <td style="text-align:center">
+                                    <?php echo $student_record['FK_GRADE']; ?>
+                                </td>
+                                <td >
+                                    <input type="text"  readonly="true" class="form-control" value="<?php echo $student_record['C_TEACHER_REMARK']; ?>"/>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php endif;?>
+            <?php if($size_arr_final >0):?>
+                  <div class="row">
+                   <table class="table table-hover  table-condensed ">
+                    <thead>
+                        <tr class="info">
+                            <th style="width: 90%;text-align:center">Nhận xét cuối kỳ</th>
+                            <th style="width: 10%;text-align: center">Danh hiệu</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td style="text-align:center">
+                                    <?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> 
+                                </td>
+                                <td style="text-align:center;color:red;">
+                                    <?php echo $arr_final_remark_title['C_TITLE']; ?>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <?php endif; ?>
         </form> 
     </div>
-
 </div>
 
+<?php else:?>
+<?php $student_name = Session::get('user_name');?>
+<div class ="container">
+    <div class="row" style="min-height: 400px;">
+          <h3 class="page-header" style="text-align:center">Tra cứu học bạ học sinh</h3>
+        <form action="" method="post" name="frmMain" id="frmMain"  >      
+<?php
+echo $this->hidden('controller', $this->get_controller_url());
+echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
+echo $this->hidden('hdn_update_type', 1);
+echo $this->hidden('hdn_site_url', SITE_URL);
+?>               
+            <div class="row" style="margin: 20px;">
+                    <div class="col-md-4">
+                        <b style="color: red;"><?php echo $student_name;?></b>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="sel_student_name" class="col-md-5 control-label">Năm học &nbsp;</label>                                 
+                            <div class="col-md-7">
+                                <select class="form-control" id="sel_year" name="sel_year">
+                                    <option value="0">-- Năm học --</option>
+                                    <?php foreach ($arr_all_year_student as  $year):?> 
+                                    <option value="<?php echo $year ;?>"><?php echo $year;?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="sel_student_name" class="col-md-4 control-label">Học kỳ &nbsp;</label>                                 
+                            <div class="col-md-8">
+                                <select class="form-control" id="sel_semester" name="sel_semester">
+                                    <option value="0">--Chọn học kỳ--</option>
+                                    <option value="1">Học kỳ I</option>
+                                    <option value="2">Học kỳ II</option>
+
+                                </select>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1 col-md-offset-8">
+                            <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
+                                Tìm kiếm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </details>   
+            <?php if($size_arr>0):?>
+            <div class="row">
+                   <table class="table table-hover  table-condensed ">
+                    <thead>
+                        <tr class="info">
+                            <th style="width: 10%;text-align:center">Môn học</th>
+                            <th style="width: 10%;text-align: center">Điểm cuối kỳ</th>
+                            <th style="width: 80%;text-align:center">Nhận xét môn học</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($arr_student_record_info as $student_record): ?>
+                            <tr>
+                                <td style="text-align:center">
+                                    <?php echo $student_record['C_SUBJECT_NAME']; ?> 
+                                </td>
+                                <td style="text-align:center">
+                                    <?php echo $student_record['FK_GRADE']; ?>
+                                </td>
+                                <td >
+                                    <input type="text" class="form-control" value="<?php echo $student_record['C_TEACHER_REMARK']; ?>"/>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php endif;?>
+            <?php if($size_arr_final >0):?>
+                  <div class="row">
+                   <table class="table table-hover  table-condensed ">
+                    <thead>
+                        <tr class="info">
+                            <th style="width: 90%;text-align:center">Nhận xét cuối kỳ</th>
+                            <th style="width: 10%;text-align: center">Danh hiệu</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td style="text-align:center">
+                                    <?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> 
+                                </td>
+                                <td style="text-align:center;color:red;">
+                                    <?php echo $arr_final_remark_title['C_TITLE']; ?>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <?php endif; ?>
+        </form> 
+    </div>
+</div>
+<?php endif; ?>
+
+
 <script type="text/javascript">
-//    function do_create_new_thread() {
-//        var student = $('#frmMain #sel_class_student').val();
-//        if (parseFloat(student) == 0) {
-//            alert("Chọn học sinh muốn tạo học bạ");
-//            return false;
-//        }
-//        var f = document.frmMain;
-//        m = $("#controller").val() + f.hdn_create_new_record.value;
-//        $("#frmMain").attr("action", m);
-//        f.submit();
-//    }
-
-
-    function dsp_ds_chuan_bi_nhap() {
-        var f = document.frmMain;
-        m = $('#controller').val() + f.hdn_dsp_ds_toan_van_chuan_bi_nhap.value;
-        $('#frmMain').attr('action', m);
-        f.submit();
+    function load_year_student(object) {
+        student_code = $(object).val();
+        var site_url = $('#hdn_site_url').val();
+        $.ajax({
+            url: site_url + 'school_report/qry_all_year_student',
+            type: 'post',
+            async: true,
+            cache: false,
+            data: 'student_code=' + student_code,
+            dataType: 'json',
+            success: function(result) {
+                if (result.length > 0) {
+                    var xhtml = "<option value='0'>--Chọn năm học--</option>";
+                    for (i = 0; i < result.length; i++) {
+                        var option = "<option value='" + result[i] + "'>" + result[i] + "</option>";
+                        xhtml += option;
+                    }
+                    $('#frmMain #sel_year').html(xhtml);
+                }
+            }
+        });
+    }
+    //kiem tra du lieu dau vao
+    
+    function check_input() {
+        var student = $('#frmMain #sel_student_code').val();
+        var semester = $('#frmMain #sel_semester').val();
+        var year = $('#frmMain #sel_year').val();
+        if(student == 0){alert("Mời chọn học sinh !!!");return false;}
+        if(semester == 0){alert("Mời chọn học kỳ!!!");return false;};
+        if(year == 0){alert("Mời chọn năm học!!!");return false;}
+    }
+    function btn_search_student_onclick() {
+        if(check_input()==false){
+                return false;
+        }else{
+                var f = document.frmMain;
+//                m = $('#controller').val() +'qry_student_school_record';
+//                $('#frmMain').attr('action', m);
+                f.submit();
+        }
+       
+            
     }
 
-//    function do_insert_list_school_record() {
-//        var f = document.frmMain;
-//        m = $('#controller').val() + f.hdn_do_add_list_school_record.value;
-//        $('#frmMain').attr('action', m);
-//        f.submit();
-//    }
+
 
 </script>

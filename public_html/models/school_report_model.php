@@ -26,7 +26,6 @@ class School_report_Model extends Model {
         $class_id = Session::get('class');
         $sql = "SELECT PK_USER,C_CODE,C_NAME,C_STUDENT_BIRTH FROM t_user WHERE  FK_CLASS ='$class_id' AND FK_GROUP = 4 AND C_DELETED = 0";
         $result = $this->db->GetAll($sql);
-
         return $result;
     }
 
@@ -373,5 +372,50 @@ class School_report_Model extends Model {
             return false;
         }
     }
+    
+    public function qry_all_year_student(){
+        $result = array();
+        if(isset($_POST['student_code'])){//neu la giao vien
+             $student_code = get_post_var('student_code'); 
+        }else{// neu la phu huynh
+            $student_code = Session::get('user_code');
+        }
+        
+        $sql = "SELECT C_YEAR FROM t_school_record WHERE C_STUDENT_CODE = '$student_code'";
+        $result = $this->db->GetCol($sql);
+        return $result;
+    }
 
+    public function qry_student_school_record($student_code,$semester,$year){
+        $result = array();
+//        $student_code = get_post_var('sel_student_code');
+//        $semester     = get_post_var('sel_semester');
+//        $year         = get_post_var('sel_year');
+            $sql ="SELECT
+                        s.C_SUBJECT_NAME, dsr.FK_GRADE ,dsr.C_TEACHER_REMARK
+                    FROM t_detail_school_record dsr
+                    INNER JOIN t_school_record sr
+                         ON sr.PK_SCHOOL_RECORD = dsr.FK_SCHOOL_RECORD
+                    INNER JOIN t_subject s
+                         ON s.PK_SUBJECT = dsr.FK_SUBJECT
+                    WHERE sr.C_STUDENT_CODE = '$student_code'
+                      AND sr.C_YEAR = '$year'
+                      AND sr.C_SEMESTER = '$semester'";
+         $result = $this->db->GetAll($sql);
+         return $result;
+           
+  }
+  
+  public function qry_final_remark_title($student_code,$semester,$year){
+     $result = array();
+//     $student_code = get_post_var('sel_student_code');
+//     $semester     = get_post_var('sel_semester');
+//     $year         = get_post_var('sel_year');
+     $sql ="SELECT C_TITLE , C_REMARK_FINAL FROM t_school_record WHERE C_STUDENT_CODE = '$student_code' AND C_SEMESTER = '$semester' AND C_YEAR ='$year' ";
+     $result = $this->db->GetRow($sql);
+     return $result;
+     
+  }
+  
+   
 }
