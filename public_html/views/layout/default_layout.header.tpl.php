@@ -8,6 +8,7 @@
     
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/custom.js"></script>
+   
 
          <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
       
@@ -104,7 +105,9 @@
                         <li>
                             <a href="<?php echo SITE_URL; ?>school_report">Quản lý học bạ</a>
                         </li>
-                        <li>
+                        <?php endif;?>
+                        <?php if($role == 1) :?>
+                         <li>
                             <a href="<?php echo SITE_URL; ?>school_year_config">Cấu hình thời gian</a>
                         </li>
                         <?php endif;?>

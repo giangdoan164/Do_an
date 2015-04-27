@@ -114,13 +114,13 @@ class School_report_Model extends Model {
                     $objPHPExcel = $objReader->load($v_dir_file . $v_cur_file_name);
                     //        neu file excel co 1 sheet
                     $sheetData = $objPHPExcel->getActiveSheet()->toArray(null, TRUE, TRUE, TRUE);
-//                  
+                   
                     $count = sizeof($sheetData);
                     for ($i = 5; $i <= $count; $i++) {
                         $sheetData[$i]['B'] = PHPExcel_Style_NumberFormat::toFormattedString($sheetData[$i]['B'], 'YYYY-MM-DD');
                     }
                     if ($count > 0) {
-
+                 
                         return $sheetData;
                     } else {
                         return false;
@@ -145,8 +145,8 @@ class School_report_Model extends Model {
      * @param type $year
      * @return boolean Kiểm tra đã nhập danh sách của kỳ đó chưa(Nhập rồi : false; Chưa nhập : true);
      */
-    function check_is_added_list_record($code, $semester, $year) {
-        $sql = "SELECT COUNT(*) FROM t_school_record WHERE C_SEMESTER = '$semester' AND C_YEAR ='$year' AND C_TEACHER_CODE='$code'";
+    function check_is_added_list_record($teacher_code, $semester, $year) {
+        $sql = "SELECT COUNT(*) FROM t_school_record WHERE C_SEMESTER = '$semester' AND C_YEAR ='$year' AND C_TEACHER_CODE='$teacher_code'";
         $count = $this->db->GetOne($sql);
         if (intval($count) == 0) {
             return true;
@@ -156,9 +156,7 @@ class School_report_Model extends Model {
     }
 
     public function do_add_list_school_record_excel($data_arr) {
-//        $teacher_code = Session::get('user_code');
-//        $semester = $data_arr[0][1];
-//        $year  = $data_arr[0][3];
+        $class_id = Session::get('class');
         $semester_info = $this->get_semester_info();
         $semester = $semester_info[0]['C_SEMESTER'];
         $year = $semester_info[0]['C_SCHOOL_YEAR'];
@@ -173,7 +171,18 @@ class School_report_Model extends Model {
         } else {
 
             $count_data = sizeof($data_arr);
-            for ($i = 4; $i < $count_data; $i++) {
+            
+            for($i = 4; $i <$count_data;$i++){
+                $arr_student_code[] = $data_arr[$i][2];
+            }
+           
+            $sql ="SELECT C_CODE FROM t_user WHERE FK_GROUP = 4 AND C_DELETED = 0 AND FK_CLASS = '$class_id' ORDER BY C_CODE ASC";
+            $list_student_in_user = $this->db->GetCol($sql);
+            //kiem tra xem ma hoc sinh trong danh sach excel voi ma hoc sinh trong bang user : neu khac nhau --> 1 trong 2 cai sai . Yeu cau giong nhau moi dc nhap
+            
+            $diff = array_diff($list_student_in_user, $arr_student_code);
+            if(sizeof($diff)==0){
+                for ($i = 4; $i < $count_data; $i++) {
                 $student_code = $data_arr[$i][2];
                 $student_title = $data_arr[$i][5];
                 $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE,C_TITLE) VALUES (?,?,?,?,?) ";
@@ -203,11 +212,15 @@ class School_report_Model extends Model {
                     }   
                 }
             }
-            if ($this->db->ErrorNo() == 0) {
-                return 'success';
-            } else {
-                return false;
+                if ($this->db->ErrorNo() == 0) {
+                    return 'success';
+                } else {
+                    return false;
+                } 
+         }else{
+                return 'list_not_matched';
             }
+           
         }
     }
 
@@ -219,18 +232,31 @@ class School_report_Model extends Model {
         $sql = "SELECT PK_SCHOOL_RECORD FROM t_school_record WHERE C_STUDENT_CODE=?  AND C_SEMESTER=? AND C_YEAR =? AND C_TEACHER_CODE=?";
         $params = array($student_code, $semester, $year, $teacher_code);
         $school_record = $this->db->GetOne($sql, $params);
-        if ($school_record == 0) {// neu chua co hoc ba thi tao moi
-            $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE) VALUES(?,?,?,?)";
-            $params = array($student_code, $semester, $year, $teacher_code);
-            $this->db->Execute($sql, $params);
-            $school_record = $this->db->Insert_ID();
-            return $school_record;
-        } else {
-            return $school_record;
+        return $school_record;
         }
-    }
+    
+//    public function get_school_record($student_code) {
+//        $semester_info = $this->get_semester_info();
+//        $semester = $semester_info[0]['C_SEMESTER'];
+//        $year = $semester_info[0]['C_SCHOOL_YEAR'];
+//        $teacher_code = Session::get('user_code');
+//        $sql = "SELECT PK_SCHOOL_RECORD FROM t_school_record WHERE C_STUDENT_CODE=?  AND C_SEMESTER=? AND C_YEAR =? AND C_TEACHER_CODE=?";
+//        $params = array($student_code, $semester, $year, $teacher_code);
+//        $school_record = $this->db->GetOne($sql, $params);
+//        if ($school_record == 0) {// neu chua co hoc ba thi tao moi
+//            $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE) VALUES(?,?,?,?)";
+//            $params = array($student_code, $semester, $year, $teacher_code);
+//            $this->db->Execute($sql, $params);
+//            $school_record = $this->db->Insert_ID();
+//            return $school_record;
+//        } else {
+//            return $school_record;
+//        }
+//    }
+//luc cuoi ky dam bao viec nhap file excel dien ra truoc
 
     public function do_update_school_record_mon_phu() {
+       
         $arr_student = $this->qry_all_student_class();
         $semester_info = $this->get_semester_info();
         $semester = $semester_info[0]['C_SEMESTER'];

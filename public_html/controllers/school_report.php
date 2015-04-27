@@ -72,13 +72,29 @@ class School_report extends Controller {
     }
 
     public function dsp_update_school_report_mon_phu($type) {
+      //truong hop chua den thoi gian nhap hoc ba
          $check = $this->school_report_model->check_is_acived();
+         
+
         if($check){
-        $DATA = array();
-        $DATA['update_type'] = 1;
-        $DATA['arr_subject'] = $this->school_report_model->qry_all_subject_grade();
-        $DATA['arr_student'] = $this->school_report_model->qry_all_student_class();
-        $this->view->render('school_report/dsp_add_school_report_mon_phu', $DATA);
+            $semester_info = $this->school_report_model->get_semester_info();
+            $semester = $semester_info[0]['C_SEMESTER'];
+            $year = $semester_info[0]['C_SCHOOL_YEAR'];
+            $teacher_code = Session::get('user_code');
+           
+            $check_is_add_school_record = $this->school_report_model->check_is_added_list_record($teacher_code,$semester,$year);
+            //truong hop chua co nhap diem toan van
+
+            if($check_is_add_school_record==FALSE){
+                $DATA = array();
+                $DATA['update_type'] = 1;
+                $DATA['arr_subject'] = $this->school_report_model->qry_all_subject_grade();
+                $DATA['arr_student'] = $this->school_report_model->qry_all_student_class();
+                $this->view->render('school_report/dsp_add_school_report_mon_phu', $DATA);
+            }else{
+               $this->school_report_model->exec_fail($this->view->get_controller_url().'dsp_main_school_record','Yêu cầu nhập điểm Toán , Tiếng Việt trước');
+            }
+
         }else{
             $this->goback_url = $this->view->get_controller_url() . 'dsp_main_school_record';
             $this->school_report_model->exec_fail($this->goback_url, "Chưa đến thời gian nhập học bạ");
@@ -94,8 +110,7 @@ class School_report extends Controller {
 
 
     public function dsp_ds_toan_van_chuan_bi_nhap() {
-
-        $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report';
+        $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report_toan_van';
         if (!empty($_FILES['uploader']['name'])) {
             $result = array();
             $this->school_report_model->goback_url = $this->goback_url;
@@ -105,8 +120,7 @@ class School_report extends Controller {
                 $DATA['error'] = "Không nhập được file!";
                 $this->school_report_model->exec_fail($this->goback_url, $DATA['error']);
             } else {
-                $this->arr_list = $result;
-                $DATA['arr_data'] = $result;
+                $DATA['arr_data'] = $result; 
                 $this->view->render('school_report/dsp_review_list', $DATA);
             }
         } else {
@@ -123,6 +137,7 @@ class School_report extends Controller {
             $value = explode(',', $value);
             $final_arr[] = $value;
         }
+     
         $result = $this->school_report_model->do_add_list_school_record_excel($final_arr);
         $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report_toan_van';
         if ($result == 'success') {
@@ -130,7 +145,11 @@ class School_report extends Controller {
         } elseif ($result == 'added') {
             $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report_toan_van';
             $this->school_report_model->exec_fail($this->goback_url, "Không thêm được ! Điểm đã được thêm  trước đó trong CSDL");
-        } else {
+        }elseif($result =='list_not_matched'){
+             $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report_toan_van';
+            $this->school_report_model->exec_fail($this->goback_url, "Danh sách học sinh trong file excel không trùng khớp với danh sách đã có trong CSDL!!!");
+        } 
+        else {
 
             $this->school_report_model->exec_fail($this->goback_url, "Không nhập được file excel");
         }

@@ -98,7 +98,7 @@ class Model {
         echo $html;
         exit;
     }
-        //Quay ve man hinh truoc sau khi thuc hien thao tac voi CSDL
+  //Quay ve man hinh truoc sau khi thuc hien thao tac voi CSDL
     public static function exec_fail($url, $message, $filter_array = array()) 
     {
         $html  = '<html><head></head><body>';
@@ -119,9 +119,6 @@ class Model {
         if(!is_null($message))
         {
             $html .= 'alert("' . $message . '");';
-//            $html .='bootbox.alert("'.$message.'",function(){});';
-//            bootbox.alert("Hello world!", function(){}) ;
-//            $html .= 'alert("' . $message . '");';
         }
         $html .= 'document.frmMain.submit();</script></body></html>';
         echo $html;

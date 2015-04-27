@@ -67,23 +67,29 @@ class Parent_student_Model extends Model
                 $v_email = $sheetData[$i]['F'];
                 $v_phone = $sheetData[$i]['G'];
                 $v_class = $sheetData[$i]['H'];
-                $v_grade = $sheetData[$i]['I'];
-                $v_student_code = $sheetData[$i]['J'];
+//                $v_grade = $sheetData[$i]['I'];
+                $v_grade = 1;
+                $post_number = 0;
+                $v_student_code = $sheetData[$i]['I'];
                 //kiem tra trung ten dang nhap truoc khi insert
                 // MaPH se co dang : nguyenvannam |11022009 |01
                 $v_user_name = $this->do_create_user_name($v_student_name,$v_student_birth);
                 $v_pass_word = md5("123456");
-                $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class,$v_user_name,$v_pass_word, 4,$v_student_code);
-                $sql = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,C_LOGIN_NAME,C_PASSWORD,FK_GROUP,C_CODE) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class,$v_user_name,$v_pass_word, 4,$v_student_code,$post_number);
+                $sql = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,C_LOGIN_NAME,C_PASSWORD,FK_GROUP,C_CODE,C_POST_NUMBER) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
                 $this->db->Execute($sql, $params);
                 
             }
         }
-    
-        
-            }
+          
+ }
 
+    public function check_exist_grade($grade){
+        $sql    = "SELECT COUNT(*) FROM t_user WHERE FK_GRADE ='$grade' AND FK_GROUP = '4' AND C_DELETED = '0'";
+        $result = $this->db->GetOne($sql);
+        return $result;
+    }
     public function update_list_excel(){
      
             if ($_FILES['uploader']['error'] == 0)
@@ -186,7 +192,7 @@ class Parent_student_Model extends Model
         $v_email             = get_post_var('txt_parent_email', '');
         $v_phone             = get_post_var('txt_phone', '');
         $v_address           = get_post_var('txt_area_address', '');
-        $v_class             = get_post_var('sel_class', '');
+        $v_class             = get_post_var('sel_class', 0);
         $v_grade             = get_post_var('sel_grade', 0);
 
         if ($v_parent_contact_id > 0)
@@ -200,11 +206,9 @@ class Parent_student_Model extends Model
                       C_MOTHER_NAME = ?,
                       C_EMAIL = ?,
                       C_PHONE = ?,
-                      C_ADDRESS = ?,
-                      FK_GRADE = ?,
-                      FK_CLASS = ? 
+                      C_ADDRESS = ?
                     WHERE PK_USER = ?";
-            $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class, $v_parent_contact_id);
+            $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_parent_contact_id);
             $this->db->Execute($sql, $params);
         }
         else
@@ -224,7 +228,46 @@ class Parent_student_Model extends Model
         return $result;
     }
     
+   
+    
     public function delete_parent_contact(){
+        // B1 xoa trong hoc ba truoc
+        //bien nay luc nao cung co gia tri roi nen ko can quan tam den gia tri 0 mac dinh//do da bat dieu kien o luc xoa(phai chon doi tuong)
+        $v_delete_list = get_post_var('hdn_item_id_list',0);
+        $sql = "SELECT C_CODE FROM t_user WHERE PK_USER IN ($v_delete_list)";
+        $arr_deleted_student_code = $this->db->GetCol($sql);
+        foreach ($arr_deleted_student_code as $student_code) {
+            $sql ="SELECT PK_SCHOOL_RECORD FROM t_school_record WHERE C_STUDENT_CODE ='$student_code'";
+            $arr_school_record = $this->db->GetCol($sql);
+            $arr_school_record = implode(',',$arr_school_record);
+            
+            //xoa trong bang chi tiet hoc ba 
+            $sql = "DELETE  FROM t_detail_school_record  WHERE FK_SCHOOL_RECORD IN ($arr_school_record)";
+            $this->db->Execute($sql);
+        
+          //B2 xoa trong bang school_record
+            $sql = "DELETE FROM t_school_record WHERE PK_SCHOOL_RECORD IN($arr_school_record)";
+            $this->db->Execute($sql);
+        }
+//          $arr_deleted_student_code = implode(',', $arr_deleted_student_code);
+//          //B2 xoa trong bang school_record
+//            $sql = "DELETE FROM t_school_record WHERE C_STUDENT_CODE IN($arr_deleted_student_code)";
+//            $this->db->Execute($sql);
+       
+       
+//    SELECT C_CODE FROM t_user WHERE PK_USER IN (330,331,332,333)
+//      vong lap truyen C_CODE (1 ma hs co nhieu hoc ba)  
+//    SELECT PK_SCHOOL_RECORD FROM t_school_record WHERE C_STUDENT_CODE = 1 
+//
+//
+//    DELETE
+//    FROM t_detail_school_record
+//    WHERE FK_SCHOOL_RECORD IN (1,2,3)
+//
+//    DELETE FROM t_school_record WHERE C_STUDENT_CODE = 1
+      
+        
+        
         $v_delete_list = get_post_var('hdn_item_id_list',0);
         $sql = "DELETE FROM `t_user` WHERE PK_USER IN ($v_delete_list)";
         $this->db->Execute($sql);
@@ -244,8 +287,9 @@ class Parent_student_Model extends Model
     public function do_transfer_class(){
         $list_update  = get_post_var('hdn_item_id_list','');
         $class_to = get_post_var('sel_class1','');
+        $grade_to = get_post_var('sel_grade1');
         if($class_to!='' && $class_to !=''){
-            $sql = " UPDATE t_user SET FK_CLASS = '$class_to' WHERE PK_USER IN ($list_update)";
+            $sql = " UPDATE t_user SET FK_CLASS = '$class_to' , FK_GRADE = '$grade_to' WHERE PK_USER IN ($list_update)";
             $this->db->Execute($sql);
             if($this->db->ErrorNo()== 0){
                 return true;

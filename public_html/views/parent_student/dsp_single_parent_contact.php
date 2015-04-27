@@ -1,4 +1,5 @@
 <?php 
+$role = Session::get('level');
   $arr_single_parent_contact = isset($arr_single_parent_contact) ? $arr_single_parent_contact : array();
   if(sizeof($arr_single_parent_contact)>0){
       $v_single_parent_contact_id = $arr_single_parent_contact['PK_USER'];
@@ -9,8 +10,7 @@
       $v_phone = $arr_single_parent_contact['C_PHONE'];
       $v_address = $arr_single_parent_contact['C_ADDRESS'];
       $v_email = $arr_single_parent_contact['C_EMAIL'];
-      $v_class_id = isset($arr_single_parent_contact['FK_CLASS']) ? $arr_single_parent_contact['FK_CLASS'] : 0;
-      $v_grade_id = isset($arr_single_parent_contact['FK_GRADE']) ? $arr_single_parent_contact['FK_GRADE'] : 0;
+   
    }else{
        //thay cho mac dinh
       $v_single_parent_contact_id  =  get_post_var('hdn_parent_contact_id',0);
@@ -21,8 +21,7 @@
       $v_phone = get_post_var('txt_teacher_phone','');
       $v_address = get_post_var('txt_area_address','');
       $v_email = get_post_var('txt_parent_email','');
-      $v_grade_id = get_post_var('sel_grade',0);
-      $v_class_id = get_post_var('sel_class',0);
+    
    }
 ?>
 <div class="container-fluid " >
@@ -77,19 +76,19 @@
    <div class="form-group">
       <label for="txt_phone" class="col-lg-3 control-label" >Số điện thoại</label>
       <div class="col-lg-9">
-        <input type="text" class="form-control" value="<?php echo $v_phone;?>" id="txt_phone"  name="txt_phone" placeholder="Số điện thoại">
+          <input type="text"  class="form-control" value="<?php echo $v_phone;?>" id="txt_phone"  name="txt_phone" placeholder="Số điện thoại">
       </div>
     </div>
     
      <div class="form-group">
-      <label for="txt_area_address" class="col-lg-3 control-label" value="<?php echo $v_address;?>"  for="txt_area_address">Địa chỉ</label>
+      <label for="txt_area_address" class="col-lg-3 control-label"  for="txt_area_address">Địa chỉ</label>
       <div class="col-lg-9">
-          <textarea class="form-control" rows="3" id="txtarea_address" name="txt_area_address" placeholder="Địa chỉ"></textarea>
+          <textarea class="form-control" rows="3" id="txtarea_address" name="txt_area_address" placeholder="Địa chỉ"><?php echo $v_address;?></textarea>
         <span class="help-block"></span>
       </div>
     </div>
     
-   
+<?php if(sizeof($arr_single_parent_contact)==0):?>
     <div class="form-group">
       <label for="sel_grade" class="col-lg-3 control-label">Khối học</label>
       <div class="col-lg-9">
@@ -116,9 +115,12 @@
         <br>
       </div>
     </div>
+    <?php endif;?>
     <div class="form-group">
       <div class="col-lg-9 col-lg-offset-3">
+       <?php if($role == 1): ?>
         <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2">Cập nhật</button>
+        <?php endif;?>
         <button type="button" class="btn btn-default col-lg-3 col-lg-offset-2 " onclick="btn_go_back_onclick();">Quay lại</button>
       </div>
     </div>

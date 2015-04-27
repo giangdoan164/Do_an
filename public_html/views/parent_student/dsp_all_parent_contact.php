@@ -8,8 +8,8 @@ $v_class_id = $class;
     <div class="row-fluid">
         <h1 class="page-header">Quản lý danh sách liên lạc</h1>
         <div class="main-wrapper" style="margin-left: 0px;">   
-            <!--<div class="container-fluid block" style="border:1px solid #ff9900 !important; border-top: #ff9900 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">-->
-            <div class="container-fluid block" style="border:1px solid #AC0713 !important; border-top: #AC0713 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">
+           
+            <div class="container-fluid " style="border:1px solid #AC0713 !important; border-top: #AC0713 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">
                 <form name="frmMain" id="frmMain" action="" method="POST" enctype="multipart/form-data">
                     <?php
                     $url = $this->get_controller_url();
@@ -51,11 +51,8 @@ $v_class_id = $class;
                                             <option value="<?php echo $class['PK_CLASS']; ?>" <?php echo $selected; ?>><?php echo $class['C_CLASS_NAME']; ?></option>
                                         <?php endforeach; ?>
                                     </select> 
-                                    <?php // else : ?>
-        <!--                            <select disabled class="form-control" id="sel_class" name="sel_class" >
-                                        <option value="<?php // echo $user_class['PK_CLASS'];  ?>"><?php // echo $user_class['C_CLASS_NAME'];  ?></option>
-                                    </select>-->
-                                <?php endif ?>
+                               
+                                <?php endif ;?>
                             </div>
 
                             <div class="col-md-2" >
@@ -118,14 +115,15 @@ $v_class_id = $class;
                                 <th style="width: 5%;text-align:center">
                                     <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                               
                                 </th>
-                                <th style="width: 18%;text-align:center">Họ tên học sinh</th>
-                                <th style="width: 10%;text-align:center">Ngày sinh </th>
-                                <th style="width: 17%;text-align:center">Họ tên bố</th>
-                                <th style="width: 17%;text-align:center">Họ tên mẹ</th>
-                                <th style="width: 10%;text-align:center">Email</th>
-                                <th style="width: 11%;text-align:center" >SĐT</th>
-                                <th style="width: 5%;text-align:center">Lớp</th>
-                                <th style="width: 7%;text-align:center">Thao tác</th>
+                                <th style="width: 12%;text-align:center">Họ tên học sinh</th>
+                                <th style="width: 8%;text-align:center">Ngày sinh </th>
+                                <th style="width: 12%;text-align:center">Họ tên bố</th>
+                                <th style="width: 12%;text-align:center">Họ tên mẹ</th>
+                                <th style="width: 23%;text-align:center" >Địa chỉ</th>
+                                <th style="width: 15%;text-align:center">Email</th>
+                                <th style="width: 6%;text-align:center" >SĐT</th>
+                                <th style="width: 12%;text-align:center">Thao tác</th>
+                            
                             </tr>
                         </thead>
                         <tbody>
@@ -136,22 +134,25 @@ $v_class_id = $class;
                                         <input type="checkbox" name="chk" value="<?php echo $parent_contact['PK_USER']; ?>" onclick="if (!this.checked)
                                                     this.form.chk_check_all.checked = false;">
                                     </td>
-                                    <td style="text-align:center"> <?php echo $parent_contact['C_NAME']; ?>
+                                    <td style=""> <?php echo $parent_contact['C_NAME']; ?>
 
                                     </td>
                                     <td style="text-align:center">
                                         <?php echo $parent_contact['C_STUDENT_BIRTH']; ?>
 
                                     </td>
-                                    <td style="text-align:center">
+                                    <td style="">
                                         <?php echo $parent_contact['C_FATHER_NAME']; ?>
 
                                     </td>
-                                    <td style="text-align:center">
+                                    <td style="">
                                         <?php echo $parent_contact['C_MOTHER_NAME']; ?>
 
                                     </td>
-                                    <td style="text-align:center">
+                                    <td style="">
+                                        <?php echo $parent_contact['C_ADDRESS']; ?>
+                                    </td>
+                                    <td style="">
                                         <?php echo $parent_contact['C_EMAIL']; ?>
 
                                     </td>
@@ -159,10 +160,7 @@ $v_class_id = $class;
                                         <?php echo $parent_contact['C_PHONE']; ?>
 
                                     </td >
-                                    <td style="text-align:center">
-                                        <?php echo $parent_contact['C_CLASS_NAME']; ?>
-
-                                    </td>
+                                 
                                     <td style="text-align:center">
                                         <a href="javascript::(0)" onclick="row_click(<?php echo $parent_contact['PK_USER']; ?>);">  Sửa</a>
 

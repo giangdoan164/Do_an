@@ -14,13 +14,13 @@ class Parent_student extends Controller {
 
 
    public function index(){ 
-       
+
       $this->dsp_all_parent_contact();
       
    }
    
    public function dsp_all_parent_contact(){
-         $arr_data['class'] = get_post_var('sel_class','');
+       $arr_data['class'] = get_post_var('sel_class','');
        $arr_data['grade'] = get_post_var('sel_grade','');
        $arr_data['arr_class'] = $this->class_grade_model->qry_all_class();
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
@@ -88,25 +88,27 @@ class Parent_student extends Controller {
     }
     
     public function add_new_contact_list(){
-        
-        $arr_data['controller']          = get_post_var('controller', '');
-        $arr_data['hdn_dsp_all_record']  = get_post_var('hdn_dsp_all_record', '');
-        $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
-         if(!empty($_FILES['uploader']['name'])){
-             $result = $this->parent_student_model->update_list_excel();
-             if($result == FALSE){
-                  $DATA['error'] = " Mời chọn danh sách cần nhập !";
-                  $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+        $url               = $this->view->get_controller_url().'dsp_all_parent_contact';
+        $check_has_grade = $this->parent_student_model->check_exist_grade(1);
+     
+        if(!empty($_FILES['uploader']['name'])){
+                if(intval($check_has_grade)==0){//ko co hs  thuoc khoi 1 thi moi chuyen
+                 $result = $this->parent_student_model->update_list_excel();
+                 if($result == FALSE){
+                      $DATA['error'] = "meomeo!";
+                      $this->parent_student_model->exec_fail($url, $DATA['error'], $DATA);
+                 }else{
+                      $DATA['error'] = " Cập nhật danh sách mới thành công !";
+                      $this->parent_student_model->exec_fail($url, $DATA['error'], $DATA);
+                 }
+                }else{
+                     $DATA['error'] = "Đã tồn tại học sinh thuộc khối 1 trong hệ thống !!!";
+              $this->parent_student_model->exec_fail($url,$DATA['error'],array());
+                }
              }else{
-                  $DATA['error'] = " Cập nhật danh sách mới thành công !";
-                  $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+                      $DATA['error'] = " Mời chọn danh sách cần nhập !";
+                      $this->parent_student_model->exec_fail($url, $DATA['error'], $DATA);
              }
-            
-         }else{
-                $DATA['error'] = " Mời chọn danh sách cần nhập !";
-                  $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
-         }
-        
     }
     
     public function dsp_transfer_class(){

@@ -24,10 +24,8 @@
                                 <option value="0">--Mời chọn môn học--</option>
                                 <?php if(sizeof($arr_subject) >0):?>
                                 <?php foreach ($arr_subject as $key => $subject):?>
-                                <?php if($key != 1 && $key != 2):?>
                                         <option value="<?php echo $key;?>"><?php echo $subject;?></option>
-                                 <?php endif;?>
-                                         <?php endforeach;?>
+                                <?php endforeach;?>
                                 <?php endif?>
                             </select>
                         </div>
@@ -38,9 +36,7 @@
                 <table class="table table-hover  table-condensed ">
                     <thead>
                         <tr class="info">
-<!--                            <th style="width: 5%;text-align:center">
-                                <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk"  onclick="toggle_check_all(this, this.form.chk);">                                               
-                            </th>-->
+
                             <th style="width: 30%;text-align:center">Học sinh</th>
                             <th style="width: 30%;text-align: center">Ngày sinh</th>
                             <th style="width: 40%;text-align:center">Điểm cuối kỳ </th>
@@ -50,10 +46,7 @@
 
                         <?php foreach ($arr_student as $student): ?>
                             <tr>
-<!--                                <td style="text-align:center">
-                                    <input type="checkbox" name="chk" value="<?php // echo $student['C_CODE']; ?>" onchange="update_announce_content('<?php // echo $student['C_CODE']; ?>')" onclick="if (!this.checked)
-                                                                this.form.chk_check_all.checked = false;">                 
-                                </td>-->
+
                                 <td style="text-align:center">
                                     <?php echo $student['C_NAME']; ?> 
                                 </td>
@@ -77,7 +70,7 @@
                 <div class="col-md-1 col-md-offset-9">
                     <!--<button type="submit" class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</button>-->
                     <!--<a href="#" class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>-->
-                    <a  class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>
+                    <a href="#"  class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>
                     
                 </div>
             </div>
@@ -117,9 +110,8 @@
        } 
     }
     function list_grade_subject(){
-        var type = $('#frmMain #update_type').val();
-       
-        if(type==1){
+      
+            var type = $('#frmMain #update_type').val();
             subject_id = $('#frmMain #sel_subject').val();
             if(subject_id > 0){
                  var site_url = $('#hdn_site_url').val();
@@ -131,28 +123,20 @@
                     data : 'subject_id='+subject_id,
                     dataType: 'json',
                     success: function (result) {
-//                        var xhtml = "<option value='0'>-- Mời chọn lớp --</option>";
-//                         for(i=0;i<result.length;i++){
-//                             var option = "<option value ='"+result[i].PK_CLASS +"'>"+result[i].C_CLASS_NAME+"</option>";
-//                             xhtml += option;
-//                         }
-//                           $('#sel_class').html(xhtml);
-//                          console.log(result);
-                
                        if(result.length >0){
                              for(i=0;i<result.length;i++){
-                              var code = result[i].C_STUDENT_CODE;
-                              $('#frmMain #txt_sle_std_ann_'+code).val(result[i].FK_GRADE);
-                          }
+                                var code = result[i].C_STUDENT_CODE;
+                                $('#frmMain #txt_sle_std_ann_'+code).val(result[i].FK_GRADE);
+                             }
                        }else{
                            $("input[name^='txt_sle_std_ann_']").val('');
                        }
-                        
-
                     }
                 });
-            }
-        }
+          }      
     }
     
+    
+      
+       
 </script>

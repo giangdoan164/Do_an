@@ -15,7 +15,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                 <h3>Danh sách học sinh nhận xét</h3>
             </div>
             <div class="row">
-
+            <?php if(sizeof($arr_all_student) >0): ?>
                 <table class="table table-hover  table-condensed ">
                     <thead>
                         <tr class="info">
@@ -27,6 +27,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                         </tr>
                     </thead>
                     <tbody>
+                        
                         <?php $stt=0;?>
                         <?php foreach ($arr_all_student as $student): ?>
                             <tr style="text-align:center"> 
@@ -69,9 +70,10 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                                 
                         </tr>
                         <?php endforeach; ?>
-                        
+                      
                     </tbody>
                 </table>
+               
             </div>
 
             <div class="row" style="margin: 10px;">
@@ -79,6 +81,20 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                     <a  class=" btn btn-primary" onclick="do_update_onclick_final();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhân xét tổng kết </a>
                 </div>
             </div>
+              
+              <?php else:?>
+                    <div class="row" style="height: 40px;">
+                    <div class="col-md-6" style="color:red;">
+                       Mời nhập điểm cuối kỳ các môn học để nhận xét
+                    </div>
+                    <div class="col-md-6">
+                            <a href="<?php echo $this->get_controller_url() . 'dsp_add_school_report_toan_van'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="<?php echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/0'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
+
+                    </div>
+                </div>
+              <?php endif;?>           
         </form>
     </div>
 </div>

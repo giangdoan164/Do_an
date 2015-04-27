@@ -73,6 +73,7 @@ $user_id = Session::get('user_id');
                        <div class="col-md-1 col-md-offset-8">
                          <button class='btn btn-primary' onclick="do_reply(<?php echo $user_id?>)">Trả lời</button>
                     </div>
+                      
                 </div>
             </form>
             </div>
@@ -91,6 +92,10 @@ $user_id = Session::get('user_id');
      function show_reply_div(){
          $('#frmMain #btn_show').hide();
          $('#frmMain #reply_div').fadeIn();
+     }
+     function btn_update_reply_onclick(){
+         var url = '<?php echo $this->get_controller_url(); ?>dsp_update_reply';
+        showPopWin(url, 1000, 550);
      }
 </script>
 

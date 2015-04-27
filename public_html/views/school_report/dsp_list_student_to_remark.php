@@ -45,11 +45,11 @@
                 </table>
              </div>
             </div>
-            <div class="row" style="margin: 10px;">
+<!--            <div class="row" style="margin: 10px;">
                 <div class="col-md-1 col-md-offset-9">
                     <a  class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>
                 </div>
-            </div>
+            </div>-->
         </form>
     </div>
 </div>

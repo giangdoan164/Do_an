@@ -15,8 +15,10 @@
             <div class="row" style="margin: 15px 10px;">
                 <h3>Danh sách học sinh nhận xét</h3>
             </div>
+              <?php if (sizeof($arr_subject_grade) > 0) : ?>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
+                         
                     <table class="table table-hover  table-condensed ">
                         <thead>
                             <tr class="info">    
@@ -26,7 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (sizeof($arr_subject_grade) > 0) : ?>
+                     
                                 <?php foreach ($arr_subject_grade as $student): ?>
                                     <tr style="text-align:center"> 
                                         <td >
@@ -41,23 +43,33 @@
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
-                            <?php else : ?>
-                                <tr>
-                                    <td colspan="2" style="text-align: center;color:red;font-size: 20px;">
-                                        Mời nhập điểm cuối kỳ các môn học để nhận xét<br/>
-                                    </td>
-                                    <td>
-                                        <a href="<?php echo $this->get_controller_url() . 'dsp_add_school_report_toan_van'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="<?php echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/0'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
-                                    </td>
-                                </tr>
+                           
                                 
-                            <?php endif; ?>
+                           
                         </tbody>
                     </table>
+                 
                 </div>
             </div>
+                <?php else : ?>
+            <div class="row" style="height: 40px;">
+                <div class="col-md-6" style="color:red;">
+                   Mời nhập điểm cuối kỳ các môn học để nhận xét
+                </div>
+                <div class="col-md-6">
+                        <a href="<?php echo $this->get_controller_url() . 'dsp_add_school_report_toan_van'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm Toán Văn</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="<?php echo $this->get_controller_url() . 'dsp_update_school_report_mon_phu/0'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhập điểm môn Phụ</a>
+
+                </div>
+            </div>
+                
+                         
+
+
+                        
+                           
+                     <?php endif; ?>
                <?php if (sizeof($arr_subject_grade) > 0) : ?>
             <div class="row" style="margin: 10px;">
                 <div class="col-md-1 col-md-offset-9">

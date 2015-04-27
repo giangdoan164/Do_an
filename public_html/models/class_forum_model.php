@@ -149,6 +149,14 @@ class Class_forum_Model extends Model {
         $sql = "INSERT INTO t_public_post  (FK_TOPIC,C_CONTENT,C_POSTED_DATE,C_POSTED_USER) VALUES (?,?,?,?)";
         $params = array($v_topic_id, $content, $created_date, $create_user_id);
         $this->db->Execute($sql, $params);
+        
+        $sql = "SELECT C_POST_NUMBER FROM t_public_topic WHERE PK_TOPIC = '$v_topic_id'";
+        $curr_post = $this->db->GetOne($sql);
+        $curr_post = intval($curr_post) + 1;
+            
+                    // update nguoc lai POST_NUMBER 
+             $sql = "UPDATE t_user SET C_POST_NUMBER = '$curr_post' WHERE PK_USER = '$create_user_id' ";
+             $this->db->Execute($sql);
         if ($this->db->ErrorNo() == 0) {
             return TRUE;
         } else {
@@ -188,7 +196,7 @@ class Class_forum_Model extends Model {
       $params = array($topic_id,$content_reply,$posted_date,$user_id);
       $sql = "INSERT INTO t_public_post (FK_TOPIC,C_CONTENT,C_POSTED_DATE,C_POSTED_USER) VALUES(?,?,?,?)";
       $this->db->Execute($sql,$params);
-      
+      //cap nhat so luong post
       $sql = "SELECT C_POST_NUMBER FROM t_public_topic WHERE PK_TOPIC = '$topic_id'";
       $curr_post = $this->db->GetOne($sql);
       $curr_post = intval($curr_post) + 1;

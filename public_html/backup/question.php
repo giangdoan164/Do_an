@@ -2,7 +2,7 @@
 alert box boostrap
 http://bootboxjs.com/documentation.html
 http://bootboxjs.com/
-
+"design pixel perfect, spacing
 http://www.twitterbootstrap.net/forum/forum.php?s=b83d4df800284858bff42aeee1ed587b
 class Date time
 http://blog.itviec.com/2014/03/full-stack-developer/

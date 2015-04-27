@@ -1,5 +1,6 @@
 <?php
 $role = Session::get('level');
+$open='';
 //giao vien
 if (!isset($arr_final_remark_title)) {
     $size_arr_final = 0;
@@ -68,7 +69,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                      </div>
                  </details>
             
-            <details <?php echo $open;?>>
+            <details <?php echo $open; ?>>
                 <summary>Tra cứu học bạ học sinh</summary>
                 <div class="row" style="margin: 20px;">
                     <div class="col-md-4">

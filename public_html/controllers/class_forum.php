@@ -111,5 +111,9 @@ class Class_forum extends Controller {
     }
     
     
+    public function dsp_update_reply(){
+        echo "meomeo";
+    }
+    
 
 }

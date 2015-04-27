@@ -45,7 +45,7 @@ $string_arr = substr($string_arr,2);
                 </thead>
                 <tbody>  
                         <?php if ($count_arr > 0): ?>
-                        <?php for ($i = 5; $i < $count_arr; $i++) : ?>
+                        <?php for ($i = 5; $i <= $count_arr; $i++) : ?>
                             <tr>
                                 <td style="width: 15%;text-align:center"><?php echo $arr_data[$i]['A'] ?></td>
                                 <td style="width: 15%;text-align:center"><?php echo date("d-m-Y", strtotime($arr_data[$i]['B'])); ?></td>
@@ -66,7 +66,7 @@ $string_arr = substr($string_arr,2);
                     <div class="row" style="margin-top:10px;margin-bottom:10px;">
                     <button type="button"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cập nhật vào hệ thống </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a  href="<?php echo $this->get_controller_url().'dsp_add_main_school_report'?>"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
+                    <a  href="<?php echo $this->get_controller_url().'dsp_main_school_record'?>"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Quay lại </a>
                 </div>
         </div>
