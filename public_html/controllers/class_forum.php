@@ -92,7 +92,6 @@ class Class_forum extends Controller {
     }
     
     public function reply_topic($user_id){
-        
             $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
             $arr['user_id']  = $user_id;
             $arr['content']   = get_post_var('txta_reply_content');

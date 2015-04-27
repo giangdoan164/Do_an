@@ -26,6 +26,12 @@
                         <button class="btn btn-primary" onclick="dsp_create_new_topic();"> <span class="icon-plus">Chủ đề mới</span></button>
                     </div>
                 </div>  
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-9">
+                     <a href="<?php echo $this->get_controller_url().'dsp_forum_index';?>"><span class="glyphicon glyphicon-share-alt"></span> &nbsp;Trang chủ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <a href="<?php echo $this->get_controller_url().'dsp_all_topic/'.$category_id;?>"><span class="glyphicon glyphicon-remove" onclick="teacher_delete_topic();"></span> &nbsp;Xóa</a>     
+                    </div> 
+                </div>
                 <table class="table table-hover table-nomargin table-condensed ">
                     <thead>
                         <tr class="info">
@@ -35,7 +41,7 @@
                             <th style="width: 15%;text-align:center">Lượt xem</th>
                         </tr>
                     </thead>
-                    <tbody>  
+                    <tbody>     
                         <?php if (sizeof($arr_all_topic) >0 ):?>
                         <?php foreach ($arr_all_topic as $topic) :?>
                         <tr>

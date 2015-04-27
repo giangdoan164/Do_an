@@ -66,6 +66,8 @@ $user_id = Session::get('user_id');
                 
                     <script type='text/javascript'>
                         CKEDITOR.replace('txta_reply_content');
+//                        http://jsfiddle.net/cDzqp/
+                        CKEDITOR.instances.txta_reply_content.setData("sdkfjsldjkf");
                     </script>
                 </div>
             </div>
