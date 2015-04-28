@@ -9,6 +9,7 @@
                         echo $this->hidden('hdn_dsp_all_topic','dsp_all_topic');
                         echo $this->hidden('hdn_dsp_single_topic','dsp_single_topic');
                         echo $this->hidden('hdn_create_new_topic','do_create_new_topic');
+                        echo $this->hidden('cate_id',$cate_id);
             ?>
             <div class="row">
                 <a href="<?php echo $this->get_controller_url().dsp_all_topic ?>"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Diễn đàn</a>

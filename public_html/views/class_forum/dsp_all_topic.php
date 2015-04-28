@@ -1,16 +1,13 @@
 <?php
 
  ?>
-<div class="container-fluid" >
-    <div class="row-fluid">
-        <h1 class="page-header">Diễn đàn - Trao đổi</h1>
-        
+<div class="container" >
+    <div class="row">
+        <h1 class="page-header">Diễn đàn - Trao đổi</h1>  
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
                 <?php
-                    if(isset($category_id)){
-                        echo $this->hidden('category_id',$category_id);
-                    }
+                    if(isset($category_id)){echo $this->hidden('category_id',$category_id);  }
                     echo $this->hidden('controller', $this->get_controller_url());
                     echo $this->hidden('hdn_dsp_forum_index','dsp_forum_index');
                     echo $this->hidden('hdn_dsp_all_topic','dsp_all_topic');
@@ -34,14 +31,14 @@
                 </div>
                 <table class="table table-hover table-nomargin table-condensed ">
                     <thead>
-                        <tr class="info">
+                        <tr class="forum_head">
                             <th style="width: 50%;text-align:center">Chủ  đề</th>
                             <th style="width: 20%;text-align:center">Post mới nhất </th>
                             <th style="width: 15%;text-align:center">Trả lời</th>
                             <th style="width: 15%;text-align:center">Lượt xem</th>
                         </tr>
                     </thead>
-                    <tbody>     
+                    <tbody >     
                         <?php if (sizeof($arr_all_topic) >0 ):?>
                         <?php foreach ($arr_all_topic as $topic) :?>
                         <tr>
@@ -65,7 +62,6 @@
                         <?php endif;?>
                     </tbody>
                 </table>
-               
             </form>
         </div>
     </div>
@@ -74,9 +70,7 @@
         var f = document.frmMain;
         m = $("#controller").val() + f.hdn_dsp_create_new_topic.value;
         $("#frmMain").attr("action", m);
-        f.submit();
-        
-      
+        f.submit();   
     }
   function row_click(id){
                     var topic = $('#frmMain #hdn_dsp_single_topic').val();

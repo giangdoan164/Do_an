@@ -29,6 +29,7 @@ class Class_forum extends Controller {
         }
         $DATA['arr_new_topic']    = $this->class_forum_model->qry_new_topic($DATA['arr_all_category']);
         $DATA['arr_count_topic']  = $this->class_forum_model->do_count_topic();
+        $DATA['arr_count_post']   = $this->class_forum_model->do_count_total_post();
         $this->view->render('class_forum/dsp_forum_index', $DATA);
     }
 
@@ -43,14 +44,12 @@ class Class_forum extends Controller {
             $DATA['arr_all_topic'] = $this->class_forum_model->qry_all_topic($category_id);
             $this->view->render('class_forum/dsp_all_topic', $DATA);
         } else {
-            $this->class_forum_model->exec_fail($this->view->goback_url, "Mời chọn chủ đề !");
-            exit();
+            exit("Không truy cập được");
         }
     }
     
     public function dsp_single_topic($topic_id =0){
-    
-
+     
         $topic_id = intval($topic_id);
         $controller = get_post_var('controller','');
         $dsp_all_topic = get_post_var('hdn_dsp_all_topic','');
@@ -78,12 +77,10 @@ class Class_forum extends Controller {
     public function do_create_new_topic(){
         $cate_id  = get_post_var('category_id');
         $result = $this->class_forum_model->do_create_new_topic($cate_id);
-//        $single_topic_url = get_post_var('hdn_dsp_single_topic');
-        $all_topic_url = get_post_var('hdn_dsp_all_topic');
         $controller = get_post_var('controller');
-        $this->view->goback_url = $controller.$all_topic_url;
+        $this->view->goback_url = $controller.'dsp_all_topic/'.$cate_id;
         if($result){
-            $this->class_forum_model->exec_done($this->view->goback_url.'/'.$result,array());
+            $this->class_forum_model->exec_done($this->view->goback_url,array());
         }  else {
             die("Thêm chủ đề lỗi");
         }
@@ -114,5 +111,7 @@ class Class_forum extends Controller {
         echo "meomeo";
     }
     
+//    public function 
+//    
 
 }

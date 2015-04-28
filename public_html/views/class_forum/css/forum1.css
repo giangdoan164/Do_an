@@ -8,10 +8,13 @@ and open the template in the editor.
     Author     : GNN
 */
 
-body{
-    background-color: #f1eff0;
-}
+/*body{
+    background-color: none;
+}*/
 
+#content{
+    background: none;
+}
 .title{
     font-weight: bold;
 }
@@ -25,3 +28,24 @@ body{
     font-weight: bolder;
     font-size: 20px;
 }
+
+.forum_head{
+   background-color: #C3372D;
+   color: #FBFFF1;
+   height: 50px;
+ 
+}
+
+/*.table>thead>tr>th{
+    line-height: 50px;
+}*/
+.table thead tr th{
+    line-height: 50px;
+}
+
+.table tbody{
+    background-color: #FFFFFF;
+}
+
+
+

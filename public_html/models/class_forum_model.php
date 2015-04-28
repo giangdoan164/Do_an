@@ -22,19 +22,24 @@ class Class_forum_Model extends Model {
 
             foreach ($arr_category as $key => $value) {
                 $sql_new_topic[] = "SELECT
-                                        FK_CATEGORY,
-                                        C_NAME,
-                                        C_TITLE,
-                                        MAX(C_LATEST_DATE)
-                                      FROM t_public_topic pt
-                                        INNER JOIN t_user u
+                                        pt.FK_CATEGORY,
+                                        u.C_NAME,
+                                        pt.C_TITLE,
+                                        pt.C_LATEST_DATE
+                                    FROM t_public_topic pt
+                                    INNER JOIN t_user u
                                           ON pt.C_LAST_USER = u.PK_USER
-                                            AND u.FK_CLASS = '$class_id'
-                                            AND pt.FK_CATEGORY = '$key'";
+                                    WHERE pt.FK_CLASS = '$class_id'
+                                        AND pt.FK_CATEGORY = '$key'
+                                        AND pt.C_LATEST_DATE >= (SELECT
+                                                                    MAX(C_LATEST_DATE)
+                                                                  FROM t_public_topic pt
+                                                                  WHERE pt.FK_CLASS = '$class_id'
+                                                                      AND pt.FK_CATEGORY = '$key')";
             }
             $sql_new_topic = implode(" UNION ", $sql_new_topic);
 
-            //cach nay ko lay duoc date luon 
+ //cach nay ko lay duoc date luon 
 //        else{$sql ="SELECT  FK_CATEGORY, MAX(C_POSTED_DATE) AS 'POSTED_DATE' , COUNT(PK_TOPIC) AS TOPIC_NUMBER
 //                        FROM t_public_topic INNER JOIN t_user ON t_public_topic.C_POSTED_BY = t_user.PK_USER
 //                        AND t_user.FK_CLASS =?
@@ -50,7 +55,7 @@ class Class_forum_Model extends Model {
         }
     }
 
-    function do_count_topic() {
+   public function do_count_topic() {
         $class_id = Session::get('class');
         $result = array();
         if ($class_id == null) {
@@ -66,7 +71,27 @@ class Class_forum_Model extends Model {
         }
     }
 
+    public function do_count_total_post(){
+        $class_id = Session::get('class');
+        $result = array();
+        if ($class_id == null) {
+            return $result;
+        } else {
+            $sql = "SELECT FK_CATEGORY ,FK_CLASS, SUM(C_POST_NUMBER) as POST_NUMBER FROM t_public_topic WHERE FK_CLASS ='$class_id' GROUP BY  FK_CATEGORY ORDER BY FK_CATEGORY";
+            $result = $this->db->GetAssoc($sql);
+        }
+        if ($this->db->ErrorNo() == 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
     public function qry_all_topic($cate_id) {
+      page_calc($v_start, $v_end);
+      $v_start = $v_start - 1;
+      $v_limit = $v_end - $v_start;
+        
         $class_id = Session::get('class');
         $result = array();
         //neu ko co lop ==> chua dang nhap theo lop(giao vien or admin)
@@ -118,7 +143,7 @@ class Class_forum_Model extends Model {
         $title = get_post_var('txt_title', '');
         $latest_date = $created_date = date('Y-m-d H:i:s');
         $create_user_id = $last_user_id = Session::get('user_id');
-        $post_number = $view_number = 1;
+        $view_number = $post_number = 1;
         $content = get_post_var('txta_content');
 
         $result = array();
@@ -149,15 +174,22 @@ class Class_forum_Model extends Model {
         $sql = "INSERT INTO t_public_post  (FK_TOPIC,C_CONTENT,C_POSTED_DATE,C_POSTED_USER) VALUES (?,?,?,?)";
         $params = array($v_topic_id, $content, $created_date, $create_user_id);
         $this->db->Execute($sql, $params);
-        
-        $sql = "SELECT C_POST_NUMBER FROM t_public_topic WHERE PK_TOPIC = '$v_topic_id'";
-        $curr_post = $this->db->GetOne($sql);
-        $curr_post = intval($curr_post) + 1;
+        //update so luong post trong 1 topic
+//        $sql = "SELECT C_POST_NUMBER FROM t_public_topic WHERE PK_TOPIC = '$v_topic_id'";
+//        $curr_post = $this->db->GetOne($sql);
+//        $curr_post = intval($curr_post) + 1;
             
-                    // update nguoc lai POST_NUMBER 
-             $sql = "UPDATE t_user SET C_POST_NUMBER = '$curr_post' WHERE PK_USER = '$create_user_id' ";
-             $this->db->Execute($sql);
-        if ($this->db->ErrorNo() == 0) {
+        
+        //update so luong post cua user
+      $sql = "SELECT C_POST_NUMBER FROM t_user WHERE PK_USER = '$create_user_id'";
+      $curr_post_user = $this->db->GetOne($sql);
+      $curr_post_user = intval($curr_post_user) + 1;
+      
+     
+      $sql = "UPDATE t_user SET C_POST_NUMBER = '$curr_post_user' WHERE PK_USER = '$create_user_id' ";
+      $this->db->Execute($sql);
+
+       if ($this->db->ErrorNo() == 0) {
             return TRUE;
         } else {
             return FALSE;
