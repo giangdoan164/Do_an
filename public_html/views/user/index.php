@@ -7,8 +7,9 @@
                 border-radius: 0;
             }
             .panel{
-                border: 1px solid #ff9900 !important;
-                border-top: #ff9900 4px solid !important;
+                border: 2px solid #CE4B27 !important;
+                /*border-top: #ff9900 4px solid !important;*/
+                border-top: #CE4B27 5px solid !important;
                 box-shadow: 0 2px 3px rgba(0, 0, 0, .3);
             }
             body{
