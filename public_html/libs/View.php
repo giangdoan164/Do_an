@@ -208,6 +208,46 @@ class View {
         return $html;
         
     }
+       public static function paging_forum_new($arr_all_record)
+    {
+        $html = '';
+
+        $rows_per_page = 5;
+     
+        if (isset($arr_all_record[0]['TOTAL_RECORD']))
+        {
+            $page = isset($_POST['sel_goto_page']) ? replace_bad_char($_POST['sel_goto_page']) : 1;
+            $total_record = $arr_all_record[0]['TOTAL_RECORD'];
+        } else
+        {
+            $page = 1;
+            $total_record = $rows_per_page;
+        }
+
+        if ($total_record % $rows_per_page == 0)
+        {
+            $v_total_page = $total_record / $rows_per_page;
+        } else
+        {
+            $v_total_page = intval($total_record / $rows_per_page) + 1;
+        }
+
+        $arr_page = array();
+        for ($i = 1; $i <= $v_total_page; $i++)
+        {
+            $arr_page[$i] = 'Trang '. '&nbsp;' . $i;
+        }
+
+        $html .= '<div class="padding pull-right" id="pager">';
+        $html .= 'Tổng số ' . ' ' . $v_total_page . ' ' . ' Trang &nbsp&nbsp';
+
+        $html .= '. ' . ' Chuyển tới '. ' <select class="input-small" name="sel_goto_page" onchange="this.form.submit();">';
+        $html .= self::generate_select_option($arr_page, $page);
+        $html .= '</select>. ';
+        $html .= '</div>';
+        return $html;
+        
+    }
     
      public static function paging3($total_record,$page =1, $rows_per_page=_CONST_DEFAULT_ROWS_PER_PAGE){
         $html='';
@@ -236,7 +276,7 @@ class View {
         return $html;
     }
     
-     public static function paging_forum($total_record,$page =1, $rows_per_page=_CONST_DEFAULT_ROWS_PER_PAGE){
+     public static function paging_forum($total_record,$page =1, $rows_per_page='5'){
         $html='';
         if ($total_record % $rows_per_page == 0)
         {

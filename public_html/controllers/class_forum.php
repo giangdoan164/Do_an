@@ -39,9 +39,13 @@ class Class_forum extends Controller {
         $dsp_forum_index = get_post_var('hdn_dsp_forum_index');
         $this->view->goback_url = $controller . $dsp_forum_index;
         if ($category_id > 0) {
+            $DATA['sel_time'] = get_post_var('sel_time',1);
+            $DATA['sel_category'] = get_post_var('sel_category',1);
+            $DATA['sel_type'] = get_post_var('sel_type',1);
             $DATA['category_id'] = $category_id;
             $DATA['category_name'] = $this->category_model->qry_category_name($category_id);
             $DATA['arr_all_topic'] = $this->class_forum_model->qry_all_topic($category_id);
+            $DATA['arr_user_class']   = $this->class_forum_model->qry_all_user_class();
             $this->view->render('class_forum/dsp_all_topic', $DATA);
         } else {
             exit("Không truy cập được");
@@ -50,7 +54,7 @@ class Class_forum extends Controller {
     
     public function dsp_single_topic($topic_id =0){
      
-        $topic_id = intval($topic_id);
+       $topic_id = intval($topic_id);
         $controller = get_post_var('controller','');
         $dsp_all_topic = get_post_var('hdn_dsp_all_topic','');
         if($topic_id >0){
@@ -87,15 +91,35 @@ class Class_forum extends Controller {
         
         
     }
+//    
+//    public function reply_topic($user_id){
+//            $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
+//            $arr['user_id']  = $user_id;
+//            $arr['content']   = get_post_var('txta_reply_content');
+//            $DATA['category_id'] = get_post_var('category_id');
+//            $DATA['topic_id'] = get_post_var('hdn_topic_id');
+//            $result =  $this->class_forum_model->reply_topic($arr);
+//         if($result){
+//            
+//            $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
+//            $DATA['topic_id'] = $topic_id;
+//            $DATA['topic_name'] = $this->class_forum_model->qry_topic_title($topic_id);
+//            $this->class_forum_model->update_view_number($topic_id);
+//            $DATA['arr_all_post'] = $this->class_forum_model->dsp_single_topic($topic_id);
+//            $this->go_back_url = $this->view->get_controller_url().'dsp_single_topic/'.$DATA['topic_id'];
+//             $this->class_forum_model->exec_done( $this->go_back_url,array());
+////            $this->view->render('class_forum/dsp_single_topic',$DATA);
+//            
+//    }
+//    }
     
-    public function reply_topic($user_id){
+     public function reply_topic($user_id){
+        
             $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
-            $arr['user_id']  = $user_id;
             $arr['content']   = get_post_var('txta_reply_content');
-            $DATA['category_id'] = get_post_var('category_id');
             $result =  $this->class_forum_model->reply_topic($arr);
-         if($result){
-            
+            if($result){
+            $DATA['category_id'] = get_post_var('category_id');
             $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
             $DATA['topic_id'] = $topic_id;
             $DATA['topic_name'] = $this->class_forum_model->qry_topic_title($topic_id);
@@ -104,12 +128,19 @@ class Class_forum extends Controller {
             $this->view->render('class_forum/dsp_single_topic',$DATA);
             
     }
-    }
-    
-    
-    public function dsp_update_reply(){
-        echo "meomeo";
-    }
+     }
+    public function update_post(){
+        $result = $this->class_forum_model->update_post();
+        $arr['topic_id'] = $topic_id = get_post_var('hdn_topic_id');
+        if($result){
+            $DATA['category_id'] = get_post_var('category_id');
+            $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
+            $DATA['topic_id'] = $topic_id;
+            $DATA['topic_name'] = $this->class_forum_model->qry_topic_title($topic_id);
+            $DATA['arr_all_post'] = $this->class_forum_model->dsp_single_topic($topic_id);
+            $this->view->render('class_forum/dsp_single_topic',$DATA);
+           }
+        }
     
 //    public function 
 //    

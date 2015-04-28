@@ -91,26 +91,108 @@ class Class_forum_Model extends Model {
       page_calc($v_start, $v_end);
       $v_start = $v_start - 1;
       $v_limit = $v_end - $v_start;
-        
+      
+        $filter_cate_id = get_post_var('sel_category');
+        $type           = get_post_var('sel_type');
+        switch ($filter_cate_id) {
+            case '1':
+                    $filter_cate ='C_LATEST_DATE';
+                    break;
+            case '2':
+                    $filter_cate ='C_POST_NUMBER';
+                    break;
+            case '3':
+                    $filter_cate ='C_VIEW_NUMBER';
+                    break;
+
+            default:
+                    $filter_cate ='C_LATEST_DATE';
+                    break;
+        }
+        switch ($type) {
+            case '1':
+                    $type = 'DESC';
+                    break;
+            case '2':
+                    $type = 'ASC';
+                    break;
+
+            default:
+                    $type = 'DESC';
+                    break;
+        }
+
         $class_id = Session::get('class');
         $result = array();
         //neu ko co lop ==> chua dang nhap theo lop(giao vien or admin)
+         $condition = "WHERE pt.FK_CLASS = '$class_id' AND pt.FK_CATEGORY = '$cate_id' ";
+         $date = date('Y-m-d H:i:s');  
+         $v_filter_time = get_post_var('sel_time');
+         switch ($v_filter_time) {
+             case '1':
+                 $condition.= "";
+                 break;
+             case '2':
+                 $new_date = strtotime ( '-1 day' , strtotime ( $date ) ) ;
+                 $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                 $condition.= "AND C_CREATED_DATE >= '$new_date' ";
+                 break;
+             case '3':$new_date = strtotime ( '-3 day' , strtotime ( $date ) ) ;
+                 $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                 $condition.= "AND C_CREATED_DATE >= '$new_date' ";
+                 break;
+             case '4':
+                 $new_date = strtotime ( '-1 week' , strtotime ( $date ) ) ;
+                 $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                 $condition.= "AND C_CREATED_DATE >= '$new_date' ";
+                 break;
+             case '5':
+                 $new_date = strtotime ( '-2 week ' , strtotime ( $date ) ) ;
+                 $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                 $condition.= "AND C_CREATED_DATE >= '$new_date' ";
+                 break;
+             case '6':
+                 $new_date = strtotime ( '-1 month' , strtotime ( $date ) ) ;
+                 $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                 $condition.= "AND C_CREATED_DATE >= '$new_date' ";
+                 break;
+             case '7':
+                 $new_date = strtotime ( '-2 month' , strtotime ( $date ) ) ;
+                 $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                 $condition.= "AND C_CREATED_DATE >= '$new_date' ";
+                 break;
+             case '8':
+                 $new_date = strtotime ( '-3 month' , strtotime ( $date ) ) ;
+                 $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                 $condition.= "AND C_CREATED_DATE >= '$new_date' ";
+                 break;
+             default:
+                 break;
+         }
         if ($class_id == null) {
             return $result;
         } else {
-
-            $sql = "SELECT pt.*,u.C_NAME FROM t_public_topic pt "
+            $sql = "SELECT COUNT(*) from t_public_topic pt $condition ";
+            $total_record = $this->db->GetOne($sql);
+            $sql = "SELECT pt.*,u.C_NAME , $total_record as TOTAL_RECORD FROM t_public_topic pt  "
                     . "  INNER JOIN t_user u
                                           ON pt.C_LAST_USER = u.PK_USER "
-                    . "WHERE pt.FK_CLASS = '$class_id' AND pt.FK_CATEGORY = '$cate_id'  ORDER BY C_LATEST_DATE DESC ";
+                    . " $condition ORDER BY $filter_cate  $type LIMIT $v_start,$v_limit ";
             $result = $this->db->GetAll($sql);
         }
         if ($this->db->ErrorNo() == 0) {
             return $result;
         } else {
             return FALSE;
-            return array(); //nhu nhau do arrat() tuong duong false;
         }
+    }
+    
+    public function qry_all_user_class(){
+        $class_id = Session::get('class');
+        $sql ="SELECT PK_USER ,C_NAME FROM t_user WHERE FK_CLASS = '$class_id'";
+        $result = $this->db->GetAll($sql);
+        return $result;
+        
     }
 
     public function dsp_single_topic($topic_id) {
@@ -121,13 +203,20 @@ class Class_forum_Model extends Model {
         $v_start   = $v_start - 1;
         $v_limit   = $v_end - $v_start;
         
+        
         $result = array();
         if ($class_id == null) {
             return $result;
         } else {
-            $sql = "SELECT pp.*,u.C_LOGIN_NAME ,u.C_POST_NUMBER,pt.C_TITLE FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
-                                INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
-                        WHERE pp.FK_TOPIC = '$topic_id' ";
+//                 $sql = "SELECT COUNT(*) from t_public_post pp  WHERE pp.FK_TOPIC = '$topic_id' ";
+                 $sql = "SELECT COUNT(*) FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
+                    INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
+                    WHERE pp.FK_TOPIC = '$topic_id'  ";
+                 $total_record = $this->db->GetOne($sql);
+            
+            $sql = "SELECT pp.*,u.C_LOGIN_NAME ,u.C_POST_NUMBER,pt.C_TITLE , $total_record as TOTAL_RECORD FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
+                    INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
+                    WHERE pp.FK_TOPIC = '$topic_id' LIMIT $v_start,$v_limit ";
             $result = $this->db->GetAll($sql);
         }
         if ($this->db->ErrorNo() == 0) {
@@ -274,6 +363,19 @@ class Class_forum_Model extends Model {
         }else{
             return false;
         }
+    }
+    
+    public function update_post(){
+        $new_content = get_post_var('txta_reply_content_update');
+        $post_id     = get_post_var('hdn_post_id');
+        $sql ="UPDATE t_public_post SET C_CONTENT = '$new_content' WHERE PK_POST ='$post_id'";
+        $this->db->Execute($sql);
+         if($this->db->ErrorNo()==0){
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     
 }

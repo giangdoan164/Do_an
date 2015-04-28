@@ -2,4 +2,4 @@
 
 
 //-----------------------------------CONST-------------------------------------
-define('_CONST_DEFAULT_ROWS_PER_PAGE', 10);
+define('_CONST_DEFAULT_ROWS_PER_PAGE', 5);

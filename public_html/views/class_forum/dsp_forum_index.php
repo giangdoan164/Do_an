@@ -20,7 +20,7 @@
                         <th style="width: 25%;text-align:center">Chuyên mục</th>
                         <th style="width: 35%;text-align:center">Chủ đề mới nhất</th>
                         <th style="width: 20%;text-align:center">Số lượng chủ đề</th>
-                        <th style="width: 20%;text-align:center">Số lượng trao đổi</th>
+                        <th style="width: 20%;text-align:center">Số lượng bài viết</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                                 <span style="font-size: 15px;"><a href="#" onclick="row_click(<?php echo $cate_key;?>);" style="text-decoration:none; ">&nbsp;&nbsp;
                                 <span class="glyphicon glyphicon-comment" style="color: #B3B3B3;font-size: 25px;"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <?php   echo $category['C_NAME'];  ?>
-                                 
+                                 <br/>Mô tả chủ đề ....
                                     </a></span>
                                 </div>
                             </td>

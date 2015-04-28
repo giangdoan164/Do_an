@@ -1,19 +1,19 @@
 <?php
 if (!empty($this->ckeditor_js)) {
-    $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js . "'></script>";
+    $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js ."'></script>";
     echo $js_files;
 }
 
 $user_id = Session::get('user_id');
 
 ?>
-<div style="min-height: 600px;">
+ <form id="frmMain" name="frmMain" aciton="" method="POST">
 <div class="container" >
     <div class="row">
         <h3 class="page-header">Diễn đàn trao đổi</h3>
 
         <div class="col-md-10 col-md-offset-1">
-            <form id="frmMain" name="frmMain" aciton="" method="POST">
+          
                 <?php
                 if (isset($category_id)) {
                     echo $this->hidden('category_id', $category_id);
@@ -26,39 +26,60 @@ $user_id = Session::get('user_id');
                 echo $this->hidden('hdn_dsp_single_topic', 'dsp_single_topic');
                 echo $this->hidden('hdn_create_new_topic', 'do_create_new_topic');
                 echo $this->hidden('hdn_reply', 'reply_topic');
+                echo $this->hidden('hdn_post_id','');
                 ?>
                 <div id="reference" style="margin-bottom: 10px;">
                     <a href="<?php echo $v_controller_url . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-home"></span> &nbsp;Trang chủ</a> &gt;
                     <a href="<?php echo $v_controller_url . 'dsp_all_topic/' . $category_id; ?>"><?php echo $category_name; ?></a>  &nbsp;&gt;
                     <a href="<?php echo $v_controller_url . 'dsp_single_topic/' . $topic_id; ?>"> <?php echo $topic_name; ?> </a>
                 </div>
-                <table class="table table-hover table-nomargin table-condensed table-bordered " style="width: 100%">
+                <table class="table table-hover table-nomargin table-condensed  " style="width: 100%">
                     <tbody>
                         <?php if (sizeof($arr_all_post) > 0): ?>
                             <?php foreach ($arr_all_post as $post) : ?>
-                                <tr style="background: blue;color:white">
-                                    <td>
-                                        <div class="col-md-2 "><?php echo $post['C_POSTED_DATE'] ?></div>
-                                        <div class="col-md-1 col-md-offset-9" style="border-left:1px solid #0480be;"><?php echo "Bài viết" .$post['C_POST_NUMBER'];?></div>
+                                <tr style="background: #fff;color:#000000; ">
+                                    <td >
+                                        <div class="col-md-7 ">
+                                            
+                                        <span style='font-size: 15px;font-style: italic;'><?php echo $post['C_LOGIN_NAME'] ?></span>
+                                        &gt; &gt;<?php echo $post['C_POSTED_DATE'] ?>
+                                        </div>
+                                        <div class="col-md-2 col-md-offset-3" style="border-left:1px solid #fff;text-align: right;"><?php echo "Bài viết  " .$post['C_POST_NUMBER'];?></div>
                                     </td>
                                 </tr>
-                                <tr><td style="background-color: #9999ff;color:white;"><?php echo $post['C_LOGIN_NAME'] ?></td></tr>
-                                <tr style="background-color:#ffffcc ;"><td>Re <?php echo $post['C_TITLE']; ?></td></tr>
-
-                                <tr ><td><?php echo html_entity_decode($post['C_CONTENT'], ENT_QUOTES, 'UTF-8'); ?></td></tr>
+<!--                                <tr>
+                                    <td style="background-color: #FFFFFF;color:#574E4F;">
+                                        <span style='font-size: 15px;'>Người gửi</span>
+                                        <span style='font-size: 15px;font-style: italic;'><?php // echo $post['C_LOGIN_NAME'] ?></span>
+                                    </td>
+                                </tr>-->
+                                <tr>
+                                    <td id='post_content_<?php echo $post['PK_POST']; ?>'>
+                                        <div> 
+                                        <?php echo html_entity_decode($post['C_CONTENT'], ENT_QUOTES, 'UTF-8'); ?>
+                                        <!--<p class='pull-right'><a  href='#edit_post' data-toggle="modal" ><span>Sửa</span></a></p>-->
+                                         </div>
+                                       <p class='pull-right'><a  href='#' data-toggle="modal" onclick="edit_post(<?php echo $post['PK_POST']; ?>)"><span>Sửa</span></a></p>
+                                    </td>
+                                </tr>
+                                <tr style='background-color: #EAEAEA;height:6px;border: none;margin-top: -10px;'><td>&nbsp;</td></tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
-
+<!--                                   <p class='pull-right'><a  href='#' data-target='#edit_post' data-toggle="modal" ><span>Sửa</span></a></p>-->
                     </tbody>
                 </table>
+                <div class="clear"></div>
+                <div class="div_padding">
+               <?php echo $this->paging_forum_new($arr_all_post);?>
+                    </div>
                 <div class="row">
-                    <div class="col-md-1 col-md-offset-8">
-                        <a  class="btn btn-info" id="btn_show" onclick="show_reply_div();">Trả lời</a>
+                    <div class="col-md-2 ">
+                        <a  class="btn btn-success " id="btn_show" onclick="show_reply_div();">Trả lời</a>
                     </div>
                 </div>
                 <div id="reply_div" style="display: none">
               <div class="row">
-                    <div class="col-md-8 col-md-offset-1">
+                    <div class="col-md-10 col-md-offset-1">
                         <div class="form-group">
                             <label for="txta_reply_content" class="control-label">Nội dung</label>
                             <textarea class="form-control" rows="3" id="txta_reply_content" name="txta_reply_content"></textarea>
@@ -67,24 +88,74 @@ $user_id = Session::get('user_id');
                     <script type='text/javascript'>
                         CKEDITOR.replace('txta_reply_content');
 //                        http://jsfiddle.net/cDzqp/
-                        CKEDITOR.instances.txta_reply_content.setData("sdkfjsldjkf");
+//                        CKEDITOR.instances.txta_reply_content.setData();
                     </script>
                 </div>
+               
+                  
             </div>
                 <div class="row">
-                       <div class="col-md-1 col-md-offset-8">
-                         <button class='btn btn-primary' onclick="do_reply(<?php echo $user_id?>)">Trả lời</button>
+                       <div class="col-md-1 col-md-offset-5">
+                         <button class='btn btn-primary ' onclick="do_reply(<?php echo $user_id?>)">Trả lời</button>
                     </div>
                       
                 </div>
-            </form>
+                    
+                    
+                    
+           
+           
             </div>
         </div>
     </div>
     </div>
-</div>
-
+     <div class="modal fade " id='edit_post' role="dialog"  data-backdrop="static" data-keyboard ='false' tabindex="-1" aria-label="Close" aria-hidden="false" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel">Nội dung thay đổi</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+                <div class="form-group">
+                            <label for="txta_reply_content_update" class="control-label"></label>
+                             <textarea class="form-control" rows="3" id="txta_reply_content_update" name="txta_reply_content_update"></textarea>
+                        </div> 
+                <script type='text/javascript'>
+                  CKEDITOR.replace('txta_reply_content_update');
+                </script>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="btn_edit_post_onclick();">Cập nhật</button>
+          <button type="button" class="btn btn-default"  onclick='close_modal();'>Thoát</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+ </form>
+  
 <script type='text/javascript'>
+    function close_modal(){
+         CKEDITOR.instances['txta_reply_content_update'].setData('');
+         $('#edit_post').modal('hide');
+    }
+    function btn_edit_post_onclick(){
+        var f = document.frmMain;
+        m = $("#controller").val() +'update_post';
+        $("#frmMain").attr("action", m);
+        f.submit();
+    }
+    function edit_post(post_id){
+        var post_content = $('#frmMain #post_content_'+post_id+' div').html();
+         $('#frmMain #hdn_post_id').val(post_id);
+        $('#frmMain #edit_post').modal();
+//       CKEDITOR.instances.txta_reply_content_update.setData('');
+         CKEDITOR.instances.txta_reply_content_update.insertHtml(post_content);
+    }
      function do_reply(id){
         var f = document.frmMain;
         m = $("#controller").val() + f.hdn_reply.value+'/'+id;

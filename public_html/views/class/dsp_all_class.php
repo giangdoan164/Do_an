@@ -25,12 +25,11 @@
                                     <option value="5">Khối 5</option>
                              </select>
                        </div>
-                        <div class="form-group pull-right">
-                            <div>
-                             
-                                <a data-toggle="modal"   href="#add_new_class" ><i class="icon-plus"></i>Thêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-                                    <a  class="btn btn-primary btn-block" href="javascript:void(0);" onclick="update_delete_onclick();"><i class="icon-trash"></i>Xóa</a>
-                            </div>
+                        <div class='row'>
+                            <a data-toggle="modal" href="#add_new_class" ><i class="icon-plus"></i>Thêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <!--<a data-toggle="modal" href="#add_new_class" ><i class="icon-plus"></i>Thêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp-->
+                            <a  href="javascript:void(0);" onclick="update_delete_onclick();"><i class="icon-trash"></i>Xóa</a>
+                           
                         </div>
                         </div>
                                 <table class="table table-hover table-nomargin table-condensed table-bordered ">
