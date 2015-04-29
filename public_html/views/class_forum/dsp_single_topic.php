@@ -3,7 +3,6 @@ if (!empty($this->ckeditor_js)) {
     $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js ."'></script>";
     echo $js_files;
 }
-
 $user_id = Session::get('user_id');
 
 ?>
