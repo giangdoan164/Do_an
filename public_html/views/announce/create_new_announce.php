@@ -98,7 +98,6 @@
                                         <tr class="info">
                                             <th style="width: 5%;text-align:center">
                                                 <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk"  onclick="toggle_check_all(this, this.form.chk);">                                               
-                                           
                                             </th>
                                             <th style="width: 15%;text-align:center">Họ tên học sinh</th>
                                             <th style="width: 10%;text-align: center">Ngày sinh</th>

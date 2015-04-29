@@ -27,12 +27,20 @@ $user_id = Session::get('user_id');
                 echo $this->hidden('hdn_create_new_topic', 'do_create_new_topic');
                 echo $this->hidden('hdn_reply', 'reply_topic');
                 echo $this->hidden('hdn_post_id','');
+                echo $this->hidden('hdn_deleted_post_id','');
                 ?>
                 <div id="reference" style="margin-bottom: 10px;">
                     <a href="<?php echo $v_controller_url . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-home"></span> &nbsp;Trang chủ</a> &gt;
                     <a href="<?php echo $v_controller_url . 'dsp_all_topic/' . $category_id; ?>"><?php echo $category_name; ?></a>  &nbsp;&gt;
                     <a href="<?php echo $v_controller_url . 'dsp_single_topic/' . $topic_id; ?>"> <?php echo $topic_name; ?> </a>
                 </div>
+            <?php if($user_id ==$arr_all_post[0]['C_CREATER_USER']): ?>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-2 col-md-offset-10">
+                    <a href="#" onclick="btn_delete_topic_user(<?php echo $topic_id;?>)"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Đóng chủ đề</a>
+                </div>
+            </div>
+            <?php endif;?>
                 <table class="table table-hover table-nomargin table-condensed  " style="width: 100%">
                     <tbody>
                         <?php if (sizeof($arr_all_post) > 0): ?>
@@ -59,13 +67,19 @@ $user_id = Session::get('user_id');
                                         <?php echo html_entity_decode($post['C_CONTENT'], ENT_QUOTES, 'UTF-8'); ?>
                                         <!--<p class='pull-right'><a  href='#edit_post' data-toggle="modal" ><span>Sửa</span></a></p>-->
                                          </div>
-                                       <p class='pull-right'><a  href='#' data-toggle="modal" onclick="edit_post(<?php echo $post['PK_POST']; ?>)"><span>Sửa</span></a></p>
+                                        <?php if($user_id==$post['C_POSTED_USER']):?>
+                                       <p class='pull-right'>
+                                           <a  href='#' data-toggle="modal" onclick="edit_post(<?php echo $post['PK_POST']; ?>)"><span>Sửa</span></a> &nbsp;&nbsp;&nbsp;
+                                           <a  href='#' onclick="delete_post(<?php echo $post['PK_POST']; ?>)"><span>Xóa</span></a>&nbsp;&nbsp;
+                                       </p>
+                 
+                                       <?php endif; ?>
                                     </td>
                                 </tr>
                                 <tr style='background-color: #EAEAEA;height:6px;border: none;margin-top: -10px;'><td>&nbsp;</td></tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
-<!--                                   <p class='pull-right'><a  href='#' data-target='#edit_post' data-toggle="modal" ><span>Sửa</span></a></p>-->
+
                     </tbody>
                 </table>
                 <div class="clear"></div>
@@ -98,13 +112,7 @@ $user_id = Session::get('user_id');
                        <div class="col-md-1 col-md-offset-5">
                          <button class='btn btn-primary ' onclick="do_reply(<?php echo $user_id?>)">Trả lời</button>
                     </div>
-                      
-                </div>
-                    
-                    
-                    
-           
-           
+                </div>     
             </div>
         </div>
     </div>
@@ -139,6 +147,25 @@ $user_id = Session::get('user_id');
  </form>
   
 <script type='text/javascript'>
+    function btn_delete_topic_user(){
+        var confirm_check = confirm("Bạn có chắc chắn muốn xóa chủ đề này?");
+        if(confirm_check){
+            var f = document.frmMain;
+            m = $("#controller").val() +'delete_topic_user';
+            $("#frmMain").attr("action", m);
+            f.submit();
+        }
+    }
+    function delete_post(post_id){
+        var confirm_check = confirm("Bạn có chắc chắn muốn xóa bài viết này của mình ?");
+        if(confirm_check){
+            $('#frmMain #hdn_deleted_post_id').val(post_id);
+            var f = document.frmMain;
+            m = $("#controller").val() +'delele_post';
+            $("#frmMain").attr("action", m);
+            f.submit();
+        }
+    }
     function close_modal(){
          CKEDITOR.instances['txta_reply_content_update'].setData('');
          $('#edit_post').modal('hide');

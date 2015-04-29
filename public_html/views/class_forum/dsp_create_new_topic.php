@@ -41,6 +41,10 @@
 </div>
 <script>
     function do_create_new_topic(){
+        var title = $('#frmMain #txt_title').val().trim();
+        if(title ==''){alert("Mời nhập tiêu đề");return false;}
+        var content = $('#frmMain #txta_content').val().trim();
+        if(content ==''){alert("Mời nhập nội dung");return false;}
         var f = document.frmMain;
         m = $("#controller").val() + f.hdn_create_new_topic.value;
         $("#frmMain").attr("action", m);

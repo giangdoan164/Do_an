@@ -91,7 +91,7 @@ class Class_forum_Model extends Model {
       page_calc($v_start, $v_end);
       $v_start = $v_start - 1;
       $v_limit = $v_end - $v_start;
-      
+
         $filter_cate_id = get_post_var('sel_category');
         $type           = get_post_var('sel_type');
         switch ($filter_cate_id) {
@@ -180,6 +180,7 @@ class Class_forum_Model extends Model {
                     . " $condition ORDER BY $filter_cate  $type LIMIT $v_start,$v_limit ";
             $result = $this->db->GetAll($sql);
         }
+
         if ($this->db->ErrorNo() == 0) {
             return $result;
         } else {
@@ -210,11 +211,11 @@ class Class_forum_Model extends Model {
         } else {
 //                 $sql = "SELECT COUNT(*) from t_public_post pp  WHERE pp.FK_TOPIC = '$topic_id' ";
                  $sql = "SELECT COUNT(*) FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
-                    INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
-                    WHERE pp.FK_TOPIC = '$topic_id'  ";
+                        INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
+                        WHERE pp.FK_TOPIC = '$topic_id'  ";
                  $total_record = $this->db->GetOne($sql);
             
-            $sql = "SELECT pp.*,u.C_LOGIN_NAME ,u.C_POST_NUMBER,pt.C_TITLE , $total_record as TOTAL_RECORD FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
+            $sql = "SELECT pp.*,u.C_LOGIN_NAME ,u.C_POST_NUMBER,pt.C_TITLE,pt.C_CREATER_USER , $total_record as TOTAL_RECORD FROM t_public_post pp INNER JOIN t_user u ON pp.C_POSTED_USER = u.PK_USER 
                     INNER JOIN t_public_topic pt ON pp.FK_TOPIC = pt.PK_TOPIC  
                     WHERE pp.FK_TOPIC = '$topic_id' LIMIT $v_start,$v_limit ";
             $result = $this->db->GetAll($sql);
@@ -377,5 +378,50 @@ class Class_forum_Model extends Model {
         }
         
     }
+    public function delele_post(){
+     
+        $post_deleted_id = get_post_var('hdn_deleted_post_id');
+        $sql ="DELETE FROM t_public_post WHERE PK_POST = '$post_deleted_id'";
+        $this->db->Execute($sql);
+        if($this->db->ErrorNo()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
+    
+//    DELETE FROM t_public_topic WHERE PK_TOPIC IN ()
+    public function admin_delete_post(){
+        $deleted_list_topic = get_post_var('hdn_item_id_list');
+        $sql = "DELETE FROM t_public_topic WHERE PK_TOPIC IN ('$deleted_list_topic')";
+        $this->db->Execute($sql);
+         if($this->db->ErrorNo()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function admin_update_category(){
+        $new_category = get_post_var('sel_category_topic');
+        $update_list_topic = get_post_var('hdn_item_id_list');
+        $sql = "UPDATE t_public_topic SET FK_CATEGORY = '$new_category' WHERE PK_TOPIC IN ('$update_list_topic')";
+        $this->db->Execute($sql);
+         if($this->db->ErrorNo()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public function delete_topic_user(){
+        $topic_id = get_post_var('hdn_topic_id');
+        $sql = "DELETE FROM t_public_topic WHERE PK_TOPIC = '$topic_id'";
+        $this->db->Execute($sql);
+         if($this->db->ErrorNo()==0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

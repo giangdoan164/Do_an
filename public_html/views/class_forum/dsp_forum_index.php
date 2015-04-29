@@ -43,15 +43,17 @@
                                     <?php echo "Không có chủ đề nào trong chuyên mục"?>
                                     <?php endif; ?>
                                 </div>
-                                <div id="public_user_name" class="user_name">Người gửi  &nbsp;
                                     <?php if(isset($arr_new_topic[$cate_key])): ?>
+                                <div id="public_user_name" class="user_name">Người gửi  &nbsp;
+                                
                                     <?php echo $arr_new_topic[$cate_key]['C_NAME'];?>
                                     <br/>
                                     <div style="color:blue;">
                                         <?php echo $arr_new_topic[$cate_key]['C_LATEST_DATE'];?>
                                     </div>
-                                    <?php endif; ?>
+                                  
                                 </div>
+                                  <?php endif; ?>
                             </td>
                             <td style="text-align:center;vertical-align:middle;">
                                 <?php  if(isset($arr_count_topic[$cate_key])):?>

@@ -1,5 +1,5 @@
 <?php 
-
+$role = Session::get('level');
 ?>
 <div class="container" >
     <div class="row">
@@ -15,18 +15,21 @@ echo $this->hidden('hdn_dsp_forum_index', 'dsp_forum_index');
 echo $this->hidden('hdn_dsp_all_topic', 'dsp_all_topic');
 echo $this->hidden('hdn_dsp_single_topic', 'dsp_single_topic');
 echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
-//echo $this->hidden('')
+ echo $this->hidden('hdn_item_id_list', '');
 ?>
                 <div class='row'style="margin-top:10px;" >                        
                     <div class="col-md-4 col-md-offset-1">
                         <a href="<?php echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-home"></span> &nbsp;Trang chủ</a>&nbsp;&gt;
                         <a href="<?php echo $this->get_controller_url() . 'dsp_all_topic/' . $category_id; ?>"><?php echo $category_name; ?></a>           
                     </div>  
+                    <?php if($role == 3):?>
                     <div class="col-md-2 col-md-offset-5">
-                        <a href="<?php echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-user"></span> Quản trị điễn đàn</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <!--<a href="<?php echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-share-alt"></span> &nbsp;Chuyển chủ đề</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-                        <!--<a href="<?php echo $this->get_controller_url() . 'dsp_all_topic/' . $category_id; ?>"><span class="glyphicon glyphicon-remove" onclick="teacher_delete_topic();"></span> &nbsp;Xóa</a>-->     
-                    </div>    
+                        <!--<a href="<?php // echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-user"></span> Quản trị điễn đàn</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <a href="#" onclick="dsp_admin_dasboard();"><span class="glyphicon glyphicon-user"  ></span> Quản trị điễn đàn</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <!--<a href="<?php // echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-share-alt"></span> &nbsp;Chuyển chủ đề</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <!--<a href="<?php // echo $this->get_controller_url() . 'dsp_all_topic/' . $category_id; ?>"><span class="glyphicon glyphicon-remove" onclick="teacher_delete_topic();"></span> &nbsp;Xóa</a>-->     
+                    </div> 
+                    <?php endif;?>
                 </div>  
                 <div class="row" style="margin: 10px;padding-left: 120px;">
                     <div class="col-md-1 col-md-offset-10">
@@ -36,6 +39,7 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
                 <table class="table table-hover table-nomargin table-condensed ">
                     <thead>
                         <tr class="forum_head">
+                           
                             <th style="width: 50%;text-align:center">Chủ  đề</th>
                             <th style="width: 20%;text-align:center">Post mới nhất </th>
                             <th style="width: 15%;text-align:center">Trả lời</th>
@@ -46,6 +50,7 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
                         <?php if (sizeof($arr_all_topic) > 0): ?>
                             <?php foreach ($arr_all_topic as $topic) : ?>
                                 <tr>
+                                  
                                     <td style="text-align:center">
                                         <span style="font-size: 20px;"> <a href="#" onclick="row_click(<?php echo $topic['PK_TOPIC']; ?>)"> <?php echo $topic['C_TITLE']; ?> </a></span> 
                                         <div class="title"><span>Tạo bởi&nbsp;</span>
@@ -72,7 +77,7 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr> 
-                                <td style="color:red;text-align: center;font-weight: bold;"><?php echo "Không có bài viết nào trong chủ đề này" ?></td>
+                                <td colspan="4" style="color:red;text-align: center;font-weight: bold;"><?php echo "Không có bài viết nào trong chủ đề này" ?></td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
@@ -133,6 +138,12 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
     </div>
 </div>
 <script type="text/javascript">
+    function dsp_admin_dasboard(){
+        var f = document.frmMain;
+        m = $("#controller").val() +'dsp_admin_forum_dasboard';
+        $("#frmMain").attr("action", m);
+        f.submit();
+    }
     function dsp_create_new_topic() {
         var f = document.frmMain;
         m = $("#controller").val() + f.hdn_dsp_create_new_topic.value;
