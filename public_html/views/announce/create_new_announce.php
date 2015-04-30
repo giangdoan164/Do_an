@@ -11,6 +11,7 @@
                          $url = $this->get_controller_url();
                          echo $this->hidden('controller',$url);
                          echo $this->hidden('hdn_item_id_list', '');
+                         echo $this->hidden('hdn_add_new_ann','add_new_announce');
                     ?>
                     <div class="row">
                         <div class="col-md-4">

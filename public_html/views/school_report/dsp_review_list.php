@@ -62,13 +62,14 @@ $string_arr = substr($string_arr,2);
                     <?php endif; ?>
                 </tbody>
             </table>
-               <div class="col-md-4 col-md-offset-2" style="margin: 10px;">
-                    <div class="row" style="margin-top:10px;margin-bottom:10px;">
+               <div class="col-md-1 col-md-offset-2">
                     <button type="button"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cập nhật vào hệ thống </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a  href="<?php echo $this->get_controller_url().'dsp_main_school_record'?>"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Quay lại </a>
-                </div>
+                  
+        </div>
+               <div class="col-md-1 col-md-offset-2">
+                       <a  href="<?php echo $this->get_controller_url().'dsp_main_school_record'?>"  class="btn btn-primary" >
+                        <span class="glyphicon" ></span>Quay lại </a>
         </div>
            </form> 
         </div>

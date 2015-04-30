@@ -180,8 +180,9 @@ class School_report_Model extends Model {
             $list_student_in_user = $this->db->GetCol($sql);
             //kiem tra xem ma hoc sinh trong danh sach excel voi ma hoc sinh trong bang user : neu khac nhau --> 1 trong 2 cai sai . Yeu cau giong nhau moi dc nhap
             
-            $diff = array_diff($list_student_in_user, $arr_student_code);
-            if(sizeof($diff)==0){
+            $diff1 = array_diff($list_student_in_user, $arr_student_code);
+            $diff2 = array_diff($arr_student_code,$list_student_in_user);
+            if(sizeof($diff1)==0 && sizeof($diff2)==0){
                 for ($i = 4; $i < $count_data; $i++) {
                 $student_code = $data_arr[$i][2];
                 $student_title = $data_arr[$i][5];

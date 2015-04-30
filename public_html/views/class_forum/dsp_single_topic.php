@@ -111,6 +111,9 @@ $user_id = Session::get('user_id');
                        <div class="col-md-1 col-md-offset-5">
                          <button class='btn btn-primary ' onclick="do_reply(<?php echo $user_id?>)">Trả lời</button>
                     </div>
+                       <div class="col-md-1">
+                         <button class='btn btn-success ' onclick="do_hide();">Ẩn trả lời</button>
+                    </div>
                 </div>     
             </div>
         </div>
@@ -138,7 +141,7 @@ $user_id = Session::get('user_id');
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" onclick="btn_edit_post_onclick();">Cập nhật</button>
-          <button type="button" class="btn btn-default"  onclick='close_modal();'>Thoát</button>
+            <button type="button" class="btn btn-default"  onclick='close_modal();'>Thoát</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -191,6 +194,10 @@ $user_id = Session::get('user_id');
      function show_reply_div(){
          $('#frmMain #btn_show').hide();
          $('#frmMain #reply_div').fadeIn();
+     }
+     function do_hide(){
+         $('#frmMain #btn_show').show();
+         $('#frmMain #reply_div').fadeOut();
      }
      function btn_update_reply_onclick(){
          var url = '<?php echo $this->get_controller_url(); ?>dsp_update_reply';

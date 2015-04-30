@@ -158,8 +158,14 @@ echo $this->hidden('hdn_update_post_delete','admin_delete_post');
 </div>
 <script type="text/javascript">
     function admin_update_category(){
+        var topic_type = $('#frmMain #sel_category_topic').val();
+        if(topic_type == 0){
+            alert("Chọn loại chủ đề mới");
+            return false;
+        }
           var set_value =set_value_chk();
          if(set_value){
+             
             if(confirm("Cập nhật các chủ đề đã chọn")){
                 var f = document.frmMain;
                 m = $("#controller").val() +'admin_update_category' ;
