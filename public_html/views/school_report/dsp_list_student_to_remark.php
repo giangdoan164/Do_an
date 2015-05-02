@@ -16,20 +16,23 @@
                 <h3>Danh sách học sinh nhận xét</h3>
             </div>
             <div class="row">
-                <div class="col-md-7 col-md-offset-2">
+               
                 <table class="table table-hover  table-condensed ">
                     <thead>
                         <tr class="info">
+                            <th style="width: 5%;text-align:center">STT</th>
                             <th style="width: 40%;text-align:center">Học sinh</th>
                             <th style="width: 40%;text-align: center">Năm sinh</th>
                             <th style="width: 20%;text-align:center">Nhận xét</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                        <?php $stt = 0;?>
                         <?php foreach ($arr_all_student as $student): ?>
+                        <?php $stt = $stt + 1;?>
                             <tr style="text-align:center"> 
-                                <td >
+                                <td><?php echo $stt;?></td>
+                                <td>
                                     <?php echo $student['C_NAME']; ?> 
                                 </td>
                                 <td >
@@ -43,7 +46,7 @@
                   
                     </tbody>
                 </table>
-             </div>
+      
             </div>
 <!--            <div class="row" style="margin: 10px;">
                 <div class="col-md-1 col-md-offset-9">

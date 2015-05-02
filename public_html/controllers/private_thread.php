@@ -8,8 +8,8 @@ class Private_thread extends Controller {
         parent::__construct('private_thread');
         $this->private_thread_model = $this->loadModel('private_thread');
         //them file js rieng cua forum
-//        $this->view->js = array('class_forum/js/forum.js');
-        $this->view->js = array('class_forum/ckeditor/ckeditor.js');
+//        $this->view->js = array('class_forum/ckeditor/ckeditor.js');
+        $this->view->ckeditor_js = array('ckeditor/ckeditor.js');
         $this->view->css = array('class_forum/css/forum1.css');
     }
     

@@ -1,7 +1,7 @@
 <?php $arr_key_unread_mess = array_keys($arr_all_unread_mess);?>
 <div class="container" >
     <div class="row-fluid">
-        <h1 class="page-header">Chủ đề có tin nhắn mới</h1>
+        <h2 class="page-header">Danh sách chủ đề có tin nhắn mới</h2>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
                 <?php
@@ -14,16 +14,15 @@
                 echo $this->hidden('hdn_delete_record_method', 'delete_thread');
                 ?>
                 <div class='row' style='margin-bottom:19px;'>  
-                    <div class="col-md-1 col-md-offset-8">
-                        <button class="btn btn-primary" onclick="dsp_create_new_thread();"> <span class="icon-plus">Trao đổi mới</span></button>
-                    </div>
-                    <div class="col-md-1 col-md-offset-2">
-                        <button class="btn btn-primary" onclick="update_delete_onclick();"> <span class="icon-plus">Xóa</span></button>
+                    <div class="col-md-3 col-md-offset-9">
+                        <a class="btn btn-primary" onclick="dsp_create_new_thread();"> <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Trao đổi mới&nbsp;</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-success" onclick="update_delete_onclick();"> <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Xóa&nbsp;&nbsp;</a>
                     </div>
                 </div>  
                 <table class="table table-hover table-nomargin table-condensed " >
-                    <thead>
-                        <tr class="info">
+                    <thead class="forum_head">
+                        <tr>
                             <th style="width: 5%;text-align:center">
                                 <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">
                             </th>
@@ -77,7 +76,7 @@
                                 <?php endif;?>
                         <?php else:?>
                          <tr> 
-                             <td style="color:red;text-align: center;font-weight: bold;" colspan="5"><?php echo "Chưa có trao dổi riêng nào được tạo"?></td>
+                             <td style="color:#2C8D3A;text-align: center;font-weight: bold;" colspan="5"><?php echo "Chưa có trao dổi riêng nào được tạo"?></td>
                          </tr>
                         <?php endif;?>
                 </table>

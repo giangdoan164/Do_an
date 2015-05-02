@@ -104,7 +104,7 @@ $user_id = Session::get('user_id');
                          <button class='btn btn-primary ' onclick="do_reply(<?php echo $user_id?>)"><span class='glyphicon glyphicon-saved'></span>&nbsp;&nbsp; Trả lời&nbsp; </button>
                     </div>
                        <div class="col-md-1 col-md-offset-1">
-                           <button class='btn btn-success ' onclick="do_hide();"><span class='glyphicon glyphicon-share-alt'></span>&nbsp;Kết thúc</button>
+                           <button class='btn btn-success ' onclick="do_hide();"><span class='glyphicon glyphicon-remove'></span>&nbsp;Kết thúc</button>
                     </div>
                 </div>     
             </div>

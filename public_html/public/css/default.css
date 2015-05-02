@@ -64,3 +64,8 @@ footer#page_footer p{
 .form-control{
     border-radius: 0;
 }
+
+.div_padding .ul_pagination li.active{
+    background: #CE4B27;
+    color: #FDFDFD;
+}

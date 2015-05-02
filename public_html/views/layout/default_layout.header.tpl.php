@@ -13,6 +13,10 @@
          <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
       
         <?php
+        
+        //lay den view cua controller VIEW_URL 
+        // $js phai chua duong dan con lai
+        //$this->js la 1 mang
         if (!empty($this->js)) {
             $js_files = '';
             foreach ($this->js as $js) {
