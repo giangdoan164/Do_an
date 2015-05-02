@@ -236,24 +236,7 @@ class School_report_Model extends Model {
         return $school_record;
         }
     
-//    public function get_school_record($student_code) {
-//        $semester_info = $this->get_semester_info();
-//        $semester = $semester_info[0]['C_SEMESTER'];
-//        $year = $semester_info[0]['C_SCHOOL_YEAR'];
-//        $teacher_code = Session::get('user_code');
-//        $sql = "SELECT PK_SCHOOL_RECORD FROM t_school_record WHERE C_STUDENT_CODE=?  AND C_SEMESTER=? AND C_YEAR =? AND C_TEACHER_CODE=?";
-//        $params = array($student_code, $semester, $year, $teacher_code);
-//        $school_record = $this->db->GetOne($sql, $params);
-//        if ($school_record == 0) {// neu chua co hoc ba thi tao moi
-//            $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE) VALUES(?,?,?,?)";
-//            $params = array($student_code, $semester, $year, $teacher_code);
-//            $this->db->Execute($sql, $params);
-//            $school_record = $this->db->Insert_ID();
-//            return $school_record;
-//        } else {
-//            return $school_record;
-//        }
-//    }
+
 //luc cuoi ky dam bao viec nhap file excel dien ra truoc
 
     public function do_update_school_record_mon_phu() {

@@ -58,9 +58,9 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                                  <summary>Quản lý nhận xét</summary>
                                  <div class="row">
                                      <div class="col-md-9 col-md-offset-2">
-                                         <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_remark'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét cuối kỳ</a>
-                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                         <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_final_remark_title'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét cả năm, Danh hiệu</a>
+                                         <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_remark'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét các môn học</a>
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                         <a href="<?php echo $this->get_controller_url() . 'dsp_list_student_to_final_remark_title'; ?>"><span class="glyphicon glyphicon-plus"></span> Nhận xét tổng kết cuối kỳ</a>
 
                                      </div>
                                  </div>
@@ -72,6 +72,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
             <details <?php echo $open; ?>>
                 <summary>Tra cứu học bạ học sinh</summary>
                 <div class="row" style="margin: 20px;">
+                    <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="sel_student_name" class="col-md-4 control-label">Tên học sinh &nbsp;</label>                                 
@@ -105,12 +106,12 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                                     <option value="0">--Chọn học kỳ--</option>
                                     <option value="1">Học kỳ I</option>
                                     <option value="2">Học kỳ II</option>
-
                                 </select>
                             </div>  
                         </div>
-                    </div>
-                    <div class="row" style="margin-top: 10px;">
+                    </div></div>
+                 
+                              <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
                         <div class="col-md-4 col-md-offset-8">
                             <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
                                 Tìm kiếm
@@ -123,9 +124,32 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                            <?php endif;?>
                         </div>
                     </div>
+               
+                      <?php if($size_arr_final >0):?>
+                  <div class="row" style="margin-bottom: 20px;margin-top: 20px;">
+                   <table class="table table-hover  table-condensed ">
+                    <thead>
+                        <tr class="info">
+                            <th style="width: 90%;text-align:center">Nhận xét cuối kỳ</th>
+                            <th style="width: 10%;text-align: center">Danh hiệu</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td style="text-align:center">
+                                    <?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> 
+                                </td>
+                                <td style="text-align:center;color:red;">
+                                    <?php echo $arr_final_remark_title['C_TITLE']; ?>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <?php endif; ?>
                 </div>
-            </details>   
-            <?php if($size_arr>0):?>
+                  <?php if($size_arr>0):?>
             <div class="row">
                    <table class="table table-hover  table-condensed ">
                     <thead>
@@ -153,29 +177,9 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                 </table>
             </div>
             <?php endif;?>
-            <?php if($size_arr_final >0):?>
-                  <div class="row">
-                   <table class="table table-hover  table-condensed ">
-                    <thead>
-                        <tr class="info">
-                            <th style="width: 90%;text-align:center">Nhận xét cuối kỳ</th>
-                            <th style="width: 10%;text-align: center">Danh hiệu</th>
-                       
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                                <td style="text-align:center">
-                                    <?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> 
-                                </td>
-                                <td style="text-align:center;color:red;">
-                                    <?php echo $arr_final_remark_title['C_TITLE']; ?>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
-            </div>
-            <?php endif; ?>
+            </details>   
+          
+          
         </form> 
     </div>
 </div>
