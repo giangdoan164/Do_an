@@ -38,9 +38,10 @@ echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_b
 echo $this->hidden('hdn_update_type', 1);
 echo $this->hidden('hdn_site_url', SITE_URL);
 ?>
-             <h3 class="page-header" style="text-align:center">Quản lý học bạ</h3>
-              <details style="width:50%">
+             <h2 class="page-header" >Quản lý học bạ</h2>
+             <details  open style="width:50%">
                 <summary>Nhập học bạ</summary>
+                 <div style='min-height: 10px;'></div>
                      <div class="row">
                          <div class="col-md-11 col-md-offset-1">
                              <details>
@@ -69,7 +70,9 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                      </div>
                  </details>
             
-            <details <?php echo $open; ?>>
+            <!--<details <?php // echo $open; ?>>-->
+             <div style='min-height: 20px;'></div>
+            <details open>
                 <summary>Tra cứu học bạ học sinh</summary>
                 <div class="row" style="margin: 20px;">
                     <div class="row">
@@ -114,12 +117,12 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                               <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
                         <div class="col-md-4 col-md-offset-8">
                             <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
-                                Tìm kiếm
+                                <span class='glyphicon glyphicon-search'></span> &nbsp;&nbsp; Tìm kiếm
                             </button>
                             <?php if($size_arr >0 && $size_arr_final >0) : ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button" class="btn btn-primary" onclick="btn_print_onclick();">
-                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-success" onclick="btn_print_onclick();">
+                                <span class='glyphicon glyphicon-print'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In  &nbsp;&nbsp;      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                            <?php endif;?>
                         </div>

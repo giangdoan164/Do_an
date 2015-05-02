@@ -3,7 +3,7 @@ body {
 /*    background: #999999;*/
 /*background: #666600;*/
 /*background: #E1E1E1;*/
-background: #EAEAEA;
+/*background: #EAEAEA;*/
 }
 .navbar-fixed-top{
      background-color: #CE4B27;
@@ -16,11 +16,12 @@ background: #EAEAEA;
 }
 
 #content {
-       width: 95%;
-       margin: 20px auto;
+       /*width: 95%;*/
+       /*margin: 20px auto;*/
       
        /*background: #FFFFFF;*/
-       background: #fffff2;
+       /*background: #fffff2;*/
+       /*background: #F7F6F3;*/
 	
 }
 
@@ -58,4 +59,8 @@ footer#page_footer p{
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.form-control{
+    border-radius: 0;
 }

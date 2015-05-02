@@ -3,7 +3,7 @@ $role = Session::get('level');
 ?>
 <div class="container" >
     <div class="row">
-        <h1 class="page-header" style="color: #3E3E3E;margin: 5px;">Diễn đàn - Trao đổi</h1>  
+        <h2 class="page-header" style="color: #3E3E3E;margin: 5px;">Diễn đàn - Trao đổi</h2>  
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
 <?php
@@ -22,20 +22,27 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
                         <a href="<?php echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-home"></span> &nbsp;Trang chủ</a>&nbsp;&gt;
                         <a href="<?php echo $this->get_controller_url() . 'dsp_all_topic/' . $category_id; ?>"><?php echo $category_name; ?></a>           
                     </div>  
-                    <?php if($role == 3):?>
-                    <div class="col-md-2 col-md-offset-5">
+                 
+                </div>  
+                <div class="row" style="margin: 10px;padding-left: 120px;">
+                    <div class="col-md-3 col-md-offset-7" style="padding-left: 95px;">
+                           <?php if($role == 3):?>
+                    <!--<div class="col-md-2 col-md-offset-5">-->
                         <!--<a href="<?php // echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-user"></span> Quản trị điễn đàn</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
                         <a href="#" onclick="dsp_admin_dasboard();"><span class="glyphicon glyphicon-user"  ></span> Quản trị điễn đàn</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <!--<a href="<?php // echo $this->get_controller_url() . 'dsp_forum_index'; ?>"><span class="glyphicon glyphicon-share-alt"></span> &nbsp;Chuyển chủ đề</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
                         <!--<a href="<?php // echo $this->get_controller_url() . 'dsp_all_topic/' . $category_id; ?>"><span class="glyphicon glyphicon-remove" onclick="teacher_delete_topic();"></span> &nbsp;Xóa</a>-->     
-                    </div> 
+                    <!--</div>--> 
                     <?php endif;?>
-                </div>  
-                <div class="row" style="margin: 10px;padding-left: 120px;">
-                    <div class="col-md-1 col-md-offset-10">
-                        <button class="btn btn-primary" onclick="dsp_create_new_topic();"> <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Chủ đề</button>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <a onclick="dsp_create_new_topic();"> <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Tạo mới chủ đề</a>
+                        </div>
+                        
                     </div>
                 </div>
+                <div style="min-height: 20px;"></div>
                 <table class="table table-hover table-nomargin table-condensed ">
                     <thead>
                         <tr class="forum_head">
@@ -51,8 +58,8 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
                             <?php foreach ($arr_all_topic as $topic) : ?>
                                 <tr>
                                   
-                                    <td style="text-align:center">
-                                        <span style="font-size: 20px;"> <a href="#" onclick="row_click(<?php echo $topic['PK_TOPIC']; ?>)"> <?php echo $topic['C_TITLE']; ?> </a></span> 
+                                    <td style="padding-left: 34px;">
+                                        <span style="font-size: 20px;"> <a href="#" style="color: #2CA25E;" onclick="row_click(<?php echo $topic['PK_TOPIC']; ?>)"> <?php echo $topic['C_TITLE']; ?> </a></span> 
                                         <div class="title"><span>Tạo bởi&nbsp;</span>
                                           <?php foreach ($arr_user_class as $user): ?>
                                              <span >

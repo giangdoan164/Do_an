@@ -13,7 +13,7 @@ class Class_forum extends Controller {
         $this->class_forum_model = $this->loadModel('class_forum');
         $this->category_model = $this->loadModel('category');
         //them file js rieng cua forum
-        $this->view->js = array('class_forum/js/forum.js');
+//        $this->view->js = array('class_forum/js/forum.js');
         $this->view->ckeditor_js = 'ckeditor/ckeditor.js';
         $this->view->css = array('class_forum/css/forum1.css');
     }

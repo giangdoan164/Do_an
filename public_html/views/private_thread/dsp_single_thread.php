@@ -1,8 +1,8 @@
 <?php
-if (!empty($this->ckeditor_js)) {
-    $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js . "'></script>";
-    echo $js_files;
-}
+//if (!empty($this->ckeditor_js)) {
+//    $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js . "'></script>";
+//    echo $js_files;
+//}
 $v_controller_url = $this->get_controller_url();
 $v_total = isset($arr_all_message[0]['C_TOTAL']) ? $arr_all_message[0]['C_TOTAL'] : 0;
 $page_current = get_request_var('page',1);
@@ -10,7 +10,7 @@ $page_current = get_request_var('page',1);
 <div style="min-height: 600px;">
 <div class="container" >
     <div class="row">
-        <h3 class="page-header">Diễn đàn trao đổi</h3>
+        <h3 class="page-header">Trao đổi riêng</h3>
 
         <div class="col-md-10 col-md-offset-1">
             <form id="frmMain" name="frmMain" aciton="" method="POST">

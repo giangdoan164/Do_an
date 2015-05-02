@@ -9,19 +9,13 @@ if ($count_arr > 0) {
 $string_arr = substr($string_arr,2);
 }
  
-//$data = explode('_', $string_arr);
-//$final_arr = array();
-//foreach ($data as $value){
-//   $value = explode(',', $value);
-//   $final_arr[] = $value;
-//}
 
 ?>
 <div class="container">
     
     <div class="row">
         <div class="row">
-            <h3 style="text-align: center;">Danh sách điểm thi toán văn chuẩn bị nhập</h3>
+            <h2 style="text-align: center;">Danh sách điểm thi toán văn chuẩn bị nhập</h2>
         </div>
           <form action="" method="post" name="frmMain" id="frmMain"  enctype="multipart/form-data">
         <?php
@@ -62,15 +56,13 @@ $string_arr = substr($string_arr,2);
                     <?php endif; ?>
                 </tbody>
             </table>
-               <div class="col-md-1 col-md-offset-2">
+               <div class="col-md-3 col-md-offset-9">
                     <button type="button"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cập nhật vào hệ thống </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                  
-        </div>
-               <div class="col-md-1 col-md-offset-2">
-                       <a  href="<?php echo $this->get_controller_url().'dsp_main_school_record'?>"  class="btn btn-primary" >
-                        <span class="glyphicon" ></span>Quay lại </a>
-        </div>
+                        <span class="glyphicon glyphicon-saved"></span> &nbsp;&nbsp;Cập nhật </button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                       <a  href="<?php echo $this->get_controller_url().'dsp_main_school_record'?>"  class="btn btn-default" >
+                        <span class="glyphicon glyphicon-arrow-left" ></span> &nbsp;&nbsp;Quay lại </a>
+                 </div>
            </form> 
         </div>
 </div>

@@ -9,8 +9,8 @@ class Private_thread extends Controller {
         $this->private_thread_model = $this->loadModel('private_thread');
         //them file js rieng cua forum
 //        $this->view->js = array('class_forum/js/forum.js');
-        $this->view->ckeditor_js = 'ckeditor/ckeditor.js';
-//        $this->view->css = array('class_forum/css/forum1.css');
+        $this->view->js = array('class_forum/ckeditor/ckeditor.js');
+        $this->view->css = array('class_forum/css/forum1.css');
     }
     
     public function index(){

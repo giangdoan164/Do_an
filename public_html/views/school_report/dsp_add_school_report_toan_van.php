@@ -9,7 +9,7 @@ if ($count_arr > 0) {
 
     <form action="" method="post" name="frmMain" id="frmMain"  enctype="multipart/form-data">
         <div class="row-fluid" style="min-height: 400px;;">
-            <h3 class="page-header" style="text-align:center">Điểm thi Toán , Văn</h3>
+            <h2 class="page-header" style="text-align:center">Nhập điểm thi Toán , Văn</h2>
 <?php
 echo $this->hidden('controller', $this->get_controller_url());
 echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
@@ -19,11 +19,11 @@ echo $this->hidden('arr_data', $json_data);
                 <div class="col-md-4 col-md-offset-2">
                     <input type="file" class="form-control" name="uploader" id="uploader"/>
                 </div>
-                <div class="col-md-3 ">
-                    <button class="btn btn-primary " onclick="dsp_ds_chuan_bi_nhap();" > Nhập học bạ </button>
+                <div class="col-md-4 ">
+                    <button class="btn btn-primary " onclick="dsp_ds_chuan_bi_nhap();" ><span class='glyphicon glyphicon-plus'></span> &nbsp;Nhập học bạ </button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a  href="<?php echo $this->get_controller_url() . 'dsp_main_school_record' ?>"  class="btn btn-primary" onclick="do_insert_list_school_record();" >
-                        <span class="glyphicon" ></span>Quay lại </a>
+                    <a  href="<?php echo $this->get_controller_url() . 'dsp_main_school_record' ?>"  class="btn btn-default" onclick="do_insert_list_school_record();" >
+                        <span class="glyphicon glyphicon-arrow-left" ></span> &nbsp;&nbsp;&nbsp;Quay lại&nbsp;&nbsp; </a>
                 </div>
             </div>
         </div>

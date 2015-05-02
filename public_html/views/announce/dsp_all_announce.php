@@ -1,10 +1,10 @@
 <?php // $this->render('user/index'); ?>
 
-<div class="container-fluid" >
+<div class="container" >
     <div class="row-fluid">
         <h1 class="page-header">Quản lý Thông báo</h1>
         <div class="main-wrapper" style="margin-left: 0px;">                    
-            <div class="container-fluid block">
+            <div class="container-fluid">
                 <form name="frmMain" id="frmMain" action="" method="POST" enctype="">
                    <?php 
                         $url = $this->get_controller_url();
@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label class='col-md-5 '>Từ khóa nội dung</label>
                                 <div class="col-md-7" >
-                                    <input type='text' class='form-control' autofocus='autofocus' placeholder="Nhập từ khóa ví dụ : môn toán" name='txt_content_announce' id='txt_content_announce' />
+                                    <input type='text' style="border-radius: 0;" class='form-control' autofocus='autofocus' placeholder="Nhập từ khóa ví dụ : môn toán" name='txt_content_announce' id='txt_content_announce' />
 
                                 </div>
                             </div>
@@ -49,8 +49,8 @@
                         </div>
                         <div class="col-md-2">
                              <div class='col-md-6 col-md-offset-1'>
-                            <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
-                                <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
+                            <button type="button" class="btn btn-success " onclick="btn_filter_onclick();" name="btn_filter">
+                                <i class="glyphicon glyphicon-search"></i>  &nbsp;&nbsp;&nbsp;  Lọc&nbsp;&nbsp;&nbsp;&nbsp;
                             </button>
                         </div>
                         </div>
@@ -129,7 +129,7 @@
                         <div class="col-md-2">
                             <div class='col-md-6 col-md-offset-1'>
                             <button type="button" class="btn btn-primary" onclick="btn_add_new_onclick();" name="btn_add_new">
-                                Tạo mới 
+                                <span class='glyphicon glyphicon-plus'></span>  Tạo mới 
                             </button>
                         </div>
                     </div>
@@ -137,8 +137,8 @@
                     </div>
                 </div>
                     
-                    <div class="box box-bordered box-small">
-                           <div class="box-content nopadding" >
+                    <div style='margin-top: 30px;' >
+                 
                                 <table class="table table-hover table-nomargin table-condensed table-bordered ">
                                     <thead>
                                         <tr class="info">
@@ -186,15 +186,7 @@
                                 </table>
                                <div id="paging" class="nowrap">
                                    <?php echo $this->paging2($arr_all_announce); ?>
-                                
                                </div>
-                               
-                               
-                               <div class="div_padding" >
-                                       <?php // echo $this->paging3(count($arr_all_announce),1,5); ?>
-                               </div>
-                                    
-                        </div>
                     </div>
                 </form>
                  </div>

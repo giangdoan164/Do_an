@@ -44,27 +44,19 @@ $user_id = Session::get('user_id');
                     <tbody>
                         <?php if (sizeof($arr_all_post) > 0): ?>
                             <?php foreach ($arr_all_post as $post) : ?>
-                                <tr style="background: #fff;color:#000000; ">
+                                <tr style="background-color: #EAEAEA;;color:#000000; ">
                                     <td >
-                                        <div class="col-md-7 ">
-                                            
+                                        <div class="col-md-7 ">   
                                         <span style='font-size: 15px;font-style: italic;'><?php echo $post['C_LOGIN_NAME'] ?></span>
-                                        &gt; &gt;<?php echo $post['C_POSTED_DATE'] ?>
+                                        &gt; &gt;<?php echo date('d-m-Y h:m:s',  strtotime($post['C_POSTED_DATE'])); ?>
                                         </div>
-                                        <div class="col-md-2 col-md-offset-3" style="border-left:1px solid #fff;text-align: right;"><?php echo "Bài viết  " .$post['C_POST_NUMBER'];?></div>
+                                        <div class="col-md-2 col-md-offset-3" style="border-left:1px solid #000000;text-align: right;"><?php echo "Bài viết  " .$post['C_POST_NUMBER'];?></div>
                                     </td>
                                 </tr>
-<!--                                <tr>
-                                    <td style="background-color: #FFFFFF;color:#574E4F;">
-                                        <span style='font-size: 15px;'>Người gửi</span>
-                                        <span style='font-size: 15px;font-style: italic;'><?php // echo $post['C_LOGIN_NAME'] ?></span>
-                                    </td>
-                                </tr>-->
                                 <tr>
                                     <td id='post_content_<?php echo $post['PK_POST']; ?>'>
                                         <div> 
                                         <?php echo html_entity_decode($post['C_CONTENT'], ENT_QUOTES, 'UTF-8'); ?>
-                                        <!--<p class='pull-right'><a  href='#edit_post' data-toggle="modal" ><span>Sửa</span></a></p>-->
                                          </div>
                                         <?php if($user_id==$post['C_POSTED_USER']):?>
                                        <p class='pull-right'>
@@ -75,7 +67,7 @@ $user_id = Session::get('user_id');
                                        <?php endif; ?>
                                     </td>
                                 </tr>
-                                <tr style='background-color: #EAEAEA;height:6px;border: none;margin-top: -10px;'><td>&nbsp;</td></tr>
+                                <tr style='height:6px;border: none;margin-top: -10px;'><td>&nbsp;</td></tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
 
@@ -87,7 +79,7 @@ $user_id = Session::get('user_id');
                     </div>
                 <div class="row">
                     <div class="col-md-2 ">
-                        <a  class="btn btn-success " id="btn_show" onclick="show_reply_div();">Trả lời</a>
+                        <a  class="btn btn-primary " id="btn_show" onclick="show_reply_div();"><span class='glyphicon glyphicon-pencil'></span>&nbsp;&nbsp;Trả lời</a>
                     </div>
                 </div>
                 <div id="reply_div" style="display: none">
@@ -109,10 +101,10 @@ $user_id = Session::get('user_id');
             </div>
                 <div class="row">
                        <div class="col-md-1 col-md-offset-5">
-                         <button class='btn btn-primary ' onclick="do_reply(<?php echo $user_id?>)">Trả lời</button>
+                         <button class='btn btn-primary ' onclick="do_reply(<?php echo $user_id?>)"><span class='glyphicon glyphicon-saved'></span>&nbsp;&nbsp; Trả lời&nbsp; </button>
                     </div>
-                       <div class="col-md-1">
-                         <button class='btn btn-success ' onclick="do_hide();">Ẩn trả lời</button>
+                       <div class="col-md-1 col-md-offset-1">
+                           <button class='btn btn-success ' onclick="do_hide();"><span class='glyphicon glyphicon-share-alt'></span>&nbsp;Kết thúc</button>
                     </div>
                 </div>     
             </div>

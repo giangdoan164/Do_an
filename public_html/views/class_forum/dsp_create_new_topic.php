@@ -12,7 +12,7 @@
                         echo $this->hidden('cate_id',$cate_id);
             ?>
             <div class="row">
-                <a href="<?php echo $this->get_controller_url().dsp_all_topic ?>"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Diễn đàn</a>
+                <!--<a href="<?php // echo $this->get_controller_url()."dsp_forum_index" ?>"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;Diễn đàn</a>-->
             </div>
             <div class="row" style="margin-top:10px;margin-bottom:10px;">
                 <div class="form-group">
@@ -32,8 +32,8 @@
             </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-5">
-                <button class="btn btn-primary" onclick="do_create_new_topic();">Tạo chủ đề</button>&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-primary" >Quay lại</button>
+                <button class="btn btn-primary" onclick="do_create_new_topic();"><span class='glyphicon glyphicon-plus'></span>&nbsp;&nbsp; Tạo chủ đề</button>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-default"><span class='glyphicon glyphicon-arrow-left'></span>&nbsp;&nbsp;Quay lại</button>
             </div>
         </div>
       </form>  

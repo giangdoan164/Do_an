@@ -3,6 +3,9 @@
 ?>
 
 <div class="container">
+     <div class="row">
+            <h2 class='page-header'>Nhập điểm môn phụ</h2>
+     </div>
     <div class="row-fluid">
       
         <form  name="frmMain" id="frmMain" action="" method="POST">
@@ -32,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style='margin-top: 20px;'>
                 <table class="table table-hover  table-condensed ">
                     <thead>
                         <tr class="info">
@@ -67,11 +70,13 @@
                 </table>
             </div>
             <div class="row" style="margin: 10px;">
-                <div class="col-md-1 col-md-offset-9">
+                <div class="col-md-4 col-md-offset-8">
                     <!--<button type="submit" class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</button>-->
                     <!--<a href="#" class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>-->
                     <a href="#"  class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>
-                    
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a  href="<?php echo $this->get_controller_url() . 'dsp_main_school_record' ?>"  class="btn btn-default" onclick="do_insert_list_school_record();" >
+                        <span class="glyphicon glyphicon-arrow-left" ></span> &nbsp;&nbsp;&nbsp;Quay lại&nbsp;&nbsp; </a>
                 </div>
             </div>
         </form>

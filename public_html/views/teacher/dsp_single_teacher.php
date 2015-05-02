@@ -23,7 +23,7 @@
       $v_teacher_code ='';
    }
 ?>
-<div class="container-fluid " >
+<div class="container" >
     <div class="col-md-6 col-md-offset-3">
 <form  data-toggle="validator"  role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_teacher';?>">
 <!--<form  data-toggle="validator"  role="form" class="form-horizontal" method="post" action="<?php // echo $this->get_controller_url().'update_single_teacher';?>">-->

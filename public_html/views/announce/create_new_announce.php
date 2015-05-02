@@ -1,7 +1,7 @@
 <?php // $this->render('user/index'); ?>
-<div class="container-fluid" >
+<div class="container" >
     <div class="row-fluid">
-        <h1 class="page-header">Nhập thông báo học sinh</h1>
+        <h2 class="page-header">Nhập thông báo học sinh</h2>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <div class="container-fluid block">
                 <form name="frmMain" id="frmMain" action="" method="POST">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                      
-                    <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+                    <div class="row" style="margin-top: 30px;margin-bottom: 10px;">
                         <div class="col-md-8">
                             <textarea class="form-control"  id="txta_ann"  name ="txta_ann" rows="3" placeholder="Nhập thông báo dùng gửi chung cho phụ huynh" autofocus="autofocus"></textarea>
                         </div>
@@ -92,8 +92,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box box-bordered box-small">
-                           <div class="box-content nopadding">
+                    <div style='margin-top: 30px;' >
+                        
                                 <table class="table table-hover table-nomargin table-condensed ">
                                     <thead>
                                         <tr class="info">
@@ -139,7 +139,7 @@
                                    <?php echo $this->paging2($arr_student); ?>
                                </div>
                                     
-                        </div>  
+                        
                     </div>
                 </form>
                  </div>

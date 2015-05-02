@@ -1,5 +1,5 @@
 <?php $arr_key_unread_mess = array_keys($arr_all_unread_mess);?>
-<div class="container-fluid" >
+<div class="container" >
     <div class="row-fluid">
         <h1 class="page-header">Chủ đề có tin nhắn mới</h1>
         <div class="main-wrapper" style="margin-left: 0px;">                    

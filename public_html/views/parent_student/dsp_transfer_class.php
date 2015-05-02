@@ -4,10 +4,10 @@
 $v_grade_id = $grade;
 $v_class_id = $class;
 ?>
-<div class="container-fluid" >
+<div class="container" >
      <form name="frmMain" id="frmMain" action="" method="POST" enctype="multipart/form-data">
     <div class="row-fluid">
-        <h2 class="page-header" style="text-align: center;">Chuyển lớp</h2>
+        <h2 class="page-header" style="text-align: center;">Cập nhật lớp học</h2>
         
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <div class="container-fluid block" style=" margin-bottom: 25px;">
@@ -28,14 +28,13 @@ $v_class_id = $class;
                     echo $this->hidden('hdn_dsp_single_record', 'dsp_single_parent_contact');
                     ?>  
                     <div class="row">
-                        <div class="col-md-5">
-                            <h3 style="color: #ff3300;">Lớp chuyển đi</h3>
+                        <div class="col-md-5 ">
+                            <h4 style="color: #ff3300;padding-left:120px;margin: 0;">Lớp chuyển đi</h4>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-5">
-                            <h3 style="color: #ff3300;">Lớp chuyển đến</h3>
+                            <h4 style="color: #ff3300;padding-left:120px;margin: 0;">Lớp chuyển đến</h4>
                         </div>
-
                     </div>
             </div>
             <div class='row' style='margin-bottom:19px;'>

@@ -1,11 +1,10 @@
 <?php $arr_key_unread_mess = array_keys($arr_all_unread_mess);?>
-<div class="container-fluid" >
+<div class="container" >
     <div class="row-fluid">
-        <h1 class="page-header">Trao đổi riêng</h1>
+        <h2 class="page-header">Trao đổi riêng</h2>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
                 <?php
-
                     echo $this->hidden('controller', $this->get_controller_url());
                     echo $this->hidden('hdn_dsp_all_thread','dsp_all_thread');
                     echo $this->hidden('hdn_dsp_single_thread','dsp_single_thread');
@@ -18,17 +17,17 @@
                 echo $this->hidden('hdn_delete_record_method', 'delete_thread');
                 ?>
                 <div class='row' style='margin-bottom:19px;'>  
-                        <div class="col-md-2 col-md-offset-7">
-                        <button class="btn btn-primary btn-block" onclick="dsp_create_new_thread();">Trao đổi mới</button>
+                        <div class="col-md-2 col-md-offset-9" style="padding-left: 60px;">
+                            <button class="btn btn-primary " onclick="dsp_create_new_thread();"><span class="glyphicon glyphicon-plus"></span>&nbsp;Trao đổi mới</button>
                     </div>
-                    <div class="col-md-1 col-md-offset-1">
-                        <button class="btn btn-primary btn-block" onclick="update_delete_onclick();">Xóa</button>
+                    <div class="col-md-1">
+                        <button class="btn btn-success btn-block" onclick="update_delete_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Xóa</button>
                        
                     </div>
                 </div>  
                 <table class="table table-hover table-nomargin table-condensed " >
                     <thead>
-                        <tr class="info">
+                        <tr class="forum_head">
                                 <th style="width: 5%;text-align:center">
                                      <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">               
                                 </th>

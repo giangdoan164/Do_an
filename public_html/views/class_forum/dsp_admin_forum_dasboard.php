@@ -4,7 +4,7 @@
 ?>
 <div class="container" >
     <div class="row">
-        <h1 class="page-header" style="color: #3E3E3E;margin: 5px;">Quản trị diễn đàn</h1>  
+        <h2 class="page-header" style="color: #3E3E3E;margin: 5px;">Quản trị diễn đàn</h2>  
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <form name="frmMain" id="frmMain" action="" method="POST" >
 <?php

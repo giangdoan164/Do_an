@@ -16,6 +16,7 @@ and open the template in the editor.
     background: none;
 }
 .title{
+  
     font-weight: bold;
 }
 .user_name{
@@ -32,7 +33,7 @@ and open the template in the editor.
 .forum_head{
    background-color: #C3372D;
    color: #FBFFF1;
-   height: 50px;
+   height: 40px;
  
 }
 
@@ -40,7 +41,7 @@ and open the template in the editor.
     line-height: 50px;
 }*/
 .table thead tr th{
-    line-height: 50px;
+    line-height: 40px;
 }
 
 .table tbody{

@@ -24,18 +24,17 @@ $role = Session::get('level');
     
    }
 ?>
-<div class="container-fluid " >
+<div class="container " >
     <div class="col-md-6 col-md-offset-3">
 <form  id='frmMain' role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_parent_contact';?>">
   <fieldset>
-    <legend>Cập nhật Thông tin liên lạc gia đình</legend>
+    <legend>Cập nhật Thông tin liên lạc </legend>
     <?php 
   
   
         echo $this->hidden('controller',$this->get_controller_url());  
         echo $this->hidden('hdn_parent_contact_id',$v_single_parent_contact_id);
         echo $this->hidden('hdn_site_url',SITE_URL);
-
         echo $this->hidden('hdn_delete_record_method', 'delete_parent_contact');
         echo $this->hidden('hdn_dsp_all_record','dsp_all_parent_contact');
         echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
@@ -47,7 +46,14 @@ $role = Session::get('level');
           <input type="text" class="form-control" value="<?php echo $v_student_name; ?>" id="txt_student_name" name="txt_student_name" placeholder="Họ tên học sinh" required>
       </div>
     </div>
-    
+    <?php if(sizeof($arr_single_parent_contact)==0):?>
+    <div class="form-group">
+      <label for="txt_student_code" class="col-lg-3 control-label" >Mã học sinh <span style="color:red;">(*)</span></label>
+      <div class="col-lg-9">
+          <input type="text" class="form-control" value="<?php echo $v_student_code; ?>" id="txt_student_code" name="txt_student_code" placeholder="Mã học sinh được cấp" required>
+      </div>
+    </div>
+   <?php endif; ?>
     <div class="form-group">
      <label for="slt_student_birth" class="col-lg-3 control-label">Ngày sinh</label>
       <div class="col-lg-9">
@@ -119,9 +125,9 @@ $role = Session::get('level');
     <div class="form-group">
       <div class="col-lg-9 col-lg-offset-3">
        <?php if($role == 1): ?>
-        <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2">Cập nhật</button>
+          <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Cập nhật&nbsp;</button>
         <?php endif;?>
-        <button type="button" class="btn btn-default col-lg-3 col-lg-offset-2 " onclick="btn_go_back_onclick();">Quay lại</button>
+        <button type="button" class="btn btn-default col-lg-3 col-lg-offset-2 " onclick="btn_go_back_onclick();"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;&nbsp;Quay lại</button>
       </div>
     </div>
   </fieldset>

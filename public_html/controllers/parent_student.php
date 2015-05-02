@@ -14,7 +14,7 @@ class Parent_student extends Controller {
 
 
    public function index(){ 
-
+       
       $this->dsp_all_parent_contact();
       
    }

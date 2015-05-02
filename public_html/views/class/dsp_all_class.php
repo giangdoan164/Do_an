@@ -1,5 +1,5 @@
 <?php // $this->render('user/index'); ?>
-<div class="container-fluid" >
+<div class="container" >
     <div class="row-fluid">
         <h1 class="page-header">Quản lý lớp học</h1>
         <div class="main-wrapper" style="margin-left: 0px !important;">                    

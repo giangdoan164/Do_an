@@ -40,7 +40,7 @@
         </div>
             <div class="row" style="margin-top: 25px;">
                 <div class="col-md-2 col-md-offset-5">
-                    <button class="btn btn-primary" onclick="update_current_time();" >Cập nhật</button> 
+                    <button class="btn btn-primary" onclick="update_current_time();" ><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Cập nhật</button> 
                 </div>
             </div>
       </form>
