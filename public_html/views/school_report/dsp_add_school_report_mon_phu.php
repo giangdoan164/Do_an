@@ -75,7 +75,7 @@
                     <!--<a href="#" class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>-->
                     <a href="#"  class=" btn btn-primary" onclick="do_update_onclick();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập điểm</a>
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a  href="<?php echo $this->get_controller_url() . 'dsp_main_school_record' ?>"  class="btn btn-default" onclick="do_insert_list_school_record();" >
+                    <a  href="<?php echo $this->get_controller_url() . 'dsp_main_school_record' ?>"  class="btn btn-default"  >
                         <span class="glyphicon glyphicon-arrow-left" ></span> &nbsp;&nbsp;&nbsp;Quay lại&nbsp;&nbsp; </a>
                 </div>
             </div>

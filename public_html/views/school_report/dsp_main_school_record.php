@@ -40,7 +40,7 @@ echo $this->hidden('hdn_update_type', 1);
 echo $this->hidden('hdn_site_url', SITE_URL);
 ?>
              <h2 class="page-header" >Quản lý học bạ</h2>
-             <details  open style="width:50%">
+             <details  style="width:50%">
                 <summary>Nhập học bạ</summary>
                  <div style='min-height: 10px;'></div>
                      <div class="row">

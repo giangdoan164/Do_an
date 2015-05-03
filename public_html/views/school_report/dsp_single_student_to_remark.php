@@ -72,9 +72,13 @@
                      <?php endif; ?>
                <?php if (sizeof($arr_subject_grade) > 0) : ?>
             <div class="row" style="margin: 10px;">
-                <div class="col-md-1 col-md-offset-9">
+                <div class="col-md-4 col-md-offset-8">
                     <a  class=" btn btn-primary" onclick="do_update_onclick1();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhập nhận xét</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a  href="<?php echo $this->get_controller_url() . 'dsp_main_school_record' ?>"  class="btn btn-default"  >
+                        <span class="glyphicon glyphicon-arrow-left" ></span> &nbsp;&nbsp;&nbsp;Quay lại&nbsp;&nbsp; </a>
                 </div>
+                   
             </div>
             <?php endif;?>
         </form>

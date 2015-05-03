@@ -77,8 +77,11 @@ echo $this->hidden('hdn_site_url', SITE_URL);
             </div>
 
             <div class="row" style="margin: 10px;">
-                <div class="col-md-1 col-md-offset-9">
-                    <a  class=" btn btn-primary" onclick="do_update_onclick_final();"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Nhân xét tổng kết </a>
+                <div class="col-md-4 col-md-offset-8">
+                    <a  class=" btn btn-primary" onclick="do_update_onclick_final();"><span class="glyphicon glyphicon-saved"></span>&nbsp;Nhân xét tổng kết </a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a  href="<?php echo $this->get_controller_url() . 'dsp_main_school_record' ?>"  class="btn btn-default"  >
+                        <span class="glyphicon glyphicon-arrow-left" ></span> &nbsp;&nbsp;&nbsp;Quay lại&nbsp;&nbsp; </a>
                 </div>
             </div>
               
