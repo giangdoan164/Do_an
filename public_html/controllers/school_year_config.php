@@ -30,5 +30,15 @@ class School_year_config extends Controller
         $this->school_year_model->exec_fail( $this->goback_url,"Cập nhật thành công");
     }
     
+    public function reset_system(){
+        $result = $this->school_year_model->reset_system();
+        $this->goback_url = $this->view->get_controller_url().'dsp_system_config';
+        if($result){
+            $this->school_year_model->exec_fail($this->goback_url,"Reset hệ thống thành công");
+        }else{
+             $this->school_year_model->exec_fail($this->goback_url,"Reset hệ thống thất bại");
+        }
+    }
+    
 
 }

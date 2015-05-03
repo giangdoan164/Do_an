@@ -90,8 +90,8 @@
                         <li <?php if($current_controller=='class_grade'){echo "class='active'";} ?>>
                             <a href="<?php echo SITE_URL; ?>class_grade">Quản lý lớp học</a>
                         </li>
-                        <li <?php if($current_controller=='class_grade1'){echo "class='active'";} ?>>
-                            <a href="<?php echo SITE_URL; ?>class_grade1">Quản lý chuyên mục</a>
+                        <li <?php if($current_controller=='category'){echo "class='active'";} ?>>
+                            <a href="<?php echo SITE_URL; ?>category">Quản lý chuyên mục</a>
                         </li>
                         <?php endif;?>
                         <?php if($role == 3 || $role == 1):?>
@@ -127,8 +127,7 @@
                                 <a style="color: #ffff99;font-weight: bold;" href="<?php echo SITE_URL ?>private_thread/dsp_all_thread_has_unread_message"><span id='li_unread_thread_message'></span></a>
                             </li>
                         <?php endif; ?>
-                        <li class="dropdown">
-              <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tài khoản<span class="caret"></span></a>-->
+        <li class="dropdown" >
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span style="font-size: 16px;" class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>&nbsp;&nbsp;&nbsp;Tài khoản</a>
               <ul class="dropdown-menu" role="menu">
                   <li>
@@ -143,10 +142,6 @@
 
                             <?php endif; ?>
                         </li>
-                        
-<!--
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>-->
               </ul>
             </li>
                  

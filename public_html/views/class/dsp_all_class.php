@@ -3,33 +3,36 @@
     <div class="row-fluid">
         <h1 class="page-header">Quản lý lớp học</h1>
         <div class="main-wrapper" style="margin-left: 0px !important;">                    
-            <div class="container-fluid block">
+            <div class="container-fluid">
                 <form name="frmMain" id="frmMain" action="" method="POST" class="form-inline" >
                    <?php 
-                   // vi du chung minh bien toan cuc thi goi dau cug  duoc
-                    echo $this->hidden('controller',$this->get_controller_url());
-                    echo $this->hidden('hdn_teacher_id',0);
-                    echo $this->hidden('hdn_item_id_list', '');
-                    echo $this->hidden('hdn_delete_record_method', 'delete_class');
-                    echo $this->hidden('hdn_dsp_all_record','dsp_all_class');
+                        // vi du chung minh bien toan cuc thi goi dau cug  duoc
+                         echo $this->hidden('controller',$this->get_controller_url());
+                         echo $this->hidden('hdn_teacher_id',0);
+                         echo $this->hidden('hdn_item_id_list', '');
+                         echo $this->hidden('hdn_delete_record_method', 'delete_class');
+                         echo $this->hidden('hdn_dsp_all_record','dsp_all_class');
                      ?>
-                    <div class="row-fluid" style="padding: 10px;">
-                        <div class="form-group">
-                            <label for="sel_grade_main">Tìm kiếm &nbsp</label>
-                            <select class="form-control" id="sel_grade_main" name="sel_grade_main" onchange="load_class(this.value)">
+                    <div class="row-fluid" style="padding: 20px;margin-bottom: 40px;">
+                        <div class="col-md-5">
+                          <div class="form-group">
+                            <label for="sel_grade_main" >Tìm kiếm &nbsp</label>
+                              <select class="form-control" id="sel_grade_main" name="sel_grade_main" onchange="load_class(this.value)">
                                     <option value="0">--- Chọn khối --- </option>
                                     <option value="1">Khối 1</option>
                                     <option value="2">Khối 2</option>
                                     <option value="3">Khối 3</option>
                                     <option value="4">Khối 4</option>
                                     <option value="5">Khối 5</option>
-                             </select>
-                       </div>
-                        <div class='row'>
-                            <a data-toggle="modal" href="#add_new_class" ><i class="icon-plus"></i>Thêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <!--<a data-toggle="modal" href="#add_new_class" ><i class="icon-plus"></i>Thêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp-->
-                            <a  href="javascript:void(0);" onclick="update_delete_onclick();"><i class="icon-trash"></i>Xóa</a>
-                           
+                             </select>      
+                          </div>
+                        </div>
+                     <div class='col-md-7'>
+                            <div class="col-md-5 col-md-offset-7">
+                                <a data-toggle="modal" class="btn btn-primary" href="#add_new_class" ><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Thêm mới</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <a  href="javascript:void(0);" class="btn btn-success" onclick="update_delete_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Xóa</a>
+                            </div>   
                         </div>
                         </div>
                                 <table class="table table-hover table-nomargin table-condensed table-bordered ">

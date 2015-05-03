@@ -142,12 +142,10 @@
                                 <table class="table table-hover table-nomargin table-condensed table-bordered ">
                                     <thead>
                                         <tr class="info">
-                                            <th style="width: 5%;text-align:center">
-                                                <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                               
-                                            </th>
+                                           
                                             <th style="width: 18%;text-align:center">Họ tên học sinh</th>
                                             <th style="width: 5%;text-align: center">Lớp</th>
-                                            <th style="width: 45%;text-align:center">Nội dung</th>
+                                            <th style="width: 50%;text-align:center">Nội dung</th>
                                             <th style="width: 10%;text-align:center">Ngày gửi</th>
                                             <th style="width: 27%;text-align:center">Người gửi</th>
                                                  
@@ -157,10 +155,7 @@
                                     <tbody>
                                     <?php foreach ($arr_all_announce as $announce):?>
                                     <tr>
-                                        <td style="text-align:center">
-                                        
-                                            <input type="checkbox" name="chk" value="<?php  ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
-                                        </td>
+                                       
                                         <td style="text-align:center"> 
                                             <?php echo $announce['C_NAME']; ?>
                                         </td>
