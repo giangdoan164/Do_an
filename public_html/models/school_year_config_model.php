@@ -29,7 +29,8 @@ class School_year_config_Model extends model {
     }
     
     public function reset_system(){
-        
+        $sql = " DELETE FROM t_announce";
+        $this->db->Execute($sql);
         $sql = " DELETE FROM t_public_post";
         $this->db->Execute($sql);
         $sql = " DELETE FROM t_public_topic";
@@ -42,7 +43,7 @@ class School_year_config_Model extends model {
         $this->db->Execute($sql);
         $sql = " DELETE FROM t_private_message_read_state";
         $this->db->Execute($sql);
-         if($this->db->ErrorNo()==0){
+        if($this->db->ErrorNo()==0){
             return true;
         }else{
             return false;

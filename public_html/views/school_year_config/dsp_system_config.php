@@ -49,7 +49,7 @@
         <h2 class="page-header">Reset lại hệ thống </h2>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="#" class='btn btn-success' style='' onclick="reset_system();" ><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp; Reset hệ thống</a>&nbsp;&nbsp;&nbsp;
-        <span style='color: red;font-weight: bold'>(*) Toàn bộ trao đổi diễn đàn , trao đổi riêng sẽ bị xóa</span>
+        <span style='color: red;font-weight: bold'>(*) Toàn bộ trao đổi diễn đàn , trao đổi riêng, thông báo sẽ bị xóa</span>
     </div>
 </div>
 <script type="text/javascript">
@@ -61,8 +61,7 @@
     }
     
     function reset_system(){
-       
-        if(confirm("Reset hệ thống. Toàn bộ dữ liệu trao đổi diễn đàn, trao đổi riêng sẽ bị mất !!!")==true){
+        if(confirm("Reset hệ thống. Toàn bộ dữ liệu trao đổi diễn đàn, trao đổi riêng, thông báo sẽ bị mất !!!")==true){
                var f = document.frmMain;
                 m = $('#controller').val() +'reset_system';
                 $('#frmMain').attr('action', m);

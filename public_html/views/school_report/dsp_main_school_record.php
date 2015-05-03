@@ -31,7 +31,7 @@ if (!isset($arr_all_year_student)) {
 
 <?php if($role == 3) :?>
 <div class ="container">
-    <div class="row" style="min-height: 400px;">
+    <div class="row">
         <form action="" method="post" name="frmMain" id="frmMain"  >      
 <?php
 echo $this->hidden('controller', $this->get_controller_url());
@@ -70,8 +70,6 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                          </div>
                      </div>
                  </details>
-            
-            <!--<details <?php // echo $open; ?>>-->
              <div style='min-height: 20px;'></div>
             <details open>
                 <summary>Tra cứu học bạ học sinh</summary>
@@ -115,7 +113,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                         </div>
                     </div></div>
                  
-                              <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
+                     <div class="row" style="margin-top: 20px;">
                         <div class="col-md-4 col-md-offset-8">
                             <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
                                 <span class='glyphicon glyphicon-search'></span> &nbsp;&nbsp; Tìm kiếm
@@ -128,31 +126,12 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                            <?php endif;?>
                         </div>
                     </div>
-               
-                      <?php if($size_arr_final >0):?>
-                  <div class="row" style="margin-bottom: 20px;margin-top: 20px;">
-                   <table class="table table-hover  table-condensed ">
-                    <thead>
-                        <tr class="info">
-                            <th style="width: 90%;text-align:center">Nhận xét cuối kỳ</th>
-                            <th style="width: 10%;text-align: center">Danh hiệu</th>
-                       
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                                <td style="text-align:center">
-                                    <?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> 
-                                </td>
-                                <td style="text-align:center;color:red;">
-                                    <?php echo $arr_final_remark_title['C_TITLE']; ?>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
+                
+             
             </div>
-            <?php endif; ?>
+            
                 </div>
+     
                   <?php if($size_arr>0):?>
             <div class="row">
                    <table class="table table-hover  table-condensed ">
@@ -181,6 +160,16 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                 </table>
             </div>
             <?php endif;?>
+          <?php if($size_arr_final >0):?>
+    
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp; Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+                </div> 
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
+                </div>
+                   
+                    <?php endif; ?>
             </details>   
           
           
@@ -194,12 +183,12 @@ echo $this->hidden('hdn_site_url', SITE_URL);
     <div class="row" style="min-height: 400px;">
           <h3 class="page-header" style="text-align:center">Tra cứu học bạ học sinh</h3>
         <form action="" method="post" name="frmMain" id="frmMain"  >      
-<?php
-echo $this->hidden('controller', $this->get_controller_url());
-echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
-echo $this->hidden('hdn_update_type', 1);
-echo $this->hidden('hdn_site_url', SITE_URL);
-?>               
+            <?php
+            echo $this->hidden('controller', $this->get_controller_url());
+            echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
+            echo $this->hidden('hdn_update_type', 1);
+            echo $this->hidden('hdn_site_url', SITE_URL);
+            ?>               
             <div class="row" style="margin: 20px;">
                     <div class="col-md-4">
                         <b style="color: red;"><?php echo $student_name;?></b>
@@ -269,27 +258,13 @@ echo $this->hidden('hdn_site_url', SITE_URL);
             </div>
             <?php endif;?>
             <?php if($size_arr_final >0):?>
-                  <div class="row">
-                   <table class="table table-hover  table-condensed ">
-                    <thead>
-                        <tr class="info">
-                            <th style="width: 90%;text-align:center">Nhận xét cuối kỳ</th>
-                            <th style="width: 10%;text-align: center">Danh hiệu</th>
-                       
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                                <td style="text-align:center">
-                                    <?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> 
-                                </td>
-                                <td style="text-align:center;color:red;">
-                                    <?php echo $arr_final_remark_title['C_TITLE']; ?>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
-            </div>
+<!--                  <div class="row">                       
+                      <span>Danh hiệu</span><span><?php // echo $arr_final_remark_title['C_TITLE']; ?></span>
+                  </div>
+                  <div class="row">                       
+                      <span>Nhận xét cuối kỳ</span><span><?php // echo $arr_final_remark_title['C_REMARK_FINAL']; ?>   </span> 
+                  </div>
+                  -->
             <?php endif; ?>
         </form> 
     </div>

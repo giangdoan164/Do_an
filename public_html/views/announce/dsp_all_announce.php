@@ -175,7 +175,7 @@
                                       
                                     </tr>
                                 <?php endforeach; ?>
-                                      <?php echo $this->render_rows(count($arr_all_announce),6);?>
+                                      <?php echo $this->render_rows(count($arr_all_announce),5);?>
                                     </tbody>
                                        
                                 </table>

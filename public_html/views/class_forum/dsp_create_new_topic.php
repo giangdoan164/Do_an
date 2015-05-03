@@ -1,3 +1,9 @@
+<?php 
+if (!empty($this->ckeditor_js)) {
+    $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js ."'></script>";
+    echo $js_files;
+}
+?>
 <div class ="container">
     <div class="row">
         <h3 class="page-header" style="text-align:center">Tạo mới chủ đề</h3>
@@ -28,6 +34,11 @@
                   <label for="txta_content" class="control-label">Nội dung</label>
                   <textarea class="form-control" rows="5" id="txta_content" name="txta_content"></textarea>
                 </div>
+                   <script type='text/javascript'>
+                        CKEDITOR.replace('txta_content');
+//                        http://jsfiddle.net/cDzqp/
+//                        CKEDITOR.instances.txta_reply_content.setData();
+                    </script>
             </div>
             </div>
         <div class="row">
@@ -43,7 +54,9 @@
     function do_create_new_topic(){
         var title = $('#frmMain #txt_title').val().trim();
         if(title ==''){alert("Mời nhập tiêu đề");return false;}
-        var content = $('#frmMain #txta_content').val().trim();
+        var content = CKEDITOR.instances.txta_content.getData();
+
+//        var content = $('#frmMain #txta_content').val().trim();
         if(content ==''){alert("Mời nhập nội dung");return false;}
         var f = document.frmMain;
         m = $("#controller").val() + f.hdn_create_new_topic.value;
