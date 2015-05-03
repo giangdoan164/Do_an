@@ -133,8 +133,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-primary" onclick="btn_addnew_onclick()">Cập nhật</button>
+                        <button type="button" class="btn btn-primary" onclick="btn_addnew_onclick()"><span class="glyphicon glyphicon-saved"></span> &nbsp;&nbsp;Cập nhật</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Hủy bỏ</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

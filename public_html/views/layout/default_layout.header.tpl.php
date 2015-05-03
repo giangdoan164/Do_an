@@ -73,9 +73,9 @@
     <body>
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid" id="div_navigation">
-                <div class="navbar-header" style="color: #ffff99;padding-right: 15px;" >
+                <div class="navbar-header" style="color: #ffff99;padding-right: 15px;width: 200px;" >
                     <div style="float:left"> <img src="<?php echo PUBLIC_URL.'images/logohn.png'; ?>" style="width: 50px;"></div>     
-                   <p style="text-align: center;margin-top: 6px;margin-bottom: 0px;">HỆ THỐNG THÔNG TIN LIÊN LẠC</p>
+                   <p style="text-align: center;margin-top: 6px;margin-bottom: 0px;">TRƯỜNG TIỂU HỌC VĂN CHƯƠNG</p>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-main" style="padding-left: 15px;">
                     <ul class="nav navbar-nav">
@@ -90,8 +90,8 @@
                         <li <?php if($current_controller=='class_grade'){echo "class='active'";} ?>>
                             <a href="<?php echo SITE_URL; ?>class_grade">Quản lý lớp học</a>
                         </li>
-                        <li <?php if($current_controller=='class_grade'){echo "class='active'";} ?>>
-                            <a href="<?php echo SITE_URL; ?>class_grade">Quản lý chuyên mục</a>
+                        <li <?php if($current_controller=='class_grade1'){echo "class='active'";} ?>>
+                            <a href="<?php echo SITE_URL; ?>class_grade1">Quản lý chuyên mục</a>
                         </li>
                         <?php endif;?>
                         <?php if($role == 3 || $role == 1):?>

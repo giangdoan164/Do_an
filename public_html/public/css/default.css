@@ -5,6 +5,14 @@ body {
 /*background: #E1E1E1;*/
 /*background: #EAEAEA;*/
 }
+div.navbar #div_navigation div.navbar-collapse ul.nav li.active a{
+    background: #FFFFFF;
+    color: #000000;
+    font-weight: bold;
+}
+div.navbar-fixed-top{
+    border-bottom: 1px solid #FFFFFF;
+}
 .navbar-fixed-top{
      background-color: #CE4B27;
 /*     background-color: #AC0713;*/

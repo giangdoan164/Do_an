@@ -7,11 +7,9 @@ class School_year_config extends Controller
     function __construct()
     {
         Session::check_login();
-        parent::__construct('School_year_config');
+        parent::__construct('school_year_config');
+        $this->school_year_model = $this->loadModel('school_year_config');
 
-        $this->school_year_model = $this->loadModel('School_year_config');
-
-//        $this->view->js=array();
     }
 
     public function index()
