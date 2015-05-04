@@ -93,7 +93,7 @@
                                         <label for="txt_description_category" class="control-label">Mô tả chuyên mục</label>
                                     </div>
                                     <div class="col-md-8">                     
-                                        <input type="text" class="form-control"  id="txt_description_category" name="txt_description_category" placeholder="Tên chuyên mục">
+                                        <input type="text" class="form-control"  id="txt_description_category" name="txt_description_category" placeholder="Mô tả chuyên mục">
                                     </div>
                                 </div>
                             </div>

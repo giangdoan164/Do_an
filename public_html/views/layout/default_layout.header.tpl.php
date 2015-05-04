@@ -131,7 +131,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span style="font-size: 16px;" class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>&nbsp;&nbsp;&nbsp;Tài khoản</a>
               <ul class="dropdown-menu" role="menu">
                   <li>
-                      <a href="#"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;Đổi mật khẩu</a>
+                      <a data-toggle="modal"  href="#do_change_password"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;Đổi mật khẩu</a>
                   </li>
                         <li>
                         <?php if (@Session::get('loggedIn') != null): ?>
@@ -164,8 +164,51 @@
                 }
             });
         </script>
+   <div class="modal fade modal-check" id="do_change_password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <form action="/pm-chuyendung/license/record/../login/do_change_password/" method="post" name="change_password_form" id="change_password_form" class="form-validate form-horizontal" novalidate="novalidate">           
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4>Đổi mật khẩu</h4>
+                            </div>
+                            <div class="modal-body ">
+                                <input type="hidden" name="task" value="login">
+                                <div class="control-group row">
+                                    <label class="control-label col-xs-4">Mật khẩu hiện hành</label>
+                                    <div class="controls col-xs-8">
+                                        <input name="txt_current_password" id="txt_current_password" type="password" class="inputbox" size="15" data-rule-required="true">
+                                    </div>
+                                </div>
+                                <div class="control-group row">
+                                    <label class="control-label col-xs-4" for="txt_new_password">Mật khẩu mới</label>
+                                    <div class="controls col-xs-8">
+                                        <input name="txt_new_password" id="txt_new_password" type="password" class="inputbox" size="15" data-rule-required="true" data-rule-minlength="3" data-rule-maxlength="20">
+                                    </div>
+                                </div>
+                                <div class="control-group row">
+                                    <label class="control-label col-xs-4">Xác nhận mật khẩu mới</label>
+                                    <div class="controls col-xs-8">
+                                        <input name="txt_confirm_new_password" id="txt_confirm_new_password" type="password" class="inputbox" size="15" data-rule-required="true" equalto="#txt_new_password">
+                                    </div>
+                                </div
+                            </div>
 
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="do_change_password();">Đồng ý</button>
+                                <button type="button" class="btn " data-dismiss="modal">Hủy bỏ</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </form>
+            </div>
+        <script type="text/javascript">
+            function do_change_password(){
+                
+            }
+        </script>
         <div id="content">
+         
 
 <?php               
   
