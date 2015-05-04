@@ -9,7 +9,8 @@ class Parent_student extends Controller {
         $this->parent_student_model = $this->loadModel('parent_student');
         $this->view->title = 'Quản lý danh sách liên lạc';
         $this->class_grade_model = $this->loadModel('class_grade');
-        
+//          $role = Session::get('level');
+//          if($role!=1 || $role!=3){$this->access_denied();}
     }
 
 

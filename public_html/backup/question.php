@@ -140,3 +140,25 @@ Unfortunately this does not work with DateTime::createFromFormat() yet.
  ve visio :
         
         https://www.youtube.com/watch?v=Z3uTWpuv54U
+        
+        
+        
+        http://vinacode.net/2014/02/07/lap-trinh-vien-gioi-2/
+        http://vinacode.net/2014/07/07/tro-thanh-lap-trinh-vien-gioi/
+        http://vinacode.net/2014/10/31/tro-thanh-mot-lap-trinh-vien-gioi/
+        http://www.ddth.com/showthread.php/1279801-B%C3%AD-quy%E1%BA%BFt-h%E1%BB%8Dc-code-gi%E1%BB%8Fi-cho-l%E1%BA%ADp-tr%C3%ACnh-vi%C3%AAn
+        http://kinhdoanhdanang.com/hoc-javascript-co-ban/su-dung-javascript-voi-cac-the-radio-va-checkbox-nhu-the-nao.html
+        http://zlatanblog.com/category/htmlcss/
+        http://anhson.edu.vn/news/ar248_School_Primary_Viewer_50_Mo_hinh_quan_ly_hoc_tap_truong_TIEU_HOC_.aspx
+        http://www.vnschool.net/modules.php?name=SVR&file=article&sid=1655
+        http://techmaster.vn/posts/33374/goi-may-ong-lap-trinh-nhu-the-nao-cho-dung
+        
+        http://thuvienhoctap.net/downdetail.aspx?did=2341
+        http://cafebiz.vn/thi-truong/dau-la-noi-lam-viec-ly-tuong-nhat-trong-mat-sinh-vien-viet-nam-20150421233543464.chn
+        http://blog.itviec.com/2015/04/giao-tiep-toi-manager/
+        
+        http://www.handheld.com.vn/community/am-thanh-hinh-anh-media-center-hd-club.105/
+        
+        http://blog.itviec.com/2014/08/developer-30-tuoi/
+        https://www.youtube.com/watch?v=xtN7Do-neL8
+        http://www.wattpad.com/5145703-%C4%91%E1%BB%81-c%C6%B0%C6%A1ng-ctdl-%26-gt/page/5

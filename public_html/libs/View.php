@@ -26,7 +26,7 @@ class View {
         return $this;
     }
    
-    public function render($name ,$DATA =array() ,$include = true) {
+    public function render($name, $DATA = array(), $include = true) {
 
 //        $v_view_file =  VIEW_PATH . $name . '.php';
 //        if (file_exists($v_view_file))
@@ -55,10 +55,10 @@ class View {
 //        {
 //           die("Không tìm thấy <b>$v_view_file</b>");
 //        }
-      
-         if (is_array($DATA)) {
+
+        if (is_array($DATA)) {
             foreach ($DATA as $key => $val) {
-                $$key = $val;    
+                $$key = $val;
             }
         }
         if ($this->layout == null) {
@@ -67,25 +67,25 @@ class View {
             $header = $footer = '';
             $v_view_file = VIEW_PATH . $name . '.php';
             if (file_exists($v_view_file)) {
-                
-                if($include == true){
-                     $header = VIEW_PATH . "layout/{$this->layout}.header.tpl.php";
-                     $footer = VIEW_PATH . "layout/{$this->layout}.footer.tpl.php"; 
-                     if (!file_exists($header)) {
-                     throw new Exception("Not found header :$header ");
-                    if (!file_exists($footer)) {
-                    throw new Exception("Not found header :$footer ");
-                     }
+
+                if ($include == true) {
+                    $header = VIEW_PATH . "layout/{$this->layout}.header.tpl.php";
+                    $footer = VIEW_PATH . "layout/{$this->layout}.footer.tpl.php";
+                    if (!file_exists($header)) {
+                        throw new Exception("Not found header :$header ");
+                        if (!file_exists($footer)) {
+                            throw new Exception("Not found header :$footer ");
+                        }
+                    }
                 }
-              
-                }
-              
-                if(!empty($header)&&!empty($footer)){
+
+                if (!empty($header) && !empty($footer)) {
                     require $header;
                     require $v_view_file;
                     require $footer;
-                }else{require $v_view_file;}
-             
+                } else {
+                    require $v_view_file;
+                }
             } else {
                 die("Không tìm thấy <b>$v_view_file</b>");
             }

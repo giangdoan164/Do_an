@@ -16,6 +16,8 @@ class Class_forum extends Controller {
 //        $this->view->js = array('class_forum/js/forum.js');
         $this->view->ckeditor_js = 'ckeditor/ckeditor.js';
         $this->view->css = array('class_forum/css/forum1.css');
+//        $role=Session::get('level');
+//         if($role !=3 || $role != 4){$this->access_denied();}
     }
 
     function index() {

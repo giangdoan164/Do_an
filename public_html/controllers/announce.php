@@ -9,7 +9,8 @@ class Announce extends Controller {
         $this->view->title = "Quản lý thông báo";
         $this->announce_model =  $this->loadModel('announce');
         $this->class_grade_model = $this->loadModel('class_grade');
-        
+//          $role = Session::get('level');
+//        if($role==1){$this->access_denied();}
     }
     
     public function index(){

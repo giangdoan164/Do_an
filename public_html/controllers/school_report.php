@@ -10,6 +10,8 @@ class School_report extends Controller {
         parent::__construct('school_report');
         $this->view->title = "Quản lý học bạ";
         $this->school_report_model = $this->loadModel('school_report');
+//          $role = Session::get('level');
+//        if($role!=3 || $role !=4){$this->access_denied();}
     }
 
     public function index() {

@@ -7,6 +7,8 @@ class Category extends Controller
     {
         parent::__construct('category');
         $this->category = $this->loadModel('category');
+//        $role = Session::get('level');
+//        if($role!=1){$this->access_denied();}
      }
     
     public function index(){

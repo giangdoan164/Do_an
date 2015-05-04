@@ -8,6 +8,8 @@ class Class_grade extends Controller {
         Session::check_login();
         parent::__construct('class_grade');
         $this->class_grade_model = $this->loadModel('class_grade');
+//        $role = Session::get('level');
+//        if($role!=1){$this->access_denied();}
     }
 
     public function load_class(){

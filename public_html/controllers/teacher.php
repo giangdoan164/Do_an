@@ -7,7 +7,9 @@ class Teacher extends Controller{
         Session::check_login();
         parent::__construct('teacher');//tao view cung ten
         $this->teach_model =  $this->loadModel('teacher');
-        $this->view->title  = 'Teacher Management';
+        $this->view->title  = 'Quản lý giáo viên';
+//        $role = Session::get('level');
+//        if($role!=1){$this->access_denied();}
    }
 
    public function index(){

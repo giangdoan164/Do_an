@@ -9,7 +9,9 @@ class School_year_config extends Controller
         Session::check_login();
         parent::__construct('school_year_config');
         $this->school_year_model = $this->loadModel('school_year_config');
-
+//        $role = Session::get('level');
+//        if($role!=1){$this->access_denied();}
+        
     }
 
     public function index()

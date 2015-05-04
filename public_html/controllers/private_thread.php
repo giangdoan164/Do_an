@@ -11,6 +11,9 @@ class Private_thread extends Controller {
 //        $this->view->js = array('class_forum/ckeditor/ckeditor.js');
         $this->view->ckeditor_js = array('ckeditor/ckeditor.js');
         $this->view->css = array('class_forum/css/forum1.css');
+ 
+//        $role = Session::get('level');
+//        if($role!=3 || $role !=4){$this->access_denied();}
     }
     
     public function index(){
