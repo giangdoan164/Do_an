@@ -38,5 +38,20 @@ class User_Model extends Model {
         }
         
     }
+    
+    public function get_current_password(){
+        $user_id = Session::get('user_id');
+        $sql ="SELECT C_PASSWORD FROM t_user WHERE PK_USER = '$user_id'";
+        $result = $this->db->GetOne($sql);
+        return $result;
+    }
+    
+    public function update_new_password(){
+          $user_id = Session::get('user_id');
+          $new_pass = md5(get_post_var('txt_confirm_new_password'));
+          $sql = "UPDATE t_user SET C_PASSWORD ='$new_pass' WHERE PK_USER ='$user_id'";
+          $this->db->Execute($sql);
+          return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
+    }
 
 }

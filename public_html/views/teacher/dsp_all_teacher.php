@@ -2,7 +2,7 @@
 <?php // echo $this->get_controller_url();?>
 <div class="container" >
     <div class="row-fluid">
-        <h1 class="page-header">Quản lý giáo viên</h1>
+        <h2 class="page-header">Quản lý giáo viên</h2>
         <div class="main-wrapper" style="margin-left: 0px !important;">                    
             <div class="container-fluid block">
                 <form name="frmMain" id="frmMain" action="" method="POST"  >
