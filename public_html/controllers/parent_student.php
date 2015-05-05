@@ -50,7 +50,7 @@ class Parent_student extends Controller {
         $arr_data['controller']          = get_post_var('controller', '');
         $arr_data['hdn_dsp_all_record'] = get_post_var('hdn_dsp_all_record', '');
         $result           = $this->parent_student_model->update_single_parent_contact();
-     
+      
         if ($result == false)
         {
             $DATA['error'] = " Xảy ra lỗi không cập nhật được";
@@ -58,10 +58,16 @@ class Parent_student extends Controller {
             $this->parent_student_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
             exit();
         }
+        else if($result=='exist')
+        {
+           $this->goback_url = $arr_data['controller'].'dsp_single_parent_contact';
+            $this->parent_student_model->exec_fail($this->goback_url,"Mã học sinh đã tồn tại!");
+            exit();
+        }
         else
         {
-           $this->goback_url = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
-            $this->parent_student_model->exec_done($this->goback_url, $arr_data);
+           $this->goback_url = $arr_data['controller'].'dsp_all_parent_contact';
+            $this->parent_student_model->exec_fail($this->goback_url,"Cập nhật  mới thông tin liên lạc thành công !");
             exit();
         }
   

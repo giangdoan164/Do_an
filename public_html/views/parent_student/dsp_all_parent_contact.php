@@ -8,23 +8,22 @@ $v_class_id = $class;
     <div class="container" >
         <div class="row-fluid">
             <h2 class="page-header">Quản lý danh sách liên lạc</h2>
-            <div class="main-wrapper" style="margin-left: 0px;">   
-
+            <div class="main-wrapper" style="margin-left: 0px;">  
                 <div class="container-fluid " style="border:1px solid #AC0713 !important; border-top: #AC0713 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);  margin-bottom: 25px;">
 
                     <?php
-                    $url = $this->get_controller_url();
-                    echo $this->hidden('controller', $url);
-                    echo $this->hidden('hdn_parent_contact_id', 0);
-                    echo $this->hidden('hdn_item_id_list', '');
-                    echo $this->hidden('hdn_site_url', SITE_URL);
-                    $role = Session::get('level');
-                    echo $this->hidden('hdn_add_new_contact_list', 'add_new_contact_list');
-                    // phuc vu cho viec xoa
-                    echo $this->hidden('hdn_delete_record_method', 'delete_parent_contact');
-                    // phuc vu cho viec sua
-                    echo $this->hidden('hdn_dsp_all_record', 'dsp_all_parent_contact');
-                    echo $this->hidden('hdn_dsp_single_record', 'dsp_single_parent_contact');
+                        $url = $this->get_controller_url();
+                        echo $this->hidden('controller', $url);
+                        echo $this->hidden('hdn_parent_contact_id', 0);
+                        echo $this->hidden('hdn_item_id_list', '');
+                        echo $this->hidden('hdn_site_url', SITE_URL);
+                        $role = Session::get('level');
+                        echo $this->hidden('hdn_add_new_contact_list', 'add_new_contact_list');
+                        // phuc vu cho viec xoa
+                        echo $this->hidden('hdn_delete_record_method', 'delete_parent_contact');
+                        // phuc vu cho viec sua
+                        echo $this->hidden('hdn_dsp_all_record', 'dsp_all_parent_contact');
+                        echo $this->hidden('hdn_dsp_single_record', 'dsp_single_parent_contact');
                     ?>
                     <details open>
                         <summary><strong>Tìm kiếm</strong></summary>
@@ -55,13 +54,11 @@ $v_class_id = $class;
 
                                 <?php endif; ?>
                             </div>
-
                             <div class="col-md-2" >
                                 <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
                                     <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
                                 </button>
                             </div>
-
                         </div>
                     </details>
         
@@ -88,7 +85,7 @@ $v_class_id = $class;
                                 <div class='col-md-6 ' style='padding-top:35px;'>
                                     <div class='row'>
                                         <div class='col-md-3'>
-                                            <a href="javascript:void(0)" class="btn btn-primary" onclick="btn_addnew_onclick()"><span  class="glyphicon glyphicon-plus"></span>&nbsp&nbspThêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
+                                            <a href="javascript:void(0)" class="btn btn-success" onclick="btn_addnew_onclick()"><span  class="glyphicon glyphicon-plus"></span>&nbsp&nbspThêm mới</a>&nbsp&nbsp&nbsp&nbsp&nbsp
 
                                         </div>
 

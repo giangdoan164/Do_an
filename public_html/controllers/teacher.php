@@ -18,7 +18,6 @@ class Teacher extends Controller{
    
    public function dsp_all_teacher(){
        $level = Session::get('level');
-//       if($level==3 || $level == 4 || $level ==null){echo "Bạn ko có quyền truy cập chức năng này";exit();}
        $arr_data['arr_all_teacher'] = $this->teach_model->qry_all_teacher();
        $this->view->render('teacher/dsp_all_teacher',$arr_data);
    }
@@ -39,28 +38,34 @@ class Teacher extends Controller{
    
    public function update_single_teacher()
     {
-        $arr_data                        = array();
-        $arr_data['controller']          = get_post_var('controller', '');
-        $arr_data['hdn_dsp_all_teacher'] = get_post_var('hdn_dsp_all_teacher', '');
-
-        $arr_data['hdn_dsp_single_teacher'] = get_post_var('hdn_dsp_single_teacher', '');
-        $this->goback_url                   = $arr_data['controller'] . $arr_data['hdn_dsp_single_teacher'];
-
-
-         $this->teach_model->goback_url = $arr_data['controller'] . $arr_data['hdn_dsp_all_teacher'];
-        $result           = $this->teach_model->update_single_teacher();
-       
+        $arr_data                            = array();
+        $arr_data['controller']              = get_post_var('controller', '');
+        $arr_data['hdn_dsp_all_teacher']     = get_post_var('hdn_dsp_all_teacher', '');
+        $arr_data['hdn_dsp_single_teacher']  = get_post_var('hdn_dsp_single_teacher', '');
+        $this->goback_url                    = $arr_data['controller'] . $arr_data['hdn_dsp_single_teacher'];
+        $this->teach_model->goback_url       = $arr_data['controller'] . $arr_data['hdn_dsp_all_teacher'];
+        $result                              = $this->teach_model->update_single_teacher();
+    
         if ($result == false)
         {
             $DATA['error'] = " Xảy ra lỗi không cập nhật được";
+            $this->goback_url = $arr_data['controller'].'dsp_single_teacher';
             $this->teach_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+            exit();
+        }
+        else if($result=='exist')
+        {
+            $this->goback_url = $arr_data['controller'].'dsp_single_teacher';
+            $this->teach_model->exec_fail($this->goback_url,"Mã đã tồn tại!");
             exit();
         }
         else
         {
-            $this->teach_model->exec_done( $this->teach_model->goback_url, $arr_data);
+            $this->goback_url = $arr_data['controller'].'dsp_all_teacher';
+            $this->teach_model->exec_fail($this->goback_url,"Cập nhật mới thông tin giáo viên thành công !");
             exit();
         }
+        
     }
 
     public function delete_teacher()

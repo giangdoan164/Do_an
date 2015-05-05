@@ -194,7 +194,7 @@ class Parent_student_Model extends Model
         $v_address           = get_post_var('txt_area_address', '');
         $v_class             = get_post_var('sel_class', 0);
         $v_grade             = get_post_var('sel_grade', 0);
-
+        $v_code              = get_post_var('txt_student_code',1);
         if ($v_parent_contact_id > 0)
         {
             $sql    = "UPDATE 
@@ -210,15 +210,25 @@ class Parent_student_Model extends Model
                     WHERE PK_USER = ?";
             $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_parent_contact_id);
             $this->db->Execute($sql, $params);
+            $exec_result = '1';
         }
         else
         {
-            $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class, 4);
-            $sql    = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,FK_GROUP) VALUES(?,?,?,?,?,?,?,?,?,?)";
-            $this->db->Execute($sql, $params);
+            $v_code = trim($v_code);
+            $sql ="SELECT COUNT(*) FROM t_user WHERE C_CODE = '$v_code'";
+            $count_student = $this->db->GetOne($sql);
+            if($count_student=="0"){          
+                $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class, 4,$v_code);
+                $sql    = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,FK_GROUP,C_CODE) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                $this->db->Execute($sql, $params);
+                $exec_result = '1';
+            }else{
+                $exec_result = 'exist';
+            }
+       
         }
 
-        return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
+        return ($this->db->ErrorNo() == 0) ? $exec_result : FALSE;
     }
 
     public function qry_single_parent_contact($v_id)

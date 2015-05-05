@@ -1,6 +1,7 @@
 <?php 
 $role = Session::get('level');
   $arr_single_parent_contact = isset($arr_single_parent_contact) ? $arr_single_parent_contact : array();
+  $size_data = sizeof($arr_single_parent_contact);
   if(sizeof($arr_single_parent_contact)>0){
       $v_single_parent_contact_id = $arr_single_parent_contact['PK_USER'];
       $v_student_name = $arr_single_parent_contact['C_NAME'];
@@ -10,6 +11,7 @@ $role = Session::get('level');
       $v_phone = $arr_single_parent_contact['C_PHONE'];
       $v_address = $arr_single_parent_contact['C_ADDRESS'];
       $v_email = $arr_single_parent_contact['C_EMAIL'];
+      $v_student_code = $arr_single_parent_contact['C_CODE'];
    
    }else{
        //thay cho mac dinh
@@ -21,14 +23,14 @@ $role = Session::get('level');
       $v_phone = get_post_var('txt_teacher_phone','');
       $v_address = get_post_var('txt_area_address','');
       $v_email = get_post_var('txt_parent_email','');
-    
+      $v_student_code = get_post_var('txt_student_code');
    }
 ?>
 <div class="container " >
     <div class="col-md-6 col-md-offset-3">
 <form  id='frmMain' role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_parent_contact';?>">
   <fieldset>
-    <legend>Cập nhật Thông tin liên lạc </legend>
+      <legend><h2>Cập nhật Thông tin liên lạc</h2> </legend>
     <?php 
   
   
@@ -39,8 +41,8 @@ $role = Session::get('level');
         echo $this->hidden('hdn_dsp_all_record','dsp_all_parent_contact');
         echo $this->hidden('hdn_dsp_single_record','dsp_single_parent_contact');
     ?>
-    
-    <div class="form-group">
+
+    <div class="form-group">    
       <label for="txt_student_name" class="col-lg-3 control-label" >Họ tên học sinh <span style="color:red;">(*)</span></label>
       <div class="col-lg-9">
           <input type="text" class="form-control" value="<?php echo $v_student_name; ?>" id="txt_student_name" name="txt_student_name" placeholder="Họ tên học sinh" required>
@@ -50,7 +52,7 @@ $role = Session::get('level');
     <div class="form-group">
       <label for="txt_student_code" class="col-lg-3 control-label" >Mã học sinh <span style="color:red;">(*)</span></label>
       <div class="col-lg-9">
-          <input type="text" class="form-control" value="<?php echo $v_student_code; ?>" id="txt_student_code" name="txt_student_code" placeholder="Mã học sinh được cấp" required>
+          <input type="text" <?php if($size_data>0){echo 'readonly';}?> class="form-control" value="<?php echo $v_student_code; ?>" id="txt_student_code" name="txt_student_code" placeholder="Mã học sinh được cấp" required>
       </div>
     </div>
    <?php endif; ?>
@@ -125,7 +127,7 @@ $role = Session::get('level');
     <div class="form-group">
       <div class="col-lg-9 col-lg-offset-3">
        <?php if($role == 1): ?>
-          <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Cập nhật&nbsp;</button>
+          <button type="submit" id="submit_button" class="btn btn-primary col-lg-3 col-lg-offset-2"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Cập nhật&nbsp;</button>
         <?php endif;?>
         <button type="button" class="btn btn-default col-lg-3 col-lg-offset-2 " onclick="btn_go_back_onclick();"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;&nbsp;Quay lại</button>
       </div>
@@ -136,14 +138,39 @@ $role = Session::get('level');
     
 </div>
 <script type="text/javascript">
-//    var script_data = {
-//        controller : '<?php // echo SITE_URL;?>class_grade/load_class'
-//    }
 
-
-function btn_go_back_onclick(){
-         
-                var m = $('#frmMain #controller').val() +$('#frmMain #hdn_dsp_all_record').val();
+$("#submit_button").click(function(event)
+  {
+    
+    event.preventDefault();
+      
+         var class_id =  $('#frmMain #sel_class').val();
+         var grade_id = $('#frmMain #sel_grade').val();
+         var txt_student_code = $('#frmMain #txt_student_code').val();
+         var txt_student_name = $('#frmMain #txt_student_name').val();
+         var slt_student_birth = $('#frmMain #slt_student_birth').val();
+      var txt_father_name = $('#frmMain #txt_father_name').val();
+       var txt_mother_name = $('#frmMain #txt_mother_name').val();
+       var txt_parent_email = $('#frmMain #txt_parent_email').val();
+       var txt_phone = $('#frmMain #txt_phone').val();
+       var txt_area_address = $('#frmMain #txt_area_address').val();
+      if(class_id =='0'){alert("Mời chọn lớp học !");;return false; }
+      if(grade_id=='0'){alert("Mời chọn khối học!"); return false;}
+      if(txt_student_code==''){alert("Mời nhập mã học sinh");return false;}
+      if(txt_student_name==''){alert("Mời nhập tên học sinh");return false;}
+      if(slt_student_birth==''){alert("Mời nhập ngày sinh học sinh");return false;}
+      if(txt_father_name==''){alert("Mời nhập tên phụ huynh học sinh");return false;}
+      if(txt_mother_name==''){alert("Mời nhập  tên phụ huynh học sinh");return false;}
+      if(txt_parent_email==''){alert("Mời nhập  tên phụ huynhhọc sinh");return false;}
+      if(txt_phone==''){alert("Mời nhập số điện thoại liên lạc ");return false;}
+      if(txt_area_address ==''){alert("Mời nhập địa chỉ liên lạc ");return false;}
+                       
+      $('#frmMain').submit();
+  });
+  
+    function btn_go_back_onclick(){
+               var m = $('#frmMain #controller').val() +$('#frmMain #hdn_dsp_all_record').val();
+               
                $('#frmMain').attr('action',m);
                $('#frmMain').submit();
      

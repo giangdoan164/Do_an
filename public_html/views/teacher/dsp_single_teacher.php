@@ -1,4 +1,10 @@
 <?php 
+echo __FILE__;
+echo "<pre>";
+print_r($arr_single_teacher);
+echo "</pre>";
+echo __LINE__;
+
   $arr_single_teacher = isset($arr_single_teacher) ? $arr_single_teacher : array();
   if(sizeof($arr_single_teacher)>0){
       $v_teach_id = $arr_single_teacher['PK_USER'];
@@ -8,7 +14,7 @@
       $v_email = $arr_single_teacher['C_EMAIL'];
       $v_class_id = isset($arr_single_teacher['FK_CLASS']) ? $arr_single_teacher['FK_CLASS'] : 0;
       $v_grade_id = isset($arr_single_teacher['FK_GRADE']) ? $arr_single_teacher['FK_GRADE'] : 0;
-      $v_role =isset($arr_single_teacher['FK_GROUP']) ? $arr_single_teacher['FK_GROUP'] : 3;
+      $v_role =$arr_single_teacher['FK_GROUP'];
       $v_teacher_code =  $arr_single_teacher['C_CODE'];
    }else{
        //thay cho mac dinh
@@ -25,10 +31,9 @@
 ?>
 <div class="container" >
     <div class="col-md-6 col-md-offset-3">
-<form  data-toggle="validator"  role="form" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_teacher';?>">
-<!--<form  data-toggle="validator"  role="form" class="form-horizontal" method="post" action="<?php // echo $this->get_controller_url().'update_single_teacher';?>">-->
+<form  data-toggle="validator"  role="form" id="frmMain" class="form-horizontal" method="post" action="<?php echo $this->get_controller_url().'update_single_teacher';?>">
   <fieldset>
-    <legend>Cập nhật Giáo viên</legend>
+      <legend><h2>Cập nhật Giáo viên</h2></legend>
     <?php 
   
         $v_teacher_id   = get_post_var('hdn_teacher_id',0);
@@ -49,32 +54,32 @@
       <label for="txt_teacher_code" class="col-lg-3 control-label">Mã giáo viên</label>
       <div class="col-lg-9">
           <?php if (sizeof($arr_single_teacher)>0):?>
-          <input type="text" class="form-control" value="<?php echo $v_teacher_code;?>" id="txt_teacher_code" readonly="true"  name="txt_teacher_code" placeholder="Mã giáo viên">
+          <input type="text" class="form-control" readonly="true" value="<?php echo $v_teacher_code;?>" id="txt_teacher_code" readonly="true"  name="txt_teacher_code" placeholder="Mã giáo viên">
         
           <?php else:?>
-          <input type="text" class="form-control" value="<?php echo $v_teacher_code;?>" id="txt_teacher_code"   name="txt_teacher_code" placeholder="Mã giáo viên">
+          <input type="text" class="form-control" required value="<?php echo $v_teacher_code;?>" id="txt_teacher_code"   name="txt_teacher_code" placeholder="Mã giáo viên">
         
           <?php endif;?>
       </div>
     </div>
     <div class="form-group">
-      <label for="txt_teacher_phone" class="col-lg-3 control-label">Số điện thoại</label>
+      <label for="txt_teacher_phone" required class="col-lg-3 control-label">Số điện thoại</label>
       <div class="col-lg-9">
-        <input type="text" class="form-control" value="<?php echo $v_phone;?>" id="txt_teacher_phone"   name="txt_teacher_phone" placeholder="Số điện thoại">
+        <input type="text" class="form-control" required value="<?php echo $v_phone;?>" id="txt_teacher_phone"   name="txt_teacher_phone" placeholder="Số điện thoại">
        
       </div>
     </div>
     <div class="form-group">
       <label for="txt_area_address" class="col-lg-3 control-label" value="<?php echo $v_address;?>"  for="txt_area_address">Địa chỉ</label>
       <div class="col-lg-9">
-          <textarea class="form-control" rows="3" id="txtarea_address" name="txt_area_address" placeholder="Địa chỉ"></textarea>
+          <textarea class="form-control" rows="3"  required id="txtarea_address" name="txt_area_address" placeholder="Địa chỉ"></textarea>
         <span class="help-block"></span>
       </div>
     </div>
    <div class="form-group">
       <label for="txt_teacher_email" class="col-lg-3 control-label" >Email</label>
       <div class="col-lg-9">
-        <input type="text" class="form-control" value="<?php echo $v_email;?>" id="txt_teacher_email"  name="txt_teacher_email" placeholder="email">
+          <input type="email" class="form-control" required value="<?php echo $v_email;?>" id="txt_teacher_email"  name="txt_teacher_email" placeholder="email">
       </div>
     </div>
     <div class="form-group">
@@ -82,7 +87,7 @@
       <div class="col-lg-9">
         <select class="form-control" id="sel_role" name="sel_role" required>
           <option value="3" >Giáo viên lớp</option>
-          <option value="2"  >Giáo viên trường</option>
+          <option value="2" <?php if($v_role=='2'){echo 'selected';} ?> >Giáo viên trường</option>
         </select>
         <br>
       </div>
@@ -115,8 +120,8 @@
     </div>
     <div class="form-group">
       <div class="col-lg-9 col-lg-offset-3">
-        <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2">Cập nhật</button>
-        <button type="submit" class="btn btn-default col-lg-3 col-lg-offset-2 ">Quay lại</button>
+          <button type="submit" class="btn btn-primary col-lg-3 col-lg-offset-2"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;Cập nhật</button>
+          <button type="button" class="btn btn-default col-lg-3 col-lg-offset-2" onclick="btn_back_onclick1();" ><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;Quay lại</button>
       </div>
     </div>
   </fieldset>
@@ -125,7 +130,11 @@
     
 </div>
 <script type="text/javascript">
-
+    function btn_back_onclick1(){
+         var m = $('#frmMain #controller').val() +$('#frmMain #hdn_dsp_all_teacher').val();
+               $('#frmMain').attr('action',m);
+               $('#frmMain').submit();
+    }
     function load_class(grade_id){
         var site_url = $('#hdn_site_url').val();
         $.ajax({
