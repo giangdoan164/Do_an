@@ -85,7 +85,7 @@
                              <td style="color:red;text-align: center;font-weight: bold;" colspan="5"><?php echo "Chưa có trao dổi riêng nào được tạo"?></td>
                          </tr>
                         <?php endif;?>
-                             <?php echo $this->render_rows(count($arr_all_message),4); ?>
+                             <?php // echo $this->render_rows(count($arr_all_message),4); ?>
                     </tbody>
                 </table>
                  <div id="paging" class="nowrap">

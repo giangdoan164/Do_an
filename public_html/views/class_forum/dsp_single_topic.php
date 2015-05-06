@@ -40,12 +40,12 @@ $user_id = Session::get('user_id');
                 </div>
             </div>
             <?php endif;?>
-                <table class="table table-hover table-nomargin table-condensed  " style="width: 100%">
+                <table class="table  table-condensed  " style="width: 100%">
                     <tbody>
                         <?php if (sizeof($arr_all_post) > 0): ?>
                             <?php foreach ($arr_all_post as $post) : ?>
                                 <tr style="background-color: #EAEAEA;;color:#000000; ">
-                                    <td >
+                                    <td class="well">
                                         <div class="col-md-7 ">   
                                         <span style='font-size: 15px;font-style: italic;'><?php echo $post['C_LOGIN_NAME'] ?></span>
                                         &gt; &gt;<?php echo date('d-m-Y h:m:s',  strtotime($post['C_POSTED_DATE'])); ?>
@@ -54,7 +54,7 @@ $user_id = Session::get('user_id');
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td id='post_content_<?php echo $post['PK_POST']; ?>'>
+                                    <td id='post_content_<?php echo $post['PK_POST']; ?>' class="well">
                                         <div> 
                                         <?php echo html_entity_decode($post['C_CONTENT'], ENT_QUOTES, 'UTF-8'); ?>
                                          </div>

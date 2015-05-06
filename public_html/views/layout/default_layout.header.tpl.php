@@ -5,11 +5,8 @@
         <title><?php echo $title; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>bootstrap/css/bootstrap.min.css"/>
-
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="<?php echo PUBLIC_URL; ?>js/custom.js"></script>
-
-
         <link rel="stylesheet" href="<?php echo PUBLIC_URL; ?>css/default.css" />
 
         <?php
@@ -76,18 +73,53 @@
 
     </head>
     <body>
+<!--        <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#main_nav_1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a href="#" class="navbar-brand">GiangDongWun</a>
+    </div>
+    .collaspe se co tac diubg an di menu
+    <div class="navbar-collapse collapse" id="main_nav_1">
+        <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav  navbar-right">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
+        </ul>
+    </div>
+</nav>-->
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid" id="div_navigation">
                 <div class="navbar-header" style="color: #ffff99;padding-right: 15px;width: 200px;" >
-                    <div style="float:left"> <img src="<?php echo PUBLIC_URL . 'images/logohn.png'; ?>" style="width: 50px;"></div>     
-                    <p style="text-align: center;margin-top: 6px;margin-bottom: 0px;">TRƯỜNG TIỂU HỌC VĂN CHƯƠNG</p>
+                           <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#navbar-main">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                          </button>
+                    <a href="<?php echo SITE_URL;  ?>index" style='color: #ffff99;text-decoration: none;'>
+                                <div style="float:left"> <img src="<?php echo PUBLIC_URL . 'images/logohn.png'; ?>" style="width: 50px;"></div>     
+                               <p style="text-align: center;margin-top: 6px;margin-bottom: 0px;">TRƯỜNG TIỂU HỌC VĂN CHƯƠNG</p>
+                    </a>
+            
                 </div>
              
                 <div class="navbar-collapse collapse" id="navbar-main" style="padding-left: 15px;">
                      <?php if($current_controller !='index'):?>
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" ></a>
+                            <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" >&nbsp;</a>
                         </li>
 
 <?php if ($role == 1): ?>
@@ -266,6 +298,9 @@
          
     }
 </script>
+
+
+
 <div id="content">
 
 <?php ?>

@@ -1,9 +1,6 @@
 <?php 
-echo __FILE__;
-echo "<pre>";
-print_r($arr_single_teacher);
-echo "</pre>";
-echo __LINE__;
+
+
 
   $arr_single_teacher = isset($arr_single_teacher) ? $arr_single_teacher : array();
   if(sizeof($arr_single_teacher)>0){
@@ -28,6 +25,8 @@ echo __LINE__;
       $v_class = get_post_var('sel_class',0);
       $v_teacher_code ='';
    }
+   
+ 
 ?>
 <div class="container" >
     <div class="col-md-6 col-md-offset-3">
@@ -70,10 +69,10 @@ echo __LINE__;
       </div>
     </div>
     <div class="form-group">
-      <label for="txt_area_address" class="col-lg-3 control-label" value="<?php echo $v_address;?>"  for="txt_area_address">Địa chỉ</label>
+      <label for="txt_area_address" class="col-lg-3 control-label"  for="txt_area_address">Địa chỉ</label>
       <div class="col-lg-9">
-          <textarea class="form-control" rows="3"  required id="txtarea_address" name="txt_area_address" placeholder="Địa chỉ"></textarea>
-        <span class="help-block"></span>
+          <textarea class="form-control" rows="3"  required id="txt_area_address"  name="txt_area_address" placeholder="Địa chỉ"><?php echo $v_address;?></textarea>
+
       </div>
     </div>
    <div class="form-group">

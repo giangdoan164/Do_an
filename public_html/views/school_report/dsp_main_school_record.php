@@ -20,6 +20,9 @@ if (!isset($year)) {
 if (!isset($semester)) {
     $semester = 0;
 }
+if (!isset($student_code)) {
+    $student_code = 0;
+}
   
 if (!isset($arr_all_year_student)) {
    
@@ -28,7 +31,11 @@ if (!isset($arr_all_year_student)) {
     $size_arr_all_year_student = sizeof($arr_all_year_student);
 }
 ?>
-
+<!--
+ $DATA['student_code'] = $student_code;
+                $DATA['semester'] = $semester;
+                $DATA['year'] = $year;-->
+<!--giao vien co giao dien rieng-->
 <?php if($role == 3) :?>
 <div class ="container">
     <div class="row">
@@ -38,7 +45,10 @@ echo $this->hidden('controller', $this->get_controller_url());
 echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
 echo $this->hidden('hdn_update_type', 1);
 echo $this->hidden('hdn_site_url', SITE_URL);
+echo $this->hidden('semester',$semester);
+echo $this->hidden('year',$year);
 ?>
+            
              <h2 class="page-header" >Quản lý học bạ</h2>
              <details  style="width:50%">
                 <summary>Nhập học bạ</summary>
@@ -72,7 +82,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                  </details>
              <div style='min-height: 20px;'></div>
             <details open>
-                <summary>Tra cứu học bạ học sinh</summary>
+                <summary>Tra cứu học bạ</summary>
                 <div class="row" style="margin: 20px;">
                     <div class="row">
                     <div class="col-md-4">
@@ -83,14 +93,14 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                                     <option value="0">---Chọn học sinh---</option>
                                         <?php if (sizeof($arr_all_student_class) > 0): ?>
                                             <?php foreach ($arr_all_student_class as $student): ?>
-                                            <option value="<?php echo $student['C_CODE']; ?>"><?php echo $student['C_NAME']; ?></option>
+                                            <option value="<?php echo $student['C_CODE']; ?>" ><?php echo $student['C_NAME']; ?></option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </select>
                             </div>  
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="sel_student_name" class="col-md-5 control-label">Năm học &nbsp;</label>                                 
                             <div class="col-md-7">
@@ -100,7 +110,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                             </div>  
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="sel_student_name" class="col-md-4 control-label">Học kỳ &nbsp;</label>                                 
                             <div class="col-md-8">
@@ -111,28 +121,30 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                                 </select>
                             </div>  
                         </div>
-                    </div></div>
-                 
-                     <div class="row" style="margin-top: 20px;">
-                        <div class="col-md-4 col-md-offset-8">
-                            <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
+                    </div>
+                        <div class="col-md-2">
+                             <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
                                 <span class='glyphicon glyphicon-search'></span> &nbsp;&nbsp; Tìm kiếm
                             </button>
+                        </div>
+                    </div>
+                     <div class="row" style="margin-top: 20px;">
+                        <div class="col-md-2 col-md-offset-5">
+<!--                            <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
+                                <span class='glyphicon glyphicon-search'></span> &nbsp;&nbsp; Tìm kiếm
+                            </button>-->
                             <?php if($size_arr >0 && $size_arr_final >0) : ?>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button" class="btn btn-success" onclick="btn_print_onclick();">
+<!--                            <button type="button" class="btn btn-success" onclick="btn_print_onclick();">
                                 <span class='glyphicon glyphicon-print'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In  &nbsp;&nbsp;      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </button>
+                            </button>-->
                            <?php endif;?>
                         </div>
                     </div>
-                
-             
             </div>
-            
-                </div>
+        </div>
      
-                  <?php if($size_arr>0):?>
+ <?php if($size_arr>0):?>
             <div class="row">
                    <table class="table table-hover  table-condensed ">
                     <thead>
@@ -152,7 +164,7 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                                     <?php echo $student_record['FK_GRADE']; ?>
                                 </td>
                                 <td >
-                                    <input type="text"  readonly="true" class="form-control" value="<?php echo $student_record['C_TEACHER_REMARK']; ?>"/>
+                                    <input type="text"  class="form-control" value="<?php echo $student_record['C_TEACHER_REMARK']; ?>"/>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -176,28 +188,30 @@ echo $this->hidden('hdn_site_url', SITE_URL);
         </form> 
     </div>
 </div>
-
 <?php else:?>
+<!--//phu huynh co giao dien rieng-->
 <?php $student_name = Session::get('user_name');?>
 <div class ="container">
-    <div class="row" style="min-height: 400px;">
-          <h3 class="page-header" style="text-align:center">Tra cứu học bạ học sinh</h3>
-        <form action="" method="post" name="frmMain" id="frmMain"  >      
+    <div class="row" >
+          <h3 class="page-header" >Tra cứu học bạ</h3>
+        <form action="" method="post" name="frmMain" id="frmMain"  > 
+               <!--sel_year     sel_semester-->
             <?php
-            echo $this->hidden('controller', $this->get_controller_url());
-            echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
-            echo $this->hidden('hdn_update_type', 1);
-            echo $this->hidden('hdn_site_url', SITE_URL);
+                echo $this->hidden('controller', $this->get_controller_url());
+                echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
+                echo $this->hidden('hdn_update_type', 1);
+                echo $this->hidden('hdn_site_url', SITE_URL);
             ?>               
-            <div class="row" style="margin: 20px;">
-                    <div class="col-md-4">
-                        <b style="color: red;"><?php echo $student_name;?></b>
+        
+                    <div class="row-fluid" style="padding-bottom: 10px;">
+                        <span style="color: #CE4B27;font-size: 20px;font-weight: bold;"><?php echo $student_name;?></span>
                         </div>
-                    </div>
-                    <div class="col-md-4">
+                   
+            
+                   <div class="col-md-4 col-md-offset-2 row">
                         <div class="form-group">
-                            <label for="sel_student_name" class="col-md-5 control-label">Năm học &nbsp;</label>                                 
-                            <div class="col-md-7">
+                            <label for="sel_student_name" class="col-md-3 control-label">Năm học</label>                                 
+                            <div class="col-md-8 ">
                                 <select class="form-control" id="sel_year" name="sel_year">
                                     <option value="0">-- Năm học --</option>
                                     <?php foreach ($arr_all_year_student as  $year):?> 
@@ -207,10 +221,10 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                             </div>  
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 row">
                         <div class="form-group">
-                            <label for="sel_student_name" class="col-md-4 control-label">Học kỳ &nbsp;</label>                                 
-                            <div class="col-md-8">
+                            <label for="sel_semester" class="col-md-3 control-label">Học kỳ &nbsp;</label>                                 
+                            <div class="col-md-8" >
                                 <select class="form-control" id="sel_semester" name="sel_semester">
                                     <option value="0">--Chọn học kỳ--</option>
                                     <option value="1">Học kỳ I</option>
@@ -220,17 +234,17 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                             </div>  
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-1 col-md-offset-8">
+                        <div class="col-md-1 ">
                             <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
-                                Tìm kiếm
+                                <span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp; Tìm kiếm
                             </button>
                         </div>
-                    </div>
+             
+                    
                 </div>
             </details>   
             <?php if($size_arr>0):?>
-            <div class="row">
+            <div class="row" style="margin-top: 20px;">
                    <table class="table table-hover  table-condensed ">
                     <thead>
                         <tr class="info">
@@ -257,15 +271,16 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                 </table>
             </div>
             <?php endif;?>
-            <?php if($size_arr_final >0):?>
-<!--                  <div class="row">                       
-                      <span>Danh hiệu</span><span><?php // echo $arr_final_remark_title['C_TITLE']; ?></span>
-                  </div>
-                  <div class="row">                       
-                      <span>Nhận xét cuối kỳ</span><span><?php // echo $arr_final_remark_title['C_REMARK_FINAL']; ?>   </span> 
-                  </div>
-                  -->
-            <?php endif; ?>
+             <?php if($size_arr_final >0):?>
+    
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp; Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+                </div> 
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
+                </div>
+                   
+                    <?php endif; ?>
         </form> 
     </div>
 </div>
@@ -274,11 +289,18 @@ echo $this->hidden('hdn_site_url', SITE_URL);
 
 <script type="text/javascript">
     function btn_print_onclick(){
-          var f = document.frmMain;
-                m = $('#controller').val() +'dsp_print_student_record';
-                $('#frmMain').attr('action', m);
-                f.submit();
         
+      var semester =  $('#frmMain #sel_semester').val();
+      var year     =  $('#frmMain #sel_year').val();
+      if(semester=='0'){alert("Mời chọn khối");return false;}
+      if(year=='0'){alert("Mời chọn năm học");return false;}
+      if(semester!='0'&&year!='0'){
+        
+            var f = document.frmMain;
+            m = $('#controller').val() +'dsp_print_student_record';
+            $('#frmMain').attr('action', m);
+            $('#frmMain').submit(); 
+      }    
     }
     function load_year_student(object) {
         student_code = $(object).val();

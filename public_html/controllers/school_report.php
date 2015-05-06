@@ -239,4 +239,6 @@ class School_report extends Controller {
         public function dsp_print_student_record(){
             $this->view->render('school_report/dsp_print_student_record',array(),false);
         }
+        
+     
 }

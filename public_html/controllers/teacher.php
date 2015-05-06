@@ -43,9 +43,9 @@ class Teacher extends Controller{
         $arr_data['hdn_dsp_all_teacher']     = get_post_var('hdn_dsp_all_teacher', '');
         $arr_data['hdn_dsp_single_teacher']  = get_post_var('hdn_dsp_single_teacher', '');
         $this->goback_url                    = $arr_data['controller'] . $arr_data['hdn_dsp_single_teacher'];
-        $this->teach_model->goback_url       = $arr_data['controller'] . $arr_data['hdn_dsp_all_teacher'];
+        $this->teach_model->goback_url       = $this->goback_url;
         $result                              = $this->teach_model->update_single_teacher();
-    
+        
         if ($result == false)
         {
             $DATA['error'] = " Xảy ra lỗi không cập nhật được";

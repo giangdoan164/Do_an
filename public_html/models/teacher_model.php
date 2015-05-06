@@ -43,13 +43,16 @@ class Teacher_Model extends Model {
         $v_class = get_post_var('sel_class', '');
         $v_teacher_id = get_post_var('hdn_teacher_id', 0);
         $v_teacher_code = get_post_var('txt_teacher_code', '');
-         $is_exist_teacher = $this->check_teach_has_class();
+         $is_exist_teacher = $this->check_teach_has_class($v_teacher_id);
         if ($is_exist_teacher == true) {
             $DATA['error'] = "Lớp đã chọn có giáo viên chủ nhiệm";
-            $this->teach_model->exec_fail($this->goback_url, $DATA['error'], $arr_data);
+            $this->exec_fail($this->goback_url, $DATA['error']);
             exit();
         }
-        
+        if($v_role=='2'){
+            $v_class ='';
+            $v_grade='';
+        }
         if ($v_teacher_id > 0) {
             $sql = "UPDATE 
                 t_user
@@ -106,7 +109,8 @@ class Teacher_Model extends Model {
         return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
     }
 
-    public function check_teach_has_class() {
+    public function check_teach_has_class($teacher_id) {
+        
         $v_class = get_post_var('sel_class', 0);
         if ($v_class == 0) {
             return false;
@@ -116,7 +120,7 @@ class Teacher_Model extends Model {
                     t_user t 
                     INNER JOIN t_class c
                         ON t.FK_CLASS = c.PK_CLASS 
-                   AND c.PK_CLASS = ? AND t.FK_GROUP = '3'";
+                   AND c.PK_CLASS = ? AND t.FK_GROUP = '3' AND PK_USER <> '$teacher_id'";
             $count = $this->db->GetOne($sql, array($v_class));
             if (intval($count) >= 1) {
                 return true;

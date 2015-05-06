@@ -15,7 +15,8 @@
                     echo $this->hidden('hdn_delete_record_method', 'delete_teacher');
                     echo $this->hidden('hdn_dsp_all_record','dsp_all_teacher');
                      ?>
-                    <!--<input type="hidden" name="controller" id="controller" value="/taothu/license/license_type/"><input type="hidden" name="hdn_dsp_single_method" id="hdn_dsp_single_method" value="dsp_single_license_type"><input type="hidden" name="hdn_dsp_all_method" id="hdn_dsp_all_method" value="dsp_all_license_type"><input type="hidden" name="hdn_update_method" id="hdn_update_method" value="update_license_type"><input type="hidden" name="hdn_delete_method" id="hdn_delete_method" value="delete_license_type"><input type="hidden" name="hdn_item_id" id="hdn_item_id" value=""><input type="hidden" name="hdn_item_id_list" id="hdn_item_id_list" value=""><input type="hidden" name="XmlData" id="XmlData" value="">            <div class="row-fluid">-->
+                    
+                   <div class="row-fluid">
                         <div class="row" style="margin-bottom: 20px;">
                               <div class="col-md-5">
                                   
@@ -23,10 +24,10 @@
                                     <div class="form-group">
                                       
                                             <div class="col-md-7">
-                                                 <input type="text" name="txt_filter" id="txt_filter" value="" class="inputbox form-control" size="30" autofocus="autofocus" placeholder="Tên giáo viên">
+                                                 <input type="text" name="txt_filter"  id="txt_filter" value="" class="inputbox form-control" size="20" autofocus="autofocus" placeholder="Tên giáo viên"/>
                                                
                                             </div>
-                                            <div class="col-md-3 col-md-offset-2">
+                                            <div class="col-md-3 col-md-offset-1">
                                               <button type="button" class="btn btn-primary" onclick="btn_filter_onclick();" name="btn_filter">
                                                     <span class="glyphicon glyphicon-search"></span>  &nbsp  Lọc
                                                 </button>  
@@ -35,7 +36,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="col-md-3 col-md-offset-2">
+                            <div class="col-md-3 col-md-offset-4">
                                     <a href="javascript:void(0)" class="btn btn-success" onclick="btn_addnew_onclick()"><span class="glyphicon glyphicon-plus"></span>&nbsp&nbspThêm mới</a>&nbsp&nbsp&nbsp
                                     <a data-toggle="modal" href="javascript:void(0);"  class="btn btn-danger" onclick="update_delete_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp&nbsp&nbsp&nbspXóa&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                        

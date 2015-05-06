@@ -44,7 +44,7 @@ if (!empty($this->ckeditor_js)) {
         <div class="row">
             <div class="col-md-6 col-md-offset-5">
                 <button class="btn btn-primary" onclick="do_create_new_topic();"><span class='glyphicon glyphicon-plus'></span>&nbsp;&nbsp; Tạo chủ đề</button>&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-default"><span class='glyphicon glyphicon-arrow-left'></span>&nbsp;&nbsp;Quay lại</button>
+                <a href="<?php echo $this->get_controller_url().'dsp_all_topic'.DS.$cate_id; ?>" class="btn btn-default"><span class='glyphicon glyphicon-arrow-left'></span>&nbsp;&nbsp;Quay lại</a>
             </div>
         </div>
       </form>  
