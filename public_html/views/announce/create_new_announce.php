@@ -13,6 +13,9 @@
                          echo $this->hidden('hdn_item_id_list', '');
                          echo $this->hidden('hdn_add_new_ann','add_new_announce');
                     ?>
+                    <div class="row-fluid" style="padding:20px;margin-bottom: 15px; border:1px solid #AC0713 !important; border-top: #AC0713 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);">
+                        
+                
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -68,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                     
+         
                     <div class="row" style="margin-top: 30px;margin-bottom: 10px;">
                         <div class="col-md-8">
                             <textarea class="form-control"  id="txta_ann"  name ="txta_ann" rows="3" placeholder="Nhập thông báo dùng gửi chung cho phụ huynh" autofocus="autofocus"></textarea>
@@ -92,6 +95,7 @@
                             </div>
                         </div>
                     </div>
+                 </div>
                     <div style='margin-top: 30px;' >
                         
                                 <table class="table table-hover table-nomargin table-condensed ">

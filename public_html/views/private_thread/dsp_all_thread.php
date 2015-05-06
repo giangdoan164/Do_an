@@ -9,15 +9,31 @@
                     echo $this->hidden('hdn_dsp_all_thread','dsp_all_thread');
                     echo $this->hidden('hdn_dsp_single_thread','dsp_single_thread');
                     echo $this->hidden('hdn_dsp_create_new_thread','dsp_create_new_thread');
-                    
-                    
                     //phuc vu cho viec xoa
                           //2 cai nay de cho viec xoa
                 echo $this->hidden('hdn_item_id_list', '');
                 echo $this->hidden('hdn_delete_record_method', 'delete_thread');
                 ?>
                 <div class='row' style='margin-bottom:19px;'>  
-                        <div class="col-md-2 col-md-offset-9" style="padding-left: 60px;">
+                    <div class="col-md-5">
+                            <div class='form-group'>
+                                <label for="sel_time"  class="col-md-5 control-label">Thời gian gửi&nbsp;</label>                                 
+                                <div class="col-md-7">
+                                     <select class="form-control " id="sel_time" name="sel_time">
+                                        <option value="1" selected="">---Từ lúc bắt đầu---</option>
+                                        <option value="2" <?php if($created_time=='2'){echo 'selected';} ?> >1 ngày trước</option>
+                                        <option value="3" <?php if($created_time=='3'){echo 'selected';} ?> >3 ngày trước</option>
+                                        <option value="4" <?php if($created_time=='4'){echo 'selected';} ?> >1 tuần trước</option>
+                                        <option value="5" <?php if($created_time=='5'){echo 'selected';} ?> >2 tuần trước</option>
+                                        <option value="6" <?php if($created_time=='6'){echo 'selected';} ?> >1 tháng trước</option>
+                                        <option value="7" <?php if($created_time=='7'){echo 'selected';} ?> >2 tháng trước</option>
+                                        <option value="8" <?php if($created_time=='8'){echo 'selected';} ?> >3 tháng trước</option>
+                                    </select>
+                 
+                                </div>  
+                            </div>
+                    </div>
+                    <div class="col-md-2 col-md-offset-3" style="padding-left: 60px;">
                             <button class="btn btn-primary " onclick="dsp_create_new_thread();"><span class="glyphicon glyphicon-plus"></span>&nbsp;Trao đổi mới</button>
                     </div>
                     <div class="col-md-1">

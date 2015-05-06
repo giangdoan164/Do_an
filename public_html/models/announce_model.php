@@ -9,17 +9,62 @@ class Announce_Model extends Model
     }
      
     public function qry_all_announce(){
-      $condition='WHERE 1>0';
+      $condition='WHERE 1>0 ';
   
        #Phan trang
       page_calc($v_start, $v_end);
       $v_start = $v_start - 1;
       $v_limit = $v_end - $v_start;
-        #End phan trang
+      #End phan trang
       
       $user_id = Session::get('user_id');
       $class_id = Session::get('class');
       $user_level =Session::get('level');
+      //bat dieu kien loc theo thoi gian
+       $date = date('Y-m-d H:i:s');  
+         $v_filter_time = get_post_var('sel_time');
+         switch ($v_filter_time) {
+                case '1':
+                    $condition.= "";
+                    break;
+                case '2':
+                    $new_date = strtotime ( '-1 day' , strtotime ( $date ) ) ;
+                    $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                    $condition.= "AND C_DATE >= '$new_date' ";
+                    break;
+                case '3':$new_date = strtotime ( '-3 day' , strtotime ( $date ) ) ;
+                    $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                    $condition.= "AND C_DATE >= '$new_date' ";
+                    break;
+                case '4':
+                    $new_date = strtotime ( '-1 week' , strtotime ( $date ) ) ;
+                    $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                    $condition.= "AND C_DATE >= '$new_date' ";
+                    break;
+                case '5':
+                    $new_date = strtotime ( '-2 week ' , strtotime ( $date ) ) ;
+                    $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                    $condition.= "AND C_DATE >= '$new_date' ";
+                    break;
+                case '6':
+                    $new_date = strtotime ( '-1 month' , strtotime ( $date ) ) ;
+                    $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                    $condition.= "AND C_DATE >= '$new_date' ";
+                    break;
+                case '7':
+                    $new_date = strtotime ( '-2 month' , strtotime ( $date ) ) ;
+                    $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                    $condition.= "AND C_DATE >= '$new_date' ";
+                    break;
+                case '8':
+                    $new_date = strtotime ( '-3 month' , strtotime ( $date ) ) ;
+                    $new_date = date ( 'Y-m-d H:i:s' , $new_date );
+                    $condition.= "AND C_DATE >= '$new_date' ";
+                    break;
+                default:
+                       break;
+
+         }
       //neu la giao vien lop thi se hien thi theo lop thoi
       // con neu la giao vien truong(quyen = 1,2 ) thi se hien thi het
       if($user_level ==3 || $user_level ==4){$condition .= " AND a.FK_CLASS ='$class_id'"; }
@@ -95,7 +140,7 @@ class Announce_Model extends Model
          $v_sel_rade = intval(get_post_var('sel_grade',0) ) ;
          $condition = '';
          if($v_sel_rade > 0){$condition .="AND FK_GRADE = '$v_sel_rade'";}
-         $sql  = "SELECT PK_USER,FK_GRADE,FK_CLASS FROM t_user WHERE FK_GROUP =4";
+         $sql  = "SELECT PK_USER,FK_GRADE,FK_CLASS FROM t_user WHERE FK_GROUP =4 $condition";
          $arr_parent_announced =  $this->db->GetAll($sql);
          foreach ($arr_parent_announced as $parent_announced){  
               $v_parent_id =  $parent_announced['PK_USER'];

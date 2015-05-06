@@ -27,12 +27,21 @@ $v_class_id = $class;
                     ?>
                     <details open>
                         <summary><strong>Tìm kiếm</strong></summary>
-                        <div class='row' style='margin-bottom:19px;'>
-                            <div class="col-md-3 col-md-offset-1">
-                                <input style="border-radius: 0;" type="text" name="txt_filter" id="txt_filter" value="" class="form-control col-md-5" autofocus="autofocus" placeholder="Tên học sinh" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">                                   
+                        <div class='row' style='margin-bottom:19px;margin-top: 10px;'>
+                            <div class="col-md-5" >
+                                <div class="control-group">
+                                     <label class="control-label col-md-6" for="txt_filter">Nhập tên học sinh</label>
+                                     <div class="col-md-6">
+                                              <input style="border-radius: 0;" type="text" name="txt_filter" id="txt_filter" value="" class="form-control col-md-5" autofocus="autofocus" placeholder="Tên học sinh" onkeypress="txt_filter_onkeypress_is_enter(event);" style="margin-right:10px;">                                   
+                          
+                                     </div>
+                              
+                                </div>
+                               
                             </div>
+                              <?php if ($role == 1): ?>
                             <div class="col-md-3">  
-                                <?php if ($role == 1): ?>
+                              
                                     <select  style="border-radius: 0;"  class="form-control" id="sel_grade" name="sel_grade" onchange="load_class(this.value)">
                                         <option value="0">--- Chọn khối --- </option>
                                         <?php foreach ($arr_grade as $grade): ?>
@@ -40,10 +49,12 @@ $v_class_id = $class;
                                             <option value="<?php echo $grade['PK_GRADE']; ?>" <?php echo $selected; ?>><?php echo $grade['C_GRADE_NAME']; ?></option>
                                         <?php endforeach; ?>/
                                     </select>
-                                <?php endif ?>
+                              
                             </div>
+                              <?php endif ?>
+                              <?php if ($role == 1): ?>
                             <div class="col-md-3">
-                                <?php if ($role == 1): ?>
+                              
                                     <select class="form-control" style="border-radius: 0;" id="sel_class" name="sel_class" onchange="load_grade(this.value)">
                                         <option value="0">--- Chọn lớp ---</option>
                                         <?php foreach ($arr_class as $class): ?>
@@ -52,9 +63,10 @@ $v_class_id = $class;
                                         <?php endforeach; ?>
                                     </select> 
 
-                                <?php endif; ?>
+                           
                             </div>
-                            <div class="col-md-2" >
+                                 <?php endif; ?>
+                            <div class="col-md-1" >
                                 <button type="button" class="btn btn-primary " onclick="btn_filter_onclick();" name="btn_filter">
                                     <i class="glyphicon glyphicon-search"></i>  &nbsp  Lọc
                                 </button>
@@ -64,7 +76,7 @@ $v_class_id = $class;
         
                     <?php if ($role == 1): ?>
                       <div class="row">
-                        <div class="col-md-3 col-md-offset-9">
+                        <div class="col-md-3 col-md-offset-9" style="text-align: right; ">
                             <a  href="<?php echo SITE_URL . 'parent_student/dsp_transfer_class' ?>"   ><span class="glyphicon glyphicon-random"></span>&nbsp;&nbsp;Chuyển Lớp</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="javascript:void(0);"  onclick="update_delete_onclick();"><span  class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Xóa</a>

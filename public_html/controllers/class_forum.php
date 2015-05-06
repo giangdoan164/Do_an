@@ -46,6 +46,7 @@ class Class_forum extends Controller {
             $DATA['sel_category'] = get_post_var('sel_category', 1);
             $DATA['sel_type'] = get_post_var('sel_type', 1);
             $DATA['category_id'] = $category_id;
+            $DATA['arr_all_category'] = $this->category_model->qry_all_category();
             $DATA['category_name'] = $this->category_model->qry_category_name($category_id);
             $DATA['arr_all_topic'] = $this->class_forum_model->qry_all_topic($category_id);
             $DATA['arr_user_class'] = $this->class_forum_model->qry_all_user_class();
@@ -56,7 +57,6 @@ class Class_forum extends Controller {
     }
 
     public function dsp_single_topic($topic_id = 0) {
-
         $topic_id = intval($topic_id);
         $controller = get_post_var('controller', '');
         $dsp_all_topic = get_post_var('hdn_dsp_all_topic', '');
@@ -65,6 +65,7 @@ class Class_forum extends Controller {
             $DATA['category_id'] = get_post_var('category_id');
             $DATA['category_name'] = $this->category_model->qry_category_name($DATA['category_id']);
             $DATA['topic_id'] = $topic_id;
+            $DATA['arr_all_category'] = $this->category_model->qry_all_category();
             $DATA['topic_name'] = $this->class_forum_model->qry_topic_title($topic_id);
             $this->class_forum_model->update_view_number($topic_id);
             $DATA['arr_all_post'] = $this->class_forum_model->dsp_single_topic($topic_id);

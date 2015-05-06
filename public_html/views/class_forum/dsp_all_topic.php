@@ -1,4 +1,5 @@
 <?php 
+
 $role = Session::get('level');
 ?>
 <div class="container" >
@@ -137,9 +138,22 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
                         </div>
                     </div>   
                 </div>
-                <div id="paging" style="margin: 10 10px;">
-                    <?php echo $this->paging2($arr_all_topic); ?>
+                <div id="paging" style="margin: 10 10px;" class="row-fluid">
+                    <div class="col-md-6">
+                         <div class="form-group-sm">
+                                <label for="sel_category" class="col-md-4 control-label ">Chuyển tới chuyên mục</label>
+                                <div class="col-md-4">
+                                    <select  class="form-control input-sm" id="sel_category" name="sel_category" onchange="jump_to_category(this);">
+                                        <?php if(sizeof($arr_all_category)>0):?>
+                                        <?php foreach ($arr_all_category as $key => $category): ?>
+                                        <option value="<?php echo $key; ?>" <?php if($key ==$category_id){echo 'selected';} ?> ><?php echo $category['C_NAME'] ?> </option>
+                                            <?php endforeach; ?>
+                                        <?php endif;?>
+                                    </select>
+                                </div>
+                         </div>  
                 </div>
+                    <?php echo $this->paging2($arr_all_topic); ?>
             </form>
         </div>
     </div>
@@ -166,6 +180,13 @@ echo $this->hidden('hdn_dsp_create_new_topic', 'dsp_create_new_topic');
     
     function btn_filter_onclick(){
          var m = $('#frmMain #controller').val() +'dsp_all_topic/' +$('#frmMain #category_id').val();
+        $('#frmMain').attr('action', m);
+        $('#frmMain').submit();
+    }
+    
+    function jump_to_category(object){
+       var category_id_jump_to  =$(object).val();
+       var m = $('#frmMain #controller').val() +'dsp_all_topic/'+category_id_jump_to;
         $('#frmMain').attr('action', m);
         $('#frmMain').submit();
     }

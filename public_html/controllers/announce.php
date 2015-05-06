@@ -22,6 +22,10 @@ class Announce extends Controller {
        $arr_data['arr_grade'] = $this->class_grade_model->qry_all_grade();
        $arr_data['arr_student'] = $this->class_grade_model->qry_all_student2();
        $arr_data['user_class'] = $this->class_grade_model->qry_user_class();
+       $arr_data['announce_type'] = get_post_var('sel_type',0);
+       $arr_data['created_time']  = get_post_var('sel_time',1);
+       $arr_data['sel_student_code'] = get_post_var('sel_student_name',0);
+       $arr_data['content_text'] = get_post_var('txt_content_announce','');
 //       $arr_data['student_log_info'] =$this->class_grade_model->qry_student_log_info();
        $arr_data['arr_all_announce'] = $this->announce_model->qry_all_announce();
        $this->view->render('announce/dsp_all_announce',$arr_data);

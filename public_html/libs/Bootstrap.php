@@ -11,11 +11,17 @@ class Bootstrap {
 
         //neu ko co controller thi goi controller mac dinh la Index va action mac dinh la index
         if (empty($url[0])) {
-
-            require_once CONTROLLER_PATH . 'index.php';
-            $controller = new Index();
-            $controller->index();
-            return false;
+            if(isset($_SESSION)){
+                 require_once CONTROLLER_PATH . 'index.php';
+                $controller = new Index();
+                $controller->index();
+                return false;
+            }else{
+                require_once CONTROLLER_PATH . 'user.php';
+                $controller = new User();
+                $controller->index();
+                return false;
+            }
         }
         $file = CONTROLLER_PATH . $url[0] . '.php';
         //kiem tra neu ton tai thi no co dung hay ko

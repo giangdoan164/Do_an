@@ -13,19 +13,17 @@
                          echo $this->hidden('hdn_add_new_announce','dsp_add_new_announce');
                          $role = Session::get('level');
                     ?>
-        
-                    <div class='row' style='margin-bottom: 15px;'>
+                    <div class='row' style='padding:20px;margin-bottom: 15px; border:1px solid #AC0713 !important; border-top: #AC0713 4px solid !important; box-shadow: 0 2px 3px rgba(0, 0, 0, .3);' >
                     <div class='row'>
                           <div class="col-md-5"> 
                             <div class="form-group">
                                 <label class='col-md-5 '>Từ khóa nội dung</label>
                                 <div class="col-md-7" >
-                                    <input type='text' style="border-radius: 0;" class='form-control' autofocus='autofocus' placeholder="Nhập từ khóa ví dụ : môn toán" name='txt_content_announce' id='txt_content_announce' />
+                                    <input type='text' style="border-radius: 0;" value="<?php echo $content_text; ?>" class='form-control' autofocus='autofocus' placeholder="Nhập từ khóa ví dụ : môn toán" name='txt_content_announce' id='txt_content_announce' />
 
                                 </div>
                             </div>
                         </div>
-                       
                            <div class="col-md-5">
                             <div class="form-group">
                                 <label for="sel_grade" class="col-md-4 control-label" >Khối học</label>
@@ -50,13 +48,11 @@
                         <div class="col-md-2">
                              <div class='col-md-6 col-md-offset-1'>
                             <button type="button" class="btn btn-success " onclick="btn_filter_onclick();" name="btn_filter">
-                                <i class="glyphicon glyphicon-search"></i>  &nbsp;&nbsp;&nbsp;  Lọc&nbsp;&nbsp;&nbsp;&nbsp;
+                                <i class="glyphicon glyphicon-search"></i>  &nbsp;&nbsp;&nbsp;  &nbsp;Lọc&nbsp;&nbsp;
                             </button>
                         </div>
                         </div>
                     </div>
-
-
                     <div class="row" style="margin-top: 10px;">
                          <div class="col-md-5">
                             <div class='form-group'>
@@ -64,9 +60,9 @@
                                 <div class="col-md-7">
                                     <select class='form-control' id='sel_type' name='sel_type' >
                                         <option value='0'>---- Tất cả ----</option>
-                                        <option value='1'>Thông báo chung</option>
-                                        <option value='2'>Thông báo học tập</option>
-                                        <option value='3'>Thông báo kỷ luật</option>
+                                        <option value='1' <?php if($announce_type=='1'){echo 'selected';} ?>>Thông báo chung</option>
+                                        <option value='2' <?php if($announce_type=='2'){echo 'selected';} ?>>Thông báo học tập</option>
+                                        <option value='3' <?php if($announce_type=='3'){echo 'selected';} ?>>Thông báo kỷ luật</option>
                                     </select>            
                                 </div>  
                             </div>
@@ -92,18 +88,32 @@
 
                             </div>
                         </div>  
-                    
                         <div class="col-md-2">
-                            <div class='col-md-6 col-md-offset-1'>
-                         
+                              <div class='col-md-6 col-md-offset-1'>
+                            <button type="button" class="btn btn-inverse " onclick="btn_reset_onclick();" name="btn_filter">
+                                <i class="glyphicon glyphicon-refresh"></i>  &nbsp;&nbsp; Reset&nbsp;
+                            </button>
                         </div>
                         </div>
                     </div>
-                    
-
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-md-5">
-
+                            <div class='form-group'>
+                                <label for="sel_time"  class="col-md-5 control-label">Thời gian gửi&nbsp;</label>                                 
+                                <div class="col-md-7">
+                                     <select class="form-control " id="sel_time" name="sel_time">
+                                        <option value="1" selected="">---Từ lúc bắt đầu---</option>
+                                        <option value="2" <?php if($created_time=='2'){echo 'selected';} ?> >1 ngày trước</option>
+                                        <option value="3" <?php if($created_time=='3'){echo 'selected';} ?> >3 ngày trước</option>
+                                        <option value="4" <?php if($created_time=='4'){echo 'selected';} ?> >1 tuần trước</option>
+                                        <option value="5" <?php if($created_time=='5'){echo 'selected';} ?> >2 tuần trước</option>
+                                        <option value="6" <?php if($created_time=='6'){echo 'selected';} ?> >1 tháng trước</option>
+                                        <option value="7" <?php if($created_time=='7'){echo 'selected';} ?> >2 tháng trước</option>
+                                        <option value="8" <?php if($created_time=='8'){echo 'selected';} ?> >3 tháng trước</option>
+                                    </select>
+                 
+                                </div>  
+                            </div>
                         </div>  
                          <div class="col-md-5">
                             <div class='form-group'>
@@ -113,7 +123,7 @@
                                     <select class='form-control' id='sel_student_name' name='sel_student_name' >
                                         <option value='0'>---- Chọn học sinh ----</option>
                                         <?php foreach($arr_student as $student) :?>
-                                        <option value="<?php echo $student['PK_USER'];?>"><?php echo $student['C_NAME'];?></option>
+                                        <option value="<?php echo $student['PK_USER'];?>" <?php if($sel_student_code ==$student['PK_USER']){echo 'selected';} ?>><?php echo $student['C_NAME'];?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?php else :?>
@@ -135,27 +145,21 @@
                     </div>
                         <?php endif;?>
                     </div>
-                </div>
-                    
+                </div>  
                     <div style='margin-top: 30px;' >
-                 
                                 <table class="table table-hover table-nomargin table-condensed table-bordered ">
                                     <thead>
                                         <tr class="info">
-                                           
                                             <th style="width: 18%;text-align:center">Họ tên học sinh</th>
                                             <th style="width: 5%;text-align: center">Lớp</th>
                                             <th style="width: 50%;text-align:center">Nội dung</th>
                                             <th style="width: 10%;text-align:center">Ngày gửi</th>
-                                            <th style="width: 27%;text-align:center">Người gửi</th>
-                                                 
+                                            <th style="width: 27%;text-align:center">Người gửi</th>     
                                         </tr>
-
                                     </thead>
                                     <tbody>
                                     <?php foreach ($arr_all_announce as $announce):?>
-                                    <tr>
-                                       
+                                    <tr> 
                                         <td style="text-align:center"> 
                                             <?php echo $announce['C_NAME']; ?>
                                         </td>
@@ -221,7 +225,15 @@
                     }
                 });
          }
-    
+         
+        function btn_reset_onclick(){
+            $('#frmMain #txt_content_announce').val('');
+            $('#frmMain #sel_type').val('0');
+            $('#frmMain #sel_time').val('1');
+            $('#frmMain #sel_student_name').val('0');
+            
+        }
+        
         function load_grade_student(class_id){
          var site_url = $('#hdn_site_url').val();
          $.ajax({

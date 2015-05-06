@@ -33,13 +33,29 @@ $user_id = Session::get('user_id');
                     <a href="<?php echo $v_controller_url . 'dsp_all_topic/' . $category_id; ?>"><?php echo $category_name; ?></a>  &nbsp;&gt;
                     <a href="<?php echo $v_controller_url . 'dsp_single_topic/' . $topic_id; ?>"> <?php echo $topic_name; ?> </a>
                 </div>
-            <?php if($user_id ==$arr_all_post[0]['C_CREATER_USER']): ?>
             <div class="row" style="margin-bottom: 20px;">
-                <div class="col-md-2 col-md-offset-10">
+              <div class="col-md-5 row">
+                   <div class="form-group-sm" style="margin-left:20px; ">
+                                <label for="sel_category" class="col-md-7 control-label ">Chuyển tới chuyên mục</label>
+                                <div class="col-md-6  row">
+                                    <select  class="form-control input-sm" id="sel_category" name="sel_category" onchange="jump_to_category(this);">
+                                        <?php if(sizeof($arr_all_category)>0):?>
+                                        <?php foreach ($arr_all_category as $key => $category): ?>
+                                        <option value="<?php echo $key; ?>" <?php if($key ==$category_id){echo 'selected';} ?> ><?php echo $category['C_NAME'] ?> </option>
+                                            <?php endforeach; ?>
+                                        <?php endif;?>
+                                    </select>
+                                </div>
+                         </div> 
+                           
+                       
+                </div>
+                  <?php if($user_id ==$arr_all_post[0]['C_CREATER_USER']): ?>
+                <div class="col-md-2 col-md-offset-5" style="padding-left: 45px;">
                     <a href="#" onclick="btn_delete_topic_user(<?php echo $topic_id;?>)"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Đóng chủ đề</a>
                 </div>
+                    <?php endif;?>
             </div>
-            <?php endif;?>
                 <table class="table  table-condensed  " style="width: 100%">
                     <tbody>
                         <?php if (sizeof($arr_all_post) > 0): ?>
@@ -195,6 +211,12 @@ $user_id = Session::get('user_id');
          var url = '<?php echo $this->get_controller_url(); ?>dsp_update_reply';
         showPopWin(url, 1000, 550);
      }
+      function jump_to_category(object){
+       var category_id_jump_to  =$(object).val();
+       var m = $('#frmMain #controller').val() +'dsp_all_topic/'+category_id_jump_to;
+        $('#frmMain').attr('action', m);
+        $('#frmMain').submit();
+    }
 </script>
 
 
