@@ -9,7 +9,6 @@ $level = Session::get('level');
 <div class ="container">
     <div class="row-fluid">
         <h3 class="page-header" style="text-align:center">Tạo mới chủ đề trao đổi</h3>
-
         <form action="" method="post" name="frmMain" id="frmMain" >
             <?php
             echo $this->hidden('controller', $this->get_controller_url());
@@ -17,7 +16,7 @@ $level = Session::get('level');
             ?>
             <div class="row">
                 <?php if ($level == 3): ?>
-                    <div class="form-group">
+                    <div class="form-group row-fluid">
                         <label class="control-label col-md-2">Chọn học sinh</label>
                         <div class="col-md-5">
                             <select  class=" form-control"  id= "sel_class_student" style="width: 350px;" name="sel_class_student">
@@ -31,7 +30,7 @@ $level = Session::get('level');
                         </div>
                     </div>
                 <?php else: ?>
-                    <div class="form-group">
+                    <div class="form-group row-fluid">
                         <label class="control-label col-md-2">Giáo viên chủ nhiệm</label>
                         <div class="col-md-5">
                             <select  class=" form-control"  id= "sel_class_student" style="width: 350px;" name="sel_class_student" readonly>
@@ -97,16 +96,17 @@ $level = Session::get('level');
             if (parseFloat(student) == 0) {
                 alert(" Chọn phụ huynh học sinh muốn trao đổi");
                 return false;
-            }
-            if (title.trim() == '') {
+            }else if (title.trim() == '') {
                 alert("Nhập tiêu đề");
                 return false;
-            }
-
-            var f = document.frmMain;
+            }else{
+                var f = document.frmMain;
             m = $("#controller").val() + f.hdn_create_new_thread.value;
             $("#frmMain").attr("action", m);
-            f.submit();
+            f.submit(); 
+            }
+
+           
         }
 
 

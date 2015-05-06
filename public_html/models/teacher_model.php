@@ -101,7 +101,10 @@ class Teacher_Model extends Model {
         $result = $this->db->GetAll($sql);
         return $result;
     }
-
+    
+    function check_teacher_has_school_record(){
+//        $sql = $this->
+    }
     public function delete_teacher() {
         $v_delete_list = get_post_var('hdn_item_id_list', 0);
         $sql = "DELETE FROM `t_user` WHERE PK_USER IN ($v_delete_list)";
