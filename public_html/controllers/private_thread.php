@@ -24,6 +24,7 @@ class Private_thread extends Controller {
         $DATA = array();
         $DATA['arr_all_unread_mess'] = $this->private_thread_model->qry_new_unread_message_thread();
         $DATA['arr_all_message'] = $this->private_thread_model->qry_all_thread();
+        $DATA['created_time'] = get_post_var('sel_time',1);
         $this->view->render('private_thread/dsp_all_thread',$DATA);
     }
     public function dsp_single_thread($thread_id){
@@ -65,11 +66,15 @@ class Private_thread extends Controller {
         $this->view->render('private_thread/dsp_thread_has_unread_message',$DATA);
     }
     
+//    public function count_unread_message(){
+//       $arr= $this->private_thread_model->qry_new_unread_message_thread();
+//       $arr_unread_thread = array_values($arr);
+//       $total  = array_sum($arr_unread_thread);
+//       echo $total;
+//    }
     public function count_unread_message(){
        $arr= $this->private_thread_model->qry_new_unread_message_thread();
-       $arr_unread_thread = array_values($arr);
-       $total  = array_sum($arr_unread_thread);
-       echo $total;
+       echo sizeof($arr);
     }
     
     public function delete_thread(){
@@ -85,6 +90,5 @@ class Private_thread extends Controller {
         }
     }
      
-    
-    
+   
 }

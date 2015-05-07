@@ -1,4 +1,5 @@
 <?php $arr_key_unread_mess = array_keys($arr_all_unread_mess);?>
+
 <div class="container" >
     <div class="row-fluid">
         <h2 class="page-header">Trao đổi riêng</h2>
@@ -9,6 +10,7 @@
                     echo $this->hidden('hdn_dsp_all_thread','dsp_all_thread');
                     echo $this->hidden('hdn_dsp_single_thread','dsp_single_thread');
                     echo $this->hidden('hdn_dsp_create_new_thread','dsp_create_new_thread');
+                   
                     //phuc vu cho viec xoa
                           //2 cai nay de cho viec xoa
                 echo $this->hidden('hdn_item_id_list', '');
@@ -19,7 +21,7 @@
                             <div class='form-group'>
                                 <label for="sel_time"  class="col-md-5 control-label">Thời gian gửi&nbsp;</label>                                 
                                 <div class="col-md-7">
-                                     <select class="form-control " id="sel_time" name="sel_time">
+                                    <select class="form-control " id="sel_time" name="sel_time" onchange="filter_onclick()">
                                         <option value="1" selected="">---Từ lúc bắt đầu---</option>
                                         <option value="2" <?php if($created_time=='2'){echo 'selected';} ?> >1 ngày trước</option>
                                         <option value="3" <?php if($created_time=='3'){echo 'selected';} ?> >3 ngày trước</option>
@@ -37,7 +39,7 @@
                             <button class="btn btn-primary " onclick="dsp_create_new_thread();"><span class="glyphicon glyphicon-plus"></span>&nbsp;Trao đổi mới</button>
                     </div>
                     <div class="col-md-1">
-                        <button class="btn btn-success btn-block" onclick="update_delete_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Xóa</button>
+                        <button class="btn btn-success" onclick="update_delete_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Xóa&nbsp;&nbsp;&nbsp;</button>
                        
                     </div>
                 </div>  
@@ -48,51 +50,60 @@
                                      <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">               
                                 </th>
                             <th style="width: 25%;text-align:center">Tên người gửi</th>
-                            <th style="width:50%;text-align:center">Tiêu đề </th>
-                            <th style="width: 20%;text-align:center">Thời gian</th>
+                            <th style="width:40%;text-align:center">Tiêu đề </th>
+                            <th style="width: 15%;text-align:center">Thời gian bắt đầu</th>
+                            <th style="width: 15%;text-align:center">Thời gian gần nhất</th>
+                        </tr>
                         </tr>
                     </thead>
                     <tbody>  
                         <?php if (sizeof($arr_all_message) >0 ):?>
                             <?php if(sizeof($arr_all_unread_mess) > 0):?>
-                                 <?php foreach ($arr_all_message as  $key_all_mess =>$message) :?>
-                                <?php if(in_array($key_all_mess,$arr_key_unread_mess)):?>
+                                 <?php foreach ($arr_all_message as $message) :?>
+                                <?php if(in_array($message['PK_THREAD'],$arr_key_unread_mess)):?>
                                         <tr style="font-weight: bold;" >
                                         <td style="text-align:center;">
-                                        <input type="checkbox" name="chk" value="<?php echo $key_all_mess;?>"  onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
+                                        <input type="checkbox" name="chk" value="<?php echo $message['PK_THREAD'];?>"  onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                         </td>
                                         <td style="text-align:center">
-                                            <a  style="color:black;" href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"> <?php echo $message['C_LOGIN_NAME'];?> </a>                           
+                                            <a  style="color:black;" href="#" onclick="row_click(<?php echo  $message['PK_THREAD'];?>)"> <?php echo $message['C_LOGIN_NAME'];?> </a>                           
                                         </td>
-                                        <td style="text-align:center">   <a style="color:black;"  href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"><?php echo $message['C_TITLE']."(".$arr_all_unread_mess[$key_all_mess].")"; ?></a></td>
+                                        <td style="text-align:center">   <a style="color:black;"  href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"><?php echo $message['C_TITLE']."(".$arr_all_unread_mess[$message['PK_THREAD']].")"; ?></a></td>
                                         <td style="text-align:center"><?php echo $message['C_CREATED_DATE'];?></td>
+                                        <td style="text-align:center"><?php echo $message['C_LATEST_DATE'];?></td>
                                         </tr>
                                     <?php else: ?>
                                            <tr>
                                             <td style="text-align:center;">
-                                            <input type="checkbox" name="chk" value="<?php echo $key_all_mess;?>"  onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
+                                            <input type="checkbox" name="chk" value="<?php echo $message['PK_THREAD'];?>"  onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                             </td>
                                             <td style="text-align:center">
-                                                <a  style="color:black;" href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"> <?php echo $message['C_LOGIN_NAME'];?> </a>                           
+                                                <a  style="color:black;" href="#" onclick="row_click(<?php echo  $message['PK_THREAD'];?>)"> <?php echo $message['C_LOGIN_NAME'];?> </a>                           
+                                            </td>     
+                                            <td style="text-align:center"><a style="color:black;" href="#" onclick="row_click(<?php echo  $message['PK_THREAD'];?>)"><?php echo $message['C_TITLE'];?></a></td>
+                                            <td style="text-align:center"><?php echo date('d-m-Y H:i:s',strtotime($message['C_CREATED_DATE']));?></td>
+                                            <td style="text-align:center">
+                                                   <?php echo date('d-m-Y H:i:s',strtotime($message['C_LATEST_DATE']));?>
+                                          
+                                            
                                             </td>
-                                            <td style="text-align:center">   <a style="color:black;" href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"><?php echo $message['C_TITLE'];?></a></td>
-                                            <td style="text-align:center"><?php echo $message['C_CREATED_DATE'];?></td>
                                             </tr>
                                     <?php endif; ?>
                                     <?php endforeach; ?>
                                <?php else: ?>
-                                       <?php foreach ($arr_all_message as  $key =>$message) :?>
+                                       <?php foreach ($arr_all_message as $message) :?>
                                         <tr>
                                             <td style="text-align:center;">
-                                            <input type="checkbox" name="chk" value="<?php echo $key;?>"  onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
+                                            <input type="checkbox" name="chk" value="<?php echo $message['PK_THREAD'];?>"  onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                             </td>
 
                                             <td style="text-align:center">
-                                                <a  style="color:black;" href="#" onclick="row_click(<?php echo  $key;?>)"> <?php echo $message['C_LOGIN_NAME'];?> </a>                           
+                                                <a  style="color:black;" href="#" onclick="row_click(<?php echo  $message['PK_THREAD'];?>)"> <?php echo $message['C_LOGIN_NAME'];?> </a>                           
                                             </td>
                                             <td style="text-align:center">    <a style="color:black;" href="#" onclick="row_click(<?php echo  $key_all_mess;?>)"><?php echo $message['C_TITLE'];?></a></td>
-                                            <td style="text-align:center"><?php echo $message['C_CREATED_DATE'];?></td>
-
+                                            <td style="text-align:center"><?php echo date('d-m-Y H:i:s',strtotime($message['C_CREATED_DATE']));?></td>
+                                            <td style="text-align:center">
+                                                <?php echo date('d-m-Y H:i:s',strtotime($message['C_LATEST_DATE']));?>
                                             </tr>
                              <?php endforeach;?>
                                 <?php endif;?>
@@ -101,7 +112,7 @@
                              <td style="color:red;text-align: center;font-weight: bold;" colspan="5"><?php echo "Chưa có trao dổi riêng nào được tạo"?></td>
                          </tr>
                         <?php endif;?>
-                             <?php // echo $this->render_rows(count($arr_all_message),4); ?>
+                             <?php // echo $this->render_rows(count($arr_all_message),20); ?>
                     </tbody>
                 </table>
                  <div id="paging" class="nowrap">
@@ -127,5 +138,10 @@
       f.submit();
   }
   
+  function filter_onclick(){
+       var f = document.frmMain;
+     
+      f.submit();
+  }
   
 </script>

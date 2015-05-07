@@ -71,7 +71,6 @@ class Announce_Model extends Model
       if($user_level ==4){$condition .=" AND a.FK_PARENT_USER = '$user_id'";}
       //giao vien  truong thi chi hien cua thong bao cua truong thoi
 //      else if($teacher_level ==2){$condition .=" AND a.FK_TEACHER_USER = '40' ";}
-    
         #End phan trang
         //B2(xem dieu kien loc là  gi)
         $content_announce = get_post_var('txt_content_announce','');
@@ -113,10 +112,7 @@ class Announce_Model extends Model
         $v_grade = get_post_var('sel_grade',0);
         $v_scope = get_post_var('radio_ann_scope',0);
         $v_list = get_post_var('hdn_item_id_list','');
-   
-    
         $v_class = get_post_var('sel_class',0);
-        
         $arr_parent_id = array();
         if($v_list !=''){
             $arr_parent_id = explode(',', $v_list);

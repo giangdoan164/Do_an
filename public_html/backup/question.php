@@ -1,6 +1,8 @@
 http://www.w3schools.com/jquery/jquery_dom_get.asp
 http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.editor.html#insertHtml
-
+https://www.youtube.com/watch?v=IRt7TzsLNWU
+https://www.youtube.com/watch?v=c9XsjzrddKA
+https://www.youtube.com/user/hussey17
 https://www.youtube.com/watch?v=93kw4W3raZo
 https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&es_th=1&ie=UTF-8#q=submit%20form%20modal%20bootstrap&es_th=1
 alert box boostrap

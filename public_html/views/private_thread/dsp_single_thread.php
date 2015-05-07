@@ -1,4 +1,6 @@
 <?php
+
+
 if (!empty($this->ckeditor_js)) {
     $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js[0] . "'></script>";
     echo $js_files;
@@ -20,9 +22,9 @@ $page_current = get_request_var('page',1);
                 echo $this->hidden('hdn_reply', 'create_reply_to_thread');
                 echo $this->hidden('hdn_dsp_single_thread','dsp_single_thread');
                 ?>
-                <div id="reference" style="margin-bottom: 10px;">
-                    <a href="<?php echo $v_controller_url . 'dsp_all_thread'; ?>"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Quay lại</a>
-                    
+                <div  style="margin-bottom: 10px;">
+                    <a href="<?php echo $v_controller_url . 'dsp_all_thread'; ?>"><span class="glyphicon glyphicon-home"></span>&nbsp;Trao đổi riêng tư</a>&nbsp;&nbsp;&gt;&gt;
+                    <?php echo $arr_all_message[0]['C_TITLE'];?>
                 </div>
                 <table class="table table-hover table-nomargin table-condensed table-bordered " style="width: 100%">
                     <tbody>
@@ -42,11 +44,7 @@ $page_current = get_request_var('page',1);
                                 <?php else:?>
                                 <tr><td><?php echo "Không có tin nhắn nào";?></td></tr>
                         <?php endif; ?>
-                       
                     </tbody>
-             
-                               
-             
                 </table>
                 <div class="row">
                     <div class="div_padding col-md-4 col-md-offset-8">

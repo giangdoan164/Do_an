@@ -227,7 +227,7 @@
                         $('#li_unread_thread_message').parent().html('');
                     }
                     else {
-                        $('#li_unread_thread_message').text(result + ' Tin nhắn mới')
+                        $('#li_unread_thread_message').text(result + ' Trao đổi mới');
                     }
                     ;
                 }
