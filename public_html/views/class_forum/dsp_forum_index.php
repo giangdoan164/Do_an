@@ -30,35 +30,35 @@ echo $this->hidden('hdn_dsp_single_topic', 'dsp_single_topic');
                             <td class="category">
                                 <div style="display: inline-block;">
                                     <span style="font-size: 15px;"><a href="#" onclick="row_click(<?php echo $cate_key; ?>);" style="text-decoration:none; ">&nbsp;&nbsp;
-                                            <span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-    <?php echo $category['C_NAME']; ?>
+<!--                                            <span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                            <img  src="<?php echo PUBLIC_URL.'images/forum_comment.png';?>" style="background-color: none;width:35px;">&nbsp;&nbsp;
+                                <?php echo $category['C_NAME']; ?>
                                             <!--<br/>Mô tả chủ đề ....-->
                                         </a></span>
                                 </div>
                             </td>
-                            <td style="text-align:center"> 
+                            <td style=""> 
                                 <div id="public_title_new" class="title">
-    <?php if (isset($arr_new_topic[$cate_key])): ?>
-        <?php echo $arr_new_topic[$cate_key]['C_TITLE']; ?>
+                            <?php if (isset($arr_new_topic[$cate_key])): ?>
+                                <?php echo $arr_new_topic[$cate_key]['C_TITLE']; ?>
                                     <?php else: ?>
                                         <?php echo "Không có chủ đề nào trong chuyên mục" ?>
                                     <?php endif; ?>
                                 </div>
                                     <?php if (isset($arr_new_topic[$cate_key])): ?>
-                                    <div id="public_user_name" class="user_name">Người gửi  &nbsp;
-
+                                    <div id="public_user_name" class="user_name" style='color:#CE4B27'>Người gửi  &nbsp;
                                     <?php echo $arr_new_topic[$cate_key]['C_NAME']; ?>
                                         <br/>
                                         <div style="color:blue;">
-                                        <?php echo $arr_new_topic[$cate_key]['C_LATEST_DATE']; ?>
+                                        <?php echo date('d-m-Y H:i:s',strtotime($arr_new_topic[$cate_key]['C_LATEST_DATE']));?>
                                         </div>
 
                                     </div>
-    <?php endif; ?>
+                                        <?php endif; ?>
                             </td>
                             <td style="text-align:center;vertical-align:middle;">
                                 <?php if (isset($arr_count_topic[$cate_key])): ?>
-        <?php echo $arr_count_topic[$cate_key]['POST_NUMBER']; ?> 
+                                    <?php echo $arr_count_topic[$cate_key]['POST_NUMBER']; ?> 
                                 <?php else: ?>
                                     <?php echo 0; ?>
                                 <?php endif; ?>

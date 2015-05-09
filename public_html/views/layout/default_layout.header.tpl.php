@@ -122,32 +122,32 @@
                             <a href="<?php echo SITE_URL; ?>index" class="navbar-brand index glyphicon glyphicon-home" >&nbsp;</a>
                         </li>
 
-<?php if ($role == 1): ?>
+                        <?php if ($role == 1): ?>
                             <li <?php if ($current_controller == 'teacher')
-    {
-        echo "class='active'";
-    } ?>>
+                            {
+                                echo "class='active'";
+                            } ?>>
                                 <a href="<?php echo SITE_URL; ?>teacher">Quản lý giáo viên</a>
                             </li>
                             <li <?php if ($current_controller == 'class_grade')
-    {
-        echo "class='active'";
-    } ?>>
+                                {
+                                    echo "class='active'";
+                                } ?>>
                                 <a href="<?php echo SITE_URL; ?>class_grade">Quản lý lớp học</a>
                             </li>
                             <li <?php if ($current_controller == 'category')  { echo "class='active'"; } ?>>
                                 <a href="<?php echo SITE_URL; ?>category">Quản lý chuyên mục</a>
                             </li>
-                            <li <?php if ($current_controller == 'subject_grade')  { echo "class='active'"; } ?>>
-                                <a href="<?php echo SITE_URL; ?>subject_grade">Quản lý khối - môn học</a>
+                            <li <?php // if ($current_controller == 'subject_grade')  { echo "class='active'"; } ?>>
+                                <!--<a href="<?php // echo SITE_URL; ?>subject_grade">Quản lý khối - môn học</a>-->
                             </li>
-<?php endif; ?>
-<?php if ($role == 3 || $role == 1): ?>
-                            <li <?php if ($current_controller == 'parent_student')
-    {
-        echo "class='active'";
-    } ?>>
-                                <a href="<?php echo SITE_URL; ?>parent_student">Quản lý liên lạc</a>
+                            <?php endif; ?>
+                            <?php if ($role == 3 || $role == 1): ?>
+                                                        <li <?php if ($current_controller == 'parent_student')
+                                {
+                                    echo "class='active'";
+                                } ?>>
+                                <a href="<?php echo SITE_URL; ?>parent_student">Quản lý danh sách liên lạc</a>
                             </li>
                         <?php endif; ?>
                         <?php if ($role == 3 || $role == 2 || $role == 4): ?>
@@ -303,4 +303,6 @@
 
 <div id="content">
 
-<?php ?>
+<?php 
+
+?>

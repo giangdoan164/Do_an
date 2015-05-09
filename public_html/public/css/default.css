@@ -77,3 +77,6 @@ footer#page_footer p{
     background: #CE4B27;
     color: #FDFDFD;
 }
+a{
+    cursor:  pointer;
+}

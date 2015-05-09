@@ -10,24 +10,24 @@ class Private_thread_Model extends model {
         $user_id = Session::get('user_id');
         $result = array();
         //c1
-            //$sql ="SELECT pm.FK_THREAD, COUNT(pm.PK_MESSAGE) AS UNREAD_MESSAGE_NUMBER
-            //FROM t_private_message pm
-            //WHERE pm.PK_MESSAGE IN(SELECT
-            //                         FK_MESSAGE
-            //                       FROM t_private_message_read_state
-            //                       WHERE FK_USER = '475'
-            //                           AND C_READ_STATE = 0)
-            //GROUP BY pm.FK_THREAD";
-        $sql = "SELECT 
-                pm.FK_THREAD,
-                COUNT(*) AS UNREAD_MESSAGE_NUMBER 
-              FROM
-                t_private_message_read_state pmrs 
-                INNER JOIN t_private_message pm 
-                  ON pmrs.FK_MESSAGE = pm.PK_MESSAGE 
-              WHERE FK_USER = '$user_id' 
-                AND C_READ_STATE = 0 
-              GROUP BY FK_THREAD ";
+            $sql ="SELECT pm.FK_THREAD, COUNT(pm.PK_MESSAGE) AS UNREAD_MESSAGE_NUMBER
+            FROM t_private_message pm
+            WHERE pm.PK_MESSAGE IN(SELECT
+                                     FK_MESSAGE
+                                   FROM t_private_message_read_state
+                                   WHERE FK_USER = '$user_id'
+                                       AND C_READ_STATE = 0)
+            GROUP BY pm.FK_THREAD";
+//        $sql = "SELECT 
+//                pm.FK_THREAD,
+//                COUNT(*) AS UNREAD_MESSAGE_NUMBER 
+//              FROM
+//                t_private_message_read_state pmrs 
+//                INNER JOIN t_private_message pm 
+//                  ON pmrs.FK_MESSAGE = pm.PK_MESSAGE 
+//              WHERE FK_USER = '$user_id' 
+//                AND C_READ_STATE = 0 
+//              GROUP BY FK_THREAD ";
        $result =  $this->db->GetAssoc($sql);
        return $result;
     }
@@ -88,41 +88,93 @@ class Private_thread_Model extends model {
 
             }
             
+//            $sql ="SELECT COUNT(*) FROM t_private_thread pt
+//                    INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
+//                    WHERE PK_THREAD 
+//                    IN (SELECT FK_THREAD  FROM t_private_thread_participant WHERE FK_USER = '$user_id') $condition";
+//            $total_record = $this->db->GetOne($sql);
+//        // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
+//        $sql = "SELECT pt.PK_THREAD,pt.C_TITLE, pt.C_LATEST_DATE ,pt.C_CREATED_DATE ,u.C_LOGIN_NAME,$total_record as TOTAL_RECORD
+//                FROM t_private_thread pt
+//                INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
+//                WHERE PK_THREAD 
+//                IN (SELECT FK_THREAD  FROM t_private_thread_participant WHERE FK_USER = '$user_id') $condition ORDER BY pt.C_CREATED_DATE DESC  LIMIT $v_start,$v_limit ";
+//        $result = $this->db->GetAll($sql);
+//        return $result;
+            
+            $private_thread_type = get_post_var('sel_type',1);
+            if($private_thread_type==1){
+               $sql_list_thread = "SELECT FK_THREAD  FROM t_private_thread_participant WHERE FK_USER = '$user_id'";
+            }elseif($private_thread_type==2){
+              $sql_list_thread =  "SELECT pm.FK_THREAD
+                                    FROM t_private_message pm
+                                    WHERE pm.PK_MESSAGE IN(SELECT
+                                                             FK_MESSAGE
+                                                           FROM t_private_message_read_state
+                                                           WHERE FK_USER = '$user_id'
+                                                               AND C_READ_STATE = 0)
+                                    GROUP BY pm.FK_THREAD";
+            }else{
+                $sql_list_thread =  "SELECT pm.FK_THREAD
+                                FROM t_private_message pm
+                                WHERE pm.PK_MESSAGE IN(SELECT
+                                                         FK_MESSAGE
+                                                       FROM t_private_message_read_state
+                                                       WHERE FK_USER = '$user_id'
+                                                           AND C_READ_STATE = 1)
+                                GROUP BY pm.FK_THREAD";
+            }
             $sql ="SELECT COUNT(*) FROM t_private_thread pt
                     INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
                     WHERE PK_THREAD 
-                    IN (SELECT FK_THREAD  FROM t_private_thread_participant WHERE FK_USER = '$user_id') $condition";
+                    IN ($sql_list_thread) $condition";
             $total_record = $this->db->GetOne($sql);
-        // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
-        $sql = "SELECT pt.PK_THREAD,pt.C_TITLE, pt.C_LATEST_DATE ,pt.C_CREATED_DATE ,u.C_LOGIN_NAME,$total_record as TOTAL_RECORD
+         // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
+            $sql = "SELECT pt.PK_THREAD,pt.C_TITLE, pt.C_LATEST_DATE ,pt.C_CREATED_DATE ,u.C_LOGIN_NAME,$total_record as TOTAL_RECORD
                 FROM t_private_thread pt
                 INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
                 WHERE PK_THREAD 
-                IN (SELECT FK_THREAD  FROM t_private_thread_participant WHERE FK_USER = '$user_id') $condition ORDER BY pt.C_CREATED_DATE DESC  LIMIT $v_start,$v_limit ";
-        $result = $this->db->GetAll($sql);
-        return $result;
+                IN ($sql_list_thread) $condition ORDER BY pt.C_CREATED_DATE DESC  LIMIT $v_start,$v_limit ";
+            $result = $this->db->GetAll($sql);
+            return $result;
+            
+//        $sql ="SELECT pm.FK_THREAD
+//            FROM t_private_message pm
+//            WHERE pm.PK_MESSAGE IN(SELECT
+//                                     FK_MESSAGE
+//                                   FROM t_private_message_read_state
+//                                   WHERE FK_USER = '$user_id'
+//                                       AND C_READ_STATE = 0)
+//            GROUP BY pm.FK_THREAD";
+//        
+//          $sql = "SELECT pt.PK_THREAD ,pt.C_TITLE,pt.C_CREATED_DATE ,u.C_LOGIN_NAME FROM t_private_thread pt
+//                    INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
+//                    WHERE PK_THREAD 
+//                    IN ($list_unread_mess) ORDER BY pt.C_CREATED_DATE DESC";
+        
     }
 
-    public function qry_all_thread_has_unread_message(){
-        $arr_unread = $this->qry_new_unread_message_thread();
-        if(sizeof($arr_unread)==0){return array();}
-        else{
-              $arr_unread_mess_key = array_keys($arr_unread);
-              $list_unread_mess = implode(",", $arr_unread_mess_key);
-              $user_id = Session::get('user_id');
-              $result = array();
-            // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
-            $sql = "SELECT pt.PK_THREAD ,pt.C_TITLE,pt.C_CREATED_DATE ,u.C_LOGIN_NAME FROM t_private_thread pt
-                    INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
-                    WHERE PK_THREAD 
-                    IN ($list_unread_mess) ORDER BY pt.C_CREATED_DATE DESC";
-            $result = $this->db->GetAssoc($sql);
-            return $result; 
-        }
-       
-    }
+//    public function qry_all_thread_has_unread_message(){
+//        $arr_unread = $this->qry_new_unread_message_thread();
+//        if(sizeof($arr_unread)==0){return array();}
+//        else{
+//              $arr_unread_mess_key = array_keys($arr_unread);
+//              $list_unread_mess = implode(",", $arr_unread_mess_key);
+//              $user_id = Session::get('user_id');
+//              $result = array();
+//            // lay ra toan bo chu de ma co lien quan den thang co usser_id nhu tren;
+//            $sql = "SELECT pt.PK_THREAD ,pt.C_TITLE,pt.C_CREATED_DATE ,u.C_LOGIN_NAME FROM t_private_thread pt
+//                    INNER JOIN t_user u on u.PK_USER  = pt.C_CREATED_USER  
+//                    WHERE PK_THREAD 
+//                    IN ($list_unread_mess) ORDER BY pt.C_CREATED_DATE DESC";
+//            $result = $this->db->GetAssoc($sql);
+//            return $result; 
+//        }
+//       
+//    }
     
     public function qry_single_thread($thread_id) {
+          $read_date = date('Y-m-d H:i:s');  
         #Phan trang
         $page = get_request_var('page', 1);
         $page = ((int) $page > 1) ? (int) $page : 1;
@@ -131,13 +183,16 @@ class Private_thread_Model extends model {
         //cap nhat lai trang thai doc tin;
         $user_id = Session::get('user_id');
         $sql = "SELECT PK_MESSAGE FROM t_private_message WHERE FK_THREAD = '$thread_id' AND FK_SENDING_USER <> '$user_id'";
+        //de phong th ko con message nua thi do bao loi
         $list_message =$this->db->GetCol($sql);
-        $list_message =  implode(',', $list_message);
-        $sql ="UPDATE t_private_message_read_state SET C_READ_STATE = 1 WHERE FK_USER = '$user_id' AND FK_MESSAGE IN ($list_message)";
-        $this->db->Execute($sql);
         
-        
+        if(sizeof($list_message) >0){
+                $list_message =  implode(',', $list_message);
+                $sql ="UPDATE t_private_message_read_state SET C_READ_STATE = 1,C_READ_DATE ='$read_date' WHERE FK_USER = '$user_id' AND FK_MESSAGE IN ($list_message)";
+                $this->db->Execute($sql);
+        }   
         $sql_count = "SELECT COUNT(*)  FROM t_private_message pm WHERE FK_THREAD = '$thread_id' ";
+        //lay tu bang message nhung tin nhan thuoc chu de da chon
         $result = array();
         $sql = "SELECT
                 pm.*,
@@ -260,6 +315,13 @@ class Private_thread_Model extends model {
         $this->db->Execute($sql);
         return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
     }
-
+    
+    public function qry_count_user_in_thread($thread_id){
+        $user_id = Session::get('user_id');
+        //ktra neu thread chi con 1 nguoi co nghia la trao doi ket thuc! ko con co the trao doi duoc nua
+       $sql = "SELECT COUNT(*) FROM t_private_thread_participant WHERE FK_THREAD = '$thread_id' AND FK_USER != $user_id" ;
+       $result = $this->db->GetOne($sql);
+       return ($this->db->ErrorNo() == 0) ? $result : FALSE;
+    }
   
 }

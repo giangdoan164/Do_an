@@ -25,10 +25,12 @@ class Private_thread extends Controller {
         $DATA['arr_all_unread_mess'] = $this->private_thread_model->qry_new_unread_message_thread();
         $DATA['arr_all_message'] = $this->private_thread_model->qry_all_thread();
         $DATA['created_time'] = get_post_var('sel_time',1);
+        $DATA['private_thread_type'] = get_post_var('sel_type',1);
         $this->view->render('private_thread/dsp_all_thread',$DATA);
     }
     public function dsp_single_thread($thread_id){
         $DATA['thread_id'] = $thread_id;
+        $DATA['is_close'] = $this->private_thread_model->qry_count_user_in_thread($thread_id);
         $DATA['arr_all_message'] = $this->private_thread_model->qry_single_thread($thread_id);
         $this->view->render('private_thread/dsp_single_thread',$DATA);
     }
@@ -60,10 +62,13 @@ class Private_thread extends Controller {
     }
     
     public function dsp_all_thread_has_unread_message(){
-        $DATA =array();
-        $DATA['arr_all_unread_mess'] = $this->private_thread_model->qry_new_unread_message_thread();
-        $DATA['arr_all_message'] = $this->private_thread_model->qry_all_thread_has_unread_message();
-        $this->view->render('private_thread/dsp_thread_has_unread_message',$DATA);
+        $DATA['sel_type'] = 2;
+        $this->private_thread_model->exec_done($this->view->get_controller_url().'dsp_all_thread',$DATA);
+        
+//        $DATA =array();
+//        $DATA['arr_all_unread_mess'] = $this->private_thread_model->qry_new_unread_message_thread();
+//        $DATA['arr_all_message'] = $this->private_thread_model->qry_all_thread_has_unread_message();
+//        $this->view->render('private_thread/dsp_thread_has_unread_message',$DATA);
     }
     
 //    public function count_unread_message(){
@@ -72,6 +77,7 @@ class Private_thread extends Controller {
 //       $total  = array_sum($arr_unread_thread);
 //       echo $total;
 //    }
+    
     public function count_unread_message(){
        $arr= $this->private_thread_model->qry_new_unread_message_thread();
        echo sizeof($arr);

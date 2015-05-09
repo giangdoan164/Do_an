@@ -34,7 +34,7 @@ and open the template in the editor.
    background-color: #C3372D;
    color: #FBFFF1;
    height: 40px;
- 
+   font-size: 15px;
 }
 
 /*.table>thead>tr>th{
@@ -48,5 +48,8 @@ and open the template in the editor.
     background-color: #FFFFFF;
 }
 
-
+a{
+    cursor: pointer;
+    
+}
 

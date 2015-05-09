@@ -22,7 +22,7 @@
                         <div class="col-md-5 col-md-offset-7">
                             <a data-toggle="modal" class="btn btn-primary" href="#add_new_class" ><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Thêm mới</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a  href="javascript:void(0);" class="btn btn-success" onclick="update_delete_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Xóa</a>
+                            <a  href="javascript:void(0);" class="btn btn-success" onclick="update_delete_category_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Xóa</a>
                         </div>   
                     </div>
                 </div>
@@ -30,7 +30,6 @@
                     <table class="table table-hover table-nomargin table-condensed table-bordered ">
                         <thead>
                             <tr class="info ">
-                       
                                 <th style="width: 5%;text-align:center;" >
                                     <input type="checkbox" name="chk_check_all" rel="checkall" data-target=".chk" onclick="toggle_check_all(this, this.form.chk);">                                              
                                 </th>

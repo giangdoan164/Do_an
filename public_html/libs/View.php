@@ -296,7 +296,7 @@ class View {
             for ($i = $begin; $i <= $end; $i++)
             {
                 if($page == $i){
-                    $html.="<li class='active'><a href='#' num_page='$i' class='page_item' title='Trang $i'>$i</a></li>";
+                    $html.="<li class='active'><a href='#' num_page='$i' class='page_item' style='color:#FDFDFD' title='Trang $i'>$i</a></li>";
                 }
                 else{
                      $html.="<li><a href='#' num_page='$i' class='page_item' title='Trang $i'>$i</a></li>";

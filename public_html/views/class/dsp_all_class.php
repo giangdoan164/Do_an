@@ -1,7 +1,7 @@
 <?php // $this->render('user/index'); ?>
 <div class="container" >
     <div class="row-fluid">
-        <h1 class="page-header">Quản lý lớp học</h1>
+        <h2 class="page-header">Quản lý lớp học</h2>
         <div class="main-wrapper" style="margin-left: 0px !important;">                    
             <div class="container-fluid">
                 <form name="frmMain" id="frmMain" action="" method="POST" class="form-inline" >
@@ -97,9 +97,6 @@
                             </div>
                         </div>
                     </div>
-        
-        
-
         <div class="modal fade" role="dialog" id ="add_new_class" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
             <div class="modal-dialog ">
                 <div class="modal-content">
@@ -132,7 +129,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -16,17 +16,17 @@ $page_current = get_request_var('page',1);
         <div class="col-md-10 col-md-offset-1">
             <form id="frmMain" name="frmMain" aciton="" method="POST">
                 <?php
-                echo $this->hidden('page',1);
-                echo $this->hidden('thread_id', $thread_id);
-                echo $this->hidden('controller',$v_controller_url);
-                echo $this->hidden('hdn_reply', 'create_reply_to_thread');
-                echo $this->hidden('hdn_dsp_single_thread','dsp_single_thread');
+                    echo $this->hidden('page',1);
+                    echo $this->hidden('thread_id', $thread_id);
+                    echo $this->hidden('controller',$v_controller_url);
+                    echo $this->hidden('hdn_reply', 'create_reply_to_thread');
+                    echo $this->hidden('hdn_dsp_single_thread','dsp_single_thread');
                 ?>
                 <div  style="margin-bottom: 10px;">
                     <a href="<?php echo $v_controller_url . 'dsp_all_thread'; ?>"><span class="glyphicon glyphicon-home"></span>&nbsp;Trao đổi riêng tư</a>&nbsp;&nbsp;&gt;&gt;
                     <?php echo $arr_all_message[0]['C_TITLE'];?>
                 </div>
-                <table class="table table-hover table-nomargin table-condensed table-bordered " style="width: 100%">
+                <table class="table  table-nomargin table-condensed table-bordered " style="width: 100%">
                     <tbody>
                         <?php if (sizeof($arr_all_message) > 0): ?>
                             <?php foreach ($arr_all_message as $message) : ?>
@@ -51,42 +51,37 @@ $page_current = get_request_var('page',1);
                        <?php echo $this->paging_forum($v_total, $page_current, 5); ?>
                     </div>
                 </div>
+                <!--co user da dong chu de->ko trao doi dc nua-->
                 <div class="row">
-                     <div class="col-md-1">
-                         <a  class="btn btn-primary " id="btn_show" onclick="show_reply_div();"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Trả lời</a>
-                    </div>
-                    
-                   
+                    <?php if($is_close !='0'):?>
+                        <div class="col-md-1">
+                            <a  class="btn btn-primary " id="btn_show" onclick="show_reply_div();"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Trả lời</a>
+                       </div>    
+                    <?php else:?>
+                    <span style="color:#C3372D">Trao đổi đã bị đóng bởi người dùng</span>
+                    <?php endif;?>
                 </div>
-              
                 <!--hop thoai tra loi-->
                 <div id="reply_div" style="display: none">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-10 col-md-offset-1">
                             <div class="form-group">
                                 <label for="txta_reply_content" class="control-label">Nội dung tin nhắn trả lời</label>
                                 <textarea class="form-control" rows="3" id="txta_reply_content" name="txta_reply_content"></textarea>
                             </div>
                         <script type='text/javascript'>
-                            CKEDITOR.replace('txta_reply_content');
+                            CKEDITOR.replace('txta_reply_content',{height: '140px'});
                         </script>
                     </div>
-                 
                 </div>
                 <div class="row">
                        <div class="col-md-3 col-md-offset-7"> &nbsp; 
                            <button class='btn btn-primary' onclick="do_reply()"><span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;&nbsp;Trả lời</button>
                            &nbsp;&nbsp;&nbsp;&nbsp;
-                           <button class='btn btn-success ' onclick="do_hide();"><span class='glyphicon glyphicon-remove'></span>&nbsp;Kết thúc</button>
-                   
-                       </div>
-                  
-                   
-                          
+                           <button class='btn btn-success ' onclick="do_hide();"><span class='glyphicon glyphicon-remove'></span>&nbsp;Kết thúc</button>    
+                       </div>                        
                 </div>
-                </div>
-                 
-           
+                </div>         
             </div>
                </form>
         </div>
@@ -103,8 +98,7 @@ $page_current = get_request_var('page',1);
                     m = $("#controller").val() + f.hdn_reply.value;
                     $("#frmMain").attr("action", m);
                     f.submit();
-            }
-     
+            } 
      }
      function show_reply_div(){
          $('#frmMain #btn_show').hide();

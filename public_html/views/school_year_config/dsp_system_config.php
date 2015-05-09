@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
          <div class="row-fluid">
-        <h2 class="page-header"> Cấu hình thời gian năm học</h2>
+        <h2 class="page-header"> Cấu hình chức năng nhập học bạ</h2>
         <form action="" method="post" name="frmMain" id="frmMain" >
             <?php
                     $url = $this->get_controller_url();
@@ -46,7 +46,7 @@
       </form>
     </div>
     <div class="row">
-        <h2 class="page-header">Reset lại hệ thống </h2>
+        <h2 class="page-header">Reset hệ thống </h2>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="#" class='btn btn-success' style='' onclick="reset_system();" ><span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp; Reset hệ thống</a>&nbsp;&nbsp;&nbsp;
         <span style='color: red;font-weight: bold'>(*) Toàn bộ trao đổi diễn đàn , trao đổi riêng, thông báo sẽ bị xóa</span>

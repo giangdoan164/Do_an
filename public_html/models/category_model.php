@@ -38,7 +38,20 @@ class Category_Model extends Model{
         
         $v_deleted_list = get_post_var('hdn_item_id_list');
         $sql = "DELETE FROM t_category WHERE PK_CATEGORY IN ($v_deleted_list)";
-          $result = $this->db->Execute($sql);
+        $result = $this->db->Execute($sql);
+        $arr_deleted_list = explode(',', $v_deleted_list);
+        foreach ($arr_deleted_list as  $key) {
+             $sql ="DELETE
+                FROM t_public_post
+                WHERE FK_TOPIC IN(SELECT
+                                    PK_TOPIC
+                                  FROM t_public_topic
+                                  WHERE FK_CATEGORY = '$key')"; 
+        }
+        
+         $this->db->Execute($sql);
+         $sql = "DELETE FROM t_public_topic WHERE FK_CATEGORY IN($v_deleted_list)";
+            $this->db->Execute($sql);
           if($this->db->ErrorNo() ==0){
             return TRUE;
         }else{

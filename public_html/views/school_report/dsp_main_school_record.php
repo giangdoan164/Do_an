@@ -82,64 +82,54 @@ echo $this->hidden('year',$year);
                  </details>
              <div style='min-height: 20px;'></div>
             <details open>
-                <summary>Tra cứu học bạ</summary>
+              <summary> Tra cứu học bạ</summary>
                 <div class="row" style="margin: 20px;">
                     <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="sel_student_name" class="col-md-4 control-label">Tên học sinh &nbsp;</label>                                 
-                            <div class="col-md-8">
-                                <select class="form-control" id="sel_student_code" name="sel_student_code" onchange="load_year_student(this);">
-                                    <option value="0">---Chọn học sinh---</option>
-                                        <?php if (sizeof($arr_all_student_class) > 0): ?>
-                                            <?php foreach ($arr_all_student_class as $student): ?>
-                                            <option value="<?php echo $student['C_CODE']; ?>" ><?php echo $student['C_NAME']; ?></option>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </select>
-                            </div>  
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label for="sel_student_name" class="col-md-4 control-label">Tên học sinh &nbsp;</label>                                 
+                                <div class="col-md-8">
+                                    <select class="form-control" id="sel_student_code" name="sel_student_code" onchange="load_year_student(this);">
+                                        <option value="0">---Chọn học sinh---</option>
+                                            <?php if (sizeof($arr_all_student_class) > 0): ?>
+                                                <?php foreach ($arr_all_student_class as $student): ?>
+                                                <option value="<?php echo $student['C_CODE']; ?>" ><?php echo $student['C_NAME']; ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </select>
+                                </div>  
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="sel_student_name" class="col-md-5 control-label">Năm học &nbsp;</label>                                 
-                            <div class="col-md-7">
-                                <select class="form-control" id="sel_year" name="sel_year">
-                                    <option value="0">-- Năm học --</option>
-                                </select>
-                            </div>  
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="sel_student_name" class="col-md-4 control-label">Năm học</label>                                 
+                                <div class="col-md-8">
+                                    <select class="form-control" id="sel_year" name="sel_year">
+                                        <option value="0">-- Năm học --</option>
+                                    </select>
+                                </div>  
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="sel_student_name" class="col-md-4 control-label">Học kỳ &nbsp;</label>                                 
-                            <div class="col-md-8">
-                                <select class="form-control" id="sel_semester" name="sel_semester">
-                                    <option value="0">--Chọn học kỳ--</option>
-                                    <option value="1">Học kỳ I</option>
-                                    <option value="2">Học kỳ II</option>
-                                </select>
-                            </div>  
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="sel_semester" class="col-md-4 control-label">Học kỳ</label>                                 
+                                <div class="col-md-8">
+                                    <select class="form-control" id="sel_semester" name="sel_semester">
+                                        <option value="0">--Chọn học kỳ--</option>
+                                        <option value="1">Học kỳ I</option>
+                                        <option value="2">Học kỳ II</option>
+                                    </select>
+                                </div>  
+                            </div>
                         </div>
-                    </div>
-                        <div class="col-md-2">
-                             <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
-                                <span class='glyphicon glyphicon-search'></span> &nbsp;&nbsp; Tìm kiếm
-                            </button>
+                          <div class="col-md-1">
+                                 <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
+                                    <span class='glyphicon glyphicon-search'></span> &nbsp;&nbsp; Tìm kiếm
+                                </button>
+                          </div>
                         </div>
-                    </div>
                      <div class="row" style="margin-top: 20px;">
-                        <div class="col-md-2 col-md-offset-5">
-<!--                            <button type="button" class="btn btn-primary" onclick="btn_search_student_onclick();">
-                                <span class='glyphicon glyphicon-search'></span> &nbsp;&nbsp; Tìm kiếm
-                            </button>-->
-                            <?php if($size_arr >0 && $size_arr_final >0) : ?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                            <button type="button" class="btn btn-success" onclick="btn_print_onclick();">
-                                <span class='glyphicon glyphicon-print'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In  &nbsp;&nbsp;      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            </button>-->
-                           <?php endif;?>
-                        </div>
+                    
                     </div>
             </div>
         </div>
@@ -175,7 +165,7 @@ echo $this->hidden('year',$year);
           <?php if($size_arr_final >0):?>
     
                 <div class="row">
-                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp; Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">- Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
                 </div> 
                 <div class="row">
                     <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
@@ -189,11 +179,15 @@ echo $this->hidden('year',$year);
     </div>
 </div>
 <?php else:?>
+
+
+
+
 <!--//phu huynh co giao dien rieng-->
 <?php $student_name = Session::get('user_name');?>
 <div class ="container">
     <div class="row" >
-          <h3 class="page-header" >Tra cứu học bạ</h3>
+          <h2 class="page-header" >Tra cứu học bạ</h2>
         <form action="" method="post" name="frmMain" id="frmMain"  > 
                <!--sel_year     sel_semester-->
             <?php
@@ -208,10 +202,10 @@ echo $this->hidden('year',$year);
                         </div>
                    
             
-                   <div class="col-md-4 col-md-offset-2 row">
+                   <div class="col-md-4 col-md-offset-1 row">
                         <div class="form-group">
                             <label for="sel_student_name" class="col-md-3 control-label">Năm học</label>                                 
-                            <div class="col-md-8 ">
+                            <div class="col-md-9 ">
                                 <select class="form-control" id="sel_year" name="sel_year">
                                     <option value="0">-- Năm học --</option>
                                     <?php foreach ($arr_all_year_student as  $year):?> 
@@ -224,7 +218,7 @@ echo $this->hidden('year',$year);
                     <div class="col-md-4 row">
                         <div class="form-group">
                             <label for="sel_semester" class="col-md-3 control-label">Học kỳ &nbsp;</label>                                 
-                            <div class="col-md-8" >
+                            <div class="col-md-9" >
                                 <select class="form-control" id="sel_semester" name="sel_semester">
                                     <option value="0">--Chọn học kỳ--</option>
                                     <option value="1">Học kỳ I</option>
@@ -274,7 +268,7 @@ echo $this->hidden('year',$year);
              <?php if($size_arr_final >0):?>
     
                 <div class="row">
-                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp; Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">- Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
                 </div> 
                 <div class="row">
                     <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>

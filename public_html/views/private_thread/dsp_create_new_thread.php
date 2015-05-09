@@ -3,7 +3,6 @@ if (!empty($this->ckeditor_js)) {
     $js_files = "<script type='text/javascript' src='" . LIBS_URL . $this->ckeditor_js[0] . "'></script>";
     echo $js_files;
 }
-
 $level = Session::get('level');
 ?>
 <div class ="container">
@@ -104,13 +103,8 @@ $level = Session::get('level');
             m = $("#controller").val() + f.hdn_create_new_thread.value;
             $("#frmMain").attr("action", m);
             f.submit(); 
-            }
-
-           
+            }      
         }
-
-
-
     }
 
     function btn_back_onclick() {

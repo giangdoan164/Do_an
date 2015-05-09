@@ -391,7 +391,7 @@ class School_report_Model extends Model {
             $student_code = Session::get('user_code');
         }
         
-        $sql = "SELECT C_YEAR FROM t_school_record WHERE C_STUDENT_CODE = '$student_code'";
+        $sql = "SELECT C_YEAR FROM t_school_record WHERE C_STUDENT_CODE = '$student_code' GROUP BY C_YEAR";
         $result = $this->db->GetCol($sql);
         return $result;
     }

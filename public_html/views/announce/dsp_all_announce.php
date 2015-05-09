@@ -2,7 +2,7 @@
 
 <div class="container" >
     <div class="row-fluid">
-        <h1 class="page-header">Quản lý Thông báo</h1>
+        <h2 class="page-header">Quản lý Thông báo</h2>
         <div class="main-wrapper" style="margin-left: 0px;">                    
             <div class="container-fluid">
                 <form name="frmMain" id="frmMain" action="" method="POST" enctype="">
@@ -48,7 +48,7 @@
                         <div class="col-md-2">
                              <div class='col-md-6 col-md-offset-1'>
                             <button type="button" class="btn btn-success " onclick="btn_filter_onclick();" name="btn_filter">
-                                <i class="glyphicon glyphicon-search"></i>  &nbsp;&nbsp;&nbsp;  &nbsp;Lọc&nbsp;&nbsp;
+                                <i class="glyphicon glyphicon-search"></i>  &nbsp;&nbsp;Lọc&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;
                             </button>
                         </div>
                         </div>
