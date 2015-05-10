@@ -7,7 +7,7 @@ $level = Session::get('level');
 ?>
 <div class ="container">
     <div class="row-fluid">
-        <h3 class="page-header" style="text-align:center">Tạo mới chủ đề trao đổi</h3>
+        <h3 class="page-header" style="text-align:center">Tạo mới trao đổi riêng</h3>
         <form action="" method="post" name="frmMain" id="frmMain" >
             <?php
             echo $this->hidden('controller', $this->get_controller_url());

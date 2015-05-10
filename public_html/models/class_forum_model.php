@@ -394,7 +394,7 @@ class Class_forum_Model extends Model {
 //    DELETE FROM t_public_topic WHERE PK_TOPIC IN ()
     public function admin_delete_post(){
         $deleted_list_topic = get_post_var('hdn_item_id_list');
-        $sql = "DELETE FROM t_public_topic WHERE PK_TOPIC IN ('$deleted_list_topic')";
+        $sql = "DELETE FROM t_public_topic WHERE PK_TOPIC IN ($deleted_list_topic)";
         $this->db->Execute($sql);
          if($this->db->ErrorNo()==0){
             return true;
@@ -405,7 +405,7 @@ class Class_forum_Model extends Model {
     public function admin_update_category(){
         $new_category = get_post_var('sel_category_topic');
         $update_list_topic = get_post_var('hdn_item_id_list');
-        $sql = "UPDATE t_public_topic SET FK_CATEGORY = '$new_category' WHERE PK_TOPIC IN ('$update_list_topic')";
+        $sql = "UPDATE t_public_topic SET FK_CATEGORY = '$new_category' WHERE PK_TOPIC IN ($update_list_topic)";
         $this->db->Execute($sql);
          if($this->db->ErrorNo()==0){
             return true;

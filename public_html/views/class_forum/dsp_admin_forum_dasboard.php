@@ -32,7 +32,7 @@ echo $this->hidden('hdn_update_post_delete','admin_delete_post');
                             <div class="form-group">
                                 <label for="sel_time" class="col-md-6 control-label">Hiển thị theo thời gian</label>
                                 <div class="col-md-6">
-                                    <select  class="form-control input-sm" id="sel_time" name="sel_time">
+                                    <select  class="form-control" id="sel_time" name="sel_time">
                                         <option value="1" <?php if($sel_time=='1'){echo 'selected';}?>>Từ lúc bắt đầu</option>
                                         <option value="2" <?php if($sel_time=='2'){echo 'selected';}?>>1 ngày trước</option>
                                         <option value="3" <?php if($sel_time=='3'){echo 'selected';}?> >3 ngày trước</option>
@@ -51,14 +51,14 @@ echo $this->hidden('hdn_update_post_delete','admin_delete_post');
                             <div class="form-group">
                                 <label for="sel_category" class="col-md-4 control-label ">Sắp xếp chủ đề theo</label>
                                 <div class="col-md-4">
-                                    <select  class="form-control input-sm" id="sel_category" name="sel_category">
+                                    <select  class="form-control " id="sel_category" name="sel_category">
                                         <option value="1" <?php if($sel_category==1){echo 'selected';}?>>Thời gian tạo </option>
                                         <option value="2" <?php if($sel_category==2){echo 'selected';}?>>Số lượng trả lời</option>
                                         <option value="3" <?php if($sel_category==3){echo 'selected';}?>>Số lượng xem</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <select  class="form-control input-sm" id="sel_type" name="sel_type">
+                                    <select  class="form-control " id="sel_type" name="sel_type">
                                         <option value="1" <?php if($sel_type==1){echo 'selected';}?>>Thứ tự giảm dần</option>
                                         <option value="2" <?php if($sel_type==2){echo 'selected';}?>>Thứ tự tăng dần</option>
                                     </select>
@@ -68,22 +68,25 @@ echo $this->hidden('hdn_update_post_delete','admin_delete_post');
                     </div>
                     <div class="col-md-1">
                         <div class="row">
-                            <button type="button" class="btn btn-success btn-sm " onclick="btn_filter_onclick();" name="btn_filter">
-                                <i class="glyphicon glyphicon-search"></i>  &nbsp;  Lọc
+                            <button type="button" class="btn btn-success  " onclick="btn_filter_onclick();" name="btn_filter">
+                                <span class="glyphicon glyphicon-search"></span>  &nbsp;  Lọc
                             </button>
                         </div>
                     </div>   
                 </div>
                 <div class="row" style="margin-top: 20px;margin-bottom: 20px;">
-                        <div class="row-fluid">
-                            <div class="col-md-3 ">
+                            <div class="col-md-6 col-md-offset-2  " style="text-align: right">
                                     <a href="#" onclick="admin_del_post();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Xóa chủ đề</a>
-                                    &nbsp;&nbsp;
-                                    <a href="#" onclick="admin_update_category();"><span class="glyphicon glyphicon-share-alt" ></span>&nbsp;&nbsp;Chuyển chủ đề</a>
+                              
                             </div>
-                             <div class="col-md-2">
-                                <?php if(sizeof($arr_category) >0):?>
-                                       <select  class="form-control input-sm" id="sel_category_topic" name="sel_category_topic">
+                             <div class="col-md-4" style="text-align: right">
+                                 <div class="col-md-5">
+                                     <a href="#" onclick="admin_update_category();"><span class="glyphicon glyphicon-share-alt" ></span>&nbsp;&nbsp;Chuyển chủ đề</a>
+                                      
+                                 </div>
+                                 <div class="col-md-7" style="padding-left: 20px;">
+                                         <?php if(sizeof($arr_category) >0):?>
+                                       <select  class="form-control " id="sel_category_topic" name="sel_category_topic">
                                            <option value="0">--Chọn loại chủ đề--</option>
                                            <?php foreach ($arr_category as $key => $category): ?>
                                            <?php if($key != $category_id): ?>
@@ -91,13 +94,12 @@ echo $this->hidden('hdn_update_post_delete','admin_delete_post');
                                            <?php  endif; ?>
                                            <?php endforeach;?>
                                        </select>
-                                <?php endif;?>
-                             </div>
-                              
-                        </div>
-                       
+                                    <?php endif;?>
+                                 </div>      
+                             </div>    
                     </div>
                 </div>
+    
                 <table class="table table-hover table-nomargin table-condensed ">
                     <thead>
                         <tr class="forum_head">
