@@ -207,10 +207,10 @@ echo $this->hidden('year',$year);
                         </div>
                    
             
-                   <div class="col-md-4 col-md-offset-1 row">
+                   <div class="col-md-4 col-md-offset-3 row">
                         <div class="form-group">
-                            <label for="sel_student_name" class="col-md-3 control-label">Năm học</label>                                 
-                            <div class="col-md-9 ">
+                            <label for="sel_student_name" class="col-md-4 control-label">Năm học</label>                                 
+                            <div class="col-md-8 ">
                                 <select class="form-control" id="sel_year" name="sel_year">
                                     <option value="0">-- Năm học --</option>
                                     <?php foreach ($arr_all_year_student as  $year):?> 
@@ -272,13 +272,25 @@ echo $this->hidden('year',$year);
             <?php endif;?>
              <?php if($size_arr_final >0):?>
     
-                <div class="row">
-                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">- Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+<!--                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">- Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php // echo $arr_final_remark_title['C_TITLE']; ?></span>
                 </div> 
                 <div class="row">
-                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php // echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
                 </div>
-                   
+                   -->
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">- Lớp:</span> <span style="font-weight: bold"><?php echo $arr_final_remark_title['C_CLASS']; ?></span>
+                </div> 
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">-&nbsp;Giáo viên chủ nhiệm: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_TEACHER_NAME']; ?> </span>
+                </div>
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">- Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+                </div> 
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
+                </div>
                     <?php endif; ?>
         </form> 
     </div>

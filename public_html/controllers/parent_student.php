@@ -81,6 +81,7 @@ class Parent_student extends Controller {
         $this->goback_url                = $arr_data['controller'] . $arr_data['hdn_dsp_all_record'];
 
         $result = $this->parent_student_model->delete_parent_contact();
+     
         if ($result == false)
         {
             $DATA['error'] = " Xảy ra lỗi không xóa được";

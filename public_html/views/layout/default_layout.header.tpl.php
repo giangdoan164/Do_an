@@ -112,9 +112,7 @@
                                 <div style="float:left"> <img src="<?php echo PUBLIC_URL . 'images/logohn.png'; ?>" style="width: 50px;"></div>     
                                <p style="text-align: center;margin-top: 6px;margin-bottom: 0px;">TRƯỜNG TIỂU HỌC VĂN CHƯƠNG</p>
                     </a>
-            
                 </div>
-             
                 <div class="navbar-collapse collapse" id="navbar-main" style="padding-left: 15px;">
                      <?php if($current_controller !='index'):?>
                     <ul class="nav navbar-nav">

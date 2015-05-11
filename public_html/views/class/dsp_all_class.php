@@ -55,7 +55,7 @@
                                             <input type="checkbox" name="chk" value="<?php echo $class['PK_CLASS']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                         </td>
                                         <td style="text-align:center">
-                                            <a href="javascript::(0)" onclick="row_click(<?php echo $class['PK_CLASS']; ?>);">  <?php echo $class['C_CLASS_NAME']; ?></a>
+                                            <a href="javascript::(0)">  <?php echo $class['C_CLASS_NAME']; ?></a>
                                          
                                         </td>
                                         <td style="text-align:center">

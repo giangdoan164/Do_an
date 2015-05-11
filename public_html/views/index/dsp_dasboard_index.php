@@ -46,7 +46,7 @@
     <h2 class='page-header' >Trang chủ</h2>
     <div class='row-fluid' style='margin-top: 50px;padding-left: 90px;'>
             <?php if ($role == 3 || $role == 1): ?>
-         <div class='col-md-4'>
+         <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #CE4B27;">
                 <a  href="<?php echo SITE_URL; ?>parent_student">
                     <span class="widge1 glyphicon glyphicon-user"></span>
@@ -56,7 +56,7 @@
         </div>
         <?php endif;?>
           <?php if ($role == 1): ?>
-        <div class='col-md-4'>
+        <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #F4BD0E;">
                 <a href="<?php echo SITE_URL; ?>class_grade">
               
@@ -65,7 +65,7 @@
                 </a>
             </div>
         </div>
-        <div class='col-md-4'>
+        <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #5B3AB6;">
                 <a href="<?php echo SITE_URL; ?>teacher">
                     <span class="widge1 glyphicon glyphicon-user"></span>
@@ -73,7 +73,7 @@
                 </a>
             </div>
         </div>
-             <div class='col-md-4'>
+             <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #A05000;">
                 <a href="<?php echo SITE_URL; ?>category">
                     <span class="widge1 glyphicon glyphicon-tags"></span>
@@ -81,7 +81,7 @@
                 </a>
             </div>
         </div>
-         <div class='col-md-4'>
+         <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #8FC238;">
                 <a href="<?php echo SITE_URL; ?>school_year_config">
                     <span class="widge1 glyphicon glyphicon-cog"></span>
@@ -92,7 +92,7 @@
         <?php endif?>
       
           <?php if ($role == 3 || $role == 2 || $role == 4): ?>
-           <div class='col-md-4'>
+           <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #00A300;">
                 <a href="<?php echo SITE_URL; ?>announce">
                     <span class="widge1 glyphicon glyphicon-volume-up"></span>
@@ -102,7 +102,7 @@
         </div>
         <?php endif;?>
          <?php if ($role == 3 || $role == 4): ?>
-          <div class='col-md-4'>
+          <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #A300AA;">
                 <a href="<?php echo SITE_URL; ?>private_thread">
                     <span class="widge1  glyphicon glyphicon-comment"></span>
@@ -110,7 +110,7 @@
                 </a>
             </div>
         </div>
-        <div class='col-md-4'>
+        <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #0093A8;">
                 <a href="<?php echo SITE_URL; ?>school_report">
                     <span class="widge1 glyphicon glyphicon-folder-open"></span>
@@ -120,7 +120,7 @@
         </div>
    
         
-        <div class='col-md-4'>
+        <div class='col-md-4 col-sm-4'>
             <div class='function' style="background: #E88A05;">
                 <a href="<?php echo SITE_URL; ?>class_forum">
                     <span class="widge1 glyphicon glyphicon-home"></span>
