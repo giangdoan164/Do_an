@@ -13,9 +13,9 @@ class Parent_student_Model extends Model
         $sql = "SELECT COUNT(*) FROM t_user WHERE C_NAME = ?  AND C_STUDENT_BIRTH = ?";
         $params = array($name,$birth);
         $result = $this->db->GetOne($sql,$params);
-        if($result==0){return FALSE;}
+        if($result==0){return FALSE;}//ko trung
         else{
-            return $result;
+            return $result;//co trung
         }
     }
 //    $timestamp = strtotime('2008-07-01T22:35:17.02');
@@ -33,9 +33,9 @@ class Parent_student_Model extends Model
         $name = vn2latin($name,true);
         $arr_name = explode("-", $name);
         $name = implode("", $arr_name);
-        if($v_exist_record==0){
+        if($v_exist_record==0){//ko trung
             return  $name.$birth;
-        }else{
+        }else{//co trung
             $v_exist_record +=1;
             return $name.$birth.$v_exist_record;
         }
@@ -185,7 +185,7 @@ class Parent_student_Model extends Model
     public function update_single_parent_contact()
     {
         $v_parent_contact_id = get_post_var('hdn_parent_contact_id', 0);
-        $v_student_name      = get_post_var('txt_student_name', '');
+        $v_student_name      = trim(get_post_var('txt_student_name', ''));
         $v_student_birth     = get_post_var('slt_student_birth', '');
         $v_father_name       = get_post_var('txt_father_name', '');
         $v_mother_name       = get_post_var('txt_mother_name', '');
@@ -195,8 +195,26 @@ class Parent_student_Model extends Model
         $v_class             = get_post_var('sel_class', 0);
         $v_grade             = get_post_var('sel_grade', 0);
         $v_code              = get_post_var('txt_student_code',1);
+        $v_password          = md5('123456');
+        
+       
         if ($v_parent_contact_id > 0)
         {
+            $sql_get_current_info ="SELECT C_NAME,C_STUDENT_BIRTH,C_LOGIN_NAME FROM t_user WHERE PK_USER = $v_parent_contact_id";
+            $arr_info = $this->db->GetRow($sql_get_current_info);
+            
+            // neu trung ngay sinh vs ten
+            
+             $v_current_birth = date('d-m-Y',  strtotime($arr_info['C_STUDENT_BIRTH']));
+             $v_new_birth =     date('d-m-Y',  strtotime($v_student_birth));
+             $v_current_name = trim($arr_info['C_NAME']);
+             
+             if($v_current_birth == $v_new_birth && $v_student_name == $v_current_name){
+                  $v_login_name =$arr_info['C_LOGIN_NAME'];
+             }else{
+                  $v_login_name = $this->do_create_user_name($v_student_name, $v_student_birth);
+             }
+             
             $sql    = "UPDATE 
                         t_user 
                     SET
@@ -206,20 +224,22 @@ class Parent_student_Model extends Model
                       C_MOTHER_NAME = ?,
                       C_EMAIL = ?,
                       C_PHONE = ?,
-                      C_ADDRESS = ?
+                      C_ADDRESS = ?,
+                      C_LOGIN_NAME=?
                     WHERE PK_USER = ?";
-            $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_parent_contact_id);
+            $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address,$v_login_name, $v_parent_contact_id);
             $this->db->Execute($sql, $params);
             $exec_result = '1';
         }
         else
         {
+            $v_login_name = $this->do_create_user_name($v_student_name, $v_student_birth);
             $v_code = trim($v_code);
             $sql ="SELECT COUNT(*) FROM t_user WHERE C_CODE = '$v_code'";
             $count_student = $this->db->GetOne($sql);
             if($count_student=="0"){          
-                $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class, 4,$v_code);
-                $sql    = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,FK_GROUP,C_CODE) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                $params = array($v_student_name, $v_student_birth, $v_father_name, $v_mother_name, $v_email, $v_phone, $v_address, $v_grade, $v_class, 4,$v_code,$v_login_name,$v_password);
+                $sql    = "INSERT INTO t_user (C_NAME,C_STUDENT_BIRTH,C_FATHER_NAME,C_MOTHER_NAME,C_EMAIL,C_PHONE,C_ADDRESS,FK_GRADE,FK_CLASS,FK_GROUP,C_CODE,C_LOGIN_NAME,C_PASSWORD) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 $this->db->Execute($sql, $params);
                 $exec_result = '1';
             }else{

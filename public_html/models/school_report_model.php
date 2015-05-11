@@ -162,6 +162,11 @@ class School_report_Model extends Model {
         $year = $semester_info[0]['C_SCHOOL_YEAR'];
         $teacher_code = Session::get('user_code');
         $arr_subject = $this->qry_all_subject_grade();
+        
+        //lay ten lop
+        $sql_get_class = "SELECT C_CLASS_NAME  FROM t_class WHERE PK_CLASS = '$class_id'";
+        $class_name = $this->db->GetOne($sql_get_class);
+        $teacher_name = Session::get('user_name');
         //array_diff
         //truoc do con check kiem tra mang lay va mang user_class  trong bang user xem neu giong nhau moi nhap . ko thi thoi-->dam bao giong het nhau trong csdl
         //neu hs chuyen truong thi cho C_DELETED = 1 -> chi select nhung thang C_DELETED = 0 thoi
@@ -186,8 +191,8 @@ class School_report_Model extends Model {
                 for ($i = 4; $i < $count_data; $i++) {
                 $student_code = $data_arr[$i][2];
                 $student_title = $data_arr[$i][5];
-                $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE,C_TITLE) VALUES (?,?,?,?,?) ";
-                $params = array($student_code, $semester, $year, $teacher_code,$student_title);
+                $sql = "INSERT INTO t_school_record(C_STUDENT_CODE,C_SEMESTER,C_YEAR,C_TEACHER_CODE,C_TITLE,C_CLASS,C_TEACHER_NAME) VALUES (?,?,?,?,?,?,?) ";
+                $params = array($student_code, $semester, $year, $teacher_code,$student_title,$class_name,$teacher_name);
                 $this->db->Execute($sql, $params);
                 $math_grade =$data_arr[$i][3];
                 $liture_grade = $data_arr[$i][4];
@@ -418,10 +423,8 @@ class School_report_Model extends Model {
   
   public function qry_final_remark_title($student_code,$semester,$year){
      $result = array();
-//     $student_code = get_post_var('sel_student_code');
-//     $semester     = get_post_var('sel_semester');
-//     $year         = get_post_var('sel_year');
-     $sql ="SELECT C_TITLE , C_REMARK_FINAL FROM t_school_record WHERE C_STUDENT_CODE = '$student_code' AND C_SEMESTER = '$semester' AND C_YEAR ='$year' ";
+     $sql ="SELECT sr.C_TITLE , sr.C_REMARK_FINAL ,sr.C_CLASS ,sr.C_TEACHER_NAME from t_school_record sr "
+             . "WHERE sr.C_STUDENT_CODE = '$student_code' AND sr.C_SEMESTER = '$semester' AND sr.C_YEAR ='$year' ";
      $result = $this->db->GetRow($sql);
      return $result;
      

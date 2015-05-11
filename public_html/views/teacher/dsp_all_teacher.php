@@ -67,19 +67,19 @@
                                             <input type="checkbox" name="chk" value="<?php echo $teacher['PK_USER']; ?>" onclick="if (!this.checked) this.form.chk_check_all.checked=false;">
                                         
                                         </td>
-                                        <td style="text-align:center"><a href="javascript::(0)" onclick="row_click(<?php echo $teacher['PK_USER']; ?>);">  <?php echo $teacher['C_NAME']; ?></a>
+                                        <td style=""><a href="javascript::(0)" onclick="row_click(<?php echo $teacher['PK_USER']; ?>);">  <?php echo $teacher['C_NAME']; ?></a>
                                          
                                         </td>
-                                        <td style="text-align:center">
+                                        <td style="">
                                            <?php echo $teacher['C_PHONE'] ;?>
                                         </td>
-                                        <td style="text-align:center">
+                                        <td style="">
                                             <?php echo $teacher['C_ADDRESS'];?>
                                         </td>
                                         <td>
                                             <?php echo $teacher['C_EMAIL'];?>
                                         </td>
-                                        <td style="text-align:center">
+                                        <td style="text-align: center">
                                             <?php echo $teacher['C_CLASS_NAME'];?>
                                         </td>
                                         <td style="text-align:center">

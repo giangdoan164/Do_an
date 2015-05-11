@@ -99,11 +99,20 @@ class Class_grade_Model extends model {
     
     public function delete_class(){
         $v_delete_list = get_post_var('hdn_item_id_list',0);
-        $sql = "DELETE FROM `t_class` WHERE PK_CLASS IN ($v_delete_list)";
-        $this->db->Execute($sql);
-        $sql = "UPDATE `t_user` SET FK_CLASS = '' WHERE FK_CLASS IN ($v_delete_list)" ;
-        $this->db->Execute($sql);
-        return ($this->db->ErrorNo() == 0) ? TRUE : FALSE;
+        //xoa class kiem tra xem neu co user thuoc class-> ko xoa duoc
+        $sql = "SELECT COUNT(*) FROM t_user WHERE FK_CLASS IN($v_delete_list)";
+        $user_in_class_number = $this->db->GetOne($sql);
+        if($user_in_class_number =='0'){// ko co user thuoc class-> xoa dc
+            $sql = "DELETE FROM `t_class` WHERE PK_CLASS IN ($v_delete_list)";
+             $this->db->Execute($sql);
+            return 'done';
+        }else{
+            return 'exist';
+        }
+        
+//        $sql = "UPDATE `t_user` SET FK_CLASS = '' WHERE FK_CLASS IN ($v_delete_list)" ;
+//        $this->db->Execute($sql);
+        
     }
     public function check_is_class_exist(){
          $v_class_name = trim(get_post_var('txt_class_name',''));

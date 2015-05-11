@@ -165,14 +165,19 @@ echo $this->hidden('year',$year);
           <?php if($size_arr_final >0):?>
     
                 <div class="row">
-                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">- Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">- Lớp:</span> <span style="font-weight: bold"><?php echo $arr_final_remark_title['C_CLASS']; ?></span>
                 </div> 
                 <div class="row">
-                    <span style="font-size: 18px;font-weight:bold;" class="col-md-2">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">-&nbsp;Giáo viên chủ nhiệm: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_TEACHER_NAME']; ?> </span>
                 </div>
-                   
-                    <?php endif; ?>
-            </details>   
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">- Danh hiệu:</span> <span style="color: red;font-weight: bold"><?php echo $arr_final_remark_title['C_TITLE']; ?></span>
+                </div> 
+                <div class="row">
+                    <span style="font-size: 18px;font-weight:bold;" class="col-md-3">-&nbsp;Nhận xét cuối kỳ: </span><span style="font-weight: bold;"><?php echo $arr_final_remark_title['C_REMARK_FINAL']; ?> </span>
+                </div>
+            <?php endif; ?>
+      </details>   
           
           
         </form> 

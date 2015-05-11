@@ -1,7 +1,5 @@
 <?php 
 
-
-
   $arr_single_teacher = isset($arr_single_teacher) ? $arr_single_teacher : array();
   if(sizeof($arr_single_teacher)>0){
       $v_teach_id = $arr_single_teacher['PK_USER'];
@@ -13,6 +11,7 @@
       $v_grade_id = isset($arr_single_teacher['FK_GRADE']) ? $arr_single_teacher['FK_GRADE'] : 0;
       $v_role =$arr_single_teacher['FK_GROUP'];
       $v_teacher_code =  $arr_single_teacher['C_CODE'];
+      $v_student_birth = $arr_single_teacher['C_STUDENT_BIRTH'];
    }else{
        //thay cho mac dinh
       $v_teach_id = get_post_var('hdn_teacher_id',0);
@@ -24,6 +23,7 @@
       $v_grade = get_post_var('sel_grade',0);
       $v_class = get_post_var('sel_class',0);
       $v_teacher_code ='';
+      $v_student_birth = get_post_var('slt_student_birth','');
    }
    
  
@@ -59,6 +59,12 @@
           <input type="text" class="form-control" required value="<?php echo $v_teacher_code;?>" id="txt_teacher_code"   name="txt_teacher_code" placeholder="Mã giáo viên">
         
           <?php endif;?>
+      </div>
+    </div>
+      <div class="form-group">
+     <label for="slt_student_birth" class="col-lg-3 control-label">Ngày sinh</label>
+      <div class="col-lg-9">
+          <input type="date" class="form-control" value="<?php echo $v_student_birth;?>" id="slt_student_birth" name="slt_student_birth">      
       </div>
     </div>
     <div class="form-group">

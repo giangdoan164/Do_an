@@ -84,7 +84,7 @@ $v_class_id = $class;
 
                     </div>
                         <details>
-                            <summary>Thêm mới</summary>
+                            <summary><strong>Thêm mới</strong></summary>
                             <div class="row">
                                 <div class='col-md-6' style='padding:35px 0px 25px 15px;'>
                                     <div class='col-md-8'>
@@ -137,7 +137,7 @@ $v_class_id = $class;
 
                                     </td>
                                     <td style="text-align:center">
-                                        <?php echo $parent_contact['C_STUDENT_BIRTH']; ?>
+                                        <?php echo date('d-m-Y', strtotime($parent_contact['C_STUDENT_BIRTH'])) ; ?>
 
                                     </td>
                                     <td style="">
