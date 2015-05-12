@@ -1,6 +1,6 @@
 <?php 
        $role = Session::get('level');
-       
+
 ?>
 <style type='text/css'>
     .col-md-4{

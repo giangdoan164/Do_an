@@ -79,7 +79,7 @@ $v_class_id = $class;
                         <div class="col-md-3 col-md-offset-9" style="text-align: right; ">
                             <a  href="<?php echo SITE_URL . 'parent_student/dsp_transfer_class' ?>"   ><span class="glyphicon glyphicon-random"></span>&nbsp;&nbsp;Chuyển Lớp</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="javascript:void(0);"  onclick="update_delete_onclick();"><span  class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Xóa</a>
+                            <a href="javascript:void(0);"  onclick="update_delete_parent_conctact_onclick();"><span  class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Xóa</a>
                         </div>
 
                     </div>

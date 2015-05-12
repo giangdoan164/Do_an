@@ -30,18 +30,18 @@ echo $this->hidden('hdn_site_url', SITE_URL);
                         
                         <?php $stt=0;?>
                         <?php foreach ($arr_all_student as $student): ?>
-                            <tr style="text-align:center"> 
-                                <td>
+                            <tr > 
+                                <td style="text-align:center">
                                     <?php $stt +=1;echo $stt;?>
                                 </td>
                                 <td>
                             <?php echo $student['C_NAME']; ?>    
                                 <input type="hidden" name="student_code[]" value="<?php echo $student['C_STUDENT_CODE']; ?>"/>
                                 </td>
-                                <td >
+                                <td style="text-align:center">
                                     <?php echo date('d-m-Y', strtotime($student['C_STUDENT_BIRTH'])); ?>
                                 </td>
-                                <td> 
+                                <td style="text-align:center">  
                                     <?php echo $student['C_TITLE'];?>
                                 </td>
                                 <td>

@@ -166,7 +166,7 @@
                                         <td style="text-align:center">
                                              <?php echo $announce['C_CLASS_NAME']; ?>
                                         </td>
-                                        <td style="text-align:center">
+                                        <td style="">
                                           <?php echo $announce['C_CONTENT']; ?>
                                         </td>
                                         <td style="text-align:center">

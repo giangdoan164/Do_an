@@ -94,11 +94,14 @@ class Teacher_Model extends Model {
              $v_new_birth =     date('d-m-Y',  strtotime($v_student_birth));
              $v_current_name = trim($arr_info['C_NAME']);
              if($v_current_birth == $v_new_birth && $v_name == $v_current_name){
+//khi updateneu ten dang nhap va mat khau giong nhau het cua thang hien tai thi se ten dang nhap se la cai cu
                   $v_login_name =$arr_info['C_LOGIN_NAME'];
              }else{
-                  $v_login_name = $this->do_create_user_name($v_name, $v_student_birth);
+                 //neu ko se tao ten dang nhap moi
+                  $v_birth = date('d-m-Y',  strtotime($v_student_birth));
+                  $v_login_name = $this->do_create_user_name($v_name, $v_birth);
              }
-            
+           
             $sql = "UPDATE 
                 t_user
               SET
@@ -120,7 +123,8 @@ class Teacher_Model extends Model {
             $sql = "SELECT COUNT(*) FROM t_user WHERE C_CODE = '$v_teacher_code'";
             $count_teacher = $this->db->GetOne($sql);
             if ($count_teacher == "0") {
-                 $v_login_name = $this->do_create_user_name($v_name, $v_student_birth);
+                $v_birth = date('d-m-Y',  strtotime($v_student_birth));
+                $v_login_name = $this->do_create_user_name($v_name, $v_birth);
                 $sql = "INSERT INTO t_user (C_NAME,C_PHONE,C_ADDRESS,C_EMAIL,FK_CLASS,FK_GROUP,FK_GRADE,C_CODE,C_STUDENT_BIRTH,C_LOGIN_NAME,C_PASSWORD) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
                 $params = array($v_name, $v_phone, $v_address, $v_email, $v_class, $v_role, $v_grade, $v_teacher_code,$v_student_birth,$v_login_name,$v_password);
                 $this->db->Execute($sql, $params);

@@ -86,14 +86,15 @@ class Class_grade_Model extends model {
         $v_start = $v_start - 1;
         $v_limit = $v_end - $v_start;
         #End phan trang
-        $total_record = $this->db->GetOne("SELECT COUNT(*) from t_class");
-        if($grade > 0){$condition = "WHERE c.FK_GRADE = $grade";}
-        $sql = "SELECT * ,$total_record as TOTAL_RECORD FROM  t_class  c LEFT JOIN t_user t ON ( c.PK_CLASS =t.FK_CLASS AND t.FK_GROUP ='3') $condition "."LIMIT $v_start,$v_limit";
+         if($grade > 0){$condition = "WHERE c.FK_GRADE = $grade";}
+        $total_record = $this->db->GetOne("SELECT COUNT(*) from t_class c $condition"); 
+        $sql = "SELECT c.* ,t.C_NAME, $total_record as TOTAL_RECORD FROM  t_class  c LEFT JOIN t_user t ON ( c.PK_CLASS =t.FK_CLASS AND t.FK_GROUP ='3') $condition "."LIMIT $v_start,$v_limit";
         $result = $this->db->GetAll($sql);
          if($this->db->ErrorNo() == 0)
         {
             return $result;
         }
+      
         return array();
     }
     

@@ -55,7 +55,7 @@ echo $this->hidden('year',$year);
                  <div style='min-height: 10px;'></div>
                      <div class="row">
                          <div class="col-md-11 col-md-offset-1">
-                             <details>
+                             <details open  >
                                  <summary>Quản lý điểm cuối kỳ</summary>
                                  <div class="row">
                                      <div class="col-md-9 col-md-offset-2">
@@ -66,7 +66,7 @@ echo $this->hidden('year',$year);
                                      </div>
                                  </div>
                              </details>
-                             <details>
+                             <details open >
                                  <summary>Quản lý nhận xét</summary>
                                  <div class="row">
                                      <div class="col-md-9 col-md-offset-2">
@@ -154,7 +154,8 @@ echo $this->hidden('year',$year);
                                     <?php echo $student_record['FK_GRADE']; ?>
                                 </td>
                                 <td >
-                                    <input type="text"  class="form-control" value="<?php echo $student_record['C_TEACHER_REMARK']; ?>"/>
+                                    <!--<input type="text"  class="form-control" value="<?php // echo $student_record['C_TEACHER_REMARK']; ?>"/>-->
+                                    <p style="font-size: 15px;"> <?php echo $student_record['C_TEACHER_REMARK']; ?></p>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -262,7 +263,8 @@ echo $this->hidden('year',$year);
                                     <?php echo $student_record['FK_GRADE']; ?>
                                 </td>
                                 <td >
-                                    <input type="text" class="form-control" value="<?php echo $student_record['C_TEACHER_REMARK']; ?>"/>
+                                    <!--<input type="text" class="form-control" value="<?php // echo $student_record['C_TEACHER_REMARK']; ?>"/>-->
+                                    <p style="font-size: 15px;"><?php echo $student_record['C_TEACHER_REMARK']; ?></p>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -1,9 +1,9 @@
 <?php
-$json_data = '';
-$count_arr = sizeof($arr_data);
-if ($count_arr > 0) {
-    $json_data = json_encode($arr_data);
-}
+//$json_data = '';
+//$count_arr = sizeof($arr_data);
+//if ($count_arr > 0) {
+//    $json_data = json_encode($arr_data);
+//}
 ?>
 <div class ="container">
 
@@ -13,7 +13,7 @@ if ($count_arr > 0) {
 <?php
 echo $this->hidden('controller', $this->get_controller_url());
 echo $this->hidden('hdn_dsp_ds_toan_van_chuan_bi_nhap', 'dsp_ds_toan_van_chuan_bi_nhap');
-echo $this->hidden('arr_data', $json_data);
+//echo $this->hidden('arr_data', $json_data);
 ?>    
             <div class="row" style="margin: 10px;">
                 <div class="col-md-4 col-md-offset-2">

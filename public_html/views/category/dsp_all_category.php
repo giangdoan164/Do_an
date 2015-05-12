@@ -7,22 +7,21 @@
         <div class="container-fluid">
             <form name="frmMain" id="frmMain" action="" method="POST" class="form-inline" >
                 <?php
-                // vi du chung minh bien toan cuc thi goi dau cug  duoc
-                echo $this->hidden('controller', $this->get_controller_url());
-                echo $this->hidden('hdn_teacher_id', 0);
-                echo $this->hidden('hdn_item_id_list', '');
-                echo $this->hidden('hdn_delete_record_method', 'delete_category');
-                echo $this->hidden('hdn_dsp_all_record', 'dsp_all_class');
+                    // vi du chung minh bien toan cuc thi goi dau cug  duoc
+                    echo $this->hidden('controller', $this->get_controller_url());
+                    echo $this->hidden('hdn_teacher_id', 0);
+                    echo $this->hidden('hdn_item_id_list', '');
+                    echo $this->hidden('hdn_delete_record_method', 'delete_category');
+                    echo $this->hidden('hdn_dsp_all_record', 'dsp_all_class');
                 ?>
-                <div class="row-fluid" style="padding: 20px;margin-bottom: 40px;">
-                    <div class="col-md-5">
-
-                    </div>
-                    <div class='col-md-7'>
-                        <div class="col-md-5 col-md-offset-7">
+                <div class="row-fluid" style="margin-bottom: 20px;">
+                
+                    <div class='row-fluid'>
+                        
                             <a data-toggle="modal" class="btn btn-primary" href="#add_new_class" ><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Thêm mới</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
                             <a  href="javascript:void(0);" class="btn btn-success" onclick="update_delete_category_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Xóa</a>
+                       
                         </div>   
                     </div>
                 </div>
@@ -44,9 +43,7 @@
                             <?php foreach ($arr_all_category as $key => $category): ?>
                             <?php $stt = $stt + 1;?>
                                 <tr>
-                              
                                     <td style="text-align:center">
-                                
                                         <input type="checkbox" name="chk" value="<?php echo $key;?>" onclick="if (!this.checked)
                                                     this.form.chk_check_all.checked = false;">
                                     </td>
@@ -111,9 +108,9 @@
     <script type="text/javascript">
         function btn_addnew_onclick() {
             var title = $('#frmMain #txt_name_category').val();
-            title = title.trim();
+       
             var description = $('#frmMain #txt_description_category').val();
-            description = description.trim();
+        
             
             if(title !=''  && description !=''){
                  var m = $('#frmMain #controller').val() + 'add_new_category';

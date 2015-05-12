@@ -1,4 +1,7 @@
-<?php // $this->render('user/index'); ?>
+<?php // $this->render('user/index');
+
+
+?>
 <div class="container" >
     <div class="row-fluid">
         <h2 class="page-header">Quản lý lớp học</h2>
@@ -13,7 +16,7 @@
                          echo $this->hidden('hdn_delete_record_method', 'delete_class');
                          echo $this->hidden('hdn_dsp_all_record','dsp_all_class');
                      ?>
-                    <div class="row-fluid" style="padding: 20px;margin-bottom: 40px;">
+                    <div class="row-fluid" style="padding-bottom: 20px;margin-bottom: 40px;">
                         <div class="col-md-5">
                           <div class="form-group">
                             <label for="sel_grade_main" >Tìm kiếm &nbsp</label>
@@ -28,12 +31,12 @@
                           </div>
                         </div>
                      <div class='col-md-7'>
-                            <div class="col-md-5 col-md-offset-7">
+                            <div class="col-md-5 col-md-offset-6">
                                 <a data-toggle="modal" class="btn btn-primary" href="#add_new_class" ><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Thêm mới</a>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               <a  href="javascript:void(0);" class="btn btn-success" onclick="update_delete_onclick();"><span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;Xóa</a>
                             </div>   
-                        </div>
+                     </div>
                         </div>
                                 <table class="table table-hover table-nomargin table-condensed table-bordered ">
                                     <thead><tr class="info ">

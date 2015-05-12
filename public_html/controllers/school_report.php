@@ -68,6 +68,7 @@ class School_report extends Controller {
         if($check){
         $this->view->render('school_report/dsp_add_school_report_toan_van');
         }else{
+//            $DATA[arr_data]
             $this->goback_url = $this->view->get_controller_url() . 'dsp_main_school_record';
             $this->school_report_model->exec_fail($this->goback_url, "Chưa đến thời gian nhập học bạ");
         }
@@ -139,14 +140,15 @@ class School_report extends Controller {
             $value = explode(',', $value);
             $final_arr[] = $value;
         }
-     
+       
         $result = $this->school_report_model->do_add_list_school_record_excel($final_arr);
         $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report_toan_van';
+        
         if ($result == 'success') {
             $this->school_report_model->exec_fail($this->goback_url, "Thêm mới điểm học bạ thành công");
         } elseif ($result == 'added') {
             $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report_toan_van';
-            $this->school_report_model->exec_fail($this->goback_url, "Không thêm được ! Điểm đã được thêm  trước đó trong CSDL");
+            $this->school_report_model->exec_fail($this->goback_url, "Không thêm được ! Điểm Toán Văn của học kỳ này đã được thêm  trước đó trong CSDL");
         }elseif($result =='list_not_matched'){
              $this->goback_url = $this->view->get_controller_url() . 'dsp_add_school_report_toan_van';
             $this->school_report_model->exec_fail($this->goback_url, "Danh sách học sinh trong file excel không trùng khớp với danh sách đã có trong CSDL!!!");
@@ -189,7 +191,7 @@ class School_report extends Controller {
     public function do_insert_all_remark_single_student() {
         $result = $this->school_report_model->do_insert_all_remark_single_student();
         if ($result) {
-            $this->school_report_model->exec_fail($this->view->get_controller_url() . 'dsp_main_school_record', "Cập nhật nhận xét thành công");
+            $this->school_report_model->exec_fail($this->view->get_controller_url() . 'dsp_list_student_to_remark', "Cập nhật nhận xét thành công");
         } else {
             $this->school_report_model->exec_fail($this->view->get_controller_url() . 'dsp_single_student_to_remark', "Cập nhật nhận xét thất bại ! Mời cập nhật lại");
         }

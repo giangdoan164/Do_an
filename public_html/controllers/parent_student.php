@@ -134,7 +134,7 @@ class Parent_student extends Controller {
       $result =  $this->parent_student_model->do_transfer_class();
       
         if($result){
-            $this->goback_url = $this->view->get_controller_url().'dsp_all_parent_contact';
+            $this->goback_url = $this->view->get_controller_url().'dsp_transfer_class';
             $this->class_grade_model->exec_fail($this->goback_url,"Cập nhật lớp thành công !");
         }else{
              $this->goback_url = $this->view->get_controller_url().'dsp_transfer_class';

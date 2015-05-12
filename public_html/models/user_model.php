@@ -18,7 +18,7 @@ class User_Model extends Model {
         $pass = md5($pass);
         $sql = "SELECT * FROM t_user where C_LOGIN_NAME ='$user' and C_PASSWORD ='$pass' AND C_DELETED='0'";
         $result = $this->db->GetRow($sql);
-          
+        
 
         if(count($result)>0){
             

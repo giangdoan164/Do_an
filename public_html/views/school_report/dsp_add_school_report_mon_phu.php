@@ -54,7 +54,7 @@
                                     <?php echo $student['C_NAME']; ?> 
                                 </td>
                                 <td style="text-align:center">
-                                    <?php echo $student['C_STUDENT_BIRTH']; ?>
+                                    <?php echo date('d-m-Y',  strtotime($student['C_STUDENT_BIRTH'])); ?>
                                 </td>
                                 <td >
                                     <div style="width:30%;margin:0px auto;">

@@ -101,16 +101,17 @@
 </nav>-->
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid" id="div_navigation">
-                <div class="navbar-header" style="color: #ffff99;padding-right: 15px;width: 200px;" >
+                <div class="navbar-header" style="color: #ffff99;padding-right: 15px;width: 60px;" >
                            <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#navbar-main">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                           </button>
-                    <a href="<?php echo SITE_URL;  ?>index" style='color: #ffff99;text-decoration: none;'>
+                    <a href="<?php // echo SITE_URL;  ?>index" style='color: #ffff99;text-decoration: none;'>
+                                <!--<div style="float:left"> <img src="<?php // echo PUBLIC_URL . 'images/logohn.png'; ?>" style="width: 50px;"></div>-->     
                                 <div style="float:left"> <img src="<?php echo PUBLIC_URL . 'images/logohn.png'; ?>" style="width: 50px;"></div>     
-                               <p style="text-align: center;margin-top: 6px;margin-bottom: 0px;">TRƯỜNG TIỂU HỌC VĂN CHƯƠNG</p>
+                               <!--<p style="text-align: center;margin-top: 6px;margin-bottom: 0px;">TRƯỜNG TIỂU HỌC VĂN CHƯƠNG</p>-->
                     </a>
                 </div>
                 <div class="navbar-collapse collapse" id="navbar-main" style="padding-left: 15px;">
