@@ -1,3 +1,9 @@
+http://blog.itviec.com/2014/08/developer-30-tuoi/
+http://genk.vn/do-choi-so/mot-so-quy-tac-de-thiet-ke-cac-giao-dien-ma-chung-ta-tiep-xuc-hang-ngay-20130923090813886.chn
+http://thachpham.com/web-development/html-css/lam-giao-dien-respoonsive.html
+http://lifeandline.com/gioi-thieu-ve-php-php-la-gi.html
+http://voithan.net/vi-sao-php-la-ngon-ngu-tot-nhat-cho-phat-trien-web/
+http://vnreview.vn/tu-van-web/-/view_content/content/1511848/7-website-noi-tieng-chi-co-mot-chuc-nang
 http://www.w3schools.com/jquery/jquery_dom_get.asp
 http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.editor.html#insertHtml
 https://www.youtube.com/watch?v=IRt7TzsLNWU

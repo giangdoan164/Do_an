@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-12 col-md-10  col-md-offset-1 ">
+                                        <div class="col-sm-10 col-md-10  col-md-offset-1 ">
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
